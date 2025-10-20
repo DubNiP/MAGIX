@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Gerenciador.Grafico.hpp"
 #include <iostream>
 
 using namespace std;
@@ -13,7 +14,7 @@ private:
 	bool pressed;
 	bool theselect;
 
-	RenderWindow* window;
+	GerenciadorGrafico* gerenciador;
 	RectangleShape* winclose;
 	Font* font;
 	Texture* image;
@@ -29,8 +30,8 @@ private:
 
 protected:
 	void set_values();
-	void loop_events();
-	void draw_all();
+	void loop_menu(Event& event);
+	void draw_menu();
 
 public:
 	Menu();
