@@ -4,14 +4,14 @@
 #include <iostream>
 #include "Menu.hpp"
 #include "Gerenciador.Grafico.hpp"
+#include "Jogo.hpp"
 
 using namespace std;
 using namespace sf;
 
 int main() {
-    GerenciadorGrafico* gerenciador = GerenciadorGrafico::getInstancia();
-    gerenciador->executar();
-                               //nao deleta?
+    Jogo jogo;
+    jogo.executar();
     return 0;
 
 }

@@ -1,15 +1,6 @@
 #include "Gerenciador.Grafico.hpp"
 #include "Menu.hpp"
 
-GerenciadorGrafico* GerenciadorGrafico::instancia = NULL;
-
-GerenciadorGrafico* GerenciadorGrafico::getInstancia() {
-    if (instancia == NULL) {
-        instancia = new GerenciadorGrafico();
-    }
-    return instancia;
-}
-
 
 GerenciadorGrafico::GerenciadorGrafico() {
     
@@ -23,14 +14,11 @@ GerenciadorGrafico::~GerenciadorGrafico() {
     if (window) {
         delete window;
     }
-    if (instancia) {
-        delete instancia;
-    }
 }
 
 
-void GerenciadorGrafico::clearWindow() {
-    window->clear();
+void GerenciadorGrafico::clearWindow(Color cor) {
+    window->clear(cor);
 
 }
 
@@ -44,9 +32,4 @@ void GerenciadorGrafico::displayWindow() {
 
 RenderWindow* GerenciadorGrafico::getWindow() {
     return window;
-}
-
-void GerenciadorGrafico::executar() {
-    Menu menu;
-    menu.executar();
 }

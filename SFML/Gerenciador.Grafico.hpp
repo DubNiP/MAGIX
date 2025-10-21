@@ -5,16 +5,14 @@ class Ente;
 
 class GerenciadorGrafico {
 public:
-    static GerenciadorGrafico* getInstancia();
-    void clearWindow();
+    void clearWindow(Color cor = Color::Black);
     void drawWindow(const Drawable& corpo);
     void displayWindow();
     RenderWindow* getWindow();
-    void executar();
     ~GerenciadorGrafico();
+    GerenciadorGrafico();
+    //void desenharEnte(Ente* pE);
 
 private:
-    GerenciadorGrafico();
-    static GerenciadorGrafico* instancia;
     RenderWindow* window;
 };
