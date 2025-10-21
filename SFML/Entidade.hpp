@@ -24,4 +24,5 @@ public:
 	void attPos();
 	void setCorShape(Color cor);
 	void setTamanhoShape(Vector2f tamanho);
+	FloatRect getBounds() const;
 };

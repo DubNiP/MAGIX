@@ -3,6 +3,7 @@
 Jogo::Jogo() :
     pJog1(NULL),
     GG(),
+    GC(),
     menu(),
     event()
 {
@@ -50,6 +51,8 @@ void Jogo::executarJogo() {
 
     RenderWindow* window = GG.getWindow();
 
+    GC.setJog(pJog1);
+    GC.setWindow(window);
 
     while (window && window->isOpen()) {
         while (window->pollEvent(event)) {
@@ -66,8 +69,9 @@ void Jogo::executarJogo() {
             pJog1->executar();
             pJog1->limitarMovimento(window->getSize());
         }
+        GC.executar();
         GG.clearWindow(Color::Blue);
-        if (pJog1) {                                     //talvez desnecessarias...
+        if (pJog1) {                                     //talvez desnecessarias... perguntar
             pJog1->draw(window);            
         }
         GG.displayWindow();

@@ -42,7 +42,7 @@ void Jogador::processarInput() {
 	}
 }
 
-void Jogador::limitarMovimento(const Vector2u& windowSize) {            //GERENCIADOR DE COLISOES?
+void Jogador::limitarMovimento(const Vector2u& windowSize) {            //GERENCIADOR DE COLISOES? (ACHO Q N)
 	FloatRect boundJog = shape.getGlobalBounds();
 
 	const int X = windowSize.x - boundJog.width;

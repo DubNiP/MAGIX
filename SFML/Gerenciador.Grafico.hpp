@@ -2,6 +2,10 @@
 
 #include <SFML/Graphics.hpp>
 
+
+/*    TROCAR O NOME DO ARQUIVO, É GERENCIADOR_GRAFICO E NAO GERENCIADOR.GRAFICO   (no cpp tbm)         */
+
+
 using namespace sf;
 class Ente;
 

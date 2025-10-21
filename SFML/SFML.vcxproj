@@ -135,6 +135,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Gerenciador.Grafico.cpp" />
+    <ClCompile Include="Gerenciador_Colisoes.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="main.cpp" />
@@ -144,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="Entidade.hpp" />
     <ClInclude Include="Gerenciador.Grafico.hpp" />
+    <ClInclude Include="Gerenciador_Colisoes.hpp" />
     <ClInclude Include="Jogador.hpp" />
     <ClInclude Include="Jogo.hpp" />
     <ClInclude Include="Menu.hpp" />

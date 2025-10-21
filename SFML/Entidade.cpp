@@ -39,3 +39,7 @@ void Entidade::setCorShape(Color cor) {
 void Entidade::setTamanhoShape(Vector2f tamanho) { 
 	shape.setSize(tamanho); 
 }
+
+FloatRect Entidade::getBounds() const {
+	return shape.getGlobalBounds();
+}
