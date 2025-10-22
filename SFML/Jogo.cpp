@@ -48,7 +48,7 @@ void Jogo::executarJogo() {
     if (pJog1) {
         delete pJog1;
     }
-    pJog1 = new Jogador(Vector2f(640,360));
+    pJog1 = new Jogador(Vector2f(640,360), 50.0f);
     Obstaculo* obs1 = new Obstaculo(Vector2f(400.f, 300.f), Vector2f(200.f, 40.f), false, 0);
 
     RenderWindow* window = GG.getWindow();

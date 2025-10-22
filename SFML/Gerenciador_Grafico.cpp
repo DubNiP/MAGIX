@@ -1,4 +1,4 @@
-#include "Gerenciador.Grafico.hpp"
+#include "Gerenciador_Grafico.hpp"
 
 
 

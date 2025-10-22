@@ -21,7 +21,7 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Gerenciador.Grafico.cpp">
+    <ClCompile Include="Gerenciador_Grafico.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Jogo.cpp">
@@ -47,7 +47,7 @@
     <ClInclude Include="Menu.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Gerenciador.Grafico.hpp">
+    <ClInclude Include="Gerenciador_Grafico.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Jogo.hpp">

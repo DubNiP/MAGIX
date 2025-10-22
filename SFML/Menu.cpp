@@ -22,7 +22,7 @@ Menu::Menu() :
 {
 	font = new Font();
 	image = new Texture();
-	bg = new Sprite();
+	bg = new Sprite();              //mover pra ente
 	set_values();
 }
 
@@ -56,7 +56,7 @@ void Menu::set_values() {
 	pos_mouse = { 0,0 };
 	mouse_coord = { 0,0 };
 
-	options = { "Nome_Jogo","Jogar","Opções","Sair" };
+	options = { "Nome_Jogo","Jogar","Opções","Sair" };                                //Classe de objetos gráficos, vale a pena olhar no futuro...
 	texts.resize(4);
 	coords = { {490,180},{620,350},{600,420},{630,490} };
 	sizes = { 80,50,50,50 };
@@ -82,7 +82,6 @@ void Menu::loop_menu(Event& event){
 			texts[pos-1].setOutlineThickness(0);
 			pressed = false;
 			theselect = false;
-			cout << "pos: " << pos << "\n";
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Up) && !pressed) {
@@ -93,7 +92,6 @@ void Menu::loop_menu(Event& event){
 			texts[pos + 1].setOutlineThickness(0);
 			pressed = false;
 			theselect = false;
-			cout << "pos: " << pos << "\n";                    //tirar no futuro?
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Enter) && !theselect) {

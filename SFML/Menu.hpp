@@ -17,7 +17,7 @@ private:
 
 	Font* font;
 	Texture* image;
-	Sprite* bg;
+	Sprite* bg;              //mover para ente no futuro...
 
 	Vector2i pos_mouse;
 	Vector2f mouse_coord;

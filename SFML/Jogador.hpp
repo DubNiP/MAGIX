@@ -6,7 +6,7 @@ class Jogador: public Personagem {
 protected:
 	int pontos;
 public:
-	Jogador(Vector2f pos);
+	Jogador(Vector2f pos, float vel);
 	~Jogador();
 	//void colidir(Inimigo* pIn);            //VOID MESMO?
 	void executar();

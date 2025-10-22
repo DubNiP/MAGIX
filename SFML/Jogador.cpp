@@ -1,7 +1,7 @@
 #include "Jogador.hpp"
 
-Jogador::Jogador(Vector2f pos) :
-	Personagem(pos),
+Jogador::Jogador(Vector2f pos, float vel) :
+	Personagem(pos, vel),
 	pontos(0)
 {
 	setCorShape(Color::Red);
@@ -42,7 +42,7 @@ void Jogador::processarInput() {
 	}
 }
 
-void Jogador::limitarMovimento(const Vector2u& windowSize) {            //GERENCIADOR DE COLISOES? (ACHO Q N)
+void Jogador::limitarMovimento(const Vector2u& windowSize) {            //GERENCIADOR DE COLISOES!!!  (ou colocar obstaculos em volta...)
 	FloatRect boundJog = shape.getGlobalBounds();
 
 	const int X = windowSize.x - boundJog.width;

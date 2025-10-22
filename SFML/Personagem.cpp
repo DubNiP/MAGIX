@@ -1,9 +1,9 @@
 #include "Personagem.hpp"
 
-Personagem::Personagem(Vector2f pos):
+Personagem::Personagem(Vector2f pos, float velocidade):
 	Entidade(pos),
 	num_vidas(10),
-	vel(50.0f)
+	vel(velocidade)
 {
 	setTamanhoShape(Vector2f(50, 50));
 }

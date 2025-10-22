@@ -35,8 +35,8 @@ void GerenciadorColisoes::tratarColisoesJogsObstaculos() {
 					const float sobrePosY = (jog.height * 0.5f + obs.height * 0.5f) - fabs(jogy - obsy);
 
 
-					Vector2f MTV(0, 0);
-					if (sobrePosX < sobrePosY) {
+					Vector2f MTV(0, 0);                      //dar uma olhada na colisão
+					if (sobrePosX < sobrePosY) {        
 						if (jogx > obsx) {
 							MTV.x = sobrePosX;
 						}
