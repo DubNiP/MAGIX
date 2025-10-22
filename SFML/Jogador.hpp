@@ -14,7 +14,6 @@ public:
 	void mover();
 
 	void processarInput();
-	void limitarMovimento(const Vector2u& windowSize);
 
 	int getPontos() const;
 	void adicionarPontos(int pts);

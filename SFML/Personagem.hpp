@@ -6,7 +6,7 @@ protected:
 	int num_vidas;
 	float vel;
 public:
-	Personagem(Vector2f pos, float velocidade = 0);       //OBS:RECEBER VELOCIDADE POR PARAMETRO
+	Personagem(Vector2f pos, float velocidade = 0);
 	~Personagem();
 	//void salvarDataBuffer;
 	virtual void executar() = 0;

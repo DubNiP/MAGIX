@@ -92,5 +92,19 @@ void GerenciadorColisoes::setWindow(RenderWindow* win) {
 	window = win;
 }
 
+void GerenciadorColisoes::limiteDeTela() {
+	if (pJog1 && window) {
+		FloatRect boundJog = pJog1->getShape().getGlobalBounds();
+		Vector2u windowSize = window->getSize();
+
+		const int X = windowSize.x - boundJog.width;
+		const int Y = windowSize.y - boundJog.height;
+		if (pJog1->getPos().x < 0)   pJog1->setPos(Vector2f(0.f, pJog1->getPos().y));
+		if (pJog1->getPos().y < 0)   pJog1->setPos(Vector2f(pJog1->getPos().x, 0.f));
+		if (pJog1->getPos().x > X)	 pJog1->setPos(Vector2f(X, pJog1->getPos().y));
+		if (pJog1->getPos().y > Y)   pJog1->setPos(Vector2f(pJog1->getPos().x, Y));
+	}
+}
+
 // Observação:  as demais funções comentadas no .hpp
 // não são definidas aqui até que as dependências sejam implementadas

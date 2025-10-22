@@ -37,4 +37,6 @@ public:
 
     void setJog(Jogador* pJog);
     void setWindow(RenderWindow* win);
+
+    void limiteDeTela();
 };

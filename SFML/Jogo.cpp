@@ -74,7 +74,7 @@ void Jogo::executarJogo() {
 
   
         pJog1.executar();
-        pJog1. limitarMovimento(window->getSize());     //desenhar deve ser no GG
+        GC.limiteDeTela();     //desenhar deve ser no GG
         pJog1.draw(window);
 
         GC.executar();
