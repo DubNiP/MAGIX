@@ -1,5 +1,4 @@
 #include "Menu.hpp"
-#include <iostream>
 
 Menu::Menu() :
 	pos(1),
@@ -102,7 +101,6 @@ void Menu::loop_menu(Event& event){
 		if (pos == 3) {
 			sair = true;
 		}
-		cout << options[pos] << endl;
 	}
 }
 

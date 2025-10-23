@@ -49,3 +49,9 @@ int Jogador::getPontos() const {
 void Jogador::adicionarPontos(int pts) { 
 	pontos += pts; 
 }
+
+void Jogador::reseta(Vector2f posicao, int vidas, int pts) {
+	setPos(posicao);
+	num_vidas = vidas;
+	pontos = pts;
+}

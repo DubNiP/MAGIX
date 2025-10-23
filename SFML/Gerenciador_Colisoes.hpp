@@ -33,6 +33,8 @@ public:
     void incluirObstaculo(Obstaculo* pObstaculo);
     // void incluirProjetil(Projetil* pProjetil);
 
+    void limparObstaculos();
+
     void executar();
 
     void setJog(Jogador* pJog);

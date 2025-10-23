@@ -6,6 +6,7 @@
 #include "Menu.hpp"
 #include "Jogador.hpp"
 #include "Obstaculo.hpp"
+#include "Fase.hpp"
 
 
 using namespace sf;
@@ -14,9 +15,9 @@ class Jogo {
 private:
 	Jogador pJog1;            
 	GerenciadorGrafico GG;
-	GerenciadorColisoes GC;     //OBS: mudar para fase no futuro 
 	Menu menu;
 	Event event;
+	Fase fase1;
 	void executarMenu(Menu& menu);
 	void executarJogo();
 public:

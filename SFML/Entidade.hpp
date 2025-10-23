@@ -27,5 +27,5 @@ public:
 	void setCorShape(Color cor);
 	void setTamanhoShape(Vector2f tamanho);
 	FloatRect getBounds() const;
-	RectangleShape getShape() const;
+	RectangleShape getShape() const;                   //acredito n estar sendo usada pra nada no momento
 };

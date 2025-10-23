@@ -71,11 +71,23 @@ void GerenciadorColisoes::incluirObstaculo(Obstaculo* pObstaculo) {
 	}
 }
 
+void GerenciadorColisoes::limparObstaculos() {
+	list<Obstaculo*>::iterator it = LOs.begin();
+	while (it != LOs.end()) {
+		if (*it) {
+			delete (*it);
+		}
+		it++;
+	}
+	LOs.clear();
+}
+
 void GerenciadorColisoes::executar() {
 	if (pJog1) {
 		list<Obstaculo*>::iterator it = LOs.begin();
 		while (it != LOs.end()) {
 			if (*it && window) {
+				(*it)->executar();
 				(*it)->draw(window);                             //WARNING: DESENHAR DEVE SER NO GERENCIADOR GRÁFICO...
 			}
 			it++;
@@ -94,7 +106,7 @@ void GerenciadorColisoes::setWindow(RenderWindow* win) {
 
 void GerenciadorColisoes::limiteDeTela() {
 	if (pJog1 && window) {
-		FloatRect boundJog = pJog1->getShape().getGlobalBounds();
+		FloatRect boundJog = pJog1->getBounds();
 		Vector2u windowSize = window->getSize();
 
 		const int X = windowSize.x - boundJog.width;
