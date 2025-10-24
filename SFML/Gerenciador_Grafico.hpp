@@ -2,6 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
+
+class ListaEntidades;
+
 using namespace sf;
 
 class GerenciadorGrafico {
@@ -10,9 +13,9 @@ private:
 public:
     GerenciadorGrafico();
     ~GerenciadorGrafico();
-    void desenharEnte(const RectangleShape &shape);
-    void clearWindow(Color cor = Color::Black);
-    void drawWindow(const Drawable& corpo);
+    void desenharEnte(const Drawable &shape);
+    void clearWindow(Color cor = Color::Black);                     
     void displayWindow();
+    void desenhaTodos(ListaEntidades* LE, Color cor = Color::Black);
     RenderWindow* getWindow() const;
 };

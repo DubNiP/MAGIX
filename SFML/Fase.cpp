@@ -12,7 +12,7 @@ Fase::Fase(Jogador* pJog,GerenciadorGrafico* pGG):
 }
 
 Fase::~Fase() {
-    lista_ents.limparPreservando(jog);
+    lista_ents.limparPreservando(jog);                 //estranho..
     GC.limparObstaculos();
     GC.limparInimigos();
     jog = NULL;
@@ -20,19 +20,19 @@ Fase::~Fase() {
 }
 
 void Fase::criarInimigos() {
-    Inimigo* in1 = new Inimigo(Vector2f(200.f, 200.f), 0.f);
+    Inimigo* in1 = new Inimigo(Vector2f(200.f, 200.f), 0.f);                   //substituir por algo no futuro..
     GC.incluirInimigo(in1);
     lista_ents.incluir(in1);
 }
 
 void Fase::criarObstaculo() {
-    Obstaculo* obs1 = new Obstaculo(Vector2f(400.f, 300.f), Vector2f(200.f, 40.f), false, 0);
+    Obstaculo* obs1 = new Obstaculo(Vector2f(400.f, 300.f), Vector2f(200.f, 40.f), false, 0);     //substituir por algo no futuro..
     GC.incluirObstaculo(obs1);
     lista_ents.incluir(obs1);
 }
 
 void Fase::criarCenario() {
-    lista_ents.limparPreservando(jog);
+    lista_ents.limparPreservando(jog);                                    //estranho..
     GC.limparObstaculos();
     GC.limparInimigos();
 
@@ -61,17 +61,12 @@ void Fase::executar() {
                     return;
                 }
             }
-            
-            GG->clearWindow(Color::Black);
-            if (jog) {
-                jog->executar();
-            }
+            lista_ents.executarTodos();  
+
             GC.limiteDeTela();
             GC.executar();
-            lista_ents.desenharTodos();
-            if (GG) {
-                GG->displayWindow();
-            }
+
+            GG->desenhaTodos(&lista_ents);
         }
     }
 }

@@ -1,10 +1,10 @@
 #pragma once
 
-#include"Gerenciador_Grafico.hpp"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
 
+class GerenciadorGrafico;
 
 class Ente {
 protected:

@@ -1,4 +1,5 @@
 #include "Menu.hpp"
+#include "Gerenciador_Grafico.hpp"
 
 Menu::Menu() :
 	pos(1),
@@ -113,10 +114,10 @@ void Menu::draw_menu() {
 	if (pGG){
 		pGG->clearWindow();
 		if (bg) {
-			pGG->drawWindow(*bg);
+			pGG->desenharEnte(*bg);
 		}
 		for (auto& t : texts) {
-			pGG->drawWindow(t);
+			pGG->desenharEnte(t);
 		}
 		pGG->displayWindow();
 	}

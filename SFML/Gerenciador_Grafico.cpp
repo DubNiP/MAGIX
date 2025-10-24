@@ -1,5 +1,5 @@
 #include "Gerenciador_Grafico.hpp"
-
+#include "ListaEntidades.hpp"
 
 
 GerenciadorGrafico::GerenciadorGrafico():
@@ -20,7 +20,7 @@ GerenciadorGrafico::~GerenciadorGrafico() {
     }
 }
 
-void GerenciadorGrafico::desenharEnte(const RectangleShape &shape) {
+void GerenciadorGrafico::desenharEnte(const Drawable &shape) {
     if (window) {
         window->draw(shape);
     }
@@ -32,15 +32,19 @@ void GerenciadorGrafico::clearWindow(Color cor) {
     }
 }
 
-void GerenciadorGrafico::drawWindow(const Drawable& corpo) {
-    if (window) {
-        window->draw(corpo);
-    }
-}
-
 void GerenciadorGrafico::displayWindow() {
     if (window) {
         window->display();
+    }
+}
+
+void GerenciadorGrafico::desenhaTodos(ListaEntidades *pLE, Color cor) {
+    if (window) {
+        clearWindow(cor);
+        if (pLE) {
+            pLE->desenharTodos();
+        }
+        displayWindow();
     }
 }
 

@@ -1,4 +1,5 @@
 #include "Ente.hpp"
+#include "Gerenciador_Grafico.hpp"
 
 GerenciadorGrafico* Ente::pGG = NULL;
 

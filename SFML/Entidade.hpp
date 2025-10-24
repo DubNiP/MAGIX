@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "Gerenciador_Grafico.hpp"
 #include "Ente.hpp"
 
 using namespace sf;
