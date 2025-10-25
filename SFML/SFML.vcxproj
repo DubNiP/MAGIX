@@ -136,6 +136,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Fase.cpp" />
+    <ClCompile Include="FasePrimeira.cpp" />
     <ClCompile Include="Gerenciador_Grafico.cpp" />
     <ClCompile Include="Gerenciador_Colisoes.cpp" />
     <ClCompile Include="Inimigo.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Ente.hpp" />
     <ClInclude Include="Entidade.hpp" />
     <ClInclude Include="Fase.hpp" />
+    <ClInclude Include="FasePrimeira.hpp" />
     <ClInclude Include="Gerenciador_Grafico.hpp" />
     <ClInclude Include="Gerenciador_Colisoes.hpp" />
     <ClInclude Include="Inimigo.hpp" />

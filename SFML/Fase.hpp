@@ -17,8 +17,8 @@ protected:
 	Jogador* jog;
 	//void criarInimFaceis();
 	//void criarPlataformas();
-	void criarInimigos();             //DEVE SER VIRTUAL NO FUTURO
-	void criarObstaculo();            //DEVE SER VIRTUAL NO FUTURO
+	virtual void criarInimigos() = 0;          
+	virtual void criarObstaculo() = 0;
 	void criarCenario();
 public:
 	Fase(Jogador* pJog, GerenciadorGrafico* pGG);

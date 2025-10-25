@@ -6,7 +6,7 @@
 #include "Menu.hpp"
 #include "Jogador.hpp"
 #include "Obstaculo.hpp"
-#include "Fase.hpp"
+#include "FasePrimeira.hpp"
 
 
 using namespace sf;
@@ -17,7 +17,7 @@ private:
 	GerenciadorGrafico GG;
 	Menu menu;
 	Event event;
-	Fase fase1;
+	FasePrimeira fase1;
 	void executarMenu(Menu& menu);
 	void executarJogo();
 public:
