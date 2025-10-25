@@ -137,6 +137,7 @@
     </ClCompile>
     <ClCompile Include="Fase.cpp" />
     <ClCompile Include="FasePrimeira.cpp" />
+    <ClCompile Include="FaseSegunda.cpp" />
     <ClCompile Include="Gerenciador_Grafico.cpp" />
     <ClCompile Include="Gerenciador_Colisoes.cpp" />
     <ClCompile Include="Inimigo.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Entidade.hpp" />
     <ClInclude Include="Fase.hpp" />
     <ClInclude Include="FasePrimeira.hpp" />
+    <ClInclude Include="FaseSegunda.hpp" />
     <ClInclude Include="Gerenciador_Grafico.hpp" />
     <ClInclude Include="Gerenciador_Colisoes.hpp" />
     <ClInclude Include="Inimigo.hpp" />

@@ -5,11 +5,7 @@
 class FasePrimeira : public Fase {
 private:
 	const int maxInimMedios;
-public:
-	FasePrimeira(Jogador* pJog, GerenciadorGrafico* pGG);
-	~FasePrimeira();
-
-
+protected:
 	void criarInimigos();
 	void criarObstaculo();
 
@@ -18,4 +14,7 @@ public:
 
 
 	void criarObsMedios();
+public:
+	FasePrimeira(Jogador* pJog, GerenciadorGrafico* pGG);
+	~FasePrimeira();
 };
