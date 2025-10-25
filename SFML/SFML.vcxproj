@@ -136,6 +136,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Fase.cpp" />
+    <ClCompile Include="FasePrimeira.cpp" />
+    <ClCompile Include="FaseSegunda.cpp" />
     <ClCompile Include="Gerenciador_Grafico.cpp" />
     <ClCompile Include="Gerenciador_Colisoes.cpp" />
     <ClCompile Include="Inimigo.cpp" />
@@ -145,12 +147,17 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
+    <ClCompile Include="Obst_Dificil.cpp" />
+    <ClCompile Include="Obst_Medio.cpp" />
     <ClCompile Include="Personagem.cpp" />
+    <ClCompile Include="Plataforma.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ente.hpp" />
     <ClInclude Include="Entidade.hpp" />
     <ClInclude Include="Fase.hpp" />
+    <ClInclude Include="FasePrimeira.hpp" />
+    <ClInclude Include="FaseSegunda.hpp" />
     <ClInclude Include="Gerenciador_Grafico.hpp" />
     <ClInclude Include="Gerenciador_Colisoes.hpp" />
     <ClInclude Include="Inimigo.hpp" />
@@ -160,7 +167,10 @@
     <ClInclude Include="ListaEntidades.hpp" />
     <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Obstaculo.hpp" />
+    <ClInclude Include="Obst_Dificil.hpp" />
+    <ClInclude Include="Obst_Medio.hpp" />
     <ClInclude Include="Personagem.hpp" />
+    <ClInclude Include="Plataforma.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

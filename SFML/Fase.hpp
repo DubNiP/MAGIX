@@ -3,7 +3,7 @@
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Colisoes.hpp"
 #include "Jogador.hpp"
-#include "Obstaculo.hpp"
+#include "Obst_Dificil.hpp"
 #include "Ente.hpp"
 #include "ListaEntidades.hpp"
 
@@ -17,8 +17,8 @@ protected:
 	Jogador* jog;
 	//void criarInimFaceis();
 	//void criarPlataformas();
-	void criarInimigos();             //DEVE SER VIRTUAL NO FUTURO
-	void criarObstaculo();            //DEVE SER VIRTUAL NO FUTURO
+	virtual void criarInimigos() = 0;          
+	virtual void criarObstaculo() = 0;
 	void criarCenario();
 public:
 	Fase(Jogador* pJog, GerenciadorGrafico* pGG);
