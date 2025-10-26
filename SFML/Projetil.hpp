@@ -19,4 +19,5 @@ public:
 	void executar();
 	int getDano();
 	//void salvar();
+	void carregarSprite();
 };

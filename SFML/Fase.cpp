@@ -55,7 +55,7 @@ void Fase::criarCenario() {
     }
     criarObstaculo();
     criarInimigos();
-    criarProjetil(); //adicionar de forma que seja enviado pelo chefão
+    criarProjetil(); //adicionar de forma que seja enviado pelos personagens
 }
 
 void Fase::executar() {

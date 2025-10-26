@@ -6,9 +6,7 @@ Obstaculo::Obstaculo(Vector2f pos , Vector2f tam, bool dano):
 	largura(tam.x),
 	altura(tam.y)
 {
-	setTamanhoShape(tam);
-	setCorShape(Color::Green);
-	attPos();
+	
 }
 
 Obstaculo::~Obstaculo() {

@@ -9,9 +9,7 @@ Projetil::Projetil(Vector2f pos, bool dir) :
     posicao(0),
     dano(1)
 {
-    setTamanhoShape(Vector2f(10.f, 10.f));           //MEXER DPS
-    setCorShape(Color::Yellow);
-    attPos();
+    carregarSprite();
 }
 
 Projetil::~Projetil()
@@ -58,3 +56,11 @@ int Projetil::getDano() {
 }
 
 //void Projetil::salvar() { }
+
+void Projetil::carregarSprite() {
+    if (!carregarTexturaSprite("Textures/Charge1.png")) {
+        throw "Deu merda aqui";
+    }
+    setScale(Vector2f(2.f, 2.f));
+    setPos(pos);
+}

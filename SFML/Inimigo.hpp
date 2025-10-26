@@ -14,4 +14,5 @@ public:
 	void danificar(Jogador* p);                  //virtual no futuro..
 	//virtual void salva() = 0;
 	void mover();
+	void carregarSprite();
 };

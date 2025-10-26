@@ -5,64 +5,27 @@ GerenciadorGrafico* Ente::pGG = NULL;
 
 Ente::Ente() :
 	id(0),
-	pFig(NULL),
-	pT(NULL)
+	pSprite(NULL),
+	textura(NULL)
 {
-	auto* rect = new RectangleShape(Vector2f(50.f, 50.f));            //modificar no futuro
-	rect->setFillColor(Color::White);
-
-	pFig = rect;
-	pT = rect;
+	pSprite = new Sprite();
 }
 
 Ente::~Ente() {
 	id = -1;
-	if (pFig) {
-		delete pFig;
+	if (pSprite) {
+		delete pSprite;
 	}
-	pFig = NULL;
-	pT = NULL;
+	if (textura) {
+		delete textura;
+	}
+	pSprite = NULL;
+	textura = NULL;
 }
-
-void Ente::criarRetangulo(const sf::Vector2f& tamanho, const sf::Color& cor) {
-	delete pFig;
-	auto* rect = new sf::RectangleShape(tamanho);
-	rect->setFillColor(cor);
-	pFig = rect;
-	pT = rect;
-}
-
-void Ente::criarCirculo(float raio, const sf::Color& cor) {
-	delete pFig;
-	auto* circle = new sf::CircleShape(raio);
-	circle->setFillColor(cor);
-	pFig = circle;
-	pT = circle;
-}
-
-void Ente::criarSprite(sf::Texture* textura) {
-	delete pFig;
-	auto* sprite = new sf::Sprite();
-	if (textura) sprite->setTexture(*textura);
-	pFig = sprite;
-	pT = sprite;
-}
-
-void Ente::criarTexto(sf::Font* fonte, const std::string& str, unsigned int tamanho) {
-	delete pFig;
-	auto* text = new sf::Text();
-	if (fonte) text->setFont(*fonte);
-	text->setString(str);
-	text->setCharacterSize(tamanho);
-	pFig = text;
-	pT = text;
-}
-
-
 
 void Ente::desenhar() {
-	if (pGG && pFig) {
-		pGG->desenharEnte(*pFig);
+	if (pGG && pSprite) {
+		pGG->desenharEnte(*pSprite);
 	}
 }
 
@@ -71,41 +34,40 @@ void Ente::setGG(GerenciadorGrafico* pG) {
 }
 
 void Ente::setPos(const Vector2f& pos) {
-	if (pT) pT->setPosition(pos);
-}
-
-void Ente::setRot(float angle) {
-	if (pT) pT->setRotation(angle);
+	if (pSprite) pSprite->setPosition(pos);
 }
 
 void Ente::setScale(const Vector2f& scale) {
-	if (pT) pT->setScale(scale);
-}
-
-void Ente::setCorShape(Color cor) {
-	// Tenta converter para Shape (funciona com RectangleShape, CircleShape, etc.)
-	if (auto* shape = dynamic_cast<Shape*>(pFig)) {
-		shape->setFillColor(cor);
-	}
-}
-
-void Ente::setTamanhoShape(Vector2f tamanho) {
-	// Específico para RectangleShape
-	if (auto* rect = dynamic_cast<RectangleShape*>(pFig)) {
-		rect->setSize(tamanho);
-	}
+	if (pSprite) pSprite->setScale(scale);
 }
 
 FloatRect Ente::getBounds() const {
-	// Tenta pegar bounds de qualquer tipo que tenha getGlobalBounds
-	if (auto* shape = dynamic_cast<Shape*>(pFig)) {
-		return shape->getGlobalBounds();
-	}
-	if (auto* sprite = dynamic_cast<Sprite*>(pFig)) {
-		return sprite->getGlobalBounds();
-	}
-	if (auto* text = dynamic_cast<Text*>(pFig)) {
-		return text->getGlobalBounds();
+	if (pSprite) {
+		return pSprite->getGlobalBounds();
 	}
 	return FloatRect();
+}
+
+
+bool Ente::carregarTexturaSprite(const string& arquivo, bool repeated, bool smooth) {
+	if (textura) {
+		delete textura;
+		textura = NULL;
+	}
+	textura = new Texture();
+	if (!textura->loadFromFile(arquivo)) {
+		delete textura;
+		textura = NULL;
+		return false;
+	}
+	textura->setRepeated(repeated);
+	textura->setSmooth(smooth);
+	if (pSprite) {
+		pSprite->setTexture(*textura, true);
+	}
+	return true;
+}
+
+Sprite* Ente::getSprite() {
+	return pSprite;
 }

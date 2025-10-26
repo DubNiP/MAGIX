@@ -9,7 +9,6 @@ Menu::Menu() :
 	iniciar(false),
 
 	font(NULL),
-	image(NULL),
 
 	pos_mouse(),
 	mouse_coord(),
@@ -20,20 +19,23 @@ Menu::Menu() :
 	sizes()
 {
 	font = new Font();
-	image = new Texture();
 
 	if (!font->loadFromFile("Fonts/ByteBounce.ttf")) {
 		throw "Deu Merda aqui";
 	}
-	if (!image->loadFromFile("Textures/background 1.png")) {
+	if (!carregarTexturaSprite("Textures/background 1.png")) {
 		throw "Deu Merda aqui";
 	}
-
-	criarSprite(image);
-	Vector2u tamText = image->getSize(); 
-	float escalaX = 1280.f / tamText.x;  
-	float escalaY = 720.f / tamText.y;    
-	setScale(Vector2f(escalaX, escalaY));   
+	if (Sprite* sp = getSprite()) {
+		if (const Texture* tex = sp->getTexture()) {
+			Vector2u tamText = tex->getSize();
+			if (tamText.x > 0 && tamText.y > 0) {
+				float escalaX = 1280.f / tamText.x;
+				float escalaY = 720.f / tamText.y;
+				setScale(Vector2f(escalaX, escalaY));
+			}
+		}
+	}
 
 	set_values();
 }
@@ -42,12 +44,7 @@ Menu::~Menu() {
 	if (font) {
 		delete font;
 	}
-	if (image) {
-		delete image;
-	}
-
 	font = NULL;
-	image = NULL;
 }
 
 void Menu::set_values() {

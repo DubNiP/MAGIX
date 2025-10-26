@@ -5,17 +5,12 @@ Jogador::Jogador(Vector2f pos, float vel) :
 	Personagem(pos, vel),
 	pontos(0),
 	invencibilidade(0.3f),
-	danoClock(),
-	textura(NULL)
+	danoClock()
 {
 	carregarSprite();
 }
 
 Jogador::~Jogador() {
-	if (textura) {
-		delete textura;
-		textura = NULL;
-	}
 }
 
 //void Jogador::colidir(Inimigo* pIn) {}
@@ -76,10 +71,8 @@ void Jogador::tomarDano(int dano) {
 }
 
 void Jogador::carregarSprite() {
-	textura = new Texture();
-	if (!textura->loadFromFile("Textures/Idle1.png")) {
+	if (!carregarTexturaSprite("Textures/Idle1.png")) {
 		throw "Deu merda aqui";
 	}
-	criarSprite(textura);
 	setPos(pos);
 }

@@ -17,7 +17,6 @@ private:
 	bool iniciar;
 
 	Font* font;
-	Texture* image;
 
 	Vector2i pos_mouse;
 	Vector2f mouse_coord;

@@ -8,7 +8,6 @@ protected:
 	int pontos;
 	float invencibilidade;
 	Clock danoClock;
-	Texture* textura;
 public:
 	Jogador(Vector2f pos, float vel);
 	~Jogador();
