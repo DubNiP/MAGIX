@@ -38,9 +38,12 @@ void GerenciadorGrafico::displayWindow() {
     }
 }
 
-void GerenciadorGrafico::desenhaTodos(ListaEntidades *pLE, Color cor) {
+void GerenciadorGrafico::desenhaTodos(ListaEntidades *pLE, Sprite* fundo) {
     if (window) {
-        clearWindow(cor);
+        clearWindow();
+        if (fundo) {
+            window->draw(*fundo);
+        }
         if (pLE) {
             pLE->desenharTodos();
         }

@@ -16,6 +16,6 @@ public:
     void desenharEnte(const Drawable &shape);
     void clearWindow(Color cor = Color::Black);                     
     void displayWindow();
-    void desenhaTodos(ListaEntidades* LE, Color cor = Color::Black);
+    void desenhaTodos(ListaEntidades* LE, Sprite* sp = NULL );
     RenderWindow* getWindow() const;
 };

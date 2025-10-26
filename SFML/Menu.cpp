@@ -22,14 +22,19 @@ Menu::Menu() :
 	font = new Font();
 	image = new Texture();
 
-	if (!font->loadFromFile("Fonts/Newsreader-VariableFont_opsz,wght.ttf")) {
+	if (!font->loadFromFile("Fonts/ByteBounce.ttf")) {
 		throw "Deu Merda aqui";
 	}
-	if (!image->loadFromFile("Textures/Fundo_menu.png")) {
+	if (!image->loadFromFile("Textures/background 1.png")) {
 		throw "Deu Merda aqui";
 	}
 
 	criarSprite(image);
+	Vector2u tamText = image->getSize(); 
+	float escalaX = 1280.f / tamText.x;  
+	float escalaY = 720.f / tamText.y;    
+	setScale(Vector2f(escalaX, escalaY));   
+
 	set_values();
 }
 
@@ -50,12 +55,12 @@ void Menu::set_values() {
 	pos_mouse = { 0,0 };
 	mouse_coord = { 0,0 };
 
-	options = { "Nome_Jogo","Jogar","Opções","Sair" };                                //Classe de objetos gráficos, vale a pena olhar no futuro...
+	options = { "Nome_Jogo","Jogar","Opcoes","Sair" };                                //Classe de objetos gráficos, vale a pena olhar no futuro...
 	texts.resize(4);
-	coords = { {490,180},{620,350},{600,420},{630,490} };
+	coords = { {490,110},{620,380},{600,450},{630,520} };
 	sizes = { 80,50,50,50 };
 
-	texts[1].setOutlineThickness(4);
+	texts[1].setOutlineThickness(6);
 
 
 	for (size_t i{}; i < texts.size(); i++) {
@@ -80,7 +85,7 @@ void Menu::loop_menu(Event& event){
 		if (pos < 3) {
 			pos++;
 			pressed = true;
-			texts[pos].setOutlineThickness(4);
+			texts[pos].setOutlineThickness(6);
 			texts[pos-1].setOutlineThickness(0);
 			pressed = false;
 			theselect = false;
@@ -90,7 +95,7 @@ void Menu::loop_menu(Event& event){
 		if (pos > 1) {
 			pos--;
 			pressed = true;
-			texts[pos].setOutlineThickness(4);
+			texts[pos].setOutlineThickness(6);
 			texts[pos + 1].setOutlineThickness(0);
 			pressed = false;
 			theselect = false;

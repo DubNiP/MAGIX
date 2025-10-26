@@ -1,16 +1,21 @@
 #include "Jogador.hpp"
+#include "Gerenciador_Grafico.hpp"
 
 Jogador::Jogador(Vector2f pos, float vel) :
 	Personagem(pos, vel),
 	pontos(0),
 	invencibilidade(0.3f),
-	danoClock()
+	danoClock(),
+	textura(NULL)
 {
-	setCorShape(Color::Red);
+	carregarSprite();
 }
 
 Jogador::~Jogador() {
-
+	if (textura) {
+		delete textura;
+		textura = NULL;
+	}
 }
 
 //void Jogador::colidir(Inimigo* pIn) {}
@@ -25,6 +30,7 @@ void Jogador::executar() {
 void Jogador::mover() {
 	attPos();
 }
+
 
 void Jogador::processarInput() {
 	float deltaTime = 1.0f / 60.0f;        //OLHAR DPS
@@ -67,4 +73,13 @@ void Jogador::tomarDano(int dano) {
 		setVidas(vidas);
 		danoClock.restart();
 	}
+}
+
+void Jogador::carregarSprite() {
+	textura = new Texture();
+	if (!textura->loadFromFile("Textures/Idle1.png")) {
+		throw "Deu merda aqui";
+	}
+	criarSprite(textura);
+	setPos(pos);
 }

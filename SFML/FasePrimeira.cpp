@@ -35,3 +35,16 @@ void FasePrimeira::criarObsMedios() {
 	GC.incluirObstaculo(obs1);
 	lista_ents.incluir(obs1);
 }
+
+
+void FasePrimeira::carregarFundo() {
+    textFundo = new Texture();
+    if (!textFundo->loadFromFile("Textures/background 3.png")) {
+		throw "Deu merda aqui";
+    }
+    spriteFundo = new Sprite(*textFundo);
+    Vector2u tamTextura = textFundo->getSize();
+    float escalaX = 1280.f / tamTextura.x;
+    float escalaY = 720.f / tamTextura.y;
+    spriteFundo->setScale(escalaX, escalaY);
+}

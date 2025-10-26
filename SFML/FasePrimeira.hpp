@@ -14,6 +14,8 @@ protected:
 
 
 	void criarObsMedios();
+
+	void carregarFundo();
 public:
 	FasePrimeira(Jogador* pJog, GerenciadorGrafico* pGG);
 	~FasePrimeira();

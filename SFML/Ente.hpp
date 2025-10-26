@@ -7,6 +7,15 @@ using namespace std;
 
 class GerenciadorGrafico;
 
+
+/*ACREDITO QUE DEVEMOS MOVER AS PARTES DE SPRITE E TEXTURA PARA CÁ E REMOVER A PARTE DE CRIAR CIRCULO, RETANGULO, ETC...*/
+
+
+
+
+
+
+
 class Ente {
 protected:
 	int id;

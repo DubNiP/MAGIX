@@ -8,6 +8,7 @@ protected:
 	int pontos;
 	float invencibilidade;
 	Clock danoClock;
+	Texture* textura;
 public:
 	Jogador(Vector2f pos, float vel);
 	~Jogador();
@@ -23,5 +24,6 @@ public:
 
 	void reseta(Vector2f pos,int vidas, int pontos);
 	void tomarDano(int dano);
+	void carregarSprite();
 
 };

@@ -5,7 +5,9 @@ Fase::Fase(Jogador* pJog,GerenciadorGrafico* pGG):
     lista_ents(),
     GG(pGG),
     GC(),
-    jog(pJog)
+    jog(pJog),
+    textFundo(NULL),
+    spriteFundo(NULL)
 {
     GC.setJog(pJog);
     GC.setWindow(GG->getWindow());
@@ -16,6 +18,15 @@ Fase::~Fase() {
     GC.limparObstaculos();
     GC.limparInimigos();
     GC.limparProjetis();
+    if (spriteFundo) {
+        delete spriteFundo;
+        spriteFundo = NULL;
+    }
+    if (textFundo) {
+        delete textFundo;
+        textFundo = NULL;
+    }
+
     jog = NULL;
     GG = NULL;
 }
@@ -34,6 +45,8 @@ void Fase::criarCenario() {
     GC.limparObstaculos();
     GC.limparInimigos();
     GC.limparProjetis();
+
+    carregarFundo();
 
     //deve ter criar plataformas, etc...
     if (jog) {
@@ -62,11 +75,10 @@ void Fase::executar() {
                 }
             }
             lista_ents.executarTodos();  
-
             GC.limiteDeTela();
             GC.executar();
 
-            GG->desenhaTodos(&lista_ents);
+            GG->desenhaTodos(&lista_ents,spriteFundo);
         }
     }
 }
