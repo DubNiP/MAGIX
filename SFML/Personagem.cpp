@@ -5,7 +5,6 @@ Personagem::Personagem(Vector2f pos, float velocidade):
 	num_vidas(1000),
 	vel(velocidade)
 {
-	setTamanhoShape(Vector2f(50, 50));
 }
 
 Personagem::~Personagem() {

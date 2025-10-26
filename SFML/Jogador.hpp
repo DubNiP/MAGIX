@@ -23,5 +23,6 @@ public:
 
 	void reseta(Vector2f pos,int vidas, int pontos);
 	void tomarDano(int dano);
+	void carregarSprite();
 
 };

@@ -11,12 +11,8 @@ class Ente {
 protected:
 	int id;
 	static GerenciadorGrafico* pGG;
-	Drawable* pFig;
-	Transformable* pT;
-	void criarRetangulo(const Vector2f& tamanho, const Color& cor = Color::White);
-	void criarCirculo(float raio, const Color& cor = Color::White);
-	void criarSprite(Texture* textura);
-	void criarTexto(Font* fonte, const string& str, unsigned int tamanho = 30);
+	Sprite* pSprite;
+	Texture* textura;
 public:
 	Ente();
 	virtual ~Ente();
@@ -25,10 +21,10 @@ public:
 	void static setGG(GerenciadorGrafico* pG);
 
 	void setPos(const Vector2f& pos);
-	void setRot(float angulo);
 	void setScale(const Vector2f& scale);
 
-	void setCorShape(Color cor);
-	void setTamanhoShape(Vector2f tamanho);
 	FloatRect getBounds() const;        
+
+	bool carregarTexturaSprite(const string& arquivo, bool repeated = false, bool smooth = true);
+	Sprite* getSprite();
 };

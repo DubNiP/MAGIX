@@ -4,9 +4,7 @@ Inimigo::Inimigo(Vector2f pos, float vel) :
 	Personagem(pos, vel),
 	nivel_maldade(3)
 {
-	criarCirculo(25.f);
-	setCorShape(Color::Magenta);
-	setPos(pos);
+	carregarSprite();
 }
 
 Inimigo::~Inimigo() {
@@ -26,5 +24,13 @@ void Inimigo::danificar(Jogador* p) {
 void Inimigo::mover() {
 	attPos();
 	//aqui devemos colocar uma implementação meio IA no futuro.
+}
+
+void Inimigo::carregarSprite() {
+	if (!carregarTexturaSprite("Textures/Golem_idle1.png",false,false)) {
+		throw "Deu merda aqui";
+	}
+	setScale(Vector2f(2.f, 2.f));
+	setPos(pos);
 }
 

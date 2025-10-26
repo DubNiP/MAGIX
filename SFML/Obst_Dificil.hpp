@@ -11,6 +11,7 @@ public:
 	void executar();
 	void obstaculizar(Jogador* p);
 	int getDanosidade() const;
+	void carregarSprite();
 };
 
 

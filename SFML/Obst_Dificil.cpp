@@ -4,7 +4,7 @@ ObstDificil::ObstDificil(Vector2f pos, Vector2f tam, bool dano, int quantDano):
 	Obstaculo(pos,tam,dano),
 	danosidade(quantDano)
 {
-
+	carregarSprite();
 }
 
 ObstDificil::~ObstDificil() {
@@ -27,4 +27,12 @@ void ObstDificil::obstaculizar(Jogador* p) {
 
 int ObstDificil::getDanosidade() const {
 	return danosidade;
+}
+
+void ObstDificil::carregarSprite() {
+	if (!carregarTexturaSprite("Textures/DungeonTile.png", false, false)) {
+		throw "Deu merda aqui";
+	}
+	setScale(Vector2f(3.f, 1.f));
+	setPos(pos);
 }

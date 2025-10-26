@@ -22,8 +22,8 @@ void Entidade::setPos(const Vector2f& p) {
 }
 
 void Entidade::attPos() {
-	if (pT) {
-		pT->setPosition(pos);
+	if (pSprite) {
+		pSprite->setPosition(pos);
 	}
 }
 
