@@ -2,7 +2,7 @@
 
 Inim_Medio::Inim_Medio(Vector2f pos, float vel, Jogador* pJog) : 
 	Inimigo(pos, vel, pJog),
-	raio(500.f)
+	tamanho(500)
 {
 	destruicao = 1;
 	carregarSprite();
@@ -35,7 +35,7 @@ void Inim_Medio::mover() {
 		Vector2f posJog = pJog->getPos();
 		Vector2f posInim = getPos();
 
-		if (fabs(posJog.x - posInim.x) < raio) {
+		if (fabs(posJog.x - posInim.x) < tamanho) {
 			if (posJog.x > posInim.x) {
 				posInim.x = posInim.x + vel;
 				setPos(posInim);

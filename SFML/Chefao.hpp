@@ -7,8 +7,7 @@
 class Chefao : public Inimigo {
 private:
     float raio;
-    int destruicao;
-    vector<Projetil*> LProjs;               //mover os projeteis para lista entidades?
+    short int forca;
 public:
     Chefao(Vector2f pos, float vel, Jogador* pJog);
 
