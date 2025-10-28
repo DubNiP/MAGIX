@@ -6,7 +6,6 @@ class Inim_Medio : public Inimigo {
 private:
     float raio;
     int destruicao;
-    Jogador* jogador;
 public:
     Inim_Medio(Vector2f pos, float vel, Jogador* pJog);
     ~Inim_Medio();

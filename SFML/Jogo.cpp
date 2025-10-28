@@ -2,13 +2,13 @@
 
 
 Jogo::Jogo() :
-    pJog1(Vector2f(640,360), 50.0f),
+    pJog1(Vector2f(640,360), 150.0f),
     GG(),
     menu(),
     event(),
-    fase1(&pJog1,&GG)
+    fase1(&pJog1)
 {
-    Ente::setGG(&GG);
+    Ente::setGG(&GG);         //pode mudar
 }
 
 Jogo::~Jogo() {

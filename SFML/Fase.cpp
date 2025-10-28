@@ -1,16 +1,14 @@
 #include "Fase.hpp"
 
-Fase::Fase(Jogador* pJog,GerenciadorGrafico* pGG):
+Fase::Fase(Jogador* pJog):
     Ente(),
     lista_ents(),
-    GG(pGG),
     GC(),
     jog(pJog),
     textFundo(NULL),
     spriteFundo(NULL)
 {
     GC.setJog(pJog);
-    GC.setWindow(GG->getWindow());
 }
 
 Fase::~Fase() {
@@ -28,17 +26,7 @@ Fase::~Fase() {
     }
 
     jog = NULL;
-    GG = NULL;
 }
-
-void Fase::criarProjetil()                                                       //COMENTAR COM O RAFA
-{
-    Projetil* pProjetil = new Projetil(Vector2f(1000.f, 360.f), false);
-    GC.incluirProjetil(pProjetil);
-    lista_ents.incluir(pProjetil);
-}
-
-
 
 void Fase::criarCenario() {
     lista_ents.limparPreservando(jog);                                    //estranho..
@@ -55,13 +43,13 @@ void Fase::criarCenario() {
     }
     criarObstaculo();
     criarInimigos();
-    criarProjetil(); //adicionar de forma que seja enviado pelos personagens
 }
 
 void Fase::executar() {
     criarCenario();
-    if (GG) {
-        RenderWindow* window = GG->getWindow();
+    if (pGG) {
+        GC.setWindow(pGG->getWindow());
+        RenderWindow* window = pGG->getWindow();
         Event event;
         while (window && window->isOpen() && jog && jog->getVidas() > 0) {
             while (window->pollEvent(event)) {
@@ -75,10 +63,9 @@ void Fase::executar() {
                 }
             }
             lista_ents.executarTodos();  
-            GC.limiteDeTela();
             GC.executar();
 
-            GG->desenhaTodos(&lista_ents,spriteFundo);
+            pGG->desenhaTodos(&lista_ents,spriteFundo);     //talvez trocar no futuro
         }
     }
 }

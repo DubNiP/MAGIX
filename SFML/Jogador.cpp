@@ -62,7 +62,9 @@ void Jogador::reseta(Vector2f posicao, int vidas, int pts) {
 
 void Jogador::tomarDano(int dano) {
 	if (dano > 0) {
-		if (danoClock.getElapsedTime().asSeconds() < invencibilidade) return;
+		if (danoClock.getElapsedTime().asSeconds() < invencibilidade) {
+			return;
+		}
 		int vidas = getVidas() - dano;
 		if (vidas < 0) vidas = 0;
 		setVidas(vidas);

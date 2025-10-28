@@ -1,6 +1,9 @@
 #include "Chefao.hpp"
 
-Chefao::Chefao(Vector2f pos, float vel, Jogador* pJog) : Inimigo(pos, vel), raio(100.f), jogador(pJog), LProjs()
+Chefao::Chefao(Vector2f pos, float vel, Jogador* pJog) : 
+	Inimigo(pos, vel, pJog),
+	raio(100.f), 
+	LProjs()
 {
 	destruicao = 15;
 	//carregarSprite();
@@ -11,7 +14,7 @@ Chefao::Chefao(Vector2f pos, float vel, Jogador* pJog) : Inimigo(pos, vel), raio
 
 Chefao::~Chefao()
 {
-	vector<Projetil*>::iterator it;                          //comentar no futuro
+	vector<Projetil*>::iterator it;                          //mudar no futuro
 	for (it = LProjs.begin(); it != LProjs.end(); ++it) {
 		delete* it;
 	}
@@ -19,8 +22,8 @@ Chefao::~Chefao()
 
 
 void Chefao::danificar() {
-	if (jogador) {
-		jogador->tomarDano(destruicao);
+	if (pJog) {
+		pJog->tomarDano(destruicao);
 	}
 }
 
@@ -37,21 +40,22 @@ void Chefao::tomarDano(int dano) {
 }
 
 void Chefao::mover() {
-	Vector2f posJog = jogador->getPos();
-	Vector2f posInim = getPos();
+	if (pJog) {
+		Vector2f posJog = pJog->getPos();
+		Vector2f posInim = getPos();
 
-	if (fabs(posJog.x - posInim.x) > raio) {
-		if (posJog.x > posInim.x) {
-			posInim.x = posInim.x + vel;
-			setPos(posInim);
-		}
-		else
-		{
-			posInim.x = posInim.x - vel;
-			setPos(posInim);
+		if (fabs(posJog.x - posInim.x) > raio) {
+			if (posJog.x > posInim.x) {
+				posInim.x = posInim.x + vel;
+				setPos(posInim);
+			}
+			else
+			{
+				posInim.x = posInim.x - vel;
+				setPos(posInim);
+			}
 		}
 	}
-
 	for (int i = 0; i < 4; i++) {
 
 		i > 1 ? moverDireita() : moverEsquerda();

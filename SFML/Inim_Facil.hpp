@@ -6,14 +6,13 @@ class Inim_facil : public Inimigo {
 private:
     float raio;
     int destruicao;
-    Jogador* jogador;
 public:
     Inim_facil(Vector2f pos, float vel, Jogador* pJog);
 
     ~Inim_facil();
 
     void danificar();
-    void tomarDano(int dano);    //Discutir depois
+    void tomarDano(int dano);
 
     void mover();
     void moverEsquerda();

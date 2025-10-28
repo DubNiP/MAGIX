@@ -11,7 +11,7 @@ protected:
 public:
 	Jogador(Vector2f pos, float vel);
 	~Jogador();
-	//void colidir(Inimigo* pIn);            //VOID MESMO?
+	//void colidir(Inimigo* pIn);            //PROVAVEL QUE SEJA O JOGADOR DANDO DANO NO INIMIGO.
 	void executar();
 	//void salvar();
 	void mover();

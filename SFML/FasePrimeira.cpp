@@ -1,7 +1,7 @@
 #include "FasePrimeira.hpp"
 
-FasePrimeira::FasePrimeira(Jogador* pJog, GerenciadorGrafico* pGG):
-	Fase(pJog, pGG),
+FasePrimeira::FasePrimeira(Jogador* pJog):
+	Fase(pJog),
 	maxInimMedios(10)
 {
 
@@ -24,7 +24,7 @@ void FasePrimeira::criarObstaculo() {
 
 
 void FasePrimeira::criarInimMedios() {
-	Inimigo* in1 = new Inim_Medio(Vector2f(200.f, 200.f), 0.f, jog);                   //substituir por algo no futuro..
+	Inimigo* in1 = new Inim_Medio(Vector2f(200.f, 200.f), 1.f, jog);                   //substituir por algo no futuro..
 	GC.incluirInimigo(in1);
 	lista_ents.incluir(in1);
 }

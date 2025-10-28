@@ -1,7 +1,7 @@
 #include "FaseSegunda.hpp"
 
-FaseSegunda::FaseSegunda(Jogador* pJog, GerenciadorGrafico* pGG):
-	Fase(pJog,pGG),
+FaseSegunda::FaseSegunda(Jogador* pJog):
+	Fase(pJog),
 	maxChefoes(2)
 {
 

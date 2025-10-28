@@ -11,7 +11,7 @@
 
 using namespace std;
 
-//POR ENQUANTO A COLISÃO PEGA OS QUADRADOS DOS FORMATOS, VALE A PENA ANALISAR ISSO E MELHORAR NO FUTURO...
+//POR ENQUANTO A COLISÃO PEGA OS QUADRADOS DOS FORMATOS, VALE A PENA ANALISAR ISSO E MELHORAR NO FUTURO?
 
 
 
@@ -26,7 +26,7 @@ public:
     GerenciadorColisoes(Jogador* pJog = NULL,RenderWindow* window = NULL);
     ~GerenciadorColisoes();
 
-    const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;
+    const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;                  //conferir se está no diagrama.
     void colidiu(Entidade* pe1, Entidade* pe2, FloatRect jog, FloatRect obs);
 
     void tratarColisoesJogsObstacs();

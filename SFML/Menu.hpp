@@ -34,7 +34,7 @@ public:
 	Menu();
 	~Menu();
 	void executar();
-	void loop_menu(Event& event);
+	void loop_menu(Event& event);      //analisar passagem por referência escondida
 	void draw_menu();
 	bool getIniciar() const;
 	bool getSair() const;

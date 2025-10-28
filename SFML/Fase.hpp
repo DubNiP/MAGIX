@@ -13,7 +13,6 @@ using namespace sf;
 class Fase: public Ente {
 protected:
 	ListaEntidades lista_ents;
-	GerenciadorGrafico* GG;
 	GerenciadorColisoes GC;
 	Jogador* jog;
 
@@ -22,13 +21,12 @@ protected:
 
 	//void criarInimFaceis();
 	//void criarPlataformas();
-	void criarProjetil();                                       //Comentar com o Rafa
 	virtual void criarInimigos() = 0;          
 	virtual void criarObstaculo() = 0;
 	void criarCenario();
 	virtual void carregarFundo() = 0;
 public:
-	Fase(Jogador* pJog, GerenciadorGrafico* pGG);
+	Fase(Jogador* pJog);
 	~Fase();
-	void executar();                  //DEVE SER VIRTUAL NO FUTURO
+	virtual void executar();
 };

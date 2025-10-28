@@ -19,6 +19,6 @@ protected:
 
 	void carregarFundo();
 public:
-	FasePrimeira(Jogador* pJog, GerenciadorGrafico* pGG);
+	FasePrimeira(Jogador* pJog);         //FASE ESTÁ CONHECENDO JOGADOR AQUI, E NO DIAGRAMA NÃO TEM NADA, PODE?
 	~FasePrimeira();
 };

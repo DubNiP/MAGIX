@@ -22,7 +22,7 @@ const bool GerenciadorColisoes::verificarColisao(Entidade* pe1, Entidade* pe2) c
 
 void GerenciadorColisoes::colidiu(Entidade* pe1, Entidade* pe2, FloatRect jog, FloatRect en) {
 	if (pe1 && pe2 && pe1 != pe2) {
-		float jogx = jog.left + jog.width / 2;         //Lógica: a posição central é a coordenada que fica no topo superior esquerdo + a altura/largura.         
+		float jogx = jog.left + jog.width / 2;         //Lógica: a posição central é a coordenada que fica no topo superior esquerdo + a altura/largura.  
 		float jogy = jog.top + jog.height / 2;
 		float obsx = en.left + en.width / 2;
 		float obsy = en.top + en.height / 2;
@@ -30,7 +30,7 @@ void GerenciadorColisoes::colidiu(Entidade* pe1, Entidade* pe2, FloatRect jog, F
 		const float sobrePosY = (jog.height * 0.5f + en.height * 0.5f) - fabs(jogy - obsy);
 
 
-		Vector2f MTV(0, 0);                      //dar uma olhada na colisão
+		Vector2f MTV(0, 0);                     
 		if (sobrePosX < sobrePosY) {
 			if (jogx > obsx) {
 				MTV.x = sobrePosX;
@@ -83,7 +83,7 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 				FloatRect inim = LIs[i]->getBounds();
 				if (verificarColisao(pJog1, LIs[i])) {
 					colidiu(LIs[i], pJog1, jog, inim);
-					LIs[i]->danificar(pJog1);                //isso tá sugando a vida do jogador MT rápido, dps é bom dar uma olhada
+					LIs[i]->danificar();                //isso tá sugando a vida do jogador MT rápido, dps é bom dar uma olhada
 				}
 			}
 		}
@@ -97,7 +97,7 @@ void GerenciadorColisoes::tratarColisoesJogsProjeteis() {
 			FloatRect jog = pJog1->getBounds();
 			FloatRect inim = (*it)->getBounds();
 			if (verificarColisao(pJog1, *it)) {
-				pJog1->tomarDano((*it)->getDano());                //analisar se é possível deixar mais organizado, mas tá massa
+				pJog1->tomarDano((*it)->getDano());               
 				(*it)->setAtivo(false);
 				it = LPs.erase(it);
 				continue;
@@ -142,6 +142,7 @@ void GerenciadorColisoes::limparProjetis()
 }
 
 void GerenciadorColisoes::executar() {
+	limiteDeTela();
 	tratarColisoesJogsObstacs();
 	tratarColisoesJogsProjeteis();
 	tratarColisoesJogsInimgs();
@@ -157,18 +158,16 @@ void GerenciadorColisoes::setWindow(RenderWindow* win) {
 
 void GerenciadorColisoes::limiteDeTela() {
 	if (window) {
+		if (pJog1) {
 
-		FloatRect boundJog = pJog1->getBounds();
-		Vector2u windowSize = window->getSize();
+			FloatRect boundJog = pJog1->getBounds();
+			Vector2u windowSize = window->getSize();
 
-		const int X = windowSize.x - boundJog.width;
-		const int Y = windowSize.y - boundJog.height;
-
-		if (pJog1){
+			const int X = windowSize.x - boundJog.width;
+			const int Y = windowSize.y - boundJog.height;
 			limiteDeTelaJogador(X, Y);
+			limiteDeTelaProjeteis(X, Y);
 		}
-
-		limiteDeTelaProjeteis(X, Y);
 	}
 }
 

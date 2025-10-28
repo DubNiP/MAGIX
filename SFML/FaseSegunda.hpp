@@ -12,6 +12,6 @@ protected:
 	void criarObsMedios();
 	//void criarProjeteis();
 public:
-	FaseSegunda(Jogador* pJog, GerenciadorGrafico* pGG);
+	FaseSegunda(Jogador* pJog);                   //FASE ESTÁ CONHECENDO JOGADOR AQUI, E NO DIAGRAMA NÃO TEM NADA, PODE?
 	~FaseSegunda();
 };

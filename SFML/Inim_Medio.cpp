@@ -1,8 +1,10 @@
 #include "Inim_Medio.hpp"
 
-Inim_Medio::Inim_Medio(Vector2f pos, float vel, Jogador* pJog) : Inimigo(pos, vel), raio(100.f), jogador(pJog)
+Inim_Medio::Inim_Medio(Vector2f pos, float vel, Jogador* pJog) : 
+	Inimigo(pos, vel, pJog),
+	raio(500.f)
 {
-	destruicao = 15;
+	destruicao = 1;
 	carregarSprite();
 	executar();
 }
@@ -13,9 +15,9 @@ Inim_Medio::~Inim_Medio()
 
 
 void Inim_Medio::danificar() {
-	if (!jogador) return;
-
-	jogador->tomarDano(destruicao);
+	if (pJog) {
+		pJog->tomarDano(destruicao);
+	}
 }
 
 void Inim_Medio::tomarDano(int dano) {
@@ -29,21 +31,22 @@ void Inim_Medio::tomarDano(int dano) {
 }
 
 void Inim_Medio::mover() {
-	Vector2f posJog = jogador->getPos();
-	Vector2f posInim = getPos();
+	if (pJog) {
+		Vector2f posJog = pJog->getPos();
+		Vector2f posInim = getPos();
 
-	if (fabs(posJog.x - posInim.x) > raio) {
-		if (posJog.x > posInim.x) {
-			posInim.x = posInim.x + vel;
-			setPos(posInim);
-		}
-		else
-		{
-			posInim.x = posInim.x - vel;
-			setPos(posInim);
+		if (fabs(posJog.x - posInim.x) < raio) {
+			if (posJog.x > posInim.x) {
+				posInim.x = posInim.x + vel;
+				setPos(posInim);
+			}
+			else
+			{
+				posInim.x = posInim.x - vel;
+				setPos(posInim);
+			}
 		}
 	}
-
 	for (int i = 0; i < 4; i++) {
 
 		i > 1 ? moverDireita() : moverEsquerda();

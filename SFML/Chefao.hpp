@@ -8,15 +8,14 @@ class Chefao : public Inimigo {
 private:
     float raio;
     int destruicao;
-    Jogador* jogador;
-    vector<Projetil*> LProjs;
+    vector<Projetil*> LProjs;               //mover os projeteis para lista entidades?
 public:
     Chefao(Vector2f pos, float vel, Jogador* pJog);
 
     ~Chefao();
 
     void danificar();
-    void tomarDano(int dano);    //Discutir depois
+    void tomarDano(int dano);
 
     void mover();
     void moverEsquerda();

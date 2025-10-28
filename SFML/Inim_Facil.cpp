@@ -2,9 +2,8 @@
 #include <cmath>
 
 Inim_facil::Inim_facil(Vector2f pos, float vel, Jogador* pJog) :
-	Inimigo(pos, vel),
-	raio(100.f),
-	jogador(pJog)
+	Inimigo(pos, vel, pJog),
+	raio(100.f)
 {
 	destruicao = 7;
 	//carregarSprite();
@@ -16,8 +15,8 @@ Inim_facil::~Inim_facil()
 }
 
 void Inim_facil::danificar() {
-	if (jogador) {
-		jogador->tomarDano(destruicao);
+	if (pJog) {
+		pJog->tomarDano(destruicao);
 	}
 }
 
@@ -32,21 +31,23 @@ void Inim_facil::tomarDano(int dano) {
 }
 
 void Inim_facil::mover() {
-	Vector2f posJog = jogador->getPos();
-	Vector2f posInim = getPos();
+	if (pJog) {
 
-	if (fabs(posJog.x - posInim.x) > raio) {
-		if (posJog.x > posInim.x) {
-			posInim.x = posInim.x + vel;
-			setPos(posInim);
-		}
-		else
-		{
-			posInim.x = posInim.x - vel;
-			setPos(posInim);
+		Vector2f posJog = pJog->getPos();
+		Vector2f posInim = getPos();
+
+		if (fabs(posJog.x - posInim.x) > raio) {
+			if (posJog.x > posInim.x) {
+				posInim.x = posInim.x + vel;
+				setPos(posInim);
+			}
+			else
+			{
+				posInim.x = posInim.x - vel;
+				setPos(posInim);
+			}
 		}
 	}
-
 	for (int i = 0; i < 4; i++) {
 
 		i > 1 ? moverDireita() : moverEsquerda();

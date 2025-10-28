@@ -14,7 +14,6 @@ public:
 	Entidade(Vector2f posicao);
 	virtual ~Entidade();
 	virtual void executar() = 0;
-	//virtual void danificar() = 0;                   FALAR DEPOIS
 	//virtual void salvar() = 0;
 	Vector2f getPos() const;
 	void setPos(const Vector2f& p);

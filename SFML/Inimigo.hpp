@@ -6,14 +6,15 @@
 class Inimigo : public Personagem {
 protected:
 	int nivel_maldade;
+	Jogador* pJog;
 public:
-	Inimigo(Vector2f pos, float vel);
+	Inimigo(Vector2f pos, float vel, Jogador* jog);
 	~Inimigo();
 	//void salvarDataBuffer();
-	void executar();                             //virtual no futuro..
-	void danificar(Jogador* p);                  //virtual no futuro..
+	virtual void executar() = 0;
+	virtual void danificar() = 0;
 	//virtual void salva() = 0;
-	void mover();
+	virtual void mover() = 0;
 	virtual void perseguir(Vector2f posicaoJog, Vector2f posicaoInim) = 0;
 	virtual void carregarSprite() = 0;
 };
