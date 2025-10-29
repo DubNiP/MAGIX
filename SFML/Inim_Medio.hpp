@@ -4,7 +4,7 @@
 
 class Inim_Medio : public Inimigo {
 private:
-    float raio;
+    int tamanho;
     int destruicao;
 	Clock relogio;
     Vector2f posInicial;

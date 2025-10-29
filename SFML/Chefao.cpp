@@ -2,28 +2,20 @@
 
 Chefao::Chefao(Vector2f pos, float vel, Jogador* pJog) : 
 	Inimigo(pos, vel, pJog),
-	raio(100.f), 
-	LProjs()
+	raio(100.f),
+	forca(15)
 {
-	destruicao = 15;
 	//carregarSprite();
 	executar();
-
-
 }
 
 Chefao::~Chefao()
 {
-	vector<Projetil*>::iterator it;                          //mudar no futuro
-	for (it = LProjs.begin(); it != LProjs.end(); ++it) {
-		delete* it;
-	}
 }
-
 
 void Chefao::danificar() {
 	if (pJog) {
-		pJog->tomarDano(destruicao);
+		pJog->tomarDano(forca);
 	}
 }
 

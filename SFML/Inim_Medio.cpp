@@ -1,9 +1,9 @@
 #include "Inim_Medio.hpp"
 
 Inim_Medio::Inim_Medio(Vector2f pos, float vel, Jogador* pJog) :
-	Inimigo(pos, vel, pJog),
+	Inimigo(pos, vel, pJog), 
 	relogio(),
-	raio(500.f)
+	tamanho(500)
 {
 	relogio.restart();
 	posInicial = pos;
@@ -42,24 +42,19 @@ void Inim_Medio::mover() {
 	Vector2f posJog = pJog->getPos();
 	Vector2f posInim = getPos();
 
-	if (fabs(posJog.x - posInim.x) < raio) {
-		if (posJog.x > posInim.x) moverDireita();
-
-		else moverEsquerda();
-	
+		if (fabs(posJog.x - posInim.x) < tamanho) {
+			if (posJog.x > posInim.x) {
+				posInim.x = posInim.x + vel;
+				setPos(posInim);
+			}
+			else
+			{
+				posInim.x = posInim.x - vel;
+				setPos(posInim);
+			}
+		}
 	}
-	else {
-		if (getPos().x < posInicial.x - raio * 2) moverDireita();
-		
-		else movimentoAleatorio();
-	}
-}
-
-void Inim_Medio::movimentoAleatorio() {
-	if (moverAleatorio % 2 == 0) moverDireita();
-
-	else moverEsquerda();
-	
+	for (int i = 0; i < 4; i++) {
 
 	float dt = relogio.getElapsedTime().asSeconds();
 	if (dt >= 2.0f) {
