@@ -7,6 +7,7 @@ class Inimigo : public Personagem {
 protected:
 	int nivel_maldade;
 	Jogador* pJog;
+	short moverAleatorio;
 public:
 	Inimigo(Vector2f pos, float vel, Jogador* jog);
 	~Inimigo();

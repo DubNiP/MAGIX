@@ -1,12 +1,15 @@
 #include "Inim_Medio.hpp"
 
-Inim_Medio::Inim_Medio(Vector2f pos, float vel, Jogador* pJog) : 
+Inim_Medio::Inim_Medio(Vector2f pos, float vel, Jogador* pJog) :
 	Inimigo(pos, vel, pJog),
+	relogio(),
 	raio(500.f)
 {
+	relogio.restart();
+	posInicial = pos;
 	destruicao = 1;
 	carregarSprite();
-	executar();
+	moverAleatorio = rand() % 2;
 }
 
 Inim_Medio::~Inim_Medio()
@@ -31,26 +34,39 @@ void Inim_Medio::tomarDano(int dano) {
 }
 
 void Inim_Medio::mover() {
-	if (pJog) {
-		Vector2f posJog = pJog->getPos();
-		Vector2f posInim = getPos();
-
-		if (fabs(posJog.x - posInim.x) < raio) {
-			if (posJog.x > posInim.x) {
-				posInim.x = posInim.x + vel;
-				setPos(posInim);
-			}
-			else
-			{
-				posInim.x = posInim.x - vel;
-				setPos(posInim);
-			}
-		}
+	if (!pJog) {
+		movimentoAleatorio();
+		return;
 	}
-	for (int i = 0; i < 4; i++) {
 
-		i > 1 ? moverDireita() : moverEsquerda();
+	Vector2f posJog = pJog->getPos();
+	Vector2f posInim = getPos();
+
+	if (fabs(posJog.x - posInim.x) < raio) {
+		if (posJog.x > posInim.x) moverDireita();
+
+		else moverEsquerda();
+	
 	}
+	else {
+		if (getPos().x < posInicial.x - raio * 2) moverDireita();
+		
+		else movimentoAleatorio();
+	}
+}
+
+void Inim_Medio::movimentoAleatorio() {
+	if (moverAleatorio % 2 == 0) moverDireita();
+
+	else moverEsquerda();
+	
+
+	float dt = relogio.getElapsedTime().asSeconds();
+	if (dt >= 2.0f) {
+		moverAleatorio = rand() % 4;
+		relogio.restart();
+	}
+
 }
 
 void Inim_Medio::moverEsquerda() {
@@ -65,14 +81,11 @@ void Inim_Medio::moverDireita() {
 	setPos(novaPos);
 }
 
-
 void Inim_Medio::perseguir(Vector2f posicaoJog, Vector2f posicaoInim) {
-	if (posicaoJog.x < posicaoInim.x) {
-		moverEsquerda();
-	}
-	else if (posicaoJog.x > posicaoInim.x) {
-		moverDireita();
-	}
+	if (posicaoJog.x < posicaoInim.x)	moverEsquerda();
+	
+	else if (posicaoJog.x > posicaoInim.x) moverDireita();
+	
 }
 
 void Inim_Medio::executar() {
