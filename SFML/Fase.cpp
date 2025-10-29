@@ -38,7 +38,7 @@ void Fase::criarCenario() {
 
     //deve ter criar plataformas, etc...
     if (jog) {
-        jog->reseta(Vector2f(640.f, 360.f), 10, 0);
+        jog->reseta(Vector2f(640.f, 240.f), 10, 0);
         lista_ents.incluir(jog);
     }
     criarObstaculo();

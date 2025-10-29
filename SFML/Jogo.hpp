@@ -13,7 +13,7 @@ using namespace sf;
 
 class Jogo {
 private:
-	Jogador pJog1;            
+	Jogador pJog1;
 	GerenciadorGrafico GG;
 	Menu menu;
 	Event event;

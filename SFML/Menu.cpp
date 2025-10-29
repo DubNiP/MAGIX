@@ -10,9 +10,6 @@ Menu::Menu() :
 
 	font(NULL),
 
-	pos_mouse(),
-	mouse_coord(),
-
 	options(),
 	coords(),
 	texts(),
@@ -48,9 +45,6 @@ Menu::~Menu() {
 }
 
 void Menu::set_values() {
-
-	pos_mouse = { 0,0 };
-	mouse_coord = { 0,0 };
 
 	options = { "Nome_Jogo","Jogar","Opcoes","Sair" };                                //Classe de objetos gráficos, vale a pena olhar no futuro...
 	texts.resize(4);

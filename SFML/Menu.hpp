@@ -18,10 +18,7 @@ private:
 
 	Font* font;
 
-	Vector2i pos_mouse;
-	Vector2f mouse_coord;
-
-	vector<const char*> options;
+	vector<string> options;
 	vector<Vector2f> coords;
 	vector<Text> texts;
 	vector<size_t> sizes;

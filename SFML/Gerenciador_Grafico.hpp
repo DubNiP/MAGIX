@@ -19,3 +19,5 @@ public:
     void desenhaTodos(ListaEntidades* LE, Sprite* sp = NULL );       //coloco essa relação?
     RenderWindow* getWindow() const;
 };
+
+//Colocar executar no futuro?

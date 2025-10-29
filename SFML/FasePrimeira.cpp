@@ -24,16 +24,23 @@ void FasePrimeira::criarObstaculo() {
 
 
 void FasePrimeira::criarInimMedios() {
-	Inimigo* in1 = new Inim_Medio(Vector2f(200.f, 200.f), 1.f, jog);                   //substituir por algo no futuro..
+	Inimigo* in1 = new Inim_Medio(Vector2f(200.f, 600.f), 1.f, jog);                   //substituir por algo no futuro..
 	GC.incluirInimigo(in1);
 	lista_ents.incluir(in1);
+	Projetil* proj = new Projetil(Vector2f(50.f, 500.f), 1);
+	lista_ents.incluir(proj);
+	GC.incluirProjetil(proj);
 }
 
 
 void FasePrimeira::criarObsMedios() {
-	Obstaculo* obs1 = new ObstDificil(Vector2f(400.f, 300.f), Vector2f(200.f, 40.f), false, 0);     //substituir por algo no futuro..
+	Obstaculo* obs1 = new ObstDificil(Vector2f(400.f, 300.f), Vector2f(400.f, 40.f), false);     //substituir por algo no futuro..
 	GC.incluirObstaculo(obs1);
 	lista_ents.incluir(obs1);
+	Obstaculo* chao = new ObstDificil(Vector2f(0.f, 680.f), Vector2f(1280.f, 40.f), false);
+	GC.incluirObstaculo(chao);
+	lista_ents.incluir(chao);
+
 }
 
 

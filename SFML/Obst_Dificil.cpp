@@ -30,9 +30,12 @@ int ObstDificil::getDanosidade() const {
 }
 
 void ObstDificil::carregarSprite() {
-	if (!carregarTexturaSprite("Textures/DungeonTile.png", false, false)) {
+	if (!carregarTexturaSprite("Textures/DungeonTile.png", true, false)) {
 		throw "Deu merda aqui";
 	}
-	setScale(Vector2f(3.f, 1.f));
+	if (Sprite* sp = getSprite()) {                //analisar
+		sp->setTextureRect(IntRect(0, 0, static_cast<int>(largura), static_cast<int>(altura)));
+	}
+	setScale(Vector2f(1.f, 1.f));
 	setPos(pos);
 }
