@@ -143,7 +143,7 @@
     <ClCompile Include="Gerenciador_Colisoes.cpp" />
     <ClCompile Include="Inimigo.cpp" />
     <ClCompile Include="Inim_Facil.cpp" />
-    <ClCompile Include="Inim_Medio.cpp" />
+    <ClCompile Include="Golem.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="ListaEntidades.cpp" />
@@ -167,7 +167,7 @@
     <ClInclude Include="Gerenciador_Colisoes.hpp" />
     <ClInclude Include="Inimigo.hpp" />
     <ClInclude Include="Inim_Facil.hpp" />
-    <ClInclude Include="Inim_Medio.hpp" />
+    <ClInclude Include="Golem.hpp" />
     <ClInclude Include="Jogador.hpp" />
     <ClInclude Include="Jogo.hpp" />
     <ClInclude Include="Lista.hpp" />

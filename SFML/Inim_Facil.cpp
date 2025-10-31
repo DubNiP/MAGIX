@@ -6,10 +6,10 @@ namespace entidades {
 
 		Inim_facil::Inim_facil(Vector2f pos, float vel, Jogador* pJog) :
 			Inimigo(pos, vel, pJog),
-			raio(100.f)
+			raio(100.f),
+			destruicao(7)
 		{
-			destruicao = 7;
-			//carregarSprite();
+			carregarSprite();
 			executar();
 		}
 

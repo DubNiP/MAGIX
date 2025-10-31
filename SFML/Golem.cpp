@@ -1,12 +1,12 @@
-#include "Inim_Medio.hpp"
+#include "Golem.hpp"
 
 namespace entidades { 
 	namespace personagens {
 
-		Inim_Medio::Inim_Medio(Vector2f pos, float vel, Jogador* pJog) :
+		Golem::Golem(Vector2f pos, float vel, Jogador* pJog) :
 			Inimigo(pos, vel, pJog), 
 			relogio(),
-			tamanho(50)
+			tamanho(100)
 		{
 			relogio.restart();
 			posInicial = pos;
@@ -15,18 +15,18 @@ namespace entidades {
 			moverAleatorio = rand() % 2;
 		}
 
-		Inim_Medio::~Inim_Medio()
+		Golem::~Golem()
 		{
 		}
 
 
-		void Inim_Medio::danificar() {
+		void Golem::danificar() {
 			if (pJog) {
 				pJog->tomarDano(destruicao);
 			}
 		}
 
-		void Inim_Medio::tomarDano(int dano) {
+		void Golem::tomarDano(int dano) {
 			if (dano > 0) {
 				{
 					int vidas = getVidas() - dano;
@@ -36,7 +36,7 @@ namespace entidades {
 			}
 		}
 
-		void Inim_Medio::mover() {
+		void Golem::mover() {
 			if (!pJog) {
 				movimentoAleatorio();
 				return;
@@ -53,12 +53,12 @@ namespace entidades {
 			}
 			else {
 				if (getPos().x < posInicial.x - tamanho * 2) moverDireita();
-
+				else if (getPos().x > posInicial.x + tamanho * 2) moverEsquerda();
 				else movimentoAleatorio();
 			}
 		}
 
-		void Inim_Medio::movimentoAleatorio() {
+		void Golem::movimentoAleatorio() {
 			if (moverAleatorio % 2 == 0) moverDireita();
 
 			else moverEsquerda();
@@ -72,37 +72,38 @@ namespace entidades {
 
 		}
 
-		void Inim_Medio::moverEsquerda() {
+		void Golem::moverEsquerda() {
 			Vector2f novaPos = getPos();
 			novaPos.x -= vel;
 			setPos(novaPos);
 		}
 
-		void Inim_Medio::moverDireita() {
+		void Golem::moverDireita() {
 			Vector2f novaPos = getPos();
 			novaPos.x += vel;
 			setPos(novaPos);
 		}
 
-		void Inim_Medio::perseguir(Vector2f posicaoJog, Vector2f posicaoInim) {
+		void Golem::perseguir(Vector2f posicaoJog, Vector2f posicaoInim) {
 			if (posicaoJog.x < posicaoInim.x)	moverEsquerda();
 	
 			else if (posicaoJog.x > posicaoInim.x) moverDireita();
 	
 		}
 
-		void Inim_Medio::executar() {
+		void Golem::executar() {
 			mover();
 			attPos();
 		}
 
-		void Inim_Medio::carregarSprite() {
+		void Golem::carregarSprite() {
 			if (!carregarTexturaSprite("Textures/Golem_idle1.png", false, false)) {
 				throw "Textura não carregada";
 			}
 			setScale(Vector2f(2.f, 2.f));
 			setPos(pos);
 		}
+
 
 		//void salvar() {}	
 	} 

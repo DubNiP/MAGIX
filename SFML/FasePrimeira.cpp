@@ -5,7 +5,7 @@ using namespace fases;
 
 FasePrimeira::FasePrimeira(entidades::personagens::Jogador* pJog):
     Fase(pJog),
-    maxInimMedios(10)
+    maxGolems(10)
 {
 }
 
@@ -13,15 +13,15 @@ FasePrimeira::~FasePrimeira() {
 }
 
 void FasePrimeira::criarInimigos() {
-    criarInimMedios();
+    criarGolems();
 }
 
 void FasePrimeira::criarObstaculo() {
     criarObsMedios();
 }
 
-void FasePrimeira::criarInimMedios() {
-    entidades::personagens::Inimigo* in1 = new entidades::personagens::Inim_Medio(Vector2f(200.f, 600.f), 1.f, jog);
+void FasePrimeira::criarGolems() {
+    entidades::personagens::Inimigo* in1 = new entidades::personagens::Golem(Vector2f(200.f, 600.f), 1.f, jog);
     GC.incluirInimigo(in1);
     lista_ents.incluir(in1);
     Projetil* proj = new Projetil(Vector2f(50.f, 500.f), 1);
@@ -80,22 +80,13 @@ void FasePrimeira::criarObsMedios() {
 	GC.incluirObstaculo(paredeDir);
 	lista_ents.incluir(paredeDir);
 
+
 	// Plataforma de teste
-    Vector2f platPos(300.f, 640.f);
+    Vector2f platPos(400.f, 588.f);
     Vector2f platTam(200.f, 20.f);
-    auto* plat = new entidades::obstaculos::Plataforma(platPos, platTam, false, /*amplitude*/100.f, /*periodo*/2.f);
+    auto* plat = new entidades::obstaculos::Plataforma(platPos, platTam, false, /*amplitude*/90.f, /*periodo*/5.f);
     GC.incluirObstaculo(plat);
     lista_ents.incluir(plat);
-
-    // Textura de pedra (tile repetido)
-    if (!plat->carregarTexturaSprite("Textures/DungeonTile.png", true, false)) {
-        throw "textura de pedra não carregada";
-    }
-    if (Sprite* sp = plat->getSprite()) {
-        sp->setTextureRect(IntRect(0, 0, static_cast<int>(platTam.x), static_cast<int>(platTam.y)));
-    }
-    plat->setScale(Vector2f(1.f, 1.f));
-    plat->setPos(platPos);
 }
 
 void FasePrimeira::carregarFundo() {

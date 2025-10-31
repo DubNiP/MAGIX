@@ -5,15 +5,15 @@
 namespace entidades {
     namespace personagens {
 
-        class Inim_Medio : public Inimigo {
+        class Golem : public Inimigo {
         private:
             int tamanho;
             int destruicao;
 	        Clock relogio;
             Vector2f posInicial;
         public:
-            Inim_Medio(Vector2f pos, float vel, Jogador* pJog);
-            ~Inim_Medio();
+            Golem(Vector2f pos, float vel, Jogador* pJog);
+            ~Golem();
 
             void danificar();
             void tomarDano(int dano);    //Discutir depois

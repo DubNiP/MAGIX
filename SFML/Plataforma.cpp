@@ -6,13 +6,14 @@ namespace entidades {
 		Plataforma::Plataforma(Vector2f pos, Vector2f tam, bool dano, float ampl, float per) :
 			Obstaculo(pos, tam, dano),
 			amplitude(ampl),
-			periodo(per > 0.f ? per : 2.f),
+			periodo(per),
 			yIn(pos.y),
 			yAnt(pos.y),
-			altura(),
+			alturaaa(),
 			ativa(false),
 			tempo()
 		{
+			carregarSprite();
 			tempo.restart();
 		}
 
@@ -23,10 +24,9 @@ namespace entidades {
 		void Plataforma::executar() {
 			yAnt = pos.y;
 
-			// Oscilação senoidal centrada em yIn: [yIn - amplitude, yIn + amplitude]
-			const float t = tempo.getElapsedTime().asSeconds();
-			const float omega = 2.f * 3.1415f / periodo;
-			pos.y = yIn + amplitude * sin(omega * t);
+			const float t = tempo.getElapsedTime().asSeconds();      
+			const float omega = 2.f * 3.1415f / periodo;     // w = 2pi/T
+			pos.y = yIn + amplitude * cos(omega * t);        // x = x0 + A * cos(wt)
 
 			attPos();
 		}
@@ -38,25 +38,32 @@ namespace entidades {
 				const FloatRect pf = getBounds();
 
 
-				const float eps = 3.f;
-				const bool overlapX = (pj.left + pj.width) > pf.left && pj.left < (pf.left + pf.width);
-				const bool onTop = abs((pj.top + pj.height) - pf.top) <= eps && overlapX;
+				const float folga = 3.f;
+				const bool overlapX = (pj.left + pj.width) > pf.left - folga && pj.left < (pf.left + pf.width);
+				const bool onTop = (abs((pj.top + pj.height) - pf.top) <= folga) && overlapX;
 
 				if (onTop) {
-					// Move o jogador junto com a plataforma usando deltaY do frame
 					const float deltaY = pos.y - yAnt;
 
-					Vector2f jp = p->getPos();
-					jp.y += deltaY;
+					Vector2f jpos = p->getPos();
+					jpos.y += deltaY;
 
-					// Garante alinhamento perfeito no topo (evita afundar/folgar por erro de arredondamento)
 					const float alturaJog = pj.height;
-					jp.y = pf.top - alturaJog;
+					jpos.y = pf.top - alturaJog;
 
-					p->setPos(jp);
+					p->setPos(jpos);
 				}
 			}
 		}
-
+		void Plataforma::carregarSprite() {
+			if (!carregarTexturaSprite("Textures/plataforma.png", true, false)) {
+				throw "Textura não carregada";
+			}
+			if (Sprite* sp = getSprite()) {
+				sp->setTextureRect(IntRect(0, 0, static_cast<int>(largura), static_cast<int>(altura)));
+			}
+			setScale(Vector2f(1.f, 1.f));
+			setPos(pos);
+		}
 	}
 }

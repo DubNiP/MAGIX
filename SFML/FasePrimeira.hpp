@@ -1,6 +1,6 @@
 #pragma once
 #include "Fase.hpp"
-#include "Inim_Medio.hpp"
+#include "Golem.hpp"
 #include "Jogador.hpp"
 #include "Plataforma.hpp"
 
@@ -8,13 +8,13 @@ namespace fases {
 
 	class FasePrimeira : public Fase {
 	private:
-		const int maxInimMedios;
+		const int maxGolems;
 	protected:
 		void criarInimigos();
 		void criarObstaculo();
 
 
-		void criarInimMedios();
+		void criarGolems();
 
 
 		void criarObsMedios();

@@ -12,7 +12,7 @@ namespace entidades {
 			float periodo;        
 			float yIn;       
 			float yAnt;      
-			int altura;
+			int alturaaa;       //mudar dps
 			bool ativa;
 			Clock tempo;
 		public:
@@ -21,7 +21,7 @@ namespace entidades {
 
 			void executar();
 			void obstaculizar(entidades::personagens::Jogador* p);
-
+			void carregarSprite();
 		};
 	} 
 }

@@ -93,7 +93,7 @@
     <ClCompile Include="Chefao.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Inim_Medio.cpp">
+    <ClCompile Include="Golem.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Inim_Facil.cpp">
@@ -161,7 +161,7 @@
     <ClInclude Include="Chefao.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Inim_Medio.hpp">
+    <ClInclude Include="Golem.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Inim_Facil.hpp">
