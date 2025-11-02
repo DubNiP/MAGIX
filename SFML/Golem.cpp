@@ -4,13 +4,13 @@ namespace entidades {
 	namespace personagens {
 
 		Golem::Golem(Vector2f pos, float vel, Jogador* pJog) :
-			Inimigo(pos, vel, pJog), 
+			Inimigo(pos, vel, pJog),
+			tamanho(100),
+			destruicao(1),
 			relogio(),
-			tamanho(100)
+			posInicial(pos)
 		{
 			relogio.restart();
-			posInicial = pos;
-			destruicao = 1;
 			carregarSprite();
 			moverAleatorio = rand() % 2;
 		}
@@ -58,6 +58,18 @@ namespace entidades {
 			}
 		}
 
+		void Golem::moverEsquerda() {
+			Vector2f novaPos = getPos();
+			novaPos.x -= vel;
+			setPos(novaPos);
+		}
+
+		void Golem::moverDireita() {
+			Vector2f novaPos = getPos();
+			novaPos.x += vel;
+			setPos(novaPos);
+		}
+
 		void Golem::movimentoAleatorio() {
 			if (moverAleatorio % 2 == 0) moverDireita();
 
@@ -70,18 +82,6 @@ namespace entidades {
 				relogio.restart();
 			}
 
-		}
-
-		void Golem::moverEsquerda() {
-			Vector2f novaPos = getPos();
-			novaPos.x -= vel;
-			setPos(novaPos);
-		}
-
-		void Golem::moverDireita() {
-			Vector2f novaPos = getPos();
-			novaPos.x += vel;
-			setPos(novaPos);
 		}
 
 		void Golem::perseguir(Vector2f posicaoJog, Vector2f posicaoInim) {

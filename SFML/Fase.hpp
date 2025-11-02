@@ -27,6 +27,7 @@ namespace fases {
 		virtual void criarObstaculo() = 0;
 		void criarCenario();                            //fazer ser virtual no futuro??? (diagrama não deixa a princípio)
 		virtual void carregarFundo() = 0;
+		Entidade* criaEntidade(Entidade* e);
 	public:
 		Fase(entidades::personagens::Jogador* pJog);
 		~Fase();

@@ -96,7 +96,7 @@
     <ClCompile Include="Golem.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Inim_Facil.cpp">
+    <ClCompile Include="Sapo.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -164,7 +164,7 @@
     <ClInclude Include="Golem.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Inim_Facil.hpp">
+    <ClInclude Include="Sapo.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

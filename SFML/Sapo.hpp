@@ -5,14 +5,16 @@
 namespace entidades { 
     namespace personagens {
 
-        class Inim_facil : public Inimigo {
+        class Sapo : public Inimigo {
         private:
             float raio;
             int destruicao;
+            Clock relogio;
+            Vector2f posInicial;
         public:
-            Inim_facil(Vector2f pos, float vel, Jogador* pJog);
+            Sapo(Vector2f pos, float vel, Jogador* pJog);
 
-            ~Inim_facil();
+            ~Sapo();
 
             void danificar();
             void tomarDano(int dano);
@@ -20,6 +22,7 @@ namespace entidades {
             void mover();
             void moverEsquerda();
             void moverDireita();
+            void movimentoAleatorio();
             void perseguir(Vector2f posicaoJog, Vector2f posicaoInim);
 
             void executar();

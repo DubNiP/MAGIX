@@ -47,6 +47,25 @@ void Fase::criarCenario() {
     criarInimigos();
 }
 
+Entidade* Fase::criaEntidade(Entidade* e) {
+    if (e) {
+
+        lista_ents.incluir(e);
+
+        if (auto* ob = dynamic_cast<entidades::obstaculos::Obstaculo*>(e)) {
+            GC.incluirObstaculo(ob);
+        }
+        else if (auto* ini = dynamic_cast<entidades::personagens::Inimigo*>(e)) {
+            GC.incluirInimigo(ini);
+        }
+        else if (auto* prj = dynamic_cast<Projetil*>(e)) {       //else?
+            GC.incluirProjetil(prj);
+        }
+
+        return e;
+    }
+}
+
 void Fase::executar() {
     criarCenario();
     if (pGG) {

@@ -20,6 +20,7 @@ namespace fases {
 		void criarObsMedios();
 
 		void carregarFundo();
+
 	public:
 		FasePrimeira(entidades::personagens::Jogador* pJog);         //FASE ESTÁ CONHECENDO JOGADOR AQUI, E NO DIAGRAMA NÃO TEM NADA, PODE?
 		~FasePrimeira();
