@@ -46,7 +46,7 @@ Menu::~Menu() {
 
 void Menu::set_values() {
 
-	options = { "Nome_Jogo","Jogar","Opcoes","Sair" };                                //Classe de objetos gráficos, vale a pena olhar no futuro...
+	options = { "Nome_Jogo","Jogar","Ranking","Sair" };                                //Classe de objetos gráficos, vale a pena olhar no futuro...
 	texts.resize(4);
 	coords = { {490,110},{620,380},{600,450},{630,520} };
 	sizes = { 80,50,50,50 };
@@ -64,7 +64,7 @@ void Menu::set_values() {
 }
 
 
-void Menu::executar() {
+void Menu::executar() {          //WTFFFFFFFFF
 
 }
 

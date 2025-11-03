@@ -39,29 +39,40 @@ void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 				mtv.x = (bCx > aCx) ? inter.width : -inter.width;
 			}
 			else {
-				// Resolver no eixo Y
 				const float aCy = ra.top + ra.height * 0.5f;
 				const float bCy = rb.top + rb.height * 0.5f;
 
 				mtv.y = (bCy > aCy) ? inter.height : -inter.height;
 			}
 
-			const bool aStatic = dynamic_cast<const entidades::obstaculos::Obstaculo*>(a) != NULL;
-			const bool bStatic = dynamic_cast<const entidades::obstaculos::Obstaculo*>(b) != NULL;
+			const bool aPerson = dynamic_cast<const entidades::personagens::Personagem*>(a) != NULL;
+			const bool bPerson = dynamic_cast<const entidades::personagens::Personagem*>(b) != NULL;
 
-			if (aStatic && !bStatic) {
+			if (!aPerson && bPerson) {
 				b->setPos(b->getPos() + mtv);
 				return;
 			}
-			if (!aStatic && bStatic) {
+			if (aPerson && !bPerson) {
 				a->setPos(a->getPos() - mtv);
 				return;
 			}
-			if (!aStatic && !bStatic) {
-				mtv.x /= 2;
-				mtv.y /= 2;
-				a->setPos(a->getPos() - mtv);
-				b->setPos(b->getPos() + mtv);
+			if (aPerson && bPerson) {
+				auto* pa = static_cast<entidades::personagens::Personagem*>(a);
+				auto* pb = static_cast<entidades::personagens::Personagem*>(b);
+
+				float va = max(0.f, pa->getVelocidade());
+				float vb = max(0.f, pb->getVelocidade());
+
+				float soma = va + vb;
+				float fracA = 0.5f;
+				float fracB = 0.5f;
+				if (soma > 0.0001f) {
+					fracA = vb / soma;
+					fracB = va / soma;
+				}
+
+				a->setPos(a->getPos() - Vector2f(mtv.x * fracA, mtv.y * fracA));
+				b->setPos(b->getPos() + Vector2f(mtv.x * fracB, mtv.y * fracB));
 			}
 		}
 	}
@@ -76,8 +87,6 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 		list<entidades::obstaculos::Obstaculo*>::iterator it = LOs.begin();
 		while (it != LOs.end()) {
 			if (*it) {                                           
-				FloatRect jog = pJog1->getBounds();
-				FloatRect obs = (*it)->getBounds();
 				if (verificarColisao(*it, pJog1)) {
 					colidiu(*it, pJog1);
 				}
@@ -93,8 +102,6 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 	if (pJog1) {
 		for (int i = 0; i < LIs.size(); i++) {
 			if (LIs[i]) {
-				FloatRect jog = pJog1->getBounds();
-				FloatRect inim = LIs[i]->getBounds();
 				if (verificarColisao(pJog1, LIs[i])) {
 					colidiu(LIs[i], pJog1);
 					LIs[i]->danificar();                //isso ta sugando a vida do jogador MT rapido, dps e bom dar uma olhada
@@ -108,8 +115,6 @@ void GerenciadorColisoes::tratarColisoesJogsProjeteis() {
 	if (pJog1) {
 		set<Projetil*>::iterator it = LPs.begin();
 		while (it != LPs.end()) {
-			FloatRect jog = pJog1->getBounds();
-			FloatRect inim = (*it)->getBounds();
 			if (verificarColisao(pJog1, *it)) {
 				pJog1->tomarDano((*it)->getDano());               
 				(*it)->setAtivo(false);
@@ -118,6 +123,90 @@ void GerenciadorColisoes::tratarColisoesJogsProjeteis() {
 			}
 			it++;
 		}
+	}
+}
+
+void GerenciadorColisoes::tratarColisoesInimgsObstacs() {
+	list<entidades::obstaculos::Obstaculo*>::iterator itObs = LOs.begin();
+	while (itObs != LOs.end()) {
+		if (*itObs) {
+			vector<entidades::personagens::Inimigo*>::iterator itIni = LIs.begin();
+			while (itIni != LIs.end()) {
+				if (*itIni) {
+					if (verificarColisao(*itObs, *itIni)) {
+						colidiu(*itObs, *itIni);
+					}
+				}
+				++itIni;
+			}
+		}
+		++itObs;
+	}
+}
+
+void GerenciadorColisoes::tratarColisoesProjeteisObstacs() {
+	set<Projetil*>::iterator itP = LPs.begin();
+	while (itP != LPs.end()) {
+		bool colidiu = false;
+
+		list<entidades::obstaculos::Obstaculo*>::iterator itObs = LOs.begin();
+		while (itObs != LOs.end()) {
+			if (*itObs && verificarColisao(*itP, *itObs)) {
+				(*itP)->setAtivo(false);
+				itP = LPs.erase(itP);
+				colidiu = true;
+				break;
+			}
+			++itObs;
+		}
+
+		if (colidiu) {
+			continue;
+		}
+		++itP;
+	}
+}
+
+void GerenciadorColisoes::tratarColisoesProjeteisInimgs() {
+	set<Projetil*>::iterator itP = LPs.begin();
+	while (itP != LPs.end()) {
+		bool colidiu = false;
+
+		vector<entidades::personagens::Inimigo*>::iterator itIni = LIs.begin();
+		while (itIni != LIs.end()) {
+			if (*itIni && verificarColisao(*itP, *itIni)) {
+				(*itIni)->tomarDano((*itP)->getDano());
+				(*itP)->setAtivo(false);
+				itP = LPs.erase(itP);
+				colidiu = true;
+				break;
+			}
+			++itIni;
+		}
+
+		if (colidiu) {
+			continue;
+		}
+		++itP;
+	}
+}
+
+void GerenciadorColisoes::tratarColisoesInimgs() {
+	vector<entidades::personagens::Inimigo*>::iterator itA = LIs.begin();
+	while (itA != LIs.end()) {
+		if (*itA) {
+			vector<entidades::personagens::Inimigo*>::iterator itB = itA;
+			++itB;
+			while (itB != LIs.end()) {
+				if (*itB) {
+					if (verificarColisao(*itA, *itB)) {
+						colidiu(*itA, *itB);
+					}
+				}
+				++itB;
+			}
+		}
+		++itA;
 	}
 }
 
@@ -157,8 +246,15 @@ void GerenciadorColisoes::limparProjetis()
 
 void GerenciadorColisoes::executar() {
 	limiteDeTela();
-	tratarColisoesJogsObstacs();
+
+	tratarColisoesInimgs();
+	tratarColisoesInimgsObstacs();
+
+	tratarColisoesProjeteisObstacs();
+	tratarColisoesProjeteisInimgs();
 	tratarColisoesJogsProjeteis();
+
+	tratarColisoesJogsObstacs();
 	tratarColisoesJogsInimgs();
 }
 

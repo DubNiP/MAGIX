@@ -31,20 +31,17 @@ namespace entidades {
 
 
 		void Jogador::processarInput() {
-			float deltaTime = 1.0f / 60.0f;        //OLHAR DPS
-			float movimento = vel * deltaTime;
-
 			if (Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up)) {
-				pos.y -= movimento;
+				pos.y -= vel;
 			}
 			if (Keyboard::isKeyPressed(Keyboard::S) || Keyboard::isKeyPressed(Keyboard::Down)) {
-				pos.y += movimento;
+				pos.y += vel;
 			}
 			if (Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left)) {
-				pos.x -= movimento;
+				pos.x -= vel;
 			}
 			if (Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right)) {
-				pos.x += movimento;
+				pos.x += vel;
 			}
 		}
 

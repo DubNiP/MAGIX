@@ -33,6 +33,11 @@ namespace Gerenciadores {
         void tratarColisoesJogsInimgs();
         void tratarColisoesJogsProjeteis();
 
+        void tratarColisoesInimgsObstacs();
+        void tratarColisoesProjeteisObstacs();
+        void tratarColisoesProjeteisInimgs();
+        void tratarColisoesInimgs();
+
         void incluirInimigo(entidades::personagens::Inimigo* pInimigo);
         void incluirObstaculo(entidades::obstaculos::Obstaculo* pObstaculo);
         void incluirProjetil(Projetil* pProjetil);
