@@ -12,7 +12,7 @@ namespace entidades {
 	        Clock relogio;
             Vector2f posInicial;
         public:
-            Golem(Vector2f pos, float vel, Jogador* pJog);
+            Golem(Vector2f pos, Jogador* pJog, Vector2f vel);
             ~Golem();
 
             void danificar();
@@ -22,7 +22,6 @@ namespace entidades {
             void moverEsquerda();
             void moverDireita();
 	        void movimentoAleatorio();
-            void perseguir(Vector2f posicaoJog, Vector2f posicaoInim);
 
             void executar();
 

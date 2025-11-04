@@ -3,8 +3,8 @@
 namespace entidades {
 	namespace personagens {
 
-		Chefao::Chefao(Vector2f pos, float vel, Jogador* pJog) :
-			Inimigo(pos, vel, pJog),
+		Chefao::Chefao(Vector2f pos, Vector2f vel, Jogador* pJog) :
+			Inimigo(pos, pJog, vel),
 			raio(100.f),
 			forca(15)
 		{
@@ -41,12 +41,12 @@ namespace entidades {
 
 				if (fabs(posJog.x - posInim.x) > raio) {
 					if (posJog.x > posInim.x) {
-						posInim.x = posInim.x + vel;
+						posInim.x = posInim.x + vel.x;
 						setPos(posInim);
 					}
 					else
 					{
-						posInim.x = posInim.x - vel;
+						posInim.x = posInim.x - vel.x;
 						setPos(posInim);
 					}
 				}
@@ -59,13 +59,13 @@ namespace entidades {
 
 		void Chefao::moverEsquerda() {
 			Vector2f novaPos = getPos();
-			novaPos.x -= vel;
+			novaPos.x -= vel.x;
 			setPos(novaPos);
 		}
 
 		void Chefao::moverDireita() {
 			Vector2f novaPos = getPos();
-			novaPos.x += vel;
+			novaPos.x += vel.x;
 			setPos(novaPos);
 		}
 

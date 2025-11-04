@@ -22,12 +22,40 @@ const bool GerenciadorColisoes::verificarColisao(Entidade* pe1, Entidade* pe2) c
 	return pe1->getBounds().intersects(pe2->getBounds());
 }
 
+bool GerenciadorColisoes::estaSobre(const FloatRect& obst, const FloatRect& ent, Entidade* b, float folga) {
+	const float entCordDireita = ent.left + ent.width;
+	const float obstCordDireita = obst.left + obst.width;
+	const float entCordInferior = ent.top + ent.height;
+	const float obstCordSuperior = obst.top;
+
+	const float sobrePosicao = min(entCordDireita, obstCordDireita) - max(ent.left, obst.left);
+	if (sobrePosicao <= 0.f) return false;
+
+	if (sobrePosicao < ent.width * 0.1) return false;
+
+	if (entCordInferior >= obstCordSuperior - folga && entCordInferior <= obstCordSuperior + folga) {
+		b->resetaRelogio();
+		return true;
+	}
+		
+	return false;
+}
+
 
 void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 	if (a && b && a != b) {
 
 		FloatRect ra = a->getBounds();
 		FloatRect rb = b->getBounds();
+
+		if (estaSobre(ra, rb, b, 40.f)) {
+			b->resetaRelogio();
+			b->setEmTerra(true);
+		}
+		else {
+			b->setEmTerra(false);
+		}
+
 		FloatRect inter;
 		if (ra.intersects(rb, inter)) {
 
@@ -57,11 +85,9 @@ void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 				return;
 			}
 			if (aPerson && bPerson) {
-				auto* pa = static_cast<entidades::personagens::Personagem*>(a);
-				auto* pb = static_cast<entidades::personagens::Personagem*>(b);
 
-				float va = max(0.f, pa->getVelocidade());
-				float vb = max(0.f, pb->getVelocidade());
+				float va = max(0.f, a->getVelocidade());
+				float vb = max(0.f, b->getVelocidade());
 
 				float soma = va + vb;
 				float fracA = 0.5f;
@@ -77,9 +103,6 @@ void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 		}
 	}
 }
-
-
-
 
 void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 	if (pJog1) {
@@ -114,7 +137,6 @@ void GerenciadorColisoes::tratarColisoesJogsProjeteis() {
 		while (it != LPs.end()) {
 			if (verificarColisao(pJog1, *it)) {
 				pJog1->tomarDano((*it)->getDano());               
-				(*it)->setAtivo(false);
 				it = LPs.erase(it);
 				continue;
 			}
@@ -140,6 +162,7 @@ void GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 		++itObs;
 	}
 }
+
 
 void GerenciadorColisoes::tratarColisoesProjeteisObstacs() {
 	set<Projetil*>::iterator itP = LPs.begin();

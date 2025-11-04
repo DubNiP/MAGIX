@@ -3,10 +3,9 @@
 namespace entidades {
 	namespace personagens {
 
-		Personagem::Personagem(Vector2f pos, float velocidade):
-			Entidade(pos),
-			num_vidas(1000),
-			vel(velocidade)
+		Personagem::Personagem(Vector2f pos, Vector2f velocidade):
+			Entidade(pos, velocidade),
+			num_vidas(1000)
 		{
 		}
 

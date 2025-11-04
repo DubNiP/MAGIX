@@ -12,7 +12,7 @@ namespace entidades {
 			float invencibilidade;
 			Clock danoClock;
 		public:
-			Jogador(Vector2f pos, float vel);
+			Jogador(Vector2f pos, Vector2f vel);
 			~Jogador();
 			//void colidir(Inimigo* pIn);            //PROVAVEL QUE SEJA O JOGADOR DANDO DANO NO INIMIGO.
 			void executar();

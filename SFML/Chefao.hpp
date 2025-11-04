@@ -12,7 +12,7 @@ namespace entidades {
             float raio;
             short int forca;
         public:
-            Chefao(Vector2f pos, float vel, Jogador* pJog);
+            Chefao(Vector2f pos, Vector2f vel, Jogador* pJog);
 
             ~Chefao();
 

@@ -11,8 +11,10 @@ namespace entidades {
             int destruicao;
             Clock relogio;
             Vector2f posInicial;
+			Clock relogioDePulo;
+            float intervaloPulo;
         public:
-            Sapo(Vector2f pos, float vel, Jogador* pJog);
+            Sapo(Vector2f pos, Jogador* pJog, Vector2f vel);
 
             ~Sapo();
 
@@ -23,7 +25,6 @@ namespace entidades {
             void moverEsquerda();
             void moverDireita();
             void movimentoAleatorio();
-            void perseguir(Vector2f posicaoJog, Vector2f posicaoInim);
 
             void executar();
 

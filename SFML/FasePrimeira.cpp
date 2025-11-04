@@ -23,9 +23,9 @@ void FasePrimeira::criarObstaculo() {
 }
 
 void FasePrimeira::criarGolems() {
-	criaEntidade(new entidades::personagens::Golem(Vector2f(200.f, 600.f), 1.f, jog));
+	criaEntidade(new entidades::personagens::Golem(Vector2f(200.f, 600.f), jog, Vector2f(1.f, 30.f)));
 	criaEntidade(new Projetil(Vector2f(50.f, 500.f), 1));
-    criaEntidade(new entidades::personagens::Sapo(Vector2f(300.f, 100.f), 1.f, jog));
+    criaEntidade(new entidades::personagens::Sapo(Vector2f(300.f, 250.f), jog, Vector2f(50.f, 120.0f)));
 }
 
 void FasePrimeira::criarObsMedios() {

@@ -2,7 +2,7 @@
 
 
 Jogo::Jogo() :
-    pJog1(Vector2f(640.f,160.f), 2.5f),
+    pJog1(Vector2f(640.f,160.f), Vector2f(2.5f, 105.f)),
     GG(Gerenciadores::GerenciadorGrafico::Instance()),
     menu(),
     event(),

@@ -4,13 +4,18 @@
 namespace entidades { 
 	namespace personagens {
 
-		Sapo::Sapo(Vector2f pos, float vel, Jogador* pJog) :
-			Inimigo(pos, vel, pJog),
-			raio(100.f),
-			destruicao(7),
+		Sapo::Sapo(Vector2f pos, Jogador* pJog, Vector2f vel) :
+			Inimigo(pos, pJog, vel),
+			raio(150.f),
+			destruicao(3),
 			relogio(),
 			posInicial()
 		{
+			posInicial = pos;
+			forcaGravidade = 40;
+			velocidadeInicialY = -vel.y;
+			relogioDePulo.restart();
+			intervaloPulo = 1.5f;
 			carregarSprite();
 			executar();
 		}
@@ -37,7 +42,6 @@ namespace entidades {
 
 		void Sapo::mover() {
 			if (!pJog) {
-				movimentoAleatorio();
 				return;
 			}
 
@@ -45,57 +49,77 @@ namespace entidades {
 			Vector2f posInim = getPos();
 
 			if (fabs(posJog.x - posInim.x) < raio) {
+				intervaloPulo = 1.0f;
 				if (posJog.x > posInim.x) moverDireita();
 
 				else moverEsquerda();
 
+				return;
+			}
+
+			const float alcanceEsquerda = posInicial.x - raio;
+			const float alcanceDireita = posInicial.x + raio;
+			intervaloPulo = 0.8f;
+
+			if (posInim.x < alcanceEsquerda * 0.5) {
+				moverDireita();
+			}
+			else if (posInim.x > alcanceDireita * 1.5) {
+				moverEsquerda();
 			}
 			else {
-				if (getPos().x < posInicial.x - raio * 2) moverDireita();
-				else if (getPos().x > posInicial.x + raio * 2) moverEsquerda();
-				else movimentoAleatorio();
+				movimentoAleatorio();
 			}
 		}
 		
 		void Sapo::movimentoAleatorio() {
-			if (moverAleatorio % 2 == 0) moverDireita();
-
-			else moverEsquerda();
-
 
 			float dt = relogio.getElapsedTime().asSeconds();
-			if (dt >= 2.0f) {
-				moverAleatorio = rand() % 4;
+			if (dt >= 1.0f) {
+				moverAleatorio = rand() % 4; 
 				relogio.restart();
 			}
 
+			if (moverAleatorio % 2 != 1) {
+				moverDireita();
+			}
+			else if (moverAleatorio % 2 == 0) {
+				if (getPos().x > 30.0f) moverEsquerda();
+			}
 		}
 
 		void Sapo::moverEsquerda() {
-			Vector2f novaPos = getPos();
-			novaPos.x -= vel;
-			setPos(novaPos);
+
+			if (emTerra && relogioDePulo.getElapsedTime().asSeconds() >= intervaloPulo) {
+				
+				relogioDePulo.restart();
+				emTerra = false;
+				
+				Vector2f novaPos = getPos();
+				novaPos.x -= vel.x;
+				vel.y = velocidadeInicialY; // negativo para subir
+				setPos(novaPos);
+			}
 		}
 
 		void Sapo::moverDireita() {
-			Vector2f novaPos = getPos();
-			novaPos.x += vel;
-			setPos(novaPos);
-		}
+			
+			if (emTerra && relogioDePulo.getElapsedTime().asSeconds() >= intervaloPulo) {
 
+				emTerra = false;
+				relogioDePulo.restart();
 
-		void Sapo::perseguir(Vector2f posicaoJog, Vector2f posicaoInim) {
-			if (posicaoJog.x < posicaoInim.x) {
-				moverEsquerda();
-			}
-			else if (posicaoJog.x > posicaoInim.x) {
-				moverDireita();
+				Vector2f novaPos = getPos();
+				vel.y = velocidadeInicialY;
+				novaPos.x += vel.x;
+				setPos(novaPos);
 			}
 		}
 
 		void Sapo::executar() {
 			mover();
 			attPos();
+			gravidade();
 		}
 
 		void Sapo::carregarSprite() {                         
