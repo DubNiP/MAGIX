@@ -54,8 +54,8 @@ namespace Gerenciadores {
         void setWindow(RenderWindow* win);
 
         void limiteDeTela();
-        void limiteDeTelaJogador(int X, int Y);
-        void limiteDeTelaProjeteis(int X, int Y);
+        void limiteDeTelaJogador(float X, float Y);
+        void limiteDeTelaProjeteis(float X, float Y);
     };
 
 }

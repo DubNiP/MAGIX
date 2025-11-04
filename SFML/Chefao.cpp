@@ -9,7 +9,6 @@ namespace entidades {
 			forca(15)
 		{
 			//carregarSprite();
-			executar();
 		}
 
 		Chefao::~Chefao()

@@ -2,6 +2,7 @@
 #include "Gerenciador_Grafico.hpp"
 
 Menu::Menu() :
+	Ente(),
 	pos(1),
 	pressed(false),
 	theselect(false),
@@ -48,13 +49,13 @@ void Menu::set_values() {
 
 	options = { "Nome_Jogo","Jogar","Ranking","Sair" };                                //Classe de objetos gráficos, vale a pena olhar no futuro...
 	texts.resize(4);
-	coords = { {490,110},{620,380},{600,450},{630,520} };
-	sizes = { 80,50,50,50 };
+	coords = { {490.f,110.f},{620.f,380.f},{600.f,450.f},{630.f,520.f} };
+	sizes = { 80u,50u,50u,50u };
 
 	texts[1].setOutlineThickness(6);
 
 
-	for (size_t i{}; i < texts.size(); i++) {
+	for (size_t i = 0; i < texts.size(); i++) {
 		texts[i].setFont(*font);
 		texts[i].setString(options[i]);
 		texts[i].setCharacterSize(sizes[i]);

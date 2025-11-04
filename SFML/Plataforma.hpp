@@ -12,7 +12,6 @@ namespace entidades {
 			float periodo;        
 			float yIn;       
 			float yAnt;      
-			int alturaaa;       //mudar dps
 			bool ativa;
 			Clock tempo;
 		public:

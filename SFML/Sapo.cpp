@@ -9,15 +9,14 @@ namespace entidades {
 			raio(150.f),
 			destruicao(3),
 			relogio(),
-			posInicial()
+			posInicial(pos),
+			relogioDePulo(),
+			intervaloPulo(1.5f)
 		{
-			posInicial = pos;
-			forcaGravidade = 40;
+			forcaGravidade = 40.f;
 			velocidadeInicialY = -vel.y;
 			relogioDePulo.restart();
-			intervaloPulo = 1.5f;
 			carregarSprite();
-			executar();
 		}
 
 		Sapo::~Sapo()
@@ -64,7 +63,7 @@ namespace entidades {
 			if (posInim.x < alcanceEsquerda * 0.5) {
 				moverDireita();
 			}
-			else if (posInim.x > alcanceDireita * 1.5) {
+			else if (posInim.x > alcanceDireita * 0.5) {
 				moverEsquerda();
 			}
 			else {
@@ -76,15 +75,15 @@ namespace entidades {
 
 			float dt = relogio.getElapsedTime().asSeconds();
 			if (dt >= 1.0f) {
-				moverAleatorio = rand() % 4; 
+				moverAleatorio = rand() % 2; 
 				relogio.restart();
 			}
 
 			if (moverAleatorio % 2 != 1) {
 				moverDireita();
 			}
-			else if (moverAleatorio % 2 == 0) {
-				if (getPos().x > 30.0f) moverEsquerda();
+			else {
+				moverEsquerda();
 			}
 		}
 

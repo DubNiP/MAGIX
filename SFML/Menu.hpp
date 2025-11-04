@@ -21,7 +21,7 @@ private:
 	vector<string> options;
 	vector<Vector2f> coords;
 	vector<Text> texts;
-	vector<size_t> sizes;
+	vector<unsigned int> sizes;
 
 
 	void set_values();

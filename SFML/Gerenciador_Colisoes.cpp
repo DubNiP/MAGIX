@@ -154,13 +154,16 @@ void GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 			while (itIni != LIs.end()) {
 				if (*itIni) {
 					if (verificarColisao(*itObs, *itIni)) {
-						colidiu(*itObs, *itIni);
+						entidades::obstaculos::ObstMedio* pTeia = dynamic_cast<entidades::obstaculos::ObstMedio*>(*itObs);
+						if (pTeia == NULL) {
+							colidiu(*itObs, *itIni);
+						}
 					}
 				}
-				++itIni;
+				itIni++;
 			}
 		}
-		++itObs;
+		itObs++;
 	}
 }
 
@@ -178,13 +181,13 @@ void GerenciadorColisoes::tratarColisoesProjeteisObstacs() {
 				colidiu = true;
 				break;
 			}
-			++itObs;
+			itObs++;
 		}
 
 		if (colidiu) {
 			continue;
 		}
-		++itP;
+		itP++;
 	}
 }
 
@@ -202,13 +205,13 @@ void GerenciadorColisoes::tratarColisoesProjeteisInimgs() {
 				colidiu = true;
 				break;
 			}
-			++itIni;
+			itIni++;
 		}
 
 		if (colidiu) {
 			continue;
 		}
-		++itP;
+		itP++;
 	}
 }
 
@@ -224,10 +227,10 @@ void GerenciadorColisoes::tratarColisoesInimgs() {
 						colidiu(*itA, *itB);
 					}
 				}
-				++itB;
+				itB++;
 			}
 		}
-		++itA;
+		itA++;
 	}
 }
 
@@ -294,23 +297,23 @@ void GerenciadorColisoes::limiteDeTela() {
 			FloatRect boundJog = pJog1->getBounds();
 			Vector2u windowSize = window->getSize();
 
-			const int X = windowSize.x - boundJog.width;
-			const int Y = windowSize.y - boundJog.height;
+			const float X = windowSize.x - boundJog.width;
+			const float Y = windowSize.y - boundJog.height;
 			limiteDeTelaJogador(X, Y);
 			limiteDeTelaProjeteis(X, Y);
 		}
 	}
 }
 
-void GerenciadorColisoes::limiteDeTelaJogador(int X, int Y) {
+void GerenciadorColisoes::limiteDeTelaJogador(float X, float Y) {
 
-	if (pJog1->getPos().x < 0)   pJog1->setPos(Vector2f(0.f, pJog1->getPos().y));
-	if (pJog1->getPos().y < 0)   pJog1->setPos(Vector2f(pJog1->getPos().x, 0.f));
+	if (pJog1->getPos().x < 0.f)   pJog1->setPos(Vector2f(0.f, pJog1->getPos().y));
+	if (pJog1->getPos().y < 0.f)   pJog1->setPos(Vector2f(pJog1->getPos().x, 0.f));
 	if (pJog1->getPos().x > X)   pJog1->setPos(Vector2f(X, pJog1->getPos().y));
 	if (pJog1->getPos().y > Y)   pJog1->setPos(Vector2f(pJog1->getPos().x, Y));
 }
 
-void GerenciadorColisoes::limiteDeTelaProjeteis(int X, int Y) {
+void GerenciadorColisoes::limiteDeTelaProjeteis(float X, float Y) {
 
 	set<Projetil*>::iterator it = LPs.begin();
 
@@ -321,7 +324,7 @@ void GerenciadorColisoes::limiteDeTelaProjeteis(int X, int Y) {
 			Vector2f posProjetil = projetil->getPos();
 
 			if (posProjetil.x  < 0 || posProjetil.y  < 0 || posProjetil.x > X || posProjetil.y > Y) {
-				projetil->setAtivo(false); //fazer a devida alteracao	
+				projetil->setAtivo(false); //fazer a devida alteracao?	
 
 				it = LPs.erase(it);
 				continue;

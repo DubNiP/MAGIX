@@ -9,7 +9,6 @@ namespace entidades {
 			periodo(per),
 			yIn(pos.y),
 			yAnt(pos.y),
-			alturaaa(),
 			ativa(false),
 			tempo()
 		{
