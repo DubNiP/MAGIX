@@ -29,13 +29,8 @@ void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 		FloatRect ra = a->getBounds();
 		FloatRect rb = b->getBounds();
 
-		if (estaSobre(ra, rb, b, 40.f)) {
-			b->setEmTerra(true);
-		}
-		else {
-			b->setEmTerra(false);
-		}
-
+		b->setEmTerra(estaSobre(ra, rb, b, 40.f));
+	
 		FloatRect inter;
 		if (ra.intersects(rb, inter)) {
 
@@ -95,7 +90,7 @@ bool GerenciadorColisoes::estaSobre(const FloatRect& obst, const FloatRect& ent,
 
 	if (sobrePosicao < ent.width * 0.2f) return false;
 
-	if (entCordInferior >= obstCordSuperior - folga && entCordInferior <= obstCordSuperior + folga) {
+	if (entCordInferior >= obstCordSuperior - folga && entCordInferior <= obstCordSuperior + folga  ) {
 		b->resetaRelogio();
 		return true;
 	}

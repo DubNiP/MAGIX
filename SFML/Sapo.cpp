@@ -7,14 +7,14 @@ namespace entidades {
 		Sapo::Sapo(Vector2f pos, Jogador* pJog, Vector2f vel) :
 			Inimigo(pos, pJog, vel),
 			raio(150.f),
-			destruicao(3),
+			destruicao(2),
 			relogio(),
 			posInicial(pos),
 			relogioDePulo(),
 			intervaloPulo(1.5f)
 		{
-			forcaGravidade = 40.f;
 			velocidadeInicialY = -vel.y;
+			velocidadeInicialX = vel.x;
 			relogioDePulo.restart();
 			carregarSprite();
 		}
@@ -89,15 +89,16 @@ namespace entidades {
 
 		void Sapo::moverEsquerda() {
 
-			if (emTerra && relogioDePulo.getElapsedTime().asSeconds() >= intervaloPulo) {
-				
+			if (emTerra && relogioDePulo.getElapsedTime().asSeconds() >= intervaloPulo && pos.x > 30) {
+
 				relogioDePulo.restart();
+				tempoAceleracao.restart();
+
 				emTerra = false;
-				
-				Vector2f novaPos = getPos();
-				novaPos.x -= vel.x;
-				vel.y = velocidadeInicialY; // negativo para subir
-				setPos(novaPos);
+				emAceleracao = true;
+
+				vel.y = velocidadeInicialY;
+				vel.x = -velocidadeInicialX;
 			}
 		}
 
@@ -106,12 +107,13 @@ namespace entidades {
 			if (emTerra && relogioDePulo.getElapsedTime().asSeconds() >= intervaloPulo) {
 
 				emTerra = false;
-				relogioDePulo.restart();
+				emAceleracao = true;
 
-				Vector2f novaPos = getPos();
+				relogioDePulo.restart();
+				tempoAceleracao.restart();
+
 				vel.y = velocidadeInicialY;
-				novaPos.x += vel.x;
-				setPos(novaPos);
+				vel.x = velocidadeInicialX;
 			}
 		}
 
@@ -119,6 +121,7 @@ namespace entidades {
 			mover();
 			attPos();
 			gravidade();
+			acelerar();
 		}
 
 		void Sapo::carregarSprite() {                         

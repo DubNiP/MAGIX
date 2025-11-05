@@ -39,7 +39,7 @@ void Fase::criarSapos() {
     int i = rand() % 2 + 3;
     while (i--) {
         int j = rand() % v.size();
-        criaEntidade(new entidades::personagens::Sapo(v[j], jog, Vector2f(50.f, 80.f)));
+        criaEntidade(new entidades::personagens::Sapo(v[j], jog, Vector2f(20.f, 70.f)));
         v[j] = v.back();
         v.pop_back();
     }

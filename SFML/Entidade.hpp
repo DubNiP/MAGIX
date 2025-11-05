@@ -12,8 +12,12 @@ protected:
 	Vector2f vel;
 	float velocidadeInicialY;
 	float velocidadeInicialX;
+	float aceleracao;
+	float emAceleracao;
 	float forcaGravidade;
+	float velocidadeTerminal;	
 	Clock tempoMovimento;
+	Clock tempoAceleracao;
 	// ostream buffer;
 	//void salvarDataBuffer();
 public:
@@ -42,6 +46,7 @@ public:
 	
 	void attPos();
 	void gravidade();
+	void acelerar();
 
 	void resetaRelogio();
 };

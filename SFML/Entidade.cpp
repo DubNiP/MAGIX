@@ -7,9 +7,13 @@ Entidade::Entidade(Vector2f posicao, Vector2f velocidade) :
 	vel(velocidade),
 	velocidadeInicialY(velocidade.y),
 	velocidadeInicialX(velocidade.x),
+	aceleracao(0.1f),
+	emAceleracao(false),
 	forcaGravidade(30.f),
-	tempoMovimento()
+	velocidadeTerminal(30.f)
 {
+	tempoMovimento.restart();
+	tempoAceleracao.restart();
 	attPos();
 }
 
@@ -69,28 +73,39 @@ void Entidade::attPos() {
 }
 
 void Entidade::gravidade() {
-	float dt = (tempoMovimento.getElapsedTime().asSeconds()) * 0.7 ;
-
-	const float TERMINAL = 30.f;   // velocidade máxima de queda (px/s)
+	float dt = tempoMovimento.getElapsedTime().asSeconds() ;
 
 	if (!emTerra) {
 		vel.y += forcaGravidade * dt;
 
-		if (vel.y > TERMINAL)
-			vel.y = TERMINAL;
-		
+		if (vel.y > velocidadeTerminal)
+			vel.y = velocidadeTerminal;
+
 		pos.y += vel.y * dt;
 	}
 	else {
+		if (vel.y += dt * forcaGravidade < -90)
+			vel.y = +15;
+
 		tempoMovimento.getElapsedTime().asSeconds();
 		pos.y += vel.y * dt;
-
-		if (tempoMovimento.getElapsedTime().asSeconds() > 0.5)
-			resetaRelogio();
 	}
 
 	attPos();
 }
+
+void Entidade::acelerar() {
+	float dtAc = tempoAceleracao.getElapsedTime().asSeconds();;
+
+	if (emAceleracao && dtAc < 0.4) {
+		dtAc = tempoAceleracao.getElapsedTime().asSeconds();
+		vel.x += aceleracao * dtAc;
+		pos.x += vel.x * dtAc;
+
+		attPos();
+	}
+}
+
 
 void Entidade::resetaRelogio() {
 	tempoMovimento.restart();
