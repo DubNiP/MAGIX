@@ -1,6 +1,7 @@
 #pragma once
 #include "Lista.hpp"
 #include "Entidade.hpp"
+#include "Inimigo.hpp"
 #include "Projetil.hpp"
 
 namespace listas {
@@ -22,6 +23,7 @@ namespace listas {
         void executarTodos();
         void desenharTodos();
         void removerProjetis();
+        void removerMorto();
 
         Entidade* getItem(int pos) const;
     };

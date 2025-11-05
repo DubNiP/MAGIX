@@ -50,6 +50,7 @@ namespace Gerenciadores {
         void limparObstaculos();
         void limparInimigos();
         void limparProjetis();
+        void removerMortos();
 
         void executar();
 

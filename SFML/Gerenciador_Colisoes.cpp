@@ -277,6 +277,18 @@ void GerenciadorColisoes::limparProjetis()
 	LPs.clear();
 }
 
+void GerenciadorColisoes::removerMortos() {
+	vector<entidades::personagens::Inimigo*>::iterator it = LIs.begin();
+	while (it != LIs.end()) {
+		if (*it && (*it)->getVidas() <= 0) {
+			it = LIs.erase(it);
+		}
+		else {
+			++it;
+		}
+	}
+}
+
 void GerenciadorColisoes::executar() {
 	limiteDeTela();
 
@@ -289,6 +301,8 @@ void GerenciadorColisoes::executar() {
 
 	tratarColisoesJogsObstacs();
 	tratarColisoesJogsInimgs();
+
+	removerMortos();
 }
 
 void GerenciadorColisoes::setJog(entidades::personagens::Jogador* pJog) {

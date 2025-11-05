@@ -55,9 +55,10 @@ void ListaEntidades::executarTodos() {
     }
 
     removerProjetis();
+    removerMorto();
 }
 
-void ListaEntidades::removerProjetis() {                     //olhar dps
+void ListaEntidades::removerProjetis() {
     int i = 0;
     while (i < LEs.getSize()) {
         Entidade* e = LEs.getItem(i);
@@ -67,6 +68,23 @@ void ListaEntidades::removerProjetis() {                     //olhar dps
                 LEs.deletar(e);
                 delete e;
                 continue;
+            }
+        }
+        i++;
+    }
+}
+
+void ListaEntidades::removerMorto() {
+    int i = 0;
+    while (i < LEs.getSize()) {
+        Entidade* e = LEs.getItem(i);
+        if (e) {
+            if (auto* ini = dynamic_cast<entidades::personagens::Inimigo*>(e)) {
+                if (ini->getVidas() <= 0) {
+                    LEs.deletar(e);
+                    delete e;
+                    continue;
+                }
             }
         }
         i++;
