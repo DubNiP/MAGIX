@@ -144,6 +144,7 @@
     <ClCompile Include="Gerenciador_Grafico.cpp" />
     <ClCompile Include="Gerenciador_Colisoes.cpp" />
     <ClCompile Include="Inimigo.cpp" />
+    <ClCompile Include="Saida.cpp" />
     <ClCompile Include="Sapo.cpp" />
     <ClCompile Include="Golem.cpp" />
     <ClCompile Include="Jogador.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Gerenciador_Grafico.hpp" />
     <ClInclude Include="Gerenciador_Colisoes.hpp" />
     <ClInclude Include="Inimigo.hpp" />
+    <ClInclude Include="Saida.hpp" />
     <ClInclude Include="Sapo.hpp" />
     <ClInclude Include="Golem.hpp" />
     <ClInclude Include="Jogador.hpp" />

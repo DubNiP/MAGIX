@@ -7,6 +7,7 @@ Fase::Fase(entidades::personagens::Jogador* pJog):
     lista_ents(),
     GC(),
     jog(pJog),
+    faseConcluida(false),
     textFundo(NULL),
     spriteFundo(NULL)
 {
@@ -97,7 +98,7 @@ void Fase::executar() {
         GC.setWindow(pGG->getWindow());
         RenderWindow* window = pGG->getWindow();
         Event event;
-        while (window && window->isOpen() && jog && jog->getVidas() > 0) {
+        while (window && window->isOpen() && jog && jog->getVidas() > 0 && !GC.getFaseConcluida()) {
             while (window->pollEvent(event)) {
                 if (event.type == Event::Closed) {
                     window->close();
@@ -108,8 +109,8 @@ void Fase::executar() {
                     return;
                 }
             }
-            GC.executar();
             lista_ents.executarTodos();
+            GC.executar();
 
             pGG->desenhaTodos(&lista_ents,spriteFundo);     //trocar no futuro?
         }

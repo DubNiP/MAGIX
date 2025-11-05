@@ -19,6 +19,7 @@ void FasePrimeira::criarInimigos() {
 void FasePrimeira::criarObstaculo() {
     criarTeias();
     criarPlataformas();
+    criaEntidade(new entidades::obstaculos::Saida(sf::Vector2f(60.f, 197.f), sf::Vector2f(47.f, 55.f)));
 }
 
 void FasePrimeira::criarBlocos() {

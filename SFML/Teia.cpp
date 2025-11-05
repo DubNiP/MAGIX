@@ -23,7 +23,7 @@ namespace entidades {
 			}
 		}
 
-		void	Teia::carregarSprite() {
+		void Teia::carregarSprite() {
 			if (!carregarTexturaSprite("Textures/Web3.png", true, false)) {
 				throw "Textura não carregada";
 			}

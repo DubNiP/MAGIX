@@ -7,7 +7,7 @@ namespace entidades {
 		Jogador::Jogador(Vector2f pos, Vector2f vel) :
 			Personagem(pos, vel),
 			pontos(0),
-			invencibilidade(0.3f),
+			invencibilidade(30.f),
 			danoClock(),
 			naTeia(false)
 		{

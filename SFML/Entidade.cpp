@@ -21,13 +21,16 @@ Entidade::~Entidade() {
 
 }
 
-
-Vector2f Entidade::getPos() const {
-	return pos;
+bool Entidade::getEmTerra() const {
+	return emTerra;
 }
 
 void Entidade::setEmTerra(const bool v) {
 	emTerra = v;
+}
+
+Vector2f Entidade::getPos() const {
+	return pos;
 }
 
 void Entidade::setPos(const Vector2f& p) {

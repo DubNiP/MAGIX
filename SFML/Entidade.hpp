@@ -27,6 +27,7 @@ public:
 	virtual void executar() = 0;
 	//virtual void salvar() = 0;
 
+	bool getEmTerra() const;
 	void setEmTerra(const bool v);
 
 	Vector2f getPos() const;

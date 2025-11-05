@@ -21,6 +21,7 @@ namespace entidades {
 
 			void executar();
 			void obstaculizar(entidades::personagens::Jogador* p);
+			bool esmagou(entidades::personagens::Personagem* p) const;
 			void setAtiva();
 			void carregarSprite();
 		};
