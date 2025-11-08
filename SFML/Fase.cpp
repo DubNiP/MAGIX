@@ -27,7 +27,7 @@ Fase::~Fase() {
         delete textFundo;
         textFundo = NULL;
     }
-
+    
     jog = NULL;
 }
 
@@ -101,6 +101,11 @@ void Fase::executar() {
         RenderWindow* window = pGG->getWindow();
         Event event;
         while (window && window->isOpen() && jog && jog->getVidas() > 0 && !GC.getFaseConcluida()) {
+            pGG->atualizarCamera(jog->getPos());
+		    View cam = pGG->getCamera();
+
+            window->setView(cam);
+            
             while (window->pollEvent(event)) {
                 if (event.type == Event::Closed) {
                     window->close();

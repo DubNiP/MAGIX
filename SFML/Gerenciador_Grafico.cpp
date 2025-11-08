@@ -8,7 +8,8 @@ using namespace std;
 GerenciadorGrafico* GerenciadorGrafico::uniqueInstance = NULL;
 
 GerenciadorGrafico::GerenciadorGrafico() :
-    window(NULL)
+    window(NULL),
+    camera(View(FloatRect(0.f, 0.f, 768.f, 432.f)))
 {
     window = new RenderWindow(VideoMode(1280, 720), "Jogo Simas");
     if (window) {
@@ -49,6 +50,31 @@ void GerenciadorGrafico::displayWindow() {
     }
 }
 
+void GerenciadorGrafico::atualizarCamera(const Vector2f posJogador) {
+    const float visaoE = camera.getSize().x;
+    const float visaoD = camera.getSize().y;
+
+    const float maxE = window->getSize().x;
+    const float maxD = window->getSize().y;
+
+    Vector2f centro = posJogador;
+
+    if (centro.x < visaoE / 2.f)
+        centro.x = visaoE / 2.f;
+
+    if (centro.x > maxE - visaoE / 2.f)
+        centro.x = maxE - visaoE / 2.f;
+
+    if (centro.y < visaoD / 2.f)
+        centro.y = visaoD / 2.f;
+
+    if (centro.y > maxD - visaoD / 2.f)
+        centro.y = maxD - visaoD / 2.f;
+
+    camera.setCenter(centro);
+}
+
+
 void GerenciadorGrafico::desenhaTodos(listas::ListaEntidades* pLE, Sprite* fundo) {
     if (window) {
         clearWindow();
@@ -64,4 +90,8 @@ void GerenciadorGrafico::desenhaTodos(listas::ListaEntidades* pLE, Sprite* fundo
 
 RenderWindow* GerenciadorGrafico::getWindow() const {
     return window;
+}
+
+View GerenciadorGrafico::getCamera() const {
+    return camera;
 }

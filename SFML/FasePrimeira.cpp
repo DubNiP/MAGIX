@@ -9,6 +9,7 @@ FasePrimeira::FasePrimeira(entidades::personagens::Jogador* pJog):
 }
 
 FasePrimeira::~FasePrimeira() {
+
 }
 
 void FasePrimeira::criarInimigos() {

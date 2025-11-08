@@ -90,7 +90,7 @@ namespace entidades {
 			num_vidas = vidas;
 			pontos = pts;
 			danoClock.restart();
-			barraVida->setSize(Vector2f(40.f * (num_vidas / 10.f), 3.f));
+			barraVida->setSize(Vector2f(40.f * (num_vidas / 15.f), 2.f));
 		}
 
 		void Jogador::tomarDano(int dano) {
@@ -102,7 +102,7 @@ namespace entidades {
 				if (vidas < 0) vidas = 0;
 				setVidas(vidas);
 				danoClock.restart();
-				barraVida->setSize(Vector2f(40.f * (num_vidas / 10.f), 3.f));
+				barraVida->setSize(Vector2f(40.f * (num_vidas / 15.f), 2.f));
 			}
 		}
 

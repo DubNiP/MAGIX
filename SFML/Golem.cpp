@@ -13,7 +13,7 @@ namespace entidades {
 			posInicial(pos),
 			bondade(false),
 			moverAleatorio(0),
-			velocidadeInicialX(vel.x)  // Inicializa com a velocidade X
+			velocidadeInicialX(vel.x)  
 		{
 			relogio.restart();
 			relogioPulo.restart();

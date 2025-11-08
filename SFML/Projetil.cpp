@@ -29,13 +29,13 @@ bool Projetil::getAtivo() const {
 
 void Projetil::moverDireita() {
     if (ativo) {
-        vel.x = velocidadeInicialX; // Move para direita
+        vel.x = velocidadeInicialX; 
     }
 }
 
 void Projetil::moverEsquerda() {
     if (ativo) {
-        vel.x = -velocidadeInicialX; // Move para esquerda
+        vel.x = -velocidadeInicialX; 
     }
 }
 

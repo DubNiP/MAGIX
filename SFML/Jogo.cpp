@@ -16,7 +16,10 @@ Jogo::~Jogo() {
 
 void Jogo::executar() {
     RenderWindow* window = GG.getWindow();
+  
     while (window && window->isOpen()) {
+		View cam = View(FloatRect(0.f, 0.f, 1280.f, 720.f));
+		window->setView(cam);
         executarMenu(menu);
 
         if (menu.getIniciar() && window->isOpen()) {
