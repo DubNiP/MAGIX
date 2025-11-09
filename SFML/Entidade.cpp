@@ -143,4 +143,4 @@ void Entidade::atualizaDirSprite() {
 }
 
 
-//Entidade::void salvarDataBuffer() {}
+//Entidade::void salvarDataBuffer() 
