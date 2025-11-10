@@ -13,7 +13,7 @@ namespace entidades {
 			//void salvarDataBuffer();
 			void executar();
 			void obstaculizar(entidades::personagens::Jogador* p);
-			int getDanosidade() const;
+			const int getDanosidade() const;
 			void carregarSprite();
 		};
 	} 

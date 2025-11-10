@@ -28,20 +28,20 @@ public:
 	virtual void executar() = 0;
 	//virtual void salvar() = 0;
 
-	bool getEmTerra() const;
+	const bool getEmTerra() const;
 	void setEmTerra(const bool v);
 
-	Vector2f getPos() const;
+	const Vector2f getPos() const;
 	void setPos(const Vector2f& p);
 
 
-	float getVelocidadeX() const;
-	float getVelocidadeY() const;
+	const float getVelocidadeX() const;
+	const float getVelocidadeY() const;
 	void setVelocidadeX(const float v);
 	void setVelocidadeY(const float v);
 
-	float getVelocidadeInicialX() const;
-	float getVelocidadeInicialY() const;
+	const float getVelocidadeInicialX() const;
+	const float getVelocidadeInicialY() const;
 	void setVelocidadeInicialX(float v);
 	void setVelocidadeInicialY(float v);
 
@@ -51,7 +51,7 @@ public:
 	void acelerar();
 
 	void resetaRelogio();
-	bool getOlhandoDir() const;
+	const bool getOlhandoDir() const;
 	void setOlhandoDir(bool dir);
 	void atualizaDirSprite();
 };

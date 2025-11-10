@@ -22,7 +22,7 @@ Entidade::~Entidade() {
 
 }
 
-bool Entidade::getEmTerra() const {
+const bool Entidade::getEmTerra() const {
 	return emTerra;
 }
 
@@ -30,7 +30,7 @@ void Entidade::setEmTerra(const bool v) {
 	emTerra = v;
 }
 
-Vector2f Entidade::getPos() const {
+const Vector2f Entidade::getPos() const {
 	return pos;
 }
 
@@ -39,11 +39,11 @@ void Entidade::setPos(const Vector2f& p) {
 	attPos();
 }
 
-float Entidade::getVelocidadeX() const {
+const float Entidade::getVelocidadeX() const {
 	return vel.x;
 }
 
-float Entidade::getVelocidadeY() const {
+const float Entidade::getVelocidadeY() const {
 	return vel.y;
 }
 
@@ -56,11 +56,11 @@ void Entidade::setVelocidadeY(const float v) {
 	vel.y = v;
 }
 
-float Entidade::getVelocidadeInicialX() const { 
+const float Entidade::getVelocidadeInicialX() const { 
 	return velocidadeInicialX; 
 }
 
-float Entidade::getVelocidadeInicialY() const { 
+const float Entidade::getVelocidadeInicialY() const { 
 	return velocidadeInicialY; 
 }
 void Entidade::setVelocidadeInicialX(float v) { 
@@ -115,7 +115,7 @@ void Entidade::resetaRelogio() {
 	tempoMovimento.restart();
 }
 
-bool Entidade::getOlhandoDir() const {
+const bool Entidade::getOlhandoDir() const {
 	return olhandoDir;
 }
 

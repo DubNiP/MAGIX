@@ -22,7 +22,7 @@ void Projetil::setAtivo(bool valor) {
     ativo = valor; 
 }
 
-bool Projetil::getAtivo() const {
+const bool Projetil::getAtivo() const {
     return ativo;
 }
 
@@ -51,7 +51,7 @@ int Projetil::getDano() {
     return dano;
 }
 
-bool Projetil::getBondade() {
+const bool Projetil::getBondade() {
     return bondade;
 }   
 

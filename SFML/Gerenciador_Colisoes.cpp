@@ -16,17 +16,16 @@ GerenciadorColisoes::GerenciadorColisoes(entidades::personagens::Jogador* pJog, 
 GerenciadorColisoes::~GerenciadorColisoes() {
 }
 
+const bool GerenciadorColisoes::getFaseConcluida() const {
+	return faseConcluida;
+}
+
 const bool GerenciadorColisoes::verificarColisao(Entidade* pe1, Entidade* pe2) const {
 	if (!pe1 || !pe2 || pe1 == pe2) {
 		return false;
 	}
 	return pe1->getBounds().intersects(pe2->getBounds());
 }
-
-bool GerenciadorColisoes::getFaseConcluida() const {
-	return faseConcluida;
-}
-
 
 void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 	if (a && b && a != b) {
@@ -131,7 +130,7 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 			if (LIs[i]) {
 				if (verificarColisao(pJog1, LIs[i])) {
 					colidiu(LIs[i], pJog1);
-					LIs[i]->danificar();                //isso ta sugando a vida do jogador MT rapido, dps e bom dar uma olhada
+					LIs[i]->danificar();            
 				}
 			}
 		}
@@ -182,10 +181,11 @@ void GerenciadorColisoes::tratarColisoesProjeteisObstacs() {
 	set<Projetil*>::iterator itP = LPs.begin();
 	while (itP != LPs.end()) {
 		bool colidiu = false;
-
+		auto* p = dynamic_cast<entidades::obstaculos::Teia*>(*itP);
 		list<entidades::obstaculos::Obstaculo*>::iterator itObs = LOs.begin();
 		while (itObs != LOs.end()) {
-			if (*itObs && verificarColisao(*itP, *itObs)) {
+
+			if (*itObs && verificarColisao(*itP, *itObs) && p) {
 				(*itP)->setAtivo(false);
 				itP = LPs.erase(itP);
 				colidiu = true;
@@ -205,7 +205,6 @@ void GerenciadorColisoes::tratarColisoesProjeteisInimgs() {
 	set<Projetil*>::iterator itP = LPs.begin();
 	while (itP != LPs.end()) {
 		bool colidiu = false;
-
 		vector<entidades::personagens::Inimigo*>::iterator itIni = LIs.begin();
 		while (itIni != LIs.end()) {
 			if (*itIni && verificarColisao(*itP, *itIni) && (*itP)->getBondade()) {

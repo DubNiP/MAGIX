@@ -12,10 +12,10 @@ public:
 	~Projetil();
 
 	void setAtivo(bool valor);
-	bool getAtivo() const;
+	const bool getAtivo() const;
 	void executar();
 	int getDano();
-	bool getBondade();
+	const bool getBondade();
 	//void salvar();
 	void carregarSprite();
 };

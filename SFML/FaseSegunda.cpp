@@ -21,8 +21,7 @@ void FaseSegunda::criarInimigos() {
 }
 
 void FaseSegunda::criarObstaculo() {
-	criarObsMedios();
-
+	criarTeias();
 }
 
 
@@ -35,8 +34,7 @@ void FaseSegunda::criarChefoes() {
 
 }
 
-
-void FaseSegunda::criarObsMedios() {
+void FaseSegunda::criarTeias() {
 
 }
 

@@ -9,8 +9,8 @@ namespace entidades {
         private:
             int tamanho;
             int destruicao;
-            sf::Clock relogio;
-            sf::Clock relogioPulo;
+            Clock relogio;
+            Clock relogioPulo;
             Vector2f posInicial;
             bool bondade;
             int moverAleatorio;

@@ -8,12 +8,12 @@ namespace fases {
 		const int maxChefoes;
 
 	protected:
-		void criarInimigos() override;
-		void criarObstaculo() override;
+		void criarInimigos();
+		void criarObstaculo();
 		void criarChefoes();
-		void criarObsMedios();
-		void criarBlocos() override;
-		void carregarFundo() override;
+		void criarTeias();
+		void criarBlocos();
+		void carregarFundo();
 
 	public:
 		FaseSegunda(entidades::personagens::Jogador* pJog);

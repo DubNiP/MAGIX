@@ -26,7 +26,7 @@ namespace entidades {
 			//virtual void salvar() = 0;
 			virtual void obstaculizar(entidades::personagens::Jogador* p) = 0;                 //está sem relação tanto no nosso diagrama quanto no do professor.
 
-			bool getDanoso() const;
+			const bool getDanoso() const;
 		};
 
 	} 

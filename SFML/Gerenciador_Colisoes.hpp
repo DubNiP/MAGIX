@@ -27,7 +27,7 @@ namespace Gerenciadores {
         GerenciadorColisoes(entidades::personagens::Jogador* pJog = NULL,RenderWindow* window = NULL);
         ~GerenciadorColisoes();
         
-        bool getFaseConcluida() const;
+        const bool getFaseConcluida() const;
 
         const bool verificarColisao(Entidade* pe1, Entidade* pe2) const;                  //conferir se está no diagrama.
         void colidiu(Entidade* pe1, Entidade* pe2);

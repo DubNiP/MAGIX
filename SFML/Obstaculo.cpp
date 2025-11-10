@@ -18,7 +18,7 @@ namespace entidades {
 
 		//void Obstaculo::salvarDataBuffer(){}
 
-		bool Obstaculo::getDanoso() const {
+		const bool Obstaculo::getDanoso() const {
 			return danoso;
 		}		
 	} 

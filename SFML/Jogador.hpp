@@ -38,7 +38,7 @@ namespace entidades {
 
 			void processarInput();
 
-			int getPontos() const;
+			const int getPontos() const;
 			void adicionarPontos(int pts);
 
 			void reseta(Vector2f pos,int vidas, int pontos);

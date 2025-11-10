@@ -15,7 +15,7 @@ namespace entidades {
 
 		//Personagem::salvarDataBuffer() {};
 
-		int Personagem::getVidas() const {
+		const int Personagem::getVidas() const {
 			return num_vidas;
 		}
 

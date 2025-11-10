@@ -76,7 +76,7 @@ namespace entidades {
 			}
 		}
 
-		int Jogador::getPontos() const { 
+		const int Jogador::getPontos() const { 
 			return pontos;
 		}
 
