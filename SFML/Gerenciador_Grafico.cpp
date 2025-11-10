@@ -54,22 +54,22 @@ void GerenciadorGrafico::atualizarCamera(const Vector2f posJogador) {
     const float visaoE = camera.getSize().x;
     const float visaoD = camera.getSize().y;
 
-    const float maxE = window->getSize().x;
-    const float maxD = window->getSize().y;
+    const float maxX = window->getSize().x;
+    const float maxY = 1080;
 
     Vector2f centro = posJogador;
 
     if (centro.x < visaoE / 2.f)
         centro.x = visaoE / 2.f;
 
-    if (centro.x > maxE - visaoE / 2.f)
-        centro.x = maxE - visaoE / 2.f;
+    if (centro.x > maxX - visaoE / 2.f)
+        centro.x = maxX - visaoE / 2.f;
 
     if (centro.y < visaoD / 2.f)
         centro.y = visaoD / 2.f;
 
-    if (centro.y > maxD - visaoD / 2.f)
-        centro.y = maxD - visaoD / 2.f;
+    if (centro.y > maxY - visaoD / 2.f)
+        centro.y = maxY - visaoD / 2.f;
 
     camera.setCenter(centro);
 }

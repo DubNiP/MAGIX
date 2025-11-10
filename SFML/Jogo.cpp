@@ -47,7 +47,7 @@ void Jogo::executarMenu(Menu& menu) {
 }
 
 void Jogo::executarJogo() {
-    fase1.executar();
+    //fase1.executar();
 
     fase2.executar();
 }

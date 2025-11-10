@@ -3,21 +3,23 @@
 
 namespace fases {
 
-	class FaseSegunda : public Fase {
-	private:
-		const int maxChefoes;
+    class FaseSegunda : public Fase {
+    private:
+        const int maxChefoes;
 
-	protected:
-		void criarInimigos() override;
-		void criarObstaculo() override;
-		void criarChefoes();
-		void criarObsMedios();
-		void criarBlocos() override;
-		void carregarFundo() override;
+    protected:
+        void criarInimigos() override;
+        void criarObstaculo() override;
+        void criarChefoes();
+        void criarObsMedios();
+        void criarPlataformas();
+        void criarAlavancas();
+        void criarBlocos() override;
+        void carregarFundo() override;
 
-	public:
-		FaseSegunda(entidades::personagens::Jogador* pJog);
-		~FaseSegunda();
-	};
+    public:
+        FaseSegunda(entidades::personagens::Jogador* pJog);
+        ~FaseSegunda();
+    };
 
 }

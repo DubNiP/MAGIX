@@ -1,15 +1,16 @@
-#include "FaseSegunda.hpp"
+﻿#include "FaseSegunda.hpp"
 #include "MagoNegro.hpp"
 #include "Bloco.hpp"
 #include "Saida.hpp"
 #include "Plataforma.hpp"
 #include "Alavanca.hpp"
+#include "Teia.hpp"
 
 using namespace fases;
 
 FaseSegunda::FaseSegunda(entidades::personagens::Jogador* pJog) :
-	Fase(pJog),
-	maxChefoes(1)
+    Fase(pJog),
+    maxChefoes(1)
 {
 }
 
@@ -17,56 +18,100 @@ FaseSegunda::~FaseSegunda() {
 }
 
 void FaseSegunda::criarInimigos() {
-	criarChefoes();
+    criarChefoes();
+    // Adicionar alguns inimigos 
+    vector<Vector2f> posicoesInimigos;
+    posicoesInimigos.push_back(Vector2f(300.f, 550.f));
+    posicoesInimigos.push_back(Vector2f(600.f, 350.f));
+    posicoesInimigos.push_back(Vector2f(900.f, 200.f));
+
+   
 }
 
 void FaseSegunda::criarObstaculo() {
-	criarObsMedios();
-
+    criarObsMedios();
+    criarPlataformas();
+    criarAlavancas();
+    //criaEntidade(new entidades::obstaculos::Saida(sf::Vector2f(1150.f, 580.f), sf::Vector2f(47.f, 55.f)));
 }
-
 
 void FaseSegunda::criarChefoes() {
-
-	entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(Vector2f(900.f, 600.f), jog, Vector2f(3.f, 50.f));
-	criaEntidade(pM);
-	pM->incluirGerenciadorColisoes(&GC);
-	pM->incluirListaEntidades(&lista_ents);
-
+    entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(Vector2f(900.f, 600.f), jog, Vector2f(3.f, 50.f));
+    criaEntidade(pM);
+    pM->incluirGerenciadorColisoes(&GC);
+    pM->incluirListaEntidades(&lista_ents);
 }
-
 
 void FaseSegunda::criarObsMedios() {
 
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(210.f, 160.f), Vector2f(30.f, 40.f)));
+
+
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(210.f, 320.f), Vector2f(30.f, 40.f)));
+
+    criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(900.f, 200.f), Vector2f(300.f, 20.f)));
 }
 
 
+void FaseSegunda::criarPlataformas() {
+    
+}
+
+void FaseSegunda::criarAlavancas() {
+  
+}
+
 void FaseSegunda::criarBlocos() {
 
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 1060.f), Vector2f(1280.f, 20.f))); // chão
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f))); // teto
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(20.f, 1060.f)));  // parede esquerda
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1260.f, 0.f), Vector2f(20.f, 1060.f)));  // parede direita
 
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 700.f),	Vector2f(1280.f, 20.f)));
 
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(20.f, 720.f) ));
 
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(1260.f, 0.f), Vector2f(20.f, 720.f)));
+    // Bloco vertical grande na esquerda
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(280.f, 360.f), Vector2f(20.f, 700.f)));
 
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f)));
+    //Escadaria 
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 980.f), Vector2f(110.f, 20.f)));
+	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 880.f), Vector2f(110.f, 20.f)));
+	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 760.f), Vector2f(110.f, 20.f)));
+	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 640.f), Vector2f(110.f, 20.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 520.f), Vector2f(110.f, 20.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 400.f), Vector2f(110.f, 20.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 280.f), Vector2f(110.f, 20.f)));
 
+    /*// Plataforma superior esquerda
+
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 80.f), Vector2f(200.f, 20.f)));
+
+    // Plataforma do meio esquerda
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 220.f), Vector2f(180.f, 20.f)));
+
+    // Plataforma inferior esquerda
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 360.f), Vector2f(180.f, 20.f)));
+
+    // Bloco vertical central
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 0.f), Vector2f(40.f, 720.f)));
+
+    // Bloco horizontal central grande
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(360.f, 160.f), Vector2f(700.f, 20.f)));*/
 }
 
 
 void FaseSegunda::carregarFundo() {
-	textFundo = new Texture();
+    textFundo = new Texture();
 
-	if (!textFundo->loadFromFile("Textures/background 2.png")) {
-		throw "textura n�o carregada";
-	}
+    if (!textFundo->loadFromFile("Textures/background 2.png")) {
+        throw "textura não carregada";
+    }
 
-	spriteFundo = new Sprite(*textFundo);
+    spriteFundo = new Sprite(*textFundo);
 
-	Vector2u tam = textFundo->getSize();
-	float escX = 1280.f / tam.x;
-	float escY = 720.f / tam.y;
+    Vector2u tam = textFundo->getSize();
+    float escX = 1280.f / tam.x;
+    float escY = 1080.f / tam.y;
 
-	spriteFundo->setScale(escX, escY);
+    spriteFundo->setScale(escX, escY);
 }

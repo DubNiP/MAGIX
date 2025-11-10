@@ -322,7 +322,7 @@ void GerenciadorColisoes::limiteDeTela() {
 			Vector2u windowSize = window->getSize();
 
 			const float X = windowSize.x - boundJog.width;
-			const float Y = windowSize.y - boundJog.height;
+			const float Y = 1080;
 			limiteDeTelaJogador(X, Y);
 			limiteDeTelaProjeteis(X, Y);
 		}
