@@ -85,8 +85,11 @@ Entidade* Fase::criaEntidade(Entidade* e) {
         else if (auto* ini = dynamic_cast<entidades::personagens::Inimigo*>(e)) {
             GC.incluirInimigo(ini);
         }
-        else if (auto* prj = dynamic_cast<Projetil*>(e)) {       //else?
+        else if (auto* prj = dynamic_cast<Projetil*>(e)) {
             GC.incluirProjetil(prj);
+        }
+        else if (auto* bloco = dynamic_cast<entidades::obstaculos::Bloco*>(e)) { 
+            GC.incluirBloco(bloco);
         }
 
         return e;

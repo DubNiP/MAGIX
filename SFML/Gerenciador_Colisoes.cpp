@@ -123,6 +123,16 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 	}
 }
 
+void GerenciadorColisoes::tratarColisoesJogsBlocos() {
+	if (pJog1) {
+		for (auto it = LBs.begin(); it != LBs.end(); ++it) {
+			if (*it && verificarColisao(*it, pJog1)) {
+				colidiu(*it, pJog1);
+			}
+		}
+	}
+}
+
 
 void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 	if (pJog1) {
@@ -173,6 +183,18 @@ void GerenciadorColisoes::tratarColisoesInimgsObstacs() {
 			}
 		}
 		itObs++;
+	}
+}
+
+void GerenciadorColisoes::tratarColisoesInimgsBlocos() {
+	for (auto itB = LBs.begin(); itB != LBs.end(); ++itB) {
+		if (*itB) {
+			for (auto itI = LIs.begin(); itI != LIs.end(); ++itI) {
+				if (*itI && verificarColisao(*itB, *itI)) {
+					colidiu(*itB, *itI);
+				}
+			}
+		}
 	}
 }
 
@@ -272,6 +294,12 @@ void GerenciadorColisoes::incluirObstaculo(entidades::obstaculos::Obstaculo* pOb
 	}
 }
 
+void GerenciadorColisoes::incluirBloco(entidades::obstaculos::Bloco* pBloco) {
+	if (pBloco) {
+		LBs.push_back(pBloco);
+	}
+}
+
 void GerenciadorColisoes::incluirProjetil(Projetil* pProjetil)
 {
 	if (pProjetil) {
@@ -282,6 +310,10 @@ void GerenciadorColisoes::incluirProjetil(Projetil* pProjetil)
 
 void GerenciadorColisoes::limparObstaculos() {
 	LOs.clear();
+}
+
+void GerenciadorColisoes::limparBlocos() {
+	LBs.clear();
 }
 
 void GerenciadorColisoes::limparInimigos() {
@@ -310,12 +342,14 @@ void GerenciadorColisoes::executar() {
 
 	tratarColisoesInimgs();
 	tratarColisoesInimgsObstacs();
+	tratarColisoesInimgsBlocos();
 
-	tratarColisoesProjeteisObstacs();
 	tratarColisoesProjeteisInimgs();
+	tratarColisoesProjeteisObstacs();
 	tratarColisoesJogsProjeteis();
 
 	tratarColisoesJogsObstacs();
+	tratarColisoesJogsBlocos();
 	tratarColisoesJogsInimgs();
 
 	removerMortos();

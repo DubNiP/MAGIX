@@ -4,7 +4,9 @@ namespace entidades {
     namespace obstaculos {
 
         Bloco::Bloco(Vector2f pos, Vector2f tam)
-            : Obstaculo(pos, tam)
+            : Entidade(pos, Vector2f(0.f, 0.f), true),
+            larguraB(tam.x),
+            alturaB(tam.y)
         {
             carregarSprite();
         }
@@ -12,9 +14,6 @@ namespace entidades {
         Bloco::~Bloco() {
         }
 
-        void Bloco::obstaculizar(entidades::personagens::Jogador* p) {
-
-        }
         void Bloco::executar() {
             attPos();
         }
@@ -24,10 +23,17 @@ namespace entidades {
                 throw "Textura não carregada";
             }
             if (Sprite* sp = getSprite()) {
-                sp->setTextureRect(IntRect(0, 0, static_cast<int>(largura), static_cast<int>(altura)));
+                sp->setTextureRect(IntRect(0, 0, static_cast<int>(larguraB), static_cast<int>(alturaB)));
             }
             setScale(Vector2f(1.f, 1.f));
             setPos(pos);
+        }
+
+        const float Bloco::getLargura() const {
+            return larguraB;
+        }
+        const float Bloco::getAltura()  const {
+            return alturaB;
         }
 
     }
