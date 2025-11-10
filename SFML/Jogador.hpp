@@ -42,7 +42,7 @@ namespace entidades {
 			void adicionarPontos(int pts);
 
 			void reseta(Vector2f pos,int vidas, int pontos);
-			void tomarDano(int dano);
+			void tomarDano(int dano, bool bond);
 			void posicaoBarra();
 			void carregarSprite();
 			void setNaTeia(bool t);

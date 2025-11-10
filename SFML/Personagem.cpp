@@ -23,7 +23,7 @@ namespace entidades {
 			num_vidas = vidas; 
 		}
 
-		void Personagem::tomarDano(int dano) {
+		void Personagem::tomarDano(int dano, bool bond) {
 			if (dano > 0) {
 				int vidas = getVidas() - dano;
 				if (vidas < 0) vidas = 0;

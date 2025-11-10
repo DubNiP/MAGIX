@@ -9,7 +9,7 @@ GerenciadorGrafico* GerenciadorGrafico::uniqueInstance = NULL;
 
 GerenciadorGrafico::GerenciadorGrafico() :
     window(NULL),
-    camera(View(FloatRect(0.f, 0.f, 768.f, 432.f)))
+    camera(View(FloatRect(0.f, 0.f, 1280.f, 720.f)))
 {
     window = new RenderWindow(VideoMode(1280, 720), "Jogo Simas");
     if (window) {

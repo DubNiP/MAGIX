@@ -92,8 +92,8 @@ namespace entidades {
 			barraVida->setSize(Vector2f(40.f * (num_vidas / 15.f), 2.f));
 		}
 
-		void Jogador::tomarDano(int dano) {
-			if (dano > 0) {
+		void Jogador::tomarDano(int dano, bool bond) {
+			if (dano > 0 && !bond) {
 				if (danoClock.getElapsedTime().asSeconds() < invencibilidade) {
 					return;
 				}

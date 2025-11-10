@@ -40,6 +40,7 @@ namespace fases {
 		Fase(entidades::personagens::Jogador* pJog);
 		~Fase();
 		void executar();         //nao foi implementado executar nas derivadas de fase. Aqui existe uma dúvida em relaçao a esse executar
+		bool getFaseConcluida() const;
 	};
 
 }

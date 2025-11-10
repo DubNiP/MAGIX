@@ -33,12 +33,12 @@ namespace entidades {
 
 		void Golem::danificar() {
 			if (pJog) {
-				pJog->tomarDano(destruicao);
+				pJog->tomarDano(destruicao, false);
 			}
 		}
 
-		void Golem::tomarDano(int dano) {
-			if (dano > 0) {
+		void Golem::tomarDano(int dano, bool bondade) {
+			if (dano > 0 && bondade) {
 				{
 					int vidas = getVidas() - dano;
 					if (vidas < 0) vidas = 0;

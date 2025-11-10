@@ -6,7 +6,8 @@ Jogo::Jogo() :
     GG(Gerenciadores::GerenciadorGrafico::Instance()),
     menu(),
     event(),
-    fase1(&pJog1)
+    fase1(&pJog1),
+    fase2(&pJog1)
 {
     Ente::setGG(&GG);         //pode mudar
 }
@@ -47,4 +48,6 @@ void Jogo::executarMenu(Menu& menu) {
 
 void Jogo::executarJogo() {
     fase1.executar();
+
+    fase2.executar();
 }

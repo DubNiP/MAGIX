@@ -7,6 +7,7 @@
 #include "Jogador.hpp"
 #include "Obstaculo.hpp"
 #include "FasePrimeira.hpp"
+#include "FaseSegunda.hpp"
 
 using namespace sf;
 
@@ -17,6 +18,7 @@ private:
 	Menu menu;
 	Event event;
 	fases::FasePrimeira fase1;
+	fases::FaseSegunda fase2;
 	void executarMenu(Menu& menu);
 	void executarJogo();
 public:

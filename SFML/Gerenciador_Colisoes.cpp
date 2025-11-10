@@ -143,7 +143,8 @@ void GerenciadorColisoes::tratarColisoesJogsProjeteis() {
 		set<Projetil*>::iterator it = LPs.begin();
 		while (it != LPs.end()) {
 			if (verificarColisao(pJog1, *it) && !(*it)->getBondade()) {
-				pJog1->tomarDano((*it)->getDano());
+				pJog1->tomarDano((*it)->getDano(), (*it)->getBondade());
+				(*it)->setAtivo(false);
 				it = LPs.erase(it);
 				continue;
 			}
@@ -207,8 +208,8 @@ void GerenciadorColisoes::tratarColisoesProjeteisInimgs() {
 
 		vector<entidades::personagens::Inimigo*>::iterator itIni = LIs.begin();
 		while (itIni != LIs.end()) {
-			if (*itIni && verificarColisao(*itP, *itIni)) {
-				(*itIni)->tomarDano((*itP)->getDano());
+			if (*itIni && verificarColisao(*itP, *itIni) && (*itP)->getBondade()) {
+				(*itIni)->tomarDano((*itP)->getDano(), (*itP)->getBondade());
 				(*itP)->setAtivo(false);
 				itP = LPs.erase(itP);
 				colidiu = true;

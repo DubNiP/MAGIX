@@ -2,14 +2,14 @@
 
 
 Projetil::Projetil(Vector2f pos, bool dir, bool bond) :
-    Entidade(pos, Vector2f(2.f,2.f), dir),
+    Entidade(pos, Vector2f(500.f,30.f), dir),
     ativo(true),
     bondade(bond),
     posicao(0),
     dano(2)
 {
-    vel.x = velocidadeInicialX;
-	vel.y = 50.f;
+    velocidadeInicialX = vel.x;
+	velocidadeInicialY = vel.y;
     carregarSprite();
 }
 
@@ -28,21 +28,23 @@ bool Projetil::getAtivo() const {
 
 void Projetil::executar() {
     if (ativo) {
+        emTerra = false;
+
         Vector2f novaPos = getPos();
         if (olhandoDir) {
-            novaPos.x += velocidadeInicialX;
+            vel.x = velocidadeInicialX;
         }
         else {
-            novaPos.x -= velocidadeInicialX;
+            vel.x = -velocidadeInicialX;
         }
 
-        setPos(novaPos);
+        float dt = tempoMovimento.restart().asSeconds();
+        pos.x += vel.x * dt;
+        pos.y += vel.y * dt;
+
+        attPos();
     }
 }
-    //float dt = tempoMovimento.restart().asSeconds();
-    //pos.x += vel.x * dt;
-    //pos.y += vel.y * dt;
-
 
 
 int Projetil::getDano() {

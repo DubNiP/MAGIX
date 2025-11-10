@@ -3,18 +3,20 @@
 
 namespace fases {
 
-	class FaseSegunda :public Fase {
+	class FaseSegunda : public Fase {
 	private:
 		const int maxChefoes;
-	protected:
 
-		void criarInimigos();
-		void criarObstaculo();
+	protected:
+		void criarInimigos() override;
+		void criarObstaculo() override;
 		void criarChefoes();
 		void criarObsMedios();
-		//void criarProjeteis();
+		void criarBlocos() override;
+		void carregarFundo() override;
+
 	public:
-		FaseSegunda(entidades::personagens::Jogador* pJog);                   //FASE ESTÁ CONHECENDO JOGADOR AQUI, E NO DIAGRAMA NÃO TEM NADA, PODE?
+		FaseSegunda(entidades::personagens::Jogador* pJog);
 		~FaseSegunda();
 	};
 

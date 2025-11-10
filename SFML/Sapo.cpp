@@ -32,12 +32,12 @@ namespace entidades {
 
 		void Sapo::danificar() {
 			if (pJog) {
-				pJog->tomarDano(destruicao);
+				pJog->tomarDano(destruicao, false);
 			}
 		}
 
-		void Sapo::tomarDano(int dano) {
-			if (dano > 0) {
+		void Sapo::tomarDano(int dano, bool bondade) {
+			if (dano > 0 && bondade) {
 				{
 					int vidas = getVidas() - dano;
 					if (vidas < 0) vidas = 0;

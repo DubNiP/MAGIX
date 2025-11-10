@@ -17,7 +17,7 @@ namespace entidades {
 
 			int getVidas() const;
 			void setVidas(int vidas);
-			virtual void tomarDano(int dano);
+			virtual void tomarDano(int dano, bool bond);
 		};
 	}
 }

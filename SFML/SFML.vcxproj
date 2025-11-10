@@ -133,7 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Alavanca.cpp" />
     <ClCompile Include="Bloco.cpp" />
-    <ClCompile Include="Chefao.cpp" />
+    <ClCompile Include="MagoNegro.cpp" />
     <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Entidade.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -162,7 +162,7 @@
   <ItemGroup>
     <ClInclude Include="Alavanca.hpp" />
     <ClInclude Include="Bloco.hpp" />
-    <ClInclude Include="Chefao.hpp" />
+    <ClInclude Include="MagoNegro.hpp" />
     <ClInclude Include="Ente.hpp" />
     <ClInclude Include="Entidade.hpp" />
     <ClInclude Include="Fase.hpp" />

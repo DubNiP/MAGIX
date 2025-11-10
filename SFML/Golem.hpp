@@ -21,7 +21,7 @@ namespace entidades {
             ~Golem();
 
             void danificar();
-            void tomarDano(int dano);
+            void tomarDano(int dano, bool bondade);
 
             void mover();
             void moverEsquerda();

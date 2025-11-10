@@ -123,3 +123,7 @@ void Fase::executar() {
         }
     }
 }
+
+bool Fase::getFaseConcluida() const {
+    return faseConcluida;
+}

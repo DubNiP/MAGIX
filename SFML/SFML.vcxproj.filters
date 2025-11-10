@@ -90,7 +90,7 @@
     <ClCompile Include="Projetil.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Chefao.cpp">
+    <ClCompile Include="MagoNegro.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Golem.cpp">
@@ -167,7 +167,7 @@
     <ClInclude Include="Projetil.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Chefao.hpp">
+    <ClInclude Include="MagoNegro.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Golem.hpp">
