@@ -64,7 +64,7 @@ void Fase::criarCenario() {
     carregarFundo();
 
     if (jog) {
-        jog->reseta(Vector2f(100.f, 630.f), 15, 0);
+        jog->reseta(Vector2f(140.f, 630.f), 15, 0);
         lista_ents.incluir(jog);
 		jog->incluirListaEntidades(&lista_ents);
 		jog->incluirGerenciadorColisoes(&GC);

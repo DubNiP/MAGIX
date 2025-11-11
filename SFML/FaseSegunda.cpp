@@ -29,45 +29,35 @@ void FaseSegunda::criarInimigos() {
 }
 
 void FaseSegunda::criarObstaculo() {
-<<<<<<< HEAD
+
     criarObsMedios();
     criarPlataformas();
-    criarAlavancas();
     //criaEntidade(new entidades::obstaculos::Saida(sf::Vector2f(1150.f, 580.f), sf::Vector2f(47.f, 55.f)));
-=======
-	criarTeias();
->>>>>>> a1f82eca9fe1299c2c02932883d6b05fc3da183d
+
 }
 
 void FaseSegunda::criarChefoes() {
-    entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(Vector2f(900.f, 600.f), jog, Vector2f(3.f, 50.f));
+    entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(Vector2f(900.f, 200.f), jog, Vector2f(3.f, 50.f));
     criaEntidade(pM);
     pM->incluirGerenciadorColisoes(&GC);
     pM->incluirListaEntidades(&lista_ents);
 }
 
-<<<<<<< HEAD
+
 void FaseSegunda::criarObsMedios() {
-=======
-void FaseSegunda::criarTeias() {
->>>>>>> a1f82eca9fe1299c2c02932883d6b05fc3da183d
 
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(210.f, 160.f), Vector2f(30.f, 40.f)));
+    auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 790.f), Vector2f(140.f, 10.f))));
+    auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 610.f), Vector2f(140.f, 10.f))));
+    auto* plat3 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(20.f, 340.f), Vector2f(100.f, 10.f))));
+    auto* plat4 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 950.f), Vector2f(140.f, 10.f))));
 
-
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(210.f, 320.f), Vector2f(30.f, 40.f)));
-
-    criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(900.f, 200.f), Vector2f(300.f, 20.f)));
-}
-
-
-void FaseSegunda::criarPlataformas() {
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 860.f), Vector2f(30.f, 40.f), plat1));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 680.f), Vector2f(30.f, 40.f), plat2));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1030.f), Vector2f(30.f, 40.f), plat3));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(350.f, 1030.f), Vector2f(30.f, 40.f), plat4));
     
 }
 
-void FaseSegunda::criarAlavancas() {
-  
-}
 
 void FaseSegunda::criarBlocos() {
 
@@ -79,32 +69,21 @@ void FaseSegunda::criarBlocos() {
 
 
     // Bloco vertical grande na esquerda
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(280.f, 360.f), Vector2f(20.f, 700.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(280.f, 540.f), Vector2f(20.f, 520.f)));
 
     //Escadaria 
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 980.f), Vector2f(110.f, 20.f)));
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 880.f), Vector2f(110.f, 20.f)));
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 760.f), Vector2f(110.f, 20.f)));
-	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 640.f), Vector2f(110.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 520.f), Vector2f(110.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 400.f), Vector2f(110.f, 20.f)));
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 280.f), Vector2f(110.f, 20.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 990.f), Vector2f(100.f, 20.f)));
+	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 890.f), Vector2f(940.f, 20.f)));
+	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 800.f), Vector2f(100.f, 20.f)));
+	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 710.f), Vector2f(940.f, 20.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 630.f), Vector2f(100.f, 20.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(200.f, 550.f), Vector2f(110.f, 20.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(280.f, 530.f), Vector2f(830.f, 20.f)));
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(20.f, 450.f), Vector2f(100.f, 20.f)));
 
-    /*// Plataforma superior esquerda
-
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 80.f), Vector2f(200.f, 20.f)));
-
-    // Plataforma do meio esquerda
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 220.f), Vector2f(180.f, 20.f)));
-
-    // Plataforma inferior esquerda
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(0.f, 360.f), Vector2f(180.f, 20.f)));
-
-    // Bloco vertical central
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(180.f, 0.f), Vector2f(40.f, 720.f)));
-
-    // Bloco horizontal central grande
-    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(360.f, 160.f), Vector2f(700.f, 20.f)));*/
+    //Hall do mago negro
+    criaEntidade(new entidades::obstaculos::Bloco(Vector2f(120.f, 320.f), Vector2f(1160.f, 20.f)));
+	criaEntidade(new entidades::obstaculos::Bloco(Vector2f(120.f, 270.f), Vector2f(20.f, 50.f)));
 }
 
 
