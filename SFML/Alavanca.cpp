@@ -19,7 +19,7 @@ namespace entidades {
 			attPos();
 		}
 
-		void Alavanca::obstaculizar(entidades::personagens::Jogador* pJ) {
+		void Alavanca::obstaculizar(entidades::personagens::Mago* pJ) {
 			if (p) {
 				p->setAtiva();
 			}

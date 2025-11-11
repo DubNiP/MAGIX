@@ -11,12 +11,12 @@ namespace fases {
         void criarInimigos();
         void criarObstaculo();
         void criarChefoes();
-        void criarObsMedios();
+        void criarObstaculosMedios();
         void criarBlocos();
         void carregarFundo();
 
     public:
-        FaseSegunda(entidades::personagens::Jogador* pJog);
+        FaseSegunda(entidades::personagens::Mago* pJog);
         ~FaseSegunda();
     };
 

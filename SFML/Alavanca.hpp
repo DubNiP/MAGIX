@@ -15,7 +15,7 @@ namespace entidades {
 			Alavanca(Vector2f pos, Vector2f tam, Plataforma* pPlat = NULL);
 			~Alavanca();
 			void executar();
-			void obstaculizar(entidades::personagens::Jogador* p);
+			void obstaculizar(entidades::personagens::Mago* p);
 			void carregarSprite();
 		};
 	}

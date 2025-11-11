@@ -14,7 +14,7 @@ namespace entidades {
 			~Teia();
 
 			void executar();
-			void obstaculizar(entidades::personagens::Jogador* p);
+			void obstaculizar(entidades::personagens::Mago* p);
 			void carregarSprite();
 
 			void setVida(int vida);

@@ -21,7 +21,7 @@ namespace entidades {
 			attPos();
 		}
 
-		void Saida::obstaculizar(entidades::personagens::Jogador* p) {
+		void Saida::obstaculizar(entidades::personagens::Mago* p) {
 		}
 
 		void Saida::setSprite() {
@@ -48,9 +48,9 @@ namespace entidades {
 			}
 		}
 
-		void Saida::atualizarPorProximidade(const FloatRect& boundsJogador) {
-			const float cxJ = boundsJogador.left + boundsJogador.width * 0.5f;
-			const float cyJ = boundsJogador.top + boundsJogador.height * 0.5f;
+		void Saida::atualizarPorProximidade(const FloatRect& boundsMago) {
+			const float cxJ = boundsMago.left + boundsMago.width * 0.5f;
+			const float cyJ = boundsMago.top + boundsMago.height * 0.5f;
 
 
 			const FloatRect bPorta = getBounds();

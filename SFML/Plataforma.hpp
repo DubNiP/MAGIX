@@ -2,7 +2,7 @@
 
 #include "Obstaculo.hpp"
 #include "Personagem.hpp"
-#include "Jogador.hpp"
+#include "Mago.hpp"
 
 using namespace sf;
 
@@ -22,7 +22,7 @@ namespace entidades {
 			~Plataforma();
 
 			void executar();
-			void obstaculizar(entidades::personagens::Jogador* p);
+			void obstaculizar(entidades::personagens::Mago* p);
 			bool esmagou(entidades::personagens::Personagem* p) const;
 			void setAtiva();
 			void carregarSprite();

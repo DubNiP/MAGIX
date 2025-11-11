@@ -2,7 +2,7 @@
 
 using namespace fases;
 
-Fase::Fase(entidades::personagens::Jogador* pJog):
+Fase::Fase(entidades::personagens::Mago* pJog):
     Ente(),
     lista_ents(),
     GC(),
@@ -66,11 +66,11 @@ void Fase::criarCenario() {
     carregarFundo();
 
     if (jog) {
-        jog->reseta(Vector2f(140.f, 630.f), 15, 0);
+        jog->reseta(Vector2f(160.f, 630.f), 15, 0);
         lista_ents.incluir(jog);
 		jog->incluirListaEntidades(&lista_ents);
 		jog->incluirGerenciadorColisoes(&GC);
-        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setJogador(jog);
+        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(jog);
     }
     criarObstaculo();
     criarInimigos();

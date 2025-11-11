@@ -50,14 +50,14 @@ void GerenciadorGrafico::displayWindow() {
     }
 }
 
-void GerenciadorGrafico::atualizarCamera(const Vector2f posJogador) {
+void GerenciadorGrafico::atualizarCamera(const Vector2f posMago) {
     const float visaoE = camera.getSize().x;
     const float visaoD = camera.getSize().y;
 
     const float maxX = window->getSize().x;
     const float maxY = 1080;
 
-    Vector2f centro = posJogador;
+    Vector2f centro = posMago;
 
     if (centro.x < visaoE / 2.f)
         centro.x = visaoE / 2.f;

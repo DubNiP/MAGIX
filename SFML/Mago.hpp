@@ -13,7 +13,7 @@ using namespace sf;
 namespace entidades { 
 	namespace personagens{
 
-		class Jogador: public Personagem {
+		class Mago: public Personagem {
 		protected:
 			int pontos;
 			float invencibilidade;
@@ -25,8 +25,8 @@ namespace entidades {
 			Gerenciadores::GerenciadorColisoes* GC;
 
 		public:
-			Jogador(Vector2f pos, Vector2f vel);
-			~Jogador();
+			Mago(Vector2f pos, Vector2f vel);
+			~Mago();
 
 			void incluirListaEntidades(listas::ListaEntidades* pLEnt);
 

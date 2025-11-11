@@ -5,7 +5,7 @@ namespace Gerenciador {
     GerenciadorEvento* GerenciadorEvento::pEvento = NULL;
 
     GerenciadorEvento::GerenciadorEvento() :
-        pJogador(NULL),
+        pMago(NULL),
         pMenu(NULL),
         prevUp(false),
         prevDown(false),
@@ -14,7 +14,7 @@ namespace Gerenciador {
     }
 
     GerenciadorEvento::~GerenciadorEvento() {
-        pJogador = NULL;
+        pMago = NULL;
         pMenu = NULL;
     }
 
@@ -25,8 +25,8 @@ namespace Gerenciador {
         return pEvento;
     }
 
-    void GerenciadorEvento::setJogador(entidades::personagens::Jogador* pj) {
-        pJogador = pj;
+    void GerenciadorEvento::setMago(entidades::personagens::Mago* pj) {
+        pMago = pj;
     }
 
     void GerenciadorEvento::setMenu(Menu* pm) {
@@ -36,14 +36,14 @@ namespace Gerenciador {
     }
 
     void GerenciadorEvento::executar() {
-        if (pJogador) {
+        if (pMago) {
 
            bool moverEsq = Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left);
            bool moverDir = Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right);
            bool pular = Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up);
            bool atirar = Keyboard::isKeyPressed(Keyboard::Space);
 
-            pJogador->processarInput(moverEsq, moverDir, pular, atirar);
+            pMago->processarInput(moverEsq, moverDir, pular, atirar);
         }
     }
 

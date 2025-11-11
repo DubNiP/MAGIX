@@ -1,5 +1,5 @@
 #include "Teia.hpp"
-#include "Jogador.hpp"
+#include "Mago.hpp"
 
 namespace entidades { 
 	namespace obstaculos {
@@ -20,7 +20,7 @@ namespace entidades {
 			attPos();
 		}
 
-		void Teia::obstaculizar(entidades::personagens::Jogador* p) {
+		void Teia::obstaculizar(entidades::personagens::Mago* p) {
 			if (p) {
 				p->setNaTeia(true);
 			}

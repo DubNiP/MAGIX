@@ -23,7 +23,7 @@ namespace entidades {
 		}
 
 
-		void Espinho::obstaculizar(entidades::personagens::Jogador* p) {
+		void Espinho::obstaculizar(entidades::personagens::Mago* p) {
 			if (p) {
 				p->setVidas(p->getVidas() - danosidade);
 			}

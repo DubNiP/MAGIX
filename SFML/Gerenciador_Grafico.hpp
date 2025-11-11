@@ -21,7 +21,7 @@ namespace Gerenciadores {
         void clearWindow(Color cor = Color::Black);
         void displayWindow();
         void desenhaTodos(listas::ListaEntidades* LE, Sprite* sp = NULL);       //coloco essa relação?
-        void atualizarCamera(const Vector2f posJogador);
+        void atualizarCamera(const Vector2f posMago);
         RenderWindow* getWindow() const;
         View getCamera() const;
     };

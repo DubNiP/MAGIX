@@ -15,10 +15,10 @@ namespace entidades {
 			Saida(Vector2f pos, Vector2f tam);
 			~Saida();
 			void executar();
-			void obstaculizar(entidades::personagens::Jogador* p);
+			void obstaculizar(entidades::personagens::Mago* p);
 			void setSprite();
 			void aplicarSpriteEstado();
-			void atualizarPorProximidade(const FloatRect& boundsJogador);
+			void atualizarPorProximidade(const FloatRect& boundsMago);
 		};
 	}
 }

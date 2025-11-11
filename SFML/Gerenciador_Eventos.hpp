@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics.hpp>
-#include "Jogador.hpp"
+#include "Mago.hpp"
 #include "Menu.hpp"
 
 namespace Gerenciador {
@@ -9,7 +9,7 @@ namespace Gerenciador {
     class GerenciadorEvento {
     private:
         static GerenciadorEvento* pEvento;
-        entidades::personagens::Jogador* pJogador;
+        entidades::personagens::Mago* pMago;
         Menu* pMenu;
 
         bool prevUp;
@@ -23,7 +23,7 @@ namespace Gerenciador {
 
         static GerenciadorEvento* getGerenciadorEvento();
 
-        void setJogador(entidades::personagens::Jogador* pj);
+        void setMago(entidades::personagens::Mago* pj);
         void setMenu(Menu* pm);
 
         void executar();

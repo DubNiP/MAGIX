@@ -3,7 +3,7 @@
 namespace entidades {
 	namespace personagens {
 
-		Inimigo::Inimigo(Vector2f pos, Jogador* jog, Vector2f vel, int des) :
+		Inimigo::Inimigo(Vector2f pos, Mago* jog, Vector2f vel, int des) :
 			Personagem(pos, vel),
 			nivel_maldade(3),
 			pJog(jog),

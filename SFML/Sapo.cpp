@@ -4,7 +4,7 @@
 namespace entidades { 
 	namespace personagens {
 
-		Sapo::Sapo(Vector2f pos, Jogador* pJog, Vector2f vel) :
+		Sapo::Sapo(Vector2f pos, Mago* pJog, Vector2f vel) :
 			Inimigo(pos, pJog, vel, 2),
 			raio(150.f),
 			intervaloPulo(1.5f)

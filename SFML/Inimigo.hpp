@@ -3,7 +3,7 @@
 
 namespace entidades {
 	namespace personagens {
-		class Jogador;  // Forward declaration
+		class Mago;  // Forward declaration
 	}
 }
 
@@ -14,7 +14,7 @@ namespace entidades {
 		class Inimigo : public Personagem {
 		protected:
 			int nivel_maldade;
-			Jogador* pJog;
+			Mago* pJog;
 			short moverAleatorio;
 			Vector2f posInicial;
 			int destruicao;
@@ -22,7 +22,7 @@ namespace entidades {
 			Clock relogioDePulo;
 			bool bondade;
 		public:
-			Inimigo(Vector2f pos, Jogador* jog, Vector2f velocidade = Vector2f(0.f, 0.f), int des = 0);
+			Inimigo(Vector2f pos, Mago* jog, Vector2f velocidade = Vector2f(0.f, 0.f), int des = 0);
 			~Inimigo();
 			//void salvarDataBuffer();
 			virtual void executar() = 0;

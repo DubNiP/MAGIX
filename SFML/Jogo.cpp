@@ -27,9 +27,9 @@ void Jogo::executar() {
         if (menu.getIniciar() && window->isOpen()) {
             menu.reseta();
             Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(NULL);
-            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setJogador(&pJog1);
+            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(&pJog1);
             executarJogo();
-            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setJogador(NULL);
+            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(NULL);
             Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(&menu);
         }
 
@@ -58,6 +58,6 @@ void Jogo::executarMenu(Menu& menu) {
 }
 
 void Jogo::executarJogo() {
-    fase1.executar();
+    //fase1.executar();
     fase2.executar();
 }

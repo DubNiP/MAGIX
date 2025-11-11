@@ -1,6 +1,6 @@
 #pragma once
 #include "Inimigo.hpp"
-#include "Jogador.hpp"
+#include "Mago.hpp"
 #include "ListaEntidades.hpp"
 #include <SFML/System/Clock.hpp>
 #include "Projetil.hpp"
@@ -19,7 +19,7 @@ namespace entidades {
             Gerenciadores::GerenciadorColisoes* GC;
 
         public:
-            MagoNegro(Vector2f pos, Jogador* pJog, Vector2f vel);
+            MagoNegro(Vector2f pos, Mago* pJog, Vector2f vel);
             ~MagoNegro();
 
             void incluirListaEntidades(listas::ListaEntidades* pLEnt);

@@ -48,7 +48,7 @@
     <ClCompile Include="Inimigo.cpp">
       <Filter>Personagens</Filter>
     </ClCompile>
-    <ClCompile Include="Jogador.cpp">
+    <ClCompile Include="Mago.cpp">
       <Filter>Personagens</Filter>
     </ClCompile>
     <ClCompile Include="Personagem.cpp">
@@ -131,7 +131,7 @@
     <ClInclude Include="Inimigo.hpp">
       <Filter>Personagens</Filter>
     </ClInclude>
-    <ClInclude Include="Jogador.hpp">
+    <ClInclude Include="Mago.hpp">
       <Filter>Personagens</Filter>
     </ClInclude>
     <ClInclude Include="Fase.hpp">

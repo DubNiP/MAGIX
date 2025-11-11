@@ -1,10 +1,10 @@
-#include "Jogador.hpp"
+#include "Mago.hpp"
 #include "Gerenciador_Colisoes.hpp"
 
 namespace entidades {
 	namespace personagens {
 
-		Jogador::Jogador(Vector2f pos, Vector2f vel) :
+		Mago::Mago(Vector2f pos, Vector2f vel) :
 			Personagem(pos, vel),
 			pontos(0),
 			invencibilidade(0.3f),
@@ -23,33 +23,33 @@ namespace entidades {
 			carregarSprite();
 		}
 
-		Jogador::~Jogador() {
+		Mago::~Mago() {
 			GC = NULL;
 			listaEntidades = NULL;
 		}
 
 
-		void Jogador::incluirListaEntidades(listas::ListaEntidades* pLEnt) {
+		void Mago::incluirListaEntidades(listas::ListaEntidades* pLEnt) {
 			listaEntidades = pLEnt;
 		}
 
-		void Jogador::incluirGerenciadorColisoes(Gerenciadores::GerenciadorColisoes* pGC) {
+		void Mago::incluirGerenciadorColisoes(Gerenciadores::GerenciadorColisoes* pGC) {
 			GC = pGC;
 		}
 
-		void Jogador::executar() {
+		void Mago::executar() {
 			gravidade();
 			mover();
 			posicaoBarra();
 		}
 
-		//void Jogador::salvar() {}
+		//void Mago::salvar() {}
 
-		void Jogador::mover() {
+		void Mago::mover() {
 			attPos();
 		}
 
-		void Jogador::processarInput(bool esquerda, bool direita, bool pular, bool atirar) {
+		void Mago::processarInput(bool esquerda, bool direita, bool pular, bool atirar) {
 			float t = naTeia ? 0.3f : 1.0f;
 
 			if (pular) {
@@ -77,15 +77,15 @@ namespace entidades {
 			}
 		}
 
-		const int Jogador::getPontos() const { 
+		const int Mago::getPontos() const {
 			return pontos;
 		}
 
-		void Jogador::adicionarPontos(int pts) { 
+		void Mago::adicionarPontos(int pts) {
 			pontos += pts; 
 		}
 
-		void Jogador::reseta(Vector2f posicao, int vidas, int pts) {
+		void Mago::reseta(Vector2f posicao, int vidas, int pts) {
 			setPos(posicao);
 			num_vidas = vidas;
 			pontos = pts;
@@ -93,7 +93,7 @@ namespace entidades {
 			barraVida->setSize(Vector2f(40.f * (num_vidas / 15.f), 2.f));
 		}
 
-		void Jogador::tomarDano(int dano, bool bond) {
+		void Mago::tomarDano(int dano, bool bond) {
 			if (dano > 0 && !bond) {
 				if (danoClock.getElapsedTime().asSeconds() < invencibilidade) {
 					return;
@@ -106,7 +106,7 @@ namespace entidades {
 			}
 		}
 
-		void Jogador::posicaoBarra() {
+		void Mago::posicaoBarra() {
 			Vector2f barraPos = getPos();
 			barraPos.y -=10.f;
 			barraPos.x -= 11.f;
@@ -116,18 +116,18 @@ namespace entidades {
 			}
 		}
 
-		void Jogador::carregarSprite() {
+		void Mago::carregarSprite() {
 			if (!carregarTexturaSprite("Textures/Idle1.png")) {
 				throw "Textura não carregada";
 			}
 			setPos(pos);
 		}
 
-		void Jogador::setNaTeia(bool estado) { 
+		void Mago::setNaTeia(bool estado) {
 			naTeia = estado;
 		}
 
-		void Jogador::criarProjetil() {
+		void Mago::criarProjetil() {
 			if (apto && GC && listaEntidades) {
 				apto = false;
 				if (olhandoDir) {

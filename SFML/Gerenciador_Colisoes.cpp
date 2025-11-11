@@ -2,7 +2,7 @@
 
 using namespace Gerenciadores;
 
-GerenciadorColisoes::GerenciadorColisoes(entidades::personagens::Jogador* pJog, RenderWindow* win):
+GerenciadorColisoes::GerenciadorColisoes(entidades::personagens::Mago* pJog, RenderWindow* win):
 	LIs(),
 	LOs(),
 	LPs(),
@@ -364,7 +364,7 @@ void GerenciadorColisoes::executar() {
 	removerMortos();
 }
 
-void GerenciadorColisoes::setJog(entidades::personagens::Jogador* pJog) {
+void GerenciadorColisoes::setJog(entidades::personagens::Mago* pJog) {
 	pJog1 = pJog;
 }
 
@@ -381,13 +381,13 @@ void GerenciadorColisoes::limiteDeTela() {
 
 			const float X = windowSize.x - boundJog.width;
 			const float Y = 1080;
-			limiteDeTelaJogador(X, Y);
+			limiteDeTelaMago(X, Y);
 			limiteDeTelaProjeteis(X, Y);
 		}
 	}
 }
 
-void GerenciadorColisoes::limiteDeTelaJogador(float X, float Y) {
+void GerenciadorColisoes::limiteDeTelaMago(float X, float Y) {
 
 	if (pJog1->getPos().x < 0.f)   pJog1->setPos(Vector2f(0.f, pJog1->getPos().y));
 	if (pJog1->getPos().y < 0.f)   pJog1->setPos(Vector2f(pJog1->getPos().x, 0.f));

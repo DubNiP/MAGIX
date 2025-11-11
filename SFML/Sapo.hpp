@@ -1,6 +1,6 @@
 #pragma once
 #include "Inimigo.hpp"
-#include "Jogador.hpp"
+#include "Mago.hpp"
 
 namespace entidades { 
     namespace personagens {
@@ -10,7 +10,7 @@ namespace entidades {
             float raio;
             float intervaloPulo;
         public:
-            Sapo(Vector2f pos, Jogador* pJog, Vector2f vel);
+            Sapo(Vector2f pos, Mago* pJog, Vector2f vel);
 
             ~Sapo();
 

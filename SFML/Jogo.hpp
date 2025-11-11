@@ -4,7 +4,7 @@
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Colisoes.hpp"
 #include "Menu.hpp"
-#include "Jogador.hpp"
+#include "Mago.hpp"
 #include "Obstaculo.hpp"
 #include "FasePrimeira.hpp"
 #include "FaseSegunda.hpp"
@@ -13,7 +13,7 @@ using namespace sf;
 
 class Jogo {
 private:
-	entidades::personagens::Jogador pJog1;            
+	entidades::personagens::Mago pJog1;            
 	Gerenciadores::GerenciadorGrafico& GG;
 	Menu menu;
 	Event event;

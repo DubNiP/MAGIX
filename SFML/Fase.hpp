@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Colisoes.hpp"
-#include "Jogador.hpp"
+#include "Mago.hpp"
 #include "Espinho.hpp"
 #include "Ente.hpp"
 #include "Projetil.hpp"
@@ -22,7 +22,7 @@ namespace fases {
 	protected:
 		listas::ListaEntidades lista_ents;
 		Gerenciadores::GerenciadorColisoes GC;
-		entidades::personagens::Jogador* jog;
+		entidades::personagens::Mago* jog;
 
 		bool faseConcluida;
 		Texture* textFundo;
@@ -37,7 +37,7 @@ namespace fases {
 		virtual void carregarFundo() = 0;
 		Entidade* criaEntidade(Entidade* e);
 	public:
-		Fase(entidades::personagens::Jogador* pJog);
+		Fase(entidades::personagens::Mago* pJog);
 		~Fase();
 		void executar();         //nao foi implementado executar nas derivadas de fase. Aqui existe uma dúvida em relaçao a esse executar
 		bool getFaseConcluida() const;

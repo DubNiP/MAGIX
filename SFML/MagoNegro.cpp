@@ -8,7 +8,7 @@
 namespace entidades {
 	namespace personagens {
 
-		MagoNegro::MagoNegro(Vector2f pos, Jogador* pJog, Vector2f vel) :
+		MagoNegro::MagoNegro(Vector2f pos, Mago* pJog, Vector2f vel) :
 			Inimigo(pos, pJog, vel, 1),
 			tamanho(400),
 			ataqueClock(),

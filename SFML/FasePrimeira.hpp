@@ -1,7 +1,7 @@
 #pragma once
 #include "Fase.hpp"
 #include "Golem.hpp"
-#include "Jogador.hpp"
+#include "Mago.hpp"
 #include "Plataforma.hpp"
 
 namespace fases {
@@ -23,7 +23,7 @@ namespace fases {
 		void carregarFundo();
 
 	public:
-		FasePrimeira(entidades::personagens::Jogador* pJog);         //FASE ESTÁ CONHECENDO JOGADOR AQUI, E NO DIAGRAMA NÃO TEM NADA, PODE?
+		FasePrimeira(entidades::personagens::Mago* pJog);         //FASE ESTÁ CONHECENDO Mago AQUI, E NO DIAGRAMA NÃO TEM NADA, PODE?
 		~FasePrimeira();
 	};
 

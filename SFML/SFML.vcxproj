@@ -148,7 +148,7 @@
     <ClCompile Include="Saida.cpp" />
     <ClCompile Include="Sapo.cpp" />
     <ClCompile Include="Golem.cpp" />
-    <ClCompile Include="Jogador.cpp" />
+    <ClCompile Include="Mago.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="ListaEntidades.cpp" />
     <ClCompile Include="main.cpp" />
@@ -176,7 +176,7 @@
     <ClInclude Include="Saida.hpp" />
     <ClInclude Include="Sapo.hpp" />
     <ClInclude Include="Golem.hpp" />
-    <ClInclude Include="Jogador.hpp" />
+    <ClInclude Include="Mago.hpp" />
     <ClInclude Include="Jogo.hpp" />
     <ClInclude Include="Lista.hpp" />
     <ClInclude Include="ListaEntidades.hpp" />

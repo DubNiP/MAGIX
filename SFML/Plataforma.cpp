@@ -38,7 +38,7 @@ namespace entidades {
 			attPos();
 		}
 
-		void Plataforma::obstaculizar(entidades::personagens::Jogador* p) {
+		void Plataforma::obstaculizar(entidades::personagens::Mago* p) {
 			if (p) {
 
 				const FloatRect pj = p->getBounds();

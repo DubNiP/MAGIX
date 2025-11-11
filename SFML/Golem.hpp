@@ -1,6 +1,6 @@
 #pragma once
 #include "Inimigo.hpp"
-#include "Jogador.hpp"
+#include "Mago.hpp"
 
 namespace entidades {
     namespace personagens {
@@ -12,7 +12,7 @@ namespace entidades {
             float velocidadeInicialX;  // Novo atributo
 
         public:
-            Golem(Vector2f pos, Jogador* pJog, Vector2f vel);
+            Golem(Vector2f pos, Mago* pJog, Vector2f vel);
             ~Golem();
 
             void danificar();

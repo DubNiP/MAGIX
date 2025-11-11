@@ -2,7 +2,7 @@
 
 using namespace fases;
 
-FasePrimeira::FasePrimeira(entidades::personagens::Jogador* pJog):
+FasePrimeira::FasePrimeira(entidades::personagens::Mago* pJog):
     Fase(pJog),
     maxGolems(10)
 {

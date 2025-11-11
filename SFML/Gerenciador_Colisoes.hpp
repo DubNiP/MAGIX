@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Entidade.hpp"
-#include "Jogador.hpp"
+#include "Mago.hpp"
 #include "Inimigo.hpp"
 #include "Teia.hpp"
 #include "Plataforma.hpp"
@@ -23,11 +23,11 @@ namespace Gerenciadores {
         list<entidades::obstaculos::Obstaculo*>  LOs;
         list<entidades::obstaculos::Bloco*> LBs;
         set<Projetil*>    LPs;  
-        entidades::personagens::Jogador* pJog1;
+        entidades::personagens::Mago* pJog1;
         RenderWindow* window;
         bool faseConcluida;
     public:
-        GerenciadorColisoes(entidades::personagens::Jogador* pJog = NULL,RenderWindow* window = NULL);
+        GerenciadorColisoes(entidades::personagens::Mago* pJog = NULL,RenderWindow* window = NULL);
         ~GerenciadorColisoes();
         
         const bool getFaseConcluida() const;
@@ -60,11 +60,11 @@ namespace Gerenciadores {
 
         void executar();
 
-        void setJog(entidades::personagens::Jogador* pJog);
+        void setJog(entidades::personagens::Mago* pJog);
         void setWindow(RenderWindow* win);
 
         void limiteDeTela();
-        void limiteDeTelaJogador(float X, float Y);
+        void limiteDeTelaMago(float X, float Y);
         void limiteDeTelaProjeteis(float X, float Y);
     };
 
