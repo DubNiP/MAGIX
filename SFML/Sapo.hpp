@@ -23,7 +23,6 @@ namespace entidades {
             void movimentoAleatorio();
 
             void executar();
-            void posicaoBarra();
 
             void carregarSprite();
 

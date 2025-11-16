@@ -1,7 +1,6 @@
 #pragma once
 #include "Inimigo.hpp"
 #include "Mago.hpp"
-#include "ListaEntidades.hpp"
 #include <SFML/System/Clock.hpp>
 #include "Projetil.hpp"
 
@@ -15,15 +14,13 @@ namespace entidades {
             bool apto;
             int moverAleatorio;
             float velocidadeInicialX;
-            listas::ListaEntidades* listaEntidades;
-            Gerenciadores::GerenciadorColisoes* GC;
+			fases::Fase* faseAtual;
 
         public:
             MagoNegro(Vector2f pos, Mago* pJog, Vector2f vel);
             ~MagoNegro();
 
-            void incluirListaEntidades(listas::ListaEntidades* pLEnt);
-            void incluirGerenciadorColisoes(Gerenciadores::GerenciadorColisoes* pGC);
+            void setFaseAtual(fases::Fase* f);
 
             void danificar();
             void tomarDano(int dano, bool bondade);
@@ -35,10 +32,7 @@ namespace entidades {
             void pular();
 
             void executar();
-            void posicaoBarra();
             void carregarSprite();
-
-            void criarProjetil();
 
         };
 

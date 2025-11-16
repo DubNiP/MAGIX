@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "Gerenciador_Grafico.hpp"
+#include <random>
+extern std::mt19937 rng;
 
 using namespace sf;
 using namespace std;
@@ -12,8 +14,8 @@ protected:
 	static Gerenciadores::GerenciadorGrafico* pGG;
 	Sprite* pSprite;
 	Texture* textura;
-	RectangleShape* barraFundo;     //nao deveria ser em entidade?
-	RectangleShape* barraVida;        
+	RectangleShape barraFundo;     //nao deveria ser em entidade?
+	RectangleShape barraVida;        
 public:
 	Ente();
 	virtual ~Ente();

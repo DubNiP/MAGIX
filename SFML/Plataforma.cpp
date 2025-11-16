@@ -24,6 +24,7 @@ namespace entidades {
 		}
 
 		void Plataforma::executar() {
+
 			if (ativa && periodo != 0.f) {
 				yAnt = pos.y;
 

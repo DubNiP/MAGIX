@@ -1,5 +1,4 @@
 #include "Golem.hpp"
-#include <cmath>
 
 namespace entidades {
 	namespace personagens {
@@ -13,13 +12,9 @@ namespace entidades {
 			relogio.restart();
 			relogioDePulo.restart();
 			carregarSprite();
-			moverAleatorio = rand() % 2;
-			if (barraVida && barraFundo) {
-				barraFundo->setSize(Vector2f(50.f, 2.f));
-				barraVida->setSize(Vector2f(50.f, 2.f));
-				barraFundo->setPosition(Vector2f(pos.x + 10.f, pos.y - 10.f));
-				barraVida->setPosition(Vector2f(pos.x + 10.f, pos.y - 10.f));
-			}
+			uniform_int_distribution<int> dist2(0, 3);
+			moverAleatorio = dist2(rng);
+			
 		}
 
 		Golem::~Golem()
@@ -38,7 +33,7 @@ namespace entidades {
 					int vidas = getVidas() - dano;
 					if (vidas < 0) vidas = 0;
 					setVidas(vidas);
-					barraVida->setSize(Vector2f(40.f * (num_vidas / 10.f), 3.f));
+					barraVida.setSize(Vector2f(30.f * (num_vidas / 10.f), 3.f));
 				}
 			}
 		}
@@ -112,7 +107,8 @@ namespace entidades {
 
 			float dt = relogio.getElapsedTime().asSeconds();
 			if (dt >= 1.0f) {
-				moverAleatorio = rand() % 4;
+				uniform_int_distribution<int> dist2(0, 3);
+				moverAleatorio = dist2(rng);
 				relogio.restart();
 			}
 		}
@@ -122,16 +118,6 @@ namespace entidades {
 			attPos();
 			gravidade();
 			posicaoBarra();
-		}
-
-		void Golem::posicaoBarra() {
-			Vector2f barraPos = getPos();
-			barraPos.y -= 10.f;
-			barraPos.x += 10.f;
-			if (barraVida && barraFundo) {
-				barraFundo->setPosition(barraPos);
-				barraVida->setPosition(barraPos);
-			}
 		}
 
 		void Golem::carregarSprite() {

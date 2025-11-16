@@ -25,7 +25,6 @@ namespace entidades {
             void pular();
 
             void executar();
-            void posicaoBarra();
             void carregarSprite();
 
             //void salvar() {  }

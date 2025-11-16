@@ -61,10 +61,11 @@ void Jogo::executarJogo() {
 
     fase1.executar();
 
-    if(fase1.getFaseConcluida()) {
+   
+   if (pJog1.getConcluiuFase()) {
         GG.setSegundaTela(true);
         fase2.executar();
-	}
-    
+   }
+   
     
 }

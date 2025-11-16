@@ -1,11 +1,14 @@
 #pragma once
 #include "Personagem.hpp"
-#include "ListaEntidades.hpp"
 #include <SFML/System/Clock.hpp>
 #include "Projetil.hpp"
 
 namespace Gerenciadores {
 	class GerenciadorColisoes;
+}
+
+namespace fases {
+	class Fase;
 }
 
 using namespace sf;
@@ -21,16 +24,12 @@ namespace entidades {
 			Clock ataqueClock;
 			bool naTeia;
 			bool apto;
-			listas::ListaEntidades* listaEntidades;
-			Gerenciadores::GerenciadorColisoes* GC;
+			bool concluiuFase;
+			fases::Fase* faseAtual;
 
 		public:
 			Mago(Vector2f pos, Vector2f vel);
 			~Mago();
-
-			void incluirListaEntidades(listas::ListaEntidades* pLEnt);
-
-			void incluirGerenciadorColisoes(Gerenciadores::GerenciadorColisoes* pGC);
 
 			void executar();
 			//void salvar();
@@ -44,10 +43,12 @@ namespace entidades {
 
 			void reseta(Vector2f pos,int vidas, int pontos);
 			void tomarDano(int dano, bool bond);
-			void posicaoBarra();
+
 			void carregarSprite();
 			void setNaTeia(bool t);
-			void criarProjetil();
+			void setConcluiuFase(bool c);
+			void setFaseAtual(fases::Fase* f);
+			bool getConcluiuFase() const;
 		};
 	} 
 }

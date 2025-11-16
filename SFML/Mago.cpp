@@ -1,5 +1,5 @@
 #include "Mago.hpp"
-#include "Gerenciador_Colisoes.hpp"
+#include "fase.hpp"
 
 namespace entidades {
 	namespace personagens {
@@ -12,29 +12,14 @@ namespace entidades {
 			ataqueClock(),
 			naTeia(false),
 			apto(true),
-			listaEntidades(NULL),
-			GC(NULL)
+			concluiuFase(false),
+			faseAtual(NULL)
 		{
-			if (barraVida && barraFundo) {
-				barraFundo->setPosition(Vector2f(pos.x -11.f, pos.y - 10.f));
-				barraVida->setPosition(Vector2f(pos.x - 11.f, pos.y - 10.f));
-			}
-
 			carregarSprite();
 		}
 
 		Mago::~Mago() {
-			GC = NULL;
-			listaEntidades = NULL;
-		}
-
-
-		void Mago::incluirListaEntidades(listas::ListaEntidades* pLEnt) {
-			listaEntidades = pLEnt;
-		}
-
-		void Mago::incluirGerenciadorColisoes(Gerenciadores::GerenciadorColisoes* pGC) {
-			GC = pGC;
+			faseAtual = NULL;
 		}
 
 		void Mago::executar() {
@@ -73,7 +58,15 @@ namespace entidades {
 			}
 
 			if (atirar) {
-				criarProjetil();
+				if (ataqueClock.getElapsedTime().asSeconds() > 1.f) {
+					apto = true;
+					ataqueClock.restart();
+				}
+				if (apto) {
+					apto = false;
+						if(faseAtual)
+							faseAtual->criarProjetil(getPos(), olhandoDir, true);
+				}
 			}
 		}
 
@@ -90,7 +83,7 @@ namespace entidades {
 			num_vidas = vidas;
 			pontos = pts;
 			danoClock.restart();
-			barraVida->setSize(Vector2f(40.f * (num_vidas / 15.f), 2.f));
+			barraVida.setSize(Vector2f(30.f * (num_vidas / 15.f), 2.f));
 		}
 
 		void Mago::tomarDano(int dano, bool bond) {
@@ -102,17 +95,7 @@ namespace entidades {
 				if (vidas < 0) vidas = 0;
 				setVidas(vidas);
 				danoClock.restart();
-				barraVida->setSize(Vector2f(40.f * (num_vidas / 15.f), 2.f));
-			}
-		}
-
-		void Mago::posicaoBarra() {
-			Vector2f barraPos = getPos();
-			barraPos.y -=10.f;
-			barraPos.x -= 11.f;
-			if (barraVida && barraFundo) {
-				barraFundo->setPosition(barraPos);
-				barraVida->setPosition(barraPos);
+				barraVida.setSize(Vector2f(30.f * (num_vidas / 15.f), 2.f));
 			}
 		}
 
@@ -127,25 +110,16 @@ namespace entidades {
 			naTeia = estado;
 		}
 
-		void Mago::criarProjetil() {
-			if (apto && GC && listaEntidades) {
-				apto = false;
-				if (olhandoDir) {
-					Projetil* p = new Projetil(Vector2f(pos.x + 20.f, pos.y + 10.f), olhandoDir, true);
-					GC->incluirProjetil(p);
-					listaEntidades->incluir(p);
-				}
-				else {
-					Projetil* p = new Projetil(Vector2f(pos.x - 20.f, pos.y + 10.f), olhandoDir, true);
-					GC->incluirProjetil(p);
-					listaEntidades->incluir(p);
-				}
-			}
+		void Mago::setConcluiuFase(bool c) {
+			concluiuFase = c;
+		}	
 
-			if (ataqueClock.getElapsedTime().asSeconds() > 1.f) {
-				apto = true;
-				ataqueClock.restart();
-			}
+		void Mago::setFaseAtual(fases::Fase* f) {
+			faseAtual = f;
 		}
+
+		bool Mago::getConcluiuFase() const {
+			return concluiuFase;
+		}	
 	} 
 }

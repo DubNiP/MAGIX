@@ -158,7 +158,7 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 
 void GerenciadorColisoes::tratarColisoesJogsProjeteis() {
 	if (pJog1) {
-		set<Projetil*>::iterator it = LPs.begin();
+		set<entidades::Projetil*>::iterator it = LPs.begin();
 		while (it != LPs.end()) {
 			if (verificarColisao(pJog1, *it) && !(*it)->getBondade()) {
 				pJog1->tomarDano((*it)->getDano(), (*it)->getBondade());
@@ -249,7 +249,7 @@ void GerenciadorColisoes::tratarColisoesProjeteisObstacs() {
 }
 
 void GerenciadorColisoes::tratarColisoesProjeteisInimgs() {
-	set<Projetil*>::iterator itP = LPs.begin();
+	set<entidades::Projetil*>::iterator itP = LPs.begin();
 	while (itP != LPs.end()) {
 		bool colidiu = false;
 		vector<entidades::personagens::Inimigo*>::iterator itIni = LIs.begin();
@@ -309,7 +309,7 @@ void GerenciadorColisoes::incluirBloco(entidades::obstaculos::Bloco* pBloco) {
 	}
 }
 
-void GerenciadorColisoes::incluirProjetil(Projetil* pProjetil)
+void GerenciadorColisoes::incluirProjetil(entidades::Projetil* pProjetil)
 {
 	if (pProjetil) {
 		LPs.insert(pProjetil);
@@ -397,10 +397,10 @@ void GerenciadorColisoes::limiteDeTelaMago(float X, float Y) {
 
 void GerenciadorColisoes::limiteDeTelaProjeteis(float X, float Y) {
 
-	set<Projetil*>::iterator it = LPs.begin();
+	set<entidades::Projetil*>::iterator it = LPs.begin();
 
 	while (it != LPs.end()) {
-		Projetil* projetil = *it;
+		entidades::Projetil* projetil = *it;
 
 		if (projetil) {
 			Vector2f posProjetil = projetil->getPos();

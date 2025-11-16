@@ -45,9 +45,11 @@ void FasePrimeira::criarGolems() {
     v.push_back(Vector2f(100.f, 430.f));
     v.push_back(Vector2f(140.f, 200.f));
     v.push_back(Vector2f(1150.f, 430.f));
-    int i = rand() % 2 + 3;
+    uniform_int_distribution<int> dist2(0, 1);
+    int i = dist2(rng) + 3;
     while (i--) {
-        int j = rand() % v.size();
+        uniform_int_distribution<int> dist2(0, 50);
+        int j = dist2(rng) % v.size();
         criaEntidade(new entidades::personagens::Golem(v[j], jog, Vector2f(1.f, 30.f)));
         v[j] = v.back();
         v.pop_back();
@@ -62,9 +64,12 @@ void FasePrimeira::criarTeias() {
     v.push_back(Vector2f(650.f, 450.f));
     v.push_back(Vector2f(1000.f, 450.f));
     v.push_back(Vector2f(680.f, 230.f));
-    int i = rand() % 3 + 3;
+    uniform_int_distribution<int> dist2(0, 2);
+    int i = dist2(rng) + 3;
+ 
     while (i--) {
-        int j = rand() % v.size();
+        uniform_int_distribution<int> dist2(0, 50);
+        int j = dist2(rng) % v.size();
         criaEntidade(new entidades::obstaculos::Teia(v[j], Vector2f(60.f, 50.f)));
         v[j] = v.back();
         v.pop_back();

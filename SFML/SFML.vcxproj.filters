@@ -90,15 +90,6 @@
     <ClCompile Include="Projetil.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="MagoNegro.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Golem.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Sapo.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="Bloco.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
@@ -110,6 +101,15 @@
     </ClCompile>
     <ClCompile Include="Gerenciador_Eventos.cpp">
       <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="MagoNegro.cpp">
+      <Filter>Personagens</Filter>
+    </ClCompile>
+    <ClCompile Include="Sapo.cpp">
+      <Filter>Personagens</Filter>
+    </ClCompile>
+    <ClCompile Include="Golem.cpp">
+      <Filter>Personagens</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -170,15 +170,6 @@
     <ClInclude Include="Projetil.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="MagoNegro.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Golem.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Sapo.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Bloco.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
@@ -190,6 +181,15 @@
     </ClInclude>
     <ClInclude Include="Gerenciador_Eventos.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Sapo.hpp">
+      <Filter>Personagens</Filter>
+    </ClInclude>
+    <ClInclude Include="Golem.hpp">
+      <Filter>Personagens</Filter>
+    </ClInclude>
+    <ClInclude Include="MagoNegro.hpp">
+      <Filter>Personagens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

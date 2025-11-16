@@ -1,4 +1,5 @@
 #include "Fase.hpp"
+#include <random>
 
 using namespace fases;
 
@@ -7,7 +8,6 @@ Fase::Fase(entidades::personagens::Mago* pJog):
     lista_ents(),
     GC(),
     jog(pJog),
-	faseUmConcluida(false),
     textFundo(NULL),
     spriteFundo(NULL)
 {
@@ -38,9 +38,12 @@ void Fase::criarSapos() {
     v.push_back(Vector2f(400.f, 250.f));
     v.push_back(Vector2f(200.f, 250.f));
     v.push_back(Vector2f(1190.f, 180.f));
-    int i = rand() % 2 + 3;
+    
+    uniform_int_distribution<int> dist2(0, 1);
+    int i = dist2(rng) + 3;
     while (i--) {
-        int j = rand() % v.size();
+        uniform_int_distribution<int> dist2(0, 50);
+        int j = dist2(rng) % v.size();
         criaEntidade(new entidades::personagens::Sapo(v[j], jog, Vector2f(20.f, 70.f)));
         v[j] = v.back();
         v.pop_back();
@@ -57,6 +60,7 @@ void Fase::criarPlataformas() {
 }
 
 void Fase::criarCenario() {
+ 
     GC.limparObstaculos();
     GC.limparInimigos();
     GC.limparProjetis();
@@ -66,12 +70,10 @@ void Fase::criarCenario() {
     carregarFundo();
 
     if (jog) {
-        jog->reseta(Vector2f(600.f, 1100.f), 15, 0);
-        if (!(GC.getFaseConcluida())) jog->reseta(Vector2f(160.f, 630.f), 15, 0);
+        jog->getConcluiuFase() ? jog->reseta(Vector2f(160.f, 1110.f), 15, 0) : jog->reseta(Vector2f(160.f, 630.f), 15, 0);
        
+		jog->setFaseAtual(this);
         lista_ents.incluir(jog);
-		jog->incluirListaEntidades(&lista_ents);
-		jog->incluirGerenciadorColisoes(&GC);
         Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(jog);
     }
     criarObstaculo();
@@ -90,7 +92,7 @@ Entidade* Fase::criaEntidade(Entidade* e) {
         else if (auto* ini = dynamic_cast<entidades::personagens::Inimigo*>(e)) {
             GC.incluirInimigo(ini);
         }
-        else if (auto* prj = dynamic_cast<Projetil*>(e)) {
+        else if (auto* prj = dynamic_cast<entidades::Projetil*>(e)) {
             GC.incluirProjetil(prj);
         }
         else if (auto* bloco = dynamic_cast<entidades::obstaculos::Bloco*>(e)) { 
@@ -132,10 +134,10 @@ void Fase::executar() {
 
             pGG->desenhaTodos(&lista_ents,spriteFundo);     //trocar no futuro?
         }
-        faseUmConcluida = GC.getFaseConcluida();
+        jog->setConcluiuFase(GC.getFaseConcluida());
     }
 }
 
-bool Fase::getFaseConcluida() const {
-    return faseUmConcluida;
+void Fase::criarProjetil(Vector2f pos, bool dir, bool bond) {
+    criaEntidade(new entidades::Projetil(pos, dir, bond));
 }

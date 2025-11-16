@@ -1,8 +1,6 @@
 ﻿#include "MagoNegro.hpp"
-#include "ListaEntidades.hpp"
-#include <cmath>
 #include "Projetil.hpp"
-#include "Gerenciador_Colisoes.hpp"
+#include "Fase.hpp"
 
 
 namespace entidades {
@@ -14,30 +12,23 @@ namespace entidades {
 			ataqueClock(),
 			apto(true),
 			moverAleatorio(0),
-			velocidadeInicialX(vel.x)
+			velocidadeInicialX(vel.x),
+			faseAtual(NULL)
 		{
 			carregarSprite();
-			moverAleatorio = rand() % 2;
-			if (barraVida && barraFundo) {
-				barraFundo->setSize(Vector2f(50.f, 2.f));
-				barraVida->setSize(Vector2f(50.f, 2.f));
-				barraFundo->setPosition(Vector2f(pos.x + 10.f, pos.y - 10.f));
-				barraVida->setPosition(Vector2f(pos.x + 10.f, pos.y - 10.f));
-			}
+			uniform_int_distribution<int> dist2(0, 3);
+			moverAleatorio = dist2(rng);
+			
 		}
 
 		MagoNegro::~MagoNegro()
 		{
+			faseAtual = NULL;
 		}
 
-		void MagoNegro::incluirListaEntidades(listas::ListaEntidades* pLEnt) {
-			listaEntidades = pLEnt;
+		void MagoNegro::setFaseAtual(fases::Fase* f) {
+			faseAtual = f;
 		}
-
-		void MagoNegro::incluirGerenciadorColisoes(Gerenciadores::GerenciadorColisoes* pGC) {
-			GC = pGC;
-		}
-
 
 		void MagoNegro::danificar() {
 			if (pJog) {
@@ -51,7 +42,7 @@ namespace entidades {
 					int vidas = getVidas() - dano;
 					if (vidas < 0) vidas = 0;
 					setVidas(vidas);
-					barraVida->setSize(Vector2f(40.f * (num_vidas / 10.f), 3.f));
+					barraVida.setSize(Vector2f(40.f * (num_vidas / 10.f), 3.f));
 				}
 			}
 		}
@@ -66,7 +57,15 @@ namespace entidades {
 
 
 			if(fabs(posJog.x - posInim.x) < tamanho) {
-				criarProjetil();
+				if (ataqueClock.getElapsedTime().asSeconds() > 1.f) {
+					apto = true;
+					ataqueClock.restart();
+				}
+				if (apto) {
+					apto = false;
+						if(faseAtual)
+							faseAtual->criarProjetil(getPos(), posJog.x > posInim.x, false);
+				}
 			}
 
 			if (relogioDePulo.getElapsedTime().asSeconds() >= 3.0f && emTerra) {
@@ -135,7 +134,8 @@ namespace entidades {
 
 			float dt = relogio.getElapsedTime().asSeconds();
 			if (dt >= 1.0f) {
-				moverAleatorio = rand() % 4;
+				uniform_int_distribution<int> dist4(0, 3);
+				moverAleatorio = dist4(rng);
 				relogio.restart();
 			}
 		}
@@ -147,16 +147,6 @@ namespace entidades {
 			posicaoBarra();
 		}
 
-		void MagoNegro::posicaoBarra() {
-			Vector2f barraPos = getPos();
-			barraPos.y -= 10.f;
-			barraPos.x += 10.f;
-			if (barraVida && barraFundo) {
-				barraFundo->setPosition(barraPos);
-				barraVida->setPosition(barraPos);
-			}
-		}
-
 		void MagoNegro::carregarSprite() {
 			if (!carregarTexturaSprite("Textures/magoNegro.png", false, false)) {
 				throw "Textura não carregada";
@@ -164,25 +154,5 @@ namespace entidades {
 			setPos(pos);
 		}
 
-		void MagoNegro::criarProjetil() {
-			if (apto && GC && listaEntidades) {
-				apto = false;
-				if (pJog->getPos().x > getPos().x) {
-					Projetil* p = new Projetil(Vector2f(pos.x + 20.f, pos.y + 10.f), true, false);
-					GC->incluirProjetil(p);
-					listaEntidades->incluir(p);
-				}
-				else {
-					Projetil* p = new Projetil(Vector2f(pos.x - 20.f, pos.y + 10.f), false, false);
-					GC->incluirProjetil(p);
-					listaEntidades->incluir(p);
-				}
-			}
-
-			if (ataqueClock.getElapsedTime().asSeconds() > 1.f) {
-				apto = true;
-				ataqueClock.restart();
-			}
-		}
 	}
 }

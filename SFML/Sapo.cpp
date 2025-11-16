@@ -12,12 +12,7 @@ namespace entidades {
 			velocidadeInicial.y = -vel.y;
 			velocidadeInicial.x = vel.x;
 			relogioDePulo.restart();
-			if (barraVida && barraFundo) {
-				barraFundo->setSize(Vector2f(30.f, 2.f));
-				barraVida->setSize(Vector2f(30.f, 2.f));
-				barraFundo->setPosition(Vector2f(pos.x, pos.y - 10.f));
-				barraVida->setPosition(Vector2f(pos.x, pos.y - 10.f));
-			}
+			
 			carregarSprite();
 		}
 
@@ -37,7 +32,7 @@ namespace entidades {
 					int vidas = getVidas() - dano;
 					if (vidas < 0) vidas = 0;
 					setVidas(vidas);
-					barraVida->setSize(Vector2f(40.f * (num_vidas / 10.f), 3.f));
+					barraVida.setSize(Vector2f(30.f * (num_vidas / 10.f), 3.f));
 				}
 			}
 		}
@@ -78,7 +73,8 @@ namespace entidades {
 
 			float dt = relogio.getElapsedTime().asSeconds();
 			if (dt >= 1.0f) {
-				moverAleatorio = rand() % 4; 
+				uniform_int_distribution<int> dist2(0, 3);
+				moverAleatorio = dist2(rng);
 				relogio.restart();
 			}
 
@@ -128,15 +124,6 @@ namespace entidades {
 			gravidade();
 			acelerar();
 			posicaoBarra();
-		}
-
-		void Sapo::posicaoBarra() {
-			Vector2f barraPos = getPos();
-			barraPos.y -= 10.f;
-			if (barraVida && barraFundo) {
-				barraFundo->setPosition(barraPos);
-				barraVida->setPosition(barraPos);
-			}
 		}
 
 		void Sapo::carregarSprite() {                         

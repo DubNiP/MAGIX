@@ -15,6 +15,7 @@ FaseSegunda::FaseSegunda(entidades::personagens::Mago* pJog) :
 {
 }
 
+
 FaseSegunda::~FaseSegunda() {
 }
 
@@ -26,8 +27,11 @@ void FaseSegunda::criarInimigos() {
     posicoesInimigos.push_back(Vector2f(660.f, 1030.f));
     posicoesInimigos.push_back(Vector2f(660.f, 800.f));
 
-    for (int i = 0; i < 3; i++) {
-        criaEntidade(new entidades::personagens::Sapo(posicoesInimigos[rand()%3], jog, Vector2f(20.f, 70.f)));
+    std::uniform_int_distribution<int> dist2(0, 2);
+
+    for (int i = 0; i < 3; ++i) {
+        int idx = dist2(rng);
+        criaEntidade(new entidades::personagens::Sapo(posicoesInimigos[idx], jog, Vector2f(20.f, 70.f)));
     }
    
 }
@@ -53,8 +57,7 @@ void FaseSegunda::criarObstaculo() {
 void FaseSegunda::criarChefoes() {
     entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(Vector2f(900.f, 200.f), jog, Vector2f(3.f, 50.f));
     criaEntidade(pM);
-    pM->incluirGerenciadorColisoes(&GC);
-    pM->incluirListaEntidades(&lista_ents);
+	pM->setFaseAtual(this);
 }
 
 

@@ -23,8 +23,6 @@ namespace fases {
 		listas::ListaEntidades lista_ents;
 		Gerenciadores::GerenciadorColisoes GC;
 		entidades::personagens::Mago* jog;
-
-		bool faseUmConcluida;
 		Texture* textFundo;
 		Sprite* spriteFundo;
 
@@ -39,8 +37,8 @@ namespace fases {
 	public:
 		Fase(entidades::personagens::Mago* pJog);
 		~Fase();
+		void criarProjetil(Vector2f pos, bool dir, bool bond);
 		void executar();         //nao foi implementado executar nas derivadas de fase. Aqui existe uma dúvida em relaçao a esse executar
-		bool getFaseConcluida() const;
 	};
 
 }
