@@ -31,7 +31,6 @@ namespace Gerenciador {
 
     void GerenciadorEvento::setMenu(Menu* pm) {
         pMenu = pm;
-        // reset estados para não herdar teclas já seguradas
         prevUp = prevDown = prevEnter = false;
     }
 
@@ -70,4 +69,39 @@ namespace Gerenciador {
         prevEnter = enter;
     }
 
+    void GerenciadorEvento::soltaTeclas() {
+        while (true) {
+            bool algumaTeclaApertada =
+                Keyboard::isKeyPressed(Keyboard::Up) ||
+                Keyboard::isKeyPressed(Keyboard::W) ||
+                Keyboard::isKeyPressed(Keyboard::Down) ||
+                Keyboard::isKeyPressed(Keyboard::S) ||
+                Keyboard::isKeyPressed(Keyboard::Enter) ||
+                Keyboard::isKeyPressed(Keyboard::Space) ||
+                Keyboard::isKeyPressed(Keyboard::Escape);
+
+            if (!algumaTeclaApertada) {
+                break;
+            }
+        }
+        prevUp = prevDown = prevEnter = false;
+    }
+
+
+    bool GerenciadorEvento::verificarEventosJanela(sf::RenderWindow* window) {
+        if (window) {
+            Event event;
+            while (window->pollEvent(event)) {
+                if (event.type == Event::Closed) {
+                    window->close();
+                    return false; 
+                }
+            }
+            return true;
+        }
+    }
 }
+
+
+
+

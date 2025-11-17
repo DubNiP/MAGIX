@@ -9,28 +9,29 @@ using namespace sf;
 
 
 class Menu: public Ente {
-private:
+protected:
 	int pos;
-	bool sair;
-	bool iniciar;
+	int posMin;  
+	int posMax;
+
 
 	Font font;
 	vector<Text> texts;
 
 
-	void set_values();
+	virtual void set_values() = 0;
 	
 
 public:
 	Menu();
 	~Menu();
+
 	void executar();
 	void moverBaixo();
 	void moverCima();
-	void confirmar();
+	virtual void confirmar()= 0;
 	void draw_menu();
-	bool getIniciar() const;
-	bool getSair() const;
 	void reseta();
 
+	const int getPosicao() const;
 };

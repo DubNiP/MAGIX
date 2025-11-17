@@ -81,6 +81,13 @@ void GerenciadorGrafico::atualizarCamera(const Vector2f posMago) {
     camera.setCenter(centro);
 }
 
+void GerenciadorGrafico::resetarCamera() {
+    camera = View(FloatRect(0.f, 0.f, 1280.f, 720.f));
+    if (window) {
+        window->setView(camera);
+    }
+}
+
 void GerenciadorGrafico::setSegundaTela(bool val) {
     segudundaTela = val;
 }

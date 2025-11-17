@@ -4,8 +4,8 @@
 Menu::Menu() :
 	Ente(),
 	pos(1),
-	sair(false),
-	iniciar(false),
+	posMin(1),
+	posMax(1),
 	font(),
 	texts()
 {
@@ -25,66 +25,30 @@ Menu::Menu() :
 			}
 		}
 	}
-
-	set_values();
 }
 
 Menu::~Menu() {
 }
-
-void Menu::set_values() {
-
-	const char* options[] = {"Nome_Jogo", "Jogar","Ranking","Sair"};                                //Classe de objetos gráficos, vale a pena olhar no futuro..
-	const Vector2f posi[] = {{490.f,110.f},{620.f,380.f},{600.f,450.f},{630.f,520.f}};
-	const unsigned int tam[] = {80u,50u,50u,50u};
-
-	texts.clear();
-	texts.reserve(4);
-
-
-	for (size_t i = 0; i < 4; i++) {
-		Text t;
-		t.setFont(font);
-		t.setString(options[i]);
-		t.setCharacterSize(tam[i]);
-		t.setPosition(posi[i]);
-		t.setOutlineColor(Color::Black);
-		t.setOutlineThickness(0.f);
-		texts.push_back(t);
-	}
-}
-
 
 void Menu::executar() {          //WTFFFFFFFFF
 
 }
 
 void Menu::moverBaixo() {
-    if (pos < 3) {
-        texts[pos].setOutlineThickness(0);
+    if (pos < posMax) {
+        texts[pos].setOutlineThickness(0.f);
         pos++;
-        texts[pos].setOutlineThickness(6);
+        texts[pos].setOutlineThickness(6.f);
     }
 }
 
 void Menu::moverCima() {
-	if (pos > 1) {
-		texts[pos].setOutlineThickness(0);
+	if (pos > posMin) {
+		texts[pos].setOutlineThickness(0.f);
 		pos--;
-		texts[pos].setOutlineThickness(6);;
+		texts[pos].setOutlineThickness(6.f);;
 	}
 }
-
-void Menu::confirmar() {
-	if (pos == 1) {
-		iniciar = true;
-	}
-
-	if (pos == 3) {
-		sair = true;
-	}
-}
-
 
 void Menu::draw_menu() {
 	if (pGG){
@@ -99,16 +63,16 @@ void Menu::draw_menu() {
 	}
 }
 
-bool Menu::getSair() const {
-	return sair;
-}
-
-
-bool Menu::getIniciar() const {
-	return iniciar;
-}
-
 void Menu::reseta() {
-	iniciar = false;
-	sair = false;
+	pos = posMin;
+	for (auto& t : texts) {
+		t.setOutlineThickness(0.f);
+	}
+	if (pos < (int)texts.size()) {
+		texts[pos].setOutlineThickness(6.f);
+	}
+}
+
+const int Menu::getPosicao() const {
+	return pos;
 }

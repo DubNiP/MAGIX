@@ -28,6 +28,9 @@ namespace Gerenciador {
 
         void executar();
         void executarMenu();
+        void soltaTeclas();
+        bool verificarEventosJanela(sf::RenderWindow* window);
+
 
     };
 

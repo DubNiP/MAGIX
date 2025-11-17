@@ -23,6 +23,7 @@ namespace Gerenciadores {
         void displayWindow();
         void desenhaTodos(listas::ListaEntidades* LE, Sprite* sp = NULL);       //coloco essa relação?
         void atualizarCamera(const Vector2f posMago);
+        void resetarCamera();
 		void setSegundaTela(bool val);
         RenderWindow* getWindow() const;
         View getCamera() const;

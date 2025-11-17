@@ -141,6 +141,7 @@ namespace entidades {
 		}
 
 		void MagoNegro::executar() {
+			iniciarClocks();
 			mover();
 			attPos();
 			gravidade();

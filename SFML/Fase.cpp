@@ -10,7 +10,9 @@ Fase::Fase(entidades::personagens::Mago* pJog):
     jog(pJog),
     textFundo(NULL),
     spriteFundo(NULL),
-    faseIniciada(false)
+    faseIniciada(false),
+    pause(false),
+    cenarioCriado(false)
 {
     GC.setJog(pJog);
 }
@@ -71,8 +73,9 @@ void Fase::criarCenario() {
     carregarFundo();
 
     if (jog) {
-        jog->getConcluiuFase() ? jog->reseta(Vector2f(160.f, 1110.f), 15, 0) : jog->reseta(Vector2f(160.f, 630.f), 15, 0);
-       
+        Vector2f posInicial = getPosicaoInicialJogador();
+        jog->reseta(posInicial, 15, 0);
+
 		jog->setFaseAtual(this);
         lista_ents.incluir(jog);
         Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(jog);
@@ -80,6 +83,10 @@ void Fase::criarCenario() {
     criarObstaculo();
     criarInimigos();
     criarBlocos();
+}
+
+Vector2f Fase::getPosicaoInicialJogador() const {
+    return Vector2f(160.f, 630.f);
 }
 
 Entidade* Fase::criaEntidade(Entidade* e) {
@@ -105,13 +112,24 @@ Entidade* Fase::criaEntidade(Entidade* e) {
     return NULL;
 }
 
+
+void Fase::inicializar() {
+    if (!cenarioCriado) {
+        criarCenario();
+        cenarioCriado = true;
+    }
+}
+
 void Fase::executar() {
-    criarCenario();
+    inicializar();
+    lista_ents.retomarTodos();
+    pause = false;
     if (pGG) {
         GC.setWindow(pGG->getWindow());
         RenderWindow* window = pGG->getWindow();
         Event event;
         faseIniciada = true;
+        bool teclaEscAnterior = false;
         while (window && window->isOpen() && jog && jog->getVidas() > 0 && !GC.getFaseConcluida()) {
             pGG->atualizarCamera(jog->getPos());
 		    View cam = pGG->getCamera();
@@ -123,21 +141,28 @@ void Fase::executar() {
                     window->close();
                     return;
                 }
-
-                if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
-                    return;
-                }
             }
+            bool teclaEsc = Keyboard::isKeyPressed(Keyboard::Escape);
+            if (teclaEsc && !teclaEscAnterior) {
+                pause = true;
+                return; 
+            }
+            teclaEscAnterior = teclaEsc;
 
             Gerenciador::GerenciadorEvento::getGerenciadorEvento()->executar();
             lista_ents.executarTodos();
 
             GC.executar();
 
-            pGG->desenhaTodos(&lista_ents,spriteFundo);     //trocar no futuro?
+            pGG->desenhaTodos(&lista_ents,spriteFundo);   
         }
         jog->setConcluiuFase(GC.getFaseConcluida());
     }
+}
+
+void Fase::resetar() {
+    cenarioCriado = false;
+    inicializar();
 }
 
 void Fase::criarProjetil(Vector2f pos, bool dir, bool bond) {
@@ -146,4 +171,8 @@ void Fase::criarProjetil(Vector2f pos, bool dir, bool bond) {
 
 const bool Fase::getFaseIniciada() const {
     return faseIniciada;
+}
+
+const bool Fase::getPause() const {
+    return pause;
 }

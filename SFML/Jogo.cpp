@@ -4,13 +4,11 @@
 Jogo::Jogo() :
     pJog1(Vector2f(100.f,630.f), Vector2f(3.f, 100.f)),
     GG(Gerenciadores::GerenciadorGrafico::Instance()),
-    menu(),
-    event(),
     fase1(&pJog1),
     fase2(&pJog1)
 {
-    Ente::setGG(&GG);         //pode mudar
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(&menu);
+    Ente::setGG(&GG);        
+    estadoAtual = new MenuPrincipalState(this);
 }
 
 Jogo::~Jogo() {
@@ -18,54 +16,37 @@ Jogo::~Jogo() {
 
 void Jogo::executar() {
     RenderWindow* window = GG.getWindow();
+    View cam = View(FloatRect(0.f, 0.f, 1280.f, 720.f));
+    window->setView(cam);
   
     while (window && window->isOpen()) {
-		View cam = View(FloatRect(0.f, 0.f, 1280.f, 720.f));
-		window->setView(cam);
-        executarMenu(menu);
-
-        if (menu.getIniciar() && window->isOpen()) {
-            menu.reseta();
-            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(NULL);
-            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(&pJog1);
-            executarJogo();
-            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(NULL);
-            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMenu(&menu);
-        }
-
-
-        if (menu.getSair()) {
-            window->close();
+        if (estadoAtual) {
+            estadoAtual->Entrar();
+            estadoAtual->handle();
+            estadoAtual->Sair();
         }
     }
 }
 
-void Jogo::executarMenu(Menu& menu) {
-    RenderWindow* window = GG.getWindow();
-
-    while (window && window->isOpen() && !menu.getIniciar() && !menu.getSair()) {
-        while (window->pollEvent(event)) {
-            if (event.type == Event::Closed) { 
-                window->close(); return; 
-            }
-            if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape) {
-                menu.reseta();
-            }
-        }
-        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->executarMenu();
-        menu.draw_menu();
+void Jogo::mudarEstado(State * novoEstado) {
+    if (estadoAtual) {
+        delete estadoAtual;
     }
+    estadoAtual = novoEstado;
 }
 
-void Jogo::executarJogo() {
+entidades::personagens::Mago* Jogo::getMago() {
+    return &pJog1;
+}
 
-    fase1.executar();
+fases::FasePrimeira* Jogo::getFase1() {
+    return &fase1;
+}
 
-   
-   if (pJog1.getConcluiuFase()) {
-        GG.setSegundaTela(true);
-        fase2.executar();
-   }
-   
-    
+fases::FaseSegunda* Jogo::getFase2() {
+    return &fase2;
+}
+
+Gerenciadores::GerenciadorGrafico& Jogo::getGG() {
+    return GG;
 }

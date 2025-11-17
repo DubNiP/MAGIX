@@ -114,6 +114,7 @@ namespace entidades {
 		}
 
 		void Golem::executar() {
+			iniciarClocks();
 			mover();
 			attPos();
 			gravidade();

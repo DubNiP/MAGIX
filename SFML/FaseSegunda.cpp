@@ -27,9 +27,9 @@ void FaseSegunda::criarInimigos() {
     posicoesInimigos.push_back(Vector2f(660.f, 1030.f));
     posicoesInimigos.push_back(Vector2f(660.f, 800.f));
 
-    std::uniform_int_distribution<int> dist2(0, 2);
+    uniform_int_distribution<int> dist2(0, 2);
 
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; i++) {
         int idx = dist2(rng);
         criaEntidade(new entidades::personagens::Sapo(posicoesInimigos[idx], jog, Vector2f(20.f, 70.f)));
     }
@@ -102,4 +102,8 @@ void FaseSegunda::carregarFundo() {
     float escY = 1280.f / tam.y;
 
     spriteFundo->setScale(escX, escY);
+}
+
+Vector2f FaseSegunda::getPosicaoInicialJogador() const {
+    return Vector2f(150.f, 1200.f);
 }

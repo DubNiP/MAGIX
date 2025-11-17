@@ -108,9 +108,19 @@ namespace listas {
         }
     }
 
+    void ListaEntidades::retomarTodos() {
+        for (int i = 0; i < LEs.getSize(); i++) {
+            Entidade* e = LEs.getItem(i);
+            if (e) {
+                e->retomar();
+            }
+        }
+    }
+
+
     Entidade* ListaEntidades::getItem(int pos) const {
         if (pos < 0 || pos >= const_cast<Lista<Entidade>&>(LEs).getSize()) {
-            return nullptr;
+            return NULL;
         }
 
         return LEs.getItem(pos);

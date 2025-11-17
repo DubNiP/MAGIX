@@ -133,7 +133,9 @@
   <ItemGroup>
     <ClCompile Include="Alavanca.cpp" />
     <ClCompile Include="Bloco.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="Gerenciador_Eventos.cpp" />
+    <ClCompile Include="JogandoState.cpp" />
     <ClCompile Include="MagoNegro.cpp" />
     <ClCompile Include="Ente.cpp" />
     <ClCompile Include="Entidade.cpp">
@@ -145,6 +147,12 @@
     <ClCompile Include="Gerenciador_Grafico.cpp" />
     <ClCompile Include="Gerenciador_Colisoes.cpp" />
     <ClCompile Include="Inimigo.cpp" />
+    <ClCompile Include="MenuGameOver.cpp" />
+    <ClCompile Include="MenuPause.cpp" />
+    <ClCompile Include="MenuPrincipal.cpp" />
+    <ClCompile Include="MenuPrincipalState.cpp" />
+    <ClCompile Include="MenuSelecaoFase.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Saida.cpp" />
     <ClCompile Include="Sapo.cpp" />
     <ClCompile Include="Golem.cpp" />
@@ -155,6 +163,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Obstaculo.cpp" />
     <ClCompile Include="Espinho.cpp" />
+    <ClCompile Include="SelecaoFaseState.cpp" />
     <ClCompile Include="Teia.cpp" />
     <ClCompile Include="Personagem.cpp" />
     <ClCompile Include="Plataforma.cpp" />
@@ -163,7 +172,9 @@
   <ItemGroup>
     <ClInclude Include="Alavanca.hpp" />
     <ClInclude Include="Bloco.hpp" />
+    <ClInclude Include="GameOverState.hpp" />
     <ClInclude Include="Gerenciador_Eventos.hpp" />
+    <ClInclude Include="JogandoState.hpp" />
     <ClInclude Include="MagoNegro.hpp" />
     <ClInclude Include="Ente.hpp" />
     <ClInclude Include="Entidade.hpp" />
@@ -173,6 +184,12 @@
     <ClInclude Include="Gerenciador_Grafico.hpp" />
     <ClInclude Include="Gerenciador_Colisoes.hpp" />
     <ClInclude Include="Inimigo.hpp" />
+    <ClInclude Include="MenuGameOver.hpp" />
+    <ClInclude Include="MenuPause.hpp" />
+    <ClInclude Include="MenuPrincipal.hpp" />
+    <ClInclude Include="MenuPrincipalState.hpp" />
+    <ClInclude Include="MenuSelecaoFase.hpp" />
+    <ClInclude Include="PauseState.hpp" />
     <ClInclude Include="Saida.hpp" />
     <ClInclude Include="Sapo.hpp" />
     <ClInclude Include="Golem.hpp" />
@@ -183,6 +200,8 @@
     <ClInclude Include="Menu.hpp" />
     <ClInclude Include="Obstaculo.hpp" />
     <ClInclude Include="Espinho.hpp" />
+    <ClInclude Include="SelecaoFaseState.hpp" />
+    <ClInclude Include="State.hpp" />
     <ClInclude Include="Teia.hpp" />
     <ClInclude Include="Personagem.hpp" />
     <ClInclude Include="Plataforma.hpp" />

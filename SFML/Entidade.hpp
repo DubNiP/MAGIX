@@ -55,4 +55,5 @@ public:
 	void setOlhandoDir(bool dir);
 	void atualizaDirSprite();
 	void iniciarClocks();
+	void retomar();
 };

@@ -153,5 +153,12 @@ void Entidade::iniciarClocks() {
 	}
 }
 
+void Entidade::retomar() {
+	if (clocksIni) {
+		tempoMovimento.restart();
+		tempoAceleracao.restart();
+	}
+}
+
 
 //Entidade::void salvarDataBuffer() 

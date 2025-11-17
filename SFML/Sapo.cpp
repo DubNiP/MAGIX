@@ -119,6 +119,7 @@ namespace entidades {
 		}
 
 		void Sapo::executar() {
+			iniciarClocks();
 			mover();
 			attPos();
 			gravidade();

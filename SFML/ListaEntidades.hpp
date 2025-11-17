@@ -22,6 +22,7 @@ namespace listas {
 
         void executarTodos();
         void desenharTodos();
+        void retomarTodos();
         void removerProjetis();
         void removerMorto();
 

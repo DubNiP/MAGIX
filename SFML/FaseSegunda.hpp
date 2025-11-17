@@ -13,6 +13,8 @@ namespace fases {
         void criarChefoes();
         void criarBlocos();
         void carregarFundo();
+        Vector2f getPosicaoInicialJogador() const;
+
 
     public:
         FaseSegunda(entidades::personagens::Mago* pJog);
