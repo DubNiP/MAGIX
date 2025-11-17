@@ -60,7 +60,6 @@ public:
     Lista() : pPrimeiro(NULL), pUltimo(NULL), size(0) {}
     ~Lista() { limpar();  }
 
-    int getSize() { return size; }
     bool vazia() const { return pPrimeiro == NULL; }
     Elemento<TL>* getPrimeiro() const { return pPrimeiro; }
     Elemento<TL>* getUltimo() const { return pUltimo; }
@@ -117,19 +116,6 @@ public:
 
         delete temp;
         size--;
-    }
-    TL* getItem(int posicao) const {
-        if (posicao < 0 || posicao >= size || !pPrimeiro) {
-            return NULL;
-        }
-
-        Elemento<TL>* temp = pPrimeiro;
-
-        for (int i = 0; i < posicao; i++) {
-            temp = temp->getProx();
-        }
-
-        return temp->getInfo();
     }
     void limpar()
     {

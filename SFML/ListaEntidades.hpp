@@ -28,7 +28,6 @@ namespace listas {
         void removerProjetis();
         void removerMorto();
 
-        Entidade* getItem(int pos) const;
         Iterator begin() { return LEs.begin(); }
         Iterator end() { return LEs.end(); }
     };

@@ -2,6 +2,10 @@
 
 using namespace std;
 
+
+//OBS: TEM ALGUNS METODOS QUE ENVOLVEM EXCLUSÃO QUE TEM UMA COMPLEXIDADE ALTA ACREDITO EU
+
+
 namespace listas {
 
     ListaEntidades::ListaEntidades() : LEs()
@@ -128,14 +132,5 @@ namespace listas {
             }
             ++it;
         }
-    }
-
-
-    Entidade* ListaEntidades::getItem(int pos) const {
-        if (pos < 0 || pos >= const_cast<Lista<Entidade>&>(LEs).getSize()) {
-            return NULL;
-        }
-
-        return LEs.getItem(pos);
     }
 }
