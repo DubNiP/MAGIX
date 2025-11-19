@@ -176,3 +176,7 @@ const bool Fase::getFaseIniciada() const {
 const bool Fase::getPause() const {
     return pause;
 }
+
+listas::ListaEntidades* Fase::getListaEntidades() {
+    return &lista_ents;
+}

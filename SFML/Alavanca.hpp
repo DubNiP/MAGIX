@@ -14,7 +14,11 @@ namespace entidades {
 		public:
 			Alavanca(Vector2f pos, Vector2f tam, Plataforma* pPlat = NULL);
 			~Alavanca();
+			
 			void executar();
+			void salvar();
+			void salvarDataBuffer();
+
 			void obstaculizar(entidades::personagens::Mago* p);
 			void carregarSprite();
 		};

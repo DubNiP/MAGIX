@@ -8,6 +8,7 @@ namespace entidades {
             larguraB(tam.x),
             alturaB(tam.y)
         {
+            id = 9;
             carregarSprite();
         }
 
@@ -17,6 +18,32 @@ namespace entidades {
         void Bloco::executar() {
             attPos();
         }
+
+        void Bloco::salvar() {
+			tempBuffer.str("");
+			tempBuffer.clear();
+
+            salvarDataBuffer();
+
+            buffer.open("Save/save.txt", ios::out | ios::app);
+
+            if (!buffer.is_open()) {
+                cerr << "Arquivo não pode ser aberto" << endl;
+                fflush(stdin);
+                return;
+            }
+
+			buffer << tempBuffer.str();
+
+			buffer.close();
+		}
+
+        void Bloco::salvarDataBuffer() {
+			Entidade::salvarDataBuffer();
+
+            tempBuffer << larguraB << " "
+                << alturaB << "\n";
+		}
 
         void Bloco::carregarSprite() {
             if (!carregarTexturaSprite("Textures/DungeonTile.png", true, false)) {

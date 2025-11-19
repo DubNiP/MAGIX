@@ -18,7 +18,8 @@ namespace entidades
 		void executar();
 		int getDano();
 		const bool getBondade();
-		//void salvar();
+		void salvar();
+		void salvarDataBuffer();
 		void carregarSprite();
 	};
 }

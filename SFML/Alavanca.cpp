@@ -1,5 +1,5 @@
 #include "Alavanca.hpp"
-
+#include <filesystem>
 
 namespace entidades {
 	namespace obstaculos {
@@ -8,6 +8,7 @@ namespace entidades {
 			p(pPlat),
 			acionada(false)
 		{
+			id = 10;
 			carregarSprite();
 		}
 
@@ -17,6 +18,30 @@ namespace entidades {
 
 		void Alavanca::executar() {
 			attPos();
+		}
+
+		void Alavanca::salvar() {
+			tempBuffer.str("");
+			tempBuffer.clear();
+
+			salvarDataBuffer();
+
+			buffer.open("Save/save", ios::out | ios::app);
+
+			if (!buffer.is_open()) {
+				cout << "Arquivo não pode ser aberto" << endl;
+				fflush(stdin);
+				return;
+			}
+			buffer << tempBuffer.str();
+
+			buffer.close();
+		}
+
+		void Alavanca::salvarDataBuffer() {
+			Obstaculo::salvarDataBuffer();
+
+			tempBuffer << acionada << "\n" << endl;
 		}
 
 		void Alavanca::obstaculizar(entidades::personagens::Mago* pJ) {

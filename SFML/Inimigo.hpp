@@ -24,10 +24,10 @@ namespace entidades {
 		public:
 			Inimigo(Vector2f pos, Mago* jog, Vector2f velocidade = Vector2f(0.f, 0.f), int des = 0);
 			~Inimigo();
-			//void salvarDataBuffer();
+			void salvarDataBuffer();
+			virtual void salvar() = 0;
 			virtual void executar() = 0;
 			virtual void danificar() = 0;
-			//virtual void salva() = 0;
 			virtual void mover() = 0;
 			virtual void carregarSprite() = 0;
 		};

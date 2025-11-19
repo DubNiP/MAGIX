@@ -10,6 +10,7 @@ namespace entidades {
 			Tfechada(),
 			Taberta()
 		{
+			id = 6;
 			setSprite();
 		}
 
@@ -19,6 +20,30 @@ namespace entidades {
 
 		void Saida::executar() {
 			attPos();
+		}
+
+		void Saida::salvar() {
+			tempBuffer.str("");
+			tempBuffer.clear();
+			
+			salvarDataBuffer();
+
+			buffer.open("Save/save.txt", ios::out | ios::app);
+			
+			if (!buffer.is_open()) {
+				cerr << "Arquivo não pode ser aberto" << endl;
+				fflush(stdin);
+				return;
+			}
+			buffer << tempBuffer.str();
+			buffer.close();
+		}
+
+		void Saida::salvarDataBuffer() {
+			Obstaculo::salvarDataBuffer();
+
+			tempBuffer << aberta << " "
+				<< raio << "\n";
 		}
 
 		void Saida::obstaculizar(entidades::personagens::Mago* p) {

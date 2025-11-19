@@ -32,6 +32,8 @@ namespace entidades {
             void pular();
 
             void executar();
+            void salvar();
+            void salvarDataBuffer();
             void carregarSprite();
 
         };

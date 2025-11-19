@@ -19,6 +19,19 @@ namespace entidades {
 		Inimigo::~Inimigo() {
 
 		}
+
+		void Inimigo::salvarDataBuffer() {
+			Personagem::salvarDataBuffer();
+
+			tempBuffer << nivel_maldade << " "
+				<< moverAleatorio << " "
+				<< posInicial.x << " "
+				<< posInicial.y << " "
+				<< destruicao << " "
+				<< relogio.getElapsedTime().asSeconds() << " "
+				<< relogioDePulo.getElapsedTime().asSeconds() << " "
+				<< bondade << " ";
+		}
 	} 
 }
 

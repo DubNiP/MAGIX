@@ -1,4 +1,5 @@
 #include "Entidade.hpp"
+#include "Projetil.hpp" // ajuste o nome do arquivo se necessário
 
 Entidade::Entidade(Vector2f posicao, Vector2f velocidade, bool dir) :
 	Ente(),
@@ -9,7 +10,7 @@ Entidade::Entidade(Vector2f posicao, Vector2f velocidade, bool dir) :
 	aceleracao(0.1f),
 	emAceleracao(false),
 	forcaGravidade(30.f),
-	velocidadeTerminal(30.f),
+	velocidadeTerminal(40.f),
 	olhandoDir(dir),
 	clocksIni(false)
 {
@@ -19,6 +20,28 @@ Entidade::Entidade(Vector2f posicao, Vector2f velocidade, bool dir) :
 Entidade::~Entidade() {
 
 }
+
+void Entidade::salvarDataBuffer() {
+
+	tempBuffer << id << " "
+		<< pos.x << " "
+		<< pos.y << " "
+		<< emTerra << " "
+		<< vel.x << " "
+		<< vel.y << " "
+		<< velocidadeInicial.x << " "
+		<< velocidadeInicial.y << " "
+		<< aceleracao << " "
+		<< emAceleracao << " "
+		<< forcaGravidade << " "
+		<< velocidadeTerminal << " "
+		<< tempoMovimento.getElapsedTime().asSeconds() << " "
+		<< tempoAceleracao.getElapsedTime().asSeconds() << " "
+		<< olhandoDir << " "
+		<< clocksIni << " ";
+
+}
+
 
 const bool Entidade::getEmTerra() const {
 	return emTerra;
@@ -75,36 +98,29 @@ void Entidade::attPos() {
 }
 
 void Entidade::gravidade() {
-	if (!clocksIni) {
-		return;
-	}
-	float dt = tempoMovimento.getElapsedTime().asSeconds() ;
+	if (!clocksIni) return;
 
-	if (!emTerra) {
-		vel.y += forcaGravidade * dt;
+	float dt = tempoMovimento.getElapsedTime().asSeconds();
 
-		if (vel.y > velocidadeTerminal)
-			vel.y = velocidadeTerminal;
+	vel.y += forcaGravidade * dt;
 
-		pos.y += vel.y * dt;
-	}
-	else {
-		if (vel.y += dt * forcaGravidade < -90)
-			vel.y = +15;
+	if (vel.y > velocidadeTerminal)
+		vel.y = velocidadeTerminal;
 
-		pos.y += vel.y * dt;
-	}
+	pos.y += vel.y * dt;
 
 	attPos();
 }
+
 
 void Entidade::acelerar() {
 	if (!clocksIni) {
 		return;
 	}
+
 	float dtAc = tempoAceleracao.getElapsedTime().asSeconds();;
 
-	if (emAceleracao && dtAc < 0.4) {
+	if (emAceleracao && dtAc < 0.4 || emAceleracao && dynamic_cast<entidades::Projetil*>(this)) {
 		dtAc = tempoAceleracao.getElapsedTime().asSeconds();
 		vel.x += aceleracao * dtAc;
 		pos.x += vel.x * dtAc;
@@ -112,7 +128,6 @@ void Entidade::acelerar() {
 		attPos();
 	}
 }
-
 
 void Entidade::resetaRelogio() {
 	tempoMovimento.restart();
@@ -159,6 +174,3 @@ void Entidade::retomar() {
 		tempoAceleracao.restart();
 	}
 }
-
-
-//Entidade::void salvarDataBuffer() 

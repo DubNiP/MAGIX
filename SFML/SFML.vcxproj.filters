@@ -84,19 +84,7 @@
     <ClCompile Include="Teia.cpp">
       <Filter>Obstaculos</Filter>
     </ClCompile>
-    <ClCompile Include="Plataforma.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="Projetil.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Bloco.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Alavanca.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Saida.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Gerenciador_Eventos.cpp">
@@ -137,6 +125,18 @@
     </ClCompile>
     <ClCompile Include="MenuPause.cpp">
       <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Bloco.cpp">
+      <Filter>Obstaculos</Filter>
+    </ClCompile>
+    <ClCompile Include="Alavanca.cpp">
+      <Filter>Obstaculos</Filter>
+    </ClCompile>
+    <ClCompile Include="Saida.cpp">
+      <Filter>Obstaculos</Filter>
+    </ClCompile>
+    <ClCompile Include="Plataforma.cpp">
+      <Filter>Obstaculos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -191,19 +191,7 @@
     <ClInclude Include="Teia.hpp">
       <Filter>Obstaculos</Filter>
     </ClInclude>
-    <ClInclude Include="Plataforma.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Projetil.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Bloco.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Alavanca.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Saida.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Gerenciador_Eventos.hpp">
@@ -247,6 +235,18 @@
     </ClInclude>
     <ClInclude Include="MenuPause.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Plataforma.hpp">
+      <Filter>Obstaculos</Filter>
+    </ClInclude>
+    <ClInclude Include="Bloco.hpp">
+      <Filter>Obstaculos</Filter>
+    </ClInclude>
+    <ClInclude Include="Alavanca.hpp">
+      <Filter>Obstaculos</Filter>
+    </ClInclude>
+    <ClInclude Include="Saida.hpp">
+      <Filter>Obstaculos</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -20,8 +20,10 @@ namespace entidades {
 		public:
 			Plataforma(Vector2f pos, Vector2f tam, bool dano = false, float amplitude = 100.f, float periodo = 2.f);
 			~Plataforma();
-
+		 
 			void executar();
+			virtual void salvar();
+			void salvarDataBuffer();
 			void obstaculizar(entidades::personagens::Mago* p);
 			bool esmagou(entidades::personagens::Personagem* p) const;
 			void setAtiva();

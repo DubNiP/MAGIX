@@ -14,6 +14,8 @@ namespace entidades {
 			~Teia();
 
 			void executar();
+			void salvar();
+			void salvarDataBuffer();
 			void obstaculizar(entidades::personagens::Mago* p);
 			void carregarSprite();
 

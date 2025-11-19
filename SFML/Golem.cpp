@@ -9,6 +9,7 @@ namespace entidades {
 			moverAleatorio(0),
 			velocidadeInicialX(vel.x)  
 		{
+			id = 4;
 			relogio.restart();
 			relogioDePulo.restart();
 			carregarSprite();
@@ -119,6 +120,34 @@ namespace entidades {
 			attPos();
 			gravidade();
 			posicaoBarra();
+		}
+
+		void Golem::salvar() {
+			tempBuffer.str("");
+			tempBuffer.clear();
+			
+			salvarDataBuffer();
+			
+			buffer.open("Save/save.txt", ios::out | ios::app);
+
+			if (!buffer.is_open()) {
+				cerr << "Arquivo não pode ser aberto" << endl;
+				fflush(stdin);
+				return;
+			}
+
+			buffer << tempBuffer.str();
+
+			buffer.close();
+		}
+
+		void Golem::salvarDataBuffer() {
+
+			Inimigo::salvarDataBuffer();
+
+			tempBuffer << tamanho << " "
+			<< moverAleatorio << " "
+			<< velocidadeInicialX << endl;
 		}
 
 		void Golem::carregarSprite() {

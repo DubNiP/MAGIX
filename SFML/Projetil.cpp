@@ -3,14 +3,15 @@
 namespace entidades
 {
     Projetil::Projetil(Vector2f pos, bool dir, bool bond) :
-        Entidade(pos, Vector2f(500.f, 30.f), dir),
+        Entidade(pos, Vector2f(80.f, -40.f), dir),
         ativo(true),
         bondade(bond),
         posicao(0),
         dano(2)
     {
-        velocidadeInicial.x = vel.x;
-        velocidadeInicial.y = vel.y;
+		tempoMovimento.restart();
+		tempoAceleracao.restart();
+		clocksIni = true;
         carregarSprite();
     }
 
@@ -18,6 +19,33 @@ namespace entidades
     {
     }
 
+    void Projetil::salvar() {
+		tempBuffer.str("");
+        tempBuffer.clear();
+
+		salvarDataBuffer();
+
+        buffer.open("Save/save.txt", ios::out | ios::app);
+
+        if (!buffer.is_open()) {
+            throw "Erro ao abrir arquivo de salvamento do projetil";
+        }
+    
+        buffer << tempBuffer.str();
+        buffer.close();
+       
+        tempBuffer.str("");
+	}
+
+    void Projetil::salvarDataBuffer() {
+		Entidade::salvarDataBuffer();
+
+        tempBuffer  << ativo << " "
+        << olhandoDir << " "
+        << ativo << " "
+        << bondade << " "
+        << dano << " " << endl;
+	}
 
     void Projetil::setAtivo(bool valor) {
         ativo = valor;
@@ -30,18 +58,13 @@ namespace entidades
     void Projetil::executar() {
         if (ativo) {
             emTerra = false;
+			emAceleracao = true;
 
-            Vector2f novaPos = getPos();
-            if (olhandoDir) {
-                vel.x = velocidadeInicial.x;
-            }
-            else {
-                vel.x = -velocidadeInicial.x;
-            }
+            int direcao = olhandoDir ? 1 : -1;
+            vel.x = fabs(vel.x) * direcao;
 
-            float dt = tempoMovimento.restart().asSeconds();
-            pos.x += vel.x * dt;
-            pos.y += vel.y * dt;
+            acelerar();
+            gravidade();
 
             attPos();
         }
@@ -55,8 +78,6 @@ namespace entidades
     const bool Projetil::getBondade() {
         return bondade;
     }
-
-    //void Projetil::salvar() { }
 
     void Projetil::carregarSprite() {
         if (!carregarTexturaSprite("Textures/Charge1.png")) {

@@ -15,8 +15,14 @@ namespace entidades {
 		Obstaculo::~Obstaculo() {
 
 		}
+		
+		void Obstaculo::salvarDataBuffer() {
+			Entidade::salvarDataBuffer();
 
-		//void Obstaculo::salvarDataBuffer(){}
+			tempBuffer << danoso << " "
+				<< largura << " "
+				<< altura << " ";
+		}
 
 		const bool Obstaculo::getDanoso() const {
 			return danoso;

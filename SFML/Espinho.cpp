@@ -8,6 +8,7 @@ namespace entidades {
 			Obstaculo(pos,tam,true),
 			danosidade(quantDano)
 		{
+			id = 8;
 			carregarSprite();
 		}
 
@@ -15,8 +16,29 @@ namespace entidades {
 
 		}
 
-		//void ObstDificil::salvarDataBuffer(){}
+		void Espinho::salvar() {
+			tempBuffer.str("");
+			tempBuffer.clear();
 
+			salvarDataBuffer();
+			
+			buffer.open("Save/save.txt", ios::out | ios::app);
+			
+			if (!buffer.is_open()) {
+				cerr << "Arquivo não pode ser aberto" << endl;
+				fflush(stdin);
+				return;
+			}
+			
+			buffer << tempBuffer.str();
+			buffer.close();
+		}
+
+		void Espinho::salvarDataBuffer() {
+			Obstaculo::salvarDataBuffer();
+
+			tempBuffer << danosidade << "\n";
+		}
 
 		void Espinho::executar() {
 			attPos();

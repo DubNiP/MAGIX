@@ -13,6 +13,9 @@ namespace entidades {
             ~Bloco();
 
             void executar();
+            void salvar();
+            void salvarDataBuffer();
+
             void carregarSprite();
             const float getLargura() const;
             const float getAltura()  const;

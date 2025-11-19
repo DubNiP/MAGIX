@@ -14,6 +14,10 @@ namespace entidades {
 
             ~Sapo();
 
+            void executar() override;
+            void salvar() override;
+            void salvarDataBuffer();
+
             void danificar();
             void tomarDano(int dano, bool bondade);
 
@@ -22,11 +26,7 @@ namespace entidades {
             void moverDireita();
             void movimentoAleatorio();
 
-            void executar();
-
             void carregarSprite();
-
-            //void salvar() {  }
 
         };
 

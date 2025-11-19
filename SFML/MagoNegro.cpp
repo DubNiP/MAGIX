@@ -15,6 +15,7 @@ namespace entidades {
 			velocidadeInicialX(vel.x),
 			faseAtual(NULL)
 		{
+			id = 3;
 			carregarSprite();
 			uniform_int_distribution<int> dist2(0, 3);
 			moverAleatorio = dist2(rng);
@@ -146,6 +147,36 @@ namespace entidades {
 			attPos();
 			gravidade();
 			posicaoBarra();
+		}
+
+		void MagoNegro::salvar() {
+			tempBuffer.str("");
+			tempBuffer.clear();
+
+			salvarDataBuffer();
+
+			buffer.open("Save/save.txt", ios::out | ios::app);
+
+			if (!buffer.is_open()) {
+				cerr << "Arquivo não pode ser aberto" << endl;
+				fflush(stdin);
+				return;
+			}
+
+			buffer << tempBuffer.str();
+
+			buffer.close();
+		}
+
+		void MagoNegro::salvarDataBuffer() {
+			Inimigo::salvarDataBuffer();
+
+			tempBuffer << tamanho << " "
+				<< ataqueClock.getElapsedTime().asSeconds() << " "
+				<< apto << " "
+				<< moverAleatorio << " "
+				<< velocidadeInicialX << " "
+				<< faseAtual << "fim" << "\n";
 		}
 
 		void MagoNegro::carregarSprite() {

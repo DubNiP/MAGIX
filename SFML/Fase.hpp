@@ -47,6 +47,7 @@ namespace fases {
 		void resetar();
 		const bool getFaseIniciada() const;
 		const bool getPause() const;
+		listas::ListaEntidades* getListaEntidades();
 	};
 
 }

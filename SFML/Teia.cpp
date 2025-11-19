@@ -9,6 +9,7 @@ namespace entidades {
 			vida(3),
 			ativo(true)
 		{
+			id = 5;
 			carregarSprite();
 		}
 		Teia::~Teia() {
@@ -18,6 +19,33 @@ namespace entidades {
 
 		void Teia::executar() {
 			attPos();
+		}
+
+		void Teia::salvar() {
+			tempBuffer.str("");
+			tempBuffer.clear();
+
+			salvarDataBuffer();
+			
+			buffer.open("Save/save.txt", ios::out | ios::app);
+			
+			if (!buffer.is_open()) {
+				cerr << "Arquivo não pode ser aberto" << endl;
+				fflush(stdin);
+				return;
+			}
+			
+			buffer << tempBuffer.str();
+
+			buffer.close();
+		}
+
+		void Teia::salvarDataBuffer() {
+			Obstaculo::salvarDataBuffer();
+
+			tempBuffer << vida << " "
+			<< ativo << " "
+			<< "\n";
 		}
 
 		void Teia::obstaculizar(entidades::personagens::Mago* p) {

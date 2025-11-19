@@ -15,6 +15,7 @@ namespace entidades {
 			concluiuFase(false),
 			faseAtual(NULL)
 		{
+			id = 1;
 			carregarSprite();
 		}
 
@@ -31,7 +32,38 @@ namespace entidades {
 			posicaoBarra();
 		}
 
-		//void Mago::salvar() {}
+		void Mago::salvar() {
+			tempBuffer.str("");
+			tempBuffer.clear();
+
+			salvarDataBuffer();
+
+			buffer.open("Save/save.txt", ios::out | ios::app);
+
+			if (!buffer.is_open()) {
+				cerr << "Arquivo não pode ser aberto" << endl;
+				fflush(stdin);
+				return;
+			}
+
+			buffer << tempBuffer.str();
+
+			buffer.close();
+			
+		}
+
+		void Mago::salvarDataBuffer() {
+			Personagem::salvarDataBuffer();
+
+			tempBuffer << pontos << " " 
+				<< invencibilidade << " " 
+				<< danoClock.getElapsedTime().asSeconds() << " " 
+				<< ataqueClock.getElapsedTime().asSeconds() << " " 
+				<< naTeia << " " 
+				<< apto << " " 
+				<< concluiuFase << endl;
+			
+		}
 
 		void Mago::mover() {
 			attPos();
@@ -128,5 +160,6 @@ namespace entidades {
 		bool Mago::getConcluiuFase() const {
 			return concluiuFase;
 		}	
+
 	} 
 }

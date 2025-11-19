@@ -11,7 +11,8 @@ namespace entidades {
 		public:
 			Espinho(Vector2f pos, Vector2f tam, int quantDano = 1);
 			~Espinho();
-			//void salvarDataBuffer();
+			void salvarDataBuffer();
+			void salvar();
 			void executar();
 			void obstaculizar(entidades::personagens::Mago* p);
 			const int getDanosidade() const;

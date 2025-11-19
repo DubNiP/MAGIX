@@ -10,9 +10,10 @@ namespace entidades {
 		public:
 			Personagem(Vector2f pos, Vector2f velocidade = Vector2f(0.f, 0.f));
 			~Personagem();
-			//void salvarDataBuffer;
+
+			void salvarDataBuffer();
+			virtual void salvar() = 0;
 			virtual void executar() = 0;
-			//virtual void salvar() = 0;
 			virtual void mover() = 0;
 
 			const int getVidas() const;

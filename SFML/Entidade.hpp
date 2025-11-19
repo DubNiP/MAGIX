@@ -1,8 +1,11 @@
 #pragma once
-
 #include <SFML/Graphics.hpp>
 #include "Ente.hpp"
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
+using namespace std;
 using namespace sf;
 
 class Entidade : public Ente {
@@ -19,14 +22,15 @@ protected:
 	Clock tempoAceleracao;
 	bool olhandoDir;
 	bool clocksIni;
-	// ostream buffer;
-	//void salvarDataBuffer();
+	stringstream tempBuffer;
+	ofstream buffer;
+	void salvarDataBuffer();
 public:
 	Entidade(Vector2f posicao = Vector2f(0.f, 0.f), Vector2f velocidade = Vector2f(0.f, 0.f), bool dir = true);
 	virtual ~Entidade();
 
+	virtual void salvar() = 0;
 	virtual void executar() = 0;
-	//virtual void salvar() = 0;
 
 	const bool getEmTerra() const;
 	void setEmTerra(const bool v);

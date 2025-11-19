@@ -1,4 +1,6 @@
 #include "ListaEntidades.hpp"
+#include <filesystem> // Para manipulação de sistemas de arquivos
+#include <fstream> // Para operações de arquivo
 
 using namespace std;
 
@@ -121,6 +123,34 @@ namespace listas {
             if (e) e->desenhar();
             ++it;
         }
+    }
+
+    void ListaEntidades::salvarTodos() {
+        
+        try {
+            std::filesystem::create_directories("Save");
+        } catch (...) {
+        }
+
+        {
+            std::ofstream out("Save/save.txt", std::ios::out | std::ios::trunc);
+            if (!out.is_open()) {
+                std::cerr << "Erro: nao foi possivel abrir Save/save.txt para salvar." << std::endl;
+                return;
+            }
+        }
+
+        Lista<Entidade>::Iterator it = LEs.begin();
+        int count = 0;
+        while (it != LEs.end()) {
+            Entidade* e = *it;
+            if (e) {
+                ++count;
+                e->salvar();
+            }
+            ++it;
+        }
+        std::cout << "ListaEntidades::salvarTodos() -> entidades salvas = " << count << std::endl;
     }
 
     void ListaEntidades::retomarTodos() {

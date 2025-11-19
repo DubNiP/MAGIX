@@ -12,6 +12,7 @@ namespace entidades {
 			ativa(false),
 			tempo()
 		{
+			id = 7;
 			this->pos.y = yIn + amplitude;
 			yAnt = pos.y;
 
@@ -37,6 +38,35 @@ namespace entidades {
 				vel.y = 0.f;
 			}
 			attPos();
+		}
+
+		void Plataforma::salvar() {
+			tempBuffer.str("");
+			tempBuffer.clear();
+
+			salvarDataBuffer();
+
+			buffer.open("Save/save.txt", ios::out | ios::app);
+
+			if (!buffer.is_open()) {
+				cerr << "Arquivo não pode ser aberto" << endl;
+				fflush(stdin);
+				return;
+			}
+
+			buffer << tempBuffer.str();
+			buffer.close();
+		}
+
+		void Plataforma::salvarDataBuffer() {
+			Obstaculo::salvarDataBuffer();
+
+			tempBuffer << amplitude << " "
+				<< periodo << " "
+				<< yIn << " "
+				<< yAnt << " "
+				<< ativa << " "
+				<< tempo.getElapsedTime().asSeconds() << endl;
 		}
 
 		void Plataforma::obstaculizar(entidades::personagens::Mago* p) {

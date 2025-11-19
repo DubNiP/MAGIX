@@ -3,10 +3,6 @@
 #include <SFML/System/Clock.hpp>
 #include "Projetil.hpp"
 
-namespace Gerenciadores {
-	class GerenciadorColisoes;
-}
-
 namespace fases {
 	class Fase;
 }
@@ -26,13 +22,13 @@ namespace entidades {
 			bool apto;
 			bool concluiuFase;
 			fases::Fase* faseAtual;
-
 		public:
 			Mago(Vector2f pos, Vector2f vel);
 			~Mago();
 
 			void executar();
-			//void salvar();
+			void salvar();
+			void salvarDataBuffer();
 			void mover();
 
 			void processarInput(bool esquerda, bool direita, bool pular, bool atirar);

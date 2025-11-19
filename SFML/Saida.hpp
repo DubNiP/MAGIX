@@ -15,6 +15,8 @@ namespace entidades {
 			Saida(Vector2f pos, Vector2f tam);
 			~Saida();
 			void executar();
+			void salvar();
+			void salvarDataBuffer();
 			void obstaculizar(entidades::personagens::Mago* p);
 			void setSprite();
 			void aplicarSpriteEstado();

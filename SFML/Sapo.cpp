@@ -9,6 +9,7 @@ namespace entidades {
 			raio(150.f),
 			intervaloPulo(1.5f)
 		{
+			id = 2;
 			velocidadeInicial.y = -vel.y;
 			velocidadeInicial.x = vel.x;
 			relogioDePulo.restart();
@@ -18,6 +19,43 @@ namespace entidades {
 
 		Sapo::~Sapo()
 		{
+		}
+
+		void Sapo::executar() {
+			iniciarClocks();
+			mover();
+			attPos();
+			gravidade();
+			acelerar();
+			posicaoBarra();
+		}
+
+		void Sapo::salvar() {
+			tempBuffer.str("");
+			tempBuffer.clear();
+
+			Inimigo::salvarDataBuffer();
+
+			salvarDataBuffer();
+
+			buffer.open("Save/save.txt", ios::out | ios::app);
+
+			if (!buffer.is_open()) {
+				cerr << "Arquivo não pode ser aberto" << endl;
+				fflush(stdin);
+				return;
+			}
+
+			buffer << tempBuffer.str();
+
+			buffer.close();
+		}
+
+		void Sapo::salvarDataBuffer() {
+
+			tempBuffer << raio << " "
+			<< intervaloPulo << endl;
+
 		}
 
 		void Sapo::danificar() {
@@ -118,15 +156,6 @@ namespace entidades {
 			setOlhandoDir(true);
 		}
 
-		void Sapo::executar() {
-			iniciarClocks();
-			mover();
-			attPos();
-			gravidade();
-			acelerar();
-			posicaoBarra();
-		}
-
 		void Sapo::carregarSprite() {                         
 			if (!carregarTexturaSprite("Textures/Sapo.png", false, false)) {
 				throw "Textura não carregada";
@@ -135,8 +164,6 @@ namespace entidades {
 			setPos(pos);
 			atualizaDirSprite();
 		}
-
-		//void salvar() {}	
 
 	} 
 }
