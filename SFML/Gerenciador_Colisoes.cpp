@@ -2,11 +2,12 @@
 
 using namespace Gerenciadores;
 
-GerenciadorColisoes::GerenciadorColisoes(entidades::personagens::Mago* pJog, RenderWindow* win):
+GerenciadorColisoes::GerenciadorColisoes(entidades::personagens::Mago* pJog, entidades::personagens::Mago* pJog2, RenderWindow* win):
 	LIs(),
 	LOs(),
 	LPs(),
 	pJog1(pJog),
+	pJog2(pJog2),
 	window(win),
 	faseConcluida(false)
 {
@@ -105,7 +106,7 @@ bool GerenciadorColisoes::estaSobre(const FloatRect& obst, const FloatRect& ent,
 void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 	if (pJog1) {
 		pJog1->setNaTeia(false);
-		for (auto it = LOs.begin(); it != LOs.end(); ++it) {
+		for (auto it = LOs.begin(); it != LOs.end(); it++) {
 			if (*it && verificarColisao(*it, pJog1)) {
 				if (dynamic_cast<entidades::obstaculos::Saida*>(*it) != NULL) {
 					faseConcluida = true;
@@ -122,10 +123,37 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 		}
 
 		const FloatRect bJog = pJog1->getBounds();
-		for (auto it = LOs.begin(); it != LOs.end(); ++it) {
+		for (auto it = LOs.begin(); it != LOs.end(); it++) {
 			if (*it) {
 				if (auto* saida = dynamic_cast<entidades::obstaculos::Saida*>(*it)) {
 					saida->atualizarPorProximidade(bJog);
+				}
+			}
+		}
+	}
+	if (pJog2) {
+		pJog2->setNaTeia(false);
+		for (auto it = LOs.begin(); it != LOs.end(); it++) {
+			if (*it && verificarColisao(*it, pJog2)) {
+				if (dynamic_cast<entidades::obstaculos::Saida*>(*it) != NULL) {
+					faseConcluida = true;
+				}
+				if (dynamic_cast<entidades::obstaculos::Teia*>(*it) == NULL) {
+					colidiu(*it, pJog2);
+				}
+				auto* plat = dynamic_cast<entidades::obstaculos::Plataforma*>(*it);
+				if (dynamic_cast<entidades::obstaculos::Plataforma*>(*it) != NULL && plat->esmagou(pJog2)) {
+					pJog2->setVidas(0);
+				}
+				(*it)->obstaculizar(pJog2);
+			}
+		}
+
+		const FloatRect bJog2 = pJog2->getBounds();
+		for (auto it = LOs.begin(); it != LOs.end(); it++) {
+			if (*it) {
+				if (auto* saida = dynamic_cast<entidades::obstaculos::Saida*>(*it)) {
+					saida->atualizarPorProximidade(bJog2);
 				}
 			}
 		}
@@ -134,9 +162,16 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 
 void GerenciadorColisoes::tratarColisoesJogsBlocos() {
 	if (pJog1) {
-		for (auto it = LBs.begin(); it != LBs.end(); ++it) {
+		for (auto it = LBs.begin(); it != LBs.end(); it++) {
 			if (*it && verificarColisao(*it, pJog1)) {
 				colidiu(*it, pJog1);
+			}
+		}
+	}
+	if (pJog2) {
+		for (auto it = LBs.begin(); it != LBs.end(); it++) {
+			if (*it && verificarColisao(*it, pJog2)) {
+				colidiu(*it, pJog2);
 			}
 		}
 	}
@@ -154,6 +189,16 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 			}
 		}
 	}
+	if (pJog2) {
+		for (int i = 0; i < LIs.size(); i++) {
+			if (LIs[i]) {
+				if (verificarColisao(pJog2, LIs[i])) {
+					colidiu(LIs[i], pJog2);
+					LIs[i]->danificar();
+				}
+			}
+		}
+	}
 }
 
 void GerenciadorColisoes::tratarColisoesJogsProjeteis() {
@@ -162,6 +207,18 @@ void GerenciadorColisoes::tratarColisoesJogsProjeteis() {
 		while (it != LPs.end()) {
 			if (verificarColisao(pJog1, *it) && !(*it)->getBondade()) {
 				pJog1->tomarDano((*it)->getDano(), (*it)->getBondade());
+				(*it)->setAtivo(false);
+				it = LPs.erase(it);
+				continue;
+			}
+			it++;
+		}
+	}
+	if (pJog2) {
+		set<entidades::Projetil*>::iterator it = LPs.begin();
+		while (it != LPs.end()) {
+			if (verificarColisao(pJog2, *it) && !(*it)->getBondade()) {
+				pJog2->tomarDano((*it)->getDano(), (*it)->getBondade());
 				(*it)->setAtivo(false);
 				it = LPs.erase(it);
 				continue;
@@ -391,21 +448,33 @@ void GerenciadorColisoes::setJog(entidades::personagens::Mago* pJog) {
 	pJog1 = pJog;
 }
 
+void GerenciadorColisoes::setJog2(entidades::personagens::Mago* pJog) {
+	pJog2 = pJog;
+}
+
 void GerenciadorColisoes::setWindow(RenderWindow* win) {
 	window = win;
 }
 
 void GerenciadorColisoes::limiteDeTela() {
 	if (window) {
+		Vector2u windowSize = window->getSize();
+		const float Y = 1280;
 		if (pJog1) {
 
 			FloatRect boundJog = pJog1->getBounds();
-			Vector2u windowSize = window->getSize();
 
 			const float X = windowSize.x - boundJog.width;
-			const float Y = 1280;
 			limiteDeTelaMago(X, Y);
 			limiteDeTelaProjeteis(X, Y);
+		}
+		if (pJog2) {
+
+			FloatRect boundJog2 = pJog2->getBounds();
+
+			const float X2 = windowSize.x - boundJog2.width;
+			limiteDeTelaMago(X2, Y);
+			limiteDeTelaProjeteis(X2, Y);
 		}
 	}
 }
@@ -416,6 +485,12 @@ void GerenciadorColisoes::limiteDeTelaMago(float X, float Y) {
 	if (pJog1->getPos().y < 0.f)   pJog1->setPos(Vector2f(pJog1->getPos().x, 0.f));
 	if (pJog1->getPos().x > X)   pJog1->setPos(Vector2f(X, pJog1->getPos().y));
 	if (pJog1->getPos().y > Y)   pJog1->setPos(Vector2f(pJog1->getPos().x, Y));
+
+	if (pJog2->getPos().x < 0.f)   pJog2->setPos(Vector2f(0.f, pJog2->getPos().y));
+	if (pJog2->getPos().y < 0.f)   pJog2->setPos(Vector2f(pJog2->getPos().x, 0.f));
+	if (pJog2->getPos().x > X)   pJog2->setPos(Vector2f(X2, pJog2->getPos().y));
+	if (pJog2->getPos().y > Y)   pJog2->setPos(Vector2f(pJog2->getPos().x, Y));
+
 }
 
 void GerenciadorColisoes::limiteDeTelaProjeteis(float X, float Y) {

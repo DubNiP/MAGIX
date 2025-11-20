@@ -24,10 +24,11 @@ namespace Gerenciadores {
         list<entidades::obstaculos::Bloco*> LBs;
         set<entidades::Projetil*>LPs;  
         entidades::personagens::Mago* pJog1;
+        entidades::personagens::Mago* pJog2;
         RenderWindow* window;
         bool faseConcluida;
     public:
-        GerenciadorColisoes(entidades::personagens::Mago* pJog = NULL,RenderWindow* window = NULL);
+        GerenciadorColisoes(entidades::personagens::Mago* pJog = NULL, entidades::personagens::Mago* pJog2 = NULL, RenderWindow* window = NULL);
         ~GerenciadorColisoes();
         
         const bool getFaseConcluida() const;
@@ -62,6 +63,7 @@ namespace Gerenciadores {
         void executar();
 
         void setJog(entidades::personagens::Mago* pJog);
+        void setJog2(entidades::personagens::Mago* pJog);
         void setWindow(RenderWindow* win);
 
         void limiteDeTela();
