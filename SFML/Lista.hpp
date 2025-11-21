@@ -11,7 +11,8 @@ class Lista
 {
 public:
     template <class TE>
-    class Elemento {
+
+    class Elemento {                                                       //Classe elemento:
     private:
         Elemento<TE>* pProx;
         TE* pInfo;
@@ -20,12 +21,14 @@ public:
         Elemento() : pProx(NULL), pInfo(NULL) {};
         ~Elemento() = default;
 
-        void setProx(Elemento<TE>* pE) { pProx = pE; }
+
         void setInfo(TE* p) { pInfo = p; }
-        Elemento<TE>* getProx() const { return pProx; }
+        void setProx(Elemento<TE>* pE) { pProx = pE; }
         TE* getInfo() const { return pInfo; }
+        Elemento<TE>* getProx() const { return pProx; }
     };
-    class Iterator {
+
+    class Iterator {                                                      //Classe Iterator, padrão de projeto Iterator.
     private:
         Elemento<TL>* atual;
     public:
@@ -50,6 +53,7 @@ public:
             return atual == aux.atual;
         }
     };
+
 private:
 
     Elemento<TL>* pPrimeiro;

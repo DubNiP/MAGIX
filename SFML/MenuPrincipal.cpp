@@ -13,8 +13,8 @@ MenuPrincipal::~MenuPrincipal() {
 }
 
 void MenuPrincipal::set_values() {
-    const char* options[] = { "Nome_Jogo", "Jogar", "Ranking", "Sair" };
-    const Vector2f posi[] = { {490.f, 110.f}, {620.f, 380.f}, {600.f, 450.f}, {630.f, 520.f} };
+    const char* options[] = { "MAGIX", "Jogar", "Ranking", "Sair" };
+    const Vector2f posi[] = { {580.f, 110.f}, {620.f, 380.f}, {600.f, 450.f}, {630.f, 520.f} };
     const unsigned int tam[] = { 80u, 50u, 50u, 50u };
 
     texts.clear();

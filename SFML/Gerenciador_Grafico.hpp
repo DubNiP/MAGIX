@@ -10,7 +10,7 @@ namespace Gerenciadores {
 
     class GerenciadorGrafico {
     private:
-        static GerenciadorGrafico* uniqueInstance;
+        static GerenciadorGrafico* pGrafico;
         RenderWindow* window;
         View camera;
         bool segundaTela;
@@ -21,10 +21,12 @@ namespace Gerenciadores {
         void desenharEnte(const Drawable& shape);
         void clearWindow(Color cor = Color::Black);
         void displayWindow();
-        void desenhaTodos(listas::ListaEntidades* LE, Sprite* sp = NULL);       //coloco essa relação?
+        void desenhaTodos(listas::ListaEntidades* LE, Sprite* sp = NULL);
         void atualizarCamera(const Vector2f posMago);
         void resetarCamera();
 		void setSegundaTela(bool val);
+
+        // GETTERS:
         RenderWindow* getWindow() const;
         View getCamera() const;
     };

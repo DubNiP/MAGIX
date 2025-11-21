@@ -27,7 +27,7 @@ namespace entidades {
 			void salvarDataBuffer();
 			virtual void salvar() = 0;
 			virtual void executar() = 0;
-			virtual void danificar() = 0;
+			virtual void danificar(Mago* pJog) = 0;
 			virtual void mover() = 0;
 			virtual void carregarSprite() = 0;
 		};

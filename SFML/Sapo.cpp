@@ -58,9 +58,9 @@ namespace entidades {
 
 		}
 
-		void Sapo::danificar() {
-			if (pJog) {
-				pJog->tomarDano(destruicao, false);
+		void Sapo::danificar(Mago* pJogador) {
+			if (pJogador) {
+				pJogador->tomarDano(destruicao, false);
 			}
 		}
 

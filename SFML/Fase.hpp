@@ -24,7 +24,7 @@ namespace fases {
 		Gerenciadores::GerenciadorColisoes GC;
 		entidades::personagens::Mago* jog1;
 		entidades::personagens::Mago* jog2;
-		Texture* textFundo;
+		Texture* textFundo;   //será que n posso usar de ente?
 		Sprite* spriteFundo;
 		bool faseIniciada;
 		bool pause;
@@ -33,10 +33,13 @@ namespace fases {
 
 		void criarSapos();
 		void criarPlataformas();
+
+		//padrão de projeto Template Method, criar cenário chama essas 3 funções dentro dele.
 		virtual void criarInimigos() = 0;
 		virtual void criarObstaculo() = 0;
 		virtual void criarBlocos() = 0;
-		void criarCenario();                            //fazer ser virtual no futuro??? (diagrama não deixa a princípio), COLOCAR NA CONSTRUTORA.
+		void criarCenario();                            //COLOCAR NA CONSTRUTORA.
+
 		virtual void carregarFundo() = 0;
 		virtual Vector2f getPosicaoInicialJogador() const;
 		Entidade* criaEntidade(Entidade* e);

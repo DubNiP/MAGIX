@@ -17,13 +17,14 @@ private:
     entidades::personagens::Mago* pMago1;
     entidades::personagens::Mago* pMago2;
     fases::Fase* faseAtual;
+    bool resetaFase;
 
 public:
-    JogandoState(Jogo* contexto, int numFase, int numJog = 1);
+    JogandoState(Jogo* contexto, int numFase, int numJog = 1, bool reseta = true);
     ~JogandoState();
 
     void Entrar();
     void handle();
     void Sair();
-    void update(int i){};
+    void update(int i){};   //Trocar?
 };

@@ -116,7 +116,7 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 				}
 				auto* plat = dynamic_cast<entidades::obstaculos::Plataforma*>(*it);
 				if (dynamic_cast<entidades::obstaculos::Plataforma*>(*it) != NULL && plat->esmagou(pJog1)) {
-					pJog1->setVidas(0);
+					pJog1->setVidas(-10);
 				}
 				(*it)->obstaculizar(pJog1);
 			}
@@ -143,7 +143,7 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 				}
 				auto* plat = dynamic_cast<entidades::obstaculos::Plataforma*>(*it);
 				if (dynamic_cast<entidades::obstaculos::Plataforma*>(*it) != NULL && plat->esmagou(pJog2)) {
-					pJog2->setVidas(0);
+					pJog2->setVidas(-10);
 				}
 				(*it)->obstaculizar(pJog2);
 			}
@@ -184,7 +184,7 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 			if (LIs[i]) {
 				if (verificarColisao(pJog1, LIs[i])) {
 					colidiu(LIs[i], pJog1);
-					LIs[i]->danificar();            
+					LIs[i]->danificar(pJog1);            
 				}
 			}
 		}
@@ -194,7 +194,7 @@ void GerenciadorColisoes::tratarColisoesJogsInimgs() {
 			if (LIs[i]) {
 				if (verificarColisao(pJog2, LIs[i])) {
 					colidiu(LIs[i], pJog2);
-					LIs[i]->danificar();
+					LIs[i]->danificar(pJog2);
 				}
 			}
 		}

@@ -7,26 +7,25 @@ MenuPrincipalState::MenuPrincipalState(Jogo* contexto):
 }
 
 MenuPrincipalState::~MenuPrincipalState() {
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);               //Padrão de projeto Observer
 }
 
 void MenuPrincipalState::Entrar() {
-    contexto->getGG().resetarCamera();
+    Gerenciadores::GerenciadorGrafico::getGG().resetarCamera();
     menu.resetaFlags();
     menu.reseta();
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);                //Padrão de projeto Observer
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->soltaTeclas();
-
 }
 
 void MenuPrincipalState::handle() {
-    auto& GG = contexto->getGG();
+    auto& GG = Gerenciadores::GerenciadorGrafico::getGG();
     auto* GE = Gerenciador::GerenciadorEvento::getGerenciadorEvento();
     RenderWindow* window = GG.getWindow();
 
 
-    while (window && window->isOpen() && !menu.getIniciar() && !menu.getSair()) {
-        if (!GE->verificarEventosJanela(window)) {
+    while (window && window->isOpen() && !menu.getIniciar() && !menu.getSair()) {        //Se não iniciou e não saiu e não clicou no close, executa menu.
+        if (!GE->verificarEventosJanela(window)) { 
             return;
         }
 
@@ -37,18 +36,20 @@ void MenuPrincipalState::handle() {
 
 void MenuPrincipalState::Sair() {
 
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);               //Padrão de projeto Observer
     if (menu.getIniciar()) {
         contexto->mudarEstado(new SelecaoFaseState(contexto));
     }
     else if (menu.getSair()) {
-        auto& GG = contexto->getGG();
+        auto& GG = Gerenciadores::GerenciadorGrafico::getGG();
         RenderWindow* window = GG.getWindow();
-        if (window) window->close();
+        if (window) {
+            window->close();
+        }
     }
 }
 
-void MenuPrincipalState::update(int i) {
+void MenuPrincipalState::update(int i) {                                                //Padrão de projeto Observer
     if (i == 1) {
         menu.moverBaixo();
     }

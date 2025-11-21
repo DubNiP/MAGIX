@@ -8,9 +8,10 @@ class PauseState : public State {
 private:
     MenuPause menu;
     int faseAtual;
+    int numJog;
 
 public:
-    PauseState(Jogo* contexto, int numFase);
+    PauseState(Jogo* contexto, int numFase, int numJ = 1);
     ~PauseState();
 
     void Entrar();

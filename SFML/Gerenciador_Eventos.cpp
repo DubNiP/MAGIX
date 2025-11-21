@@ -19,7 +19,7 @@ namespace Gerenciador {
         pMago2 = NULL;
     }
 
-    GerenciadorEvento* GerenciadorEvento::getGerenciadorEvento() {
+    GerenciadorEvento* GerenciadorEvento::getGerenciadorEvento() {     //Singleton.
         if (!pEvento) {
             pEvento = new GerenciadorEvento();
         }
@@ -60,8 +60,8 @@ namespace Gerenciador {
     bool up = Keyboard::isKeyPressed(Keyboard::Up);
     bool enter = Keyboard::isKeyPressed(Keyboard::Enter);
 
-    if (down && !prevDown) {
-        notify(1);
+    if (down && !prevDown) {                                 //Quando uma tecla é pressionada, o gerenciador de eventos notifica os Observadores.
+        notify(1); 
     }
     if (up && !prevUp) {
         notify(2);
@@ -106,6 +106,7 @@ namespace Gerenciador {
             }
             return true;
         }
+        return false;
     }
 }
 

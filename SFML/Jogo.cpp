@@ -4,19 +4,20 @@
 Jogo::Jogo() :
     pJog1(Vector2f(100.f,630.f), Vector2f(3.f, 100.f)),
     pJog2(Vector2f(100.f, 630.f), Vector2f(3.f, 100.f)),
-    GG(Gerenciadores::GerenciadorGrafico::getGG()),
     fase1(&pJog1, &pJog2),
     fase2(&pJog1, &pJog2)
 {
-    Ente::setGG(&GG);        
+    Ente::setGG(&Gerenciadores::GerenciadorGrafico::getGG());
     estadoAtual = new MenuPrincipalState(this);
 }
 
 Jogo::~Jogo() {
 }
 
+
+
 void Jogo::executar() {
-    RenderWindow* window = GG.getWindow();
+    RenderWindow* window = Gerenciadores::GerenciadorGrafico::getGG().getWindow();
     View cam = View(FloatRect(0.f, 0.f, 1280.f, 720.f));
     window->setView(cam);
   
@@ -36,6 +37,11 @@ void Jogo::mudarEstado(State * novoEstado) {
     estadoAtual = novoEstado;
 }
 
+
+
+
+//GETTERS:
+
 entidades::personagens::Mago* Jogo::getMago1() {
     return &pJog1;
 }
@@ -49,8 +55,4 @@ fases::FasePrimeira* Jogo::getFase1() {
 
 fases::FaseSegunda* Jogo::getFase2() {
     return &fase2;
-}
-
-Gerenciadores::GerenciadorGrafico& Jogo::getGG() {
-    return GG;
 }

@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//Padrão de projeto Iterator usado em todos os iteradores.
 
 //OBS: TEM ALGUNS METODOS QUE ENVOLVEM EXCLUSÃO QUE TEM UMA COMPLEXIDADE ALTA ACREDITO EU.
 
@@ -46,8 +47,8 @@ namespace listas {
     }
 
     void ListaEntidades::limparPreservando(Entidade* J1,Entidade* J2) {                  //isso é zoado, é bom dar um jeito de remover isso...
-        Lista<Entidade>::Iterator it = LEs.begin();                           //POSSIVEL SOLUCAO: COLOCAR DYNAMIC CAST PRA JOGADOR E N EXCLUIR SE FOR.
-        while(it != LEs.end()) {
+        Lista<Entidade>::Iterator it = LEs.begin();                           //POSSIVEL SOLUCAO: COLOCAR DYNAMIC CAST PRA JOGADOR E N EXCLUIR SE FOR,
+        while (it != LEs.end()) {                                             //MAS PODE DAR MERDA COM OS JOGADORES 1 E 2.
             Entidade* e = *it;
             if (e && e != J1 && e !=J2) {
                 delete e;

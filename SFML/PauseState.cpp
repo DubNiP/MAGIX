@@ -5,10 +5,11 @@
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Eventos.hpp"
 
-PauseState::PauseState(Jogo* contexto, int numFase)
-    : State(contexto), 
+PauseState::PauseState(Jogo* contexto, int numFase, int numJ): 
+    State(contexto), 
     menu(),  
-    faseAtual(numFase) 
+    faseAtual(numFase),
+    numJog(numJ)
 {
 }
 
@@ -31,7 +32,7 @@ void PauseState::Entrar() {
     cout << "PauseState::Entrar() -> menu.lista_ents = " << menu.getListaEntidades() << endl;
 
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->soltaTeclas();
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);                                     //Padrão de projeto Observer.
 }
 
 void PauseState::handle() {
@@ -39,7 +40,7 @@ void PauseState::handle() {
     auto& GG = Gerenciadores::GerenciadorGrafico::getGG();
     RenderWindow* window = GG.getWindow();
 
-    while (window && window->isOpen() && !menu.getContinuar() && !menu.getVoltarMenu()) {
+    while (window && window->isOpen() && !menu.getContinuar() && !menu.getVoltarMenu()) {                     //Enquanto não continua ou volta ao menu..
         if (!GE->verificarEventosJanela(window)) {
             return;
         }
@@ -50,13 +51,17 @@ void PauseState::handle() {
 }
 
 void PauseState::Sair() {
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);                                    //Padrão de projeto Observer.
 
     if (menu.getContinuar()) {
-        contexto->mudarEstado(new JogandoState(contexto, faseAtual));
+        contexto->mudarEstado(new JogandoState(contexto, faseAtual, numJog, false));
     }
+
     else if (menu.getVoltarMenu()) {
         contexto->getMago1()->reseta(Vector2f(100.f, 630.f), 15, 0);
+        if (numJog == 2) {
+            contexto->getMago2()->reseta(Vector2f(100.f, 630.f), 15, 0);
+        }
         contexto->mudarEstado(new MenuPrincipalState(contexto));
     }
 }

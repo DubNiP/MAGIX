@@ -18,7 +18,7 @@ namespace entidades {
             void salvar();
             void salvarDataBuffer();
 
-            void danificar();
+            void danificar(Mago* pJog);
             void tomarDano(int dano, bool bondade);
 
             void mover();

@@ -94,6 +94,11 @@ namespace entidades {
 			}
 		}
 
+
+		//A COLISÃO ESTÁ HORROROSA, OS PERSONAGENS N ESTÃO SENDO ESMAGADOS.
+	
+		//possível solução: fazer com que se a entidade estiver abaixo de n pixels, ela é morta..
+
 		bool Plataforma::esmagou(entidades::personagens::Personagem* p) const {
 			if (p) {
 				const FloatRect pj = p->getBounds();

@@ -14,7 +14,7 @@ MenuGameOver::~MenuGameOver() {
 
 void MenuGameOver::set_values() {
     const char* opcoes[] = { "GAME OVER", "Reiniciar", "Menu Principal" };
-    const Vector2f posicoes[] = { {450.f, 200.f}, {550.f, 350.f}, {450.f, 450.f} };
+    const Vector2f posicoes[] = { {500.f, 200.f}, {550.f, 350.f}, {480.f, 450.f} };
     const unsigned int tamanhos[] = { 70u, 50u, 50u };
 
     texts.clear();

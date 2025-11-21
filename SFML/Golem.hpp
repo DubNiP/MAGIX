@@ -15,7 +15,7 @@ namespace entidades {
             Golem(Vector2f pos, Mago* pJog, Vector2f vel);
             ~Golem();
 
-            void danificar();
+            void danificar(Mago* pJog);
             void tomarDano(int dano, bool bondade);
 
             void mover();

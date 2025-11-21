@@ -7,14 +7,14 @@ using namespace listas;
 using namespace fases;
 using namespace std;
 
-GerenciadorGrafico* GerenciadorGrafico::uniqueInstance = NULL;
+GerenciadorGrafico* GerenciadorGrafico::pGrafico = NULL;
 
 GerenciadorGrafico::GerenciadorGrafico() :
     window(NULL),
 	segundaTela(false),
     camera(View(FloatRect(0.f, 0.f, 1280.f, 720.f)))
 {
-    window = new RenderWindow(VideoMode(1280, 720), "Jogo Simas");
+    window = new RenderWindow(VideoMode(1280, 720), "MAGIX");
     if (window) {
         window->setFramerateLimit(60);
         window->setPosition(Vector2i(0, 0));
@@ -28,10 +28,10 @@ GerenciadorGrafico::~GerenciadorGrafico() {
 }
 
 GerenciadorGrafico& GerenciadorGrafico::getGG() {
-    if (!uniqueInstance) {
-        uniqueInstance = new GerenciadorGrafico();
+    if (!pGrafico) {
+        pGrafico = new GerenciadorGrafico();            // Padrão de projeto Singleton.
     }
-    return *uniqueInstance;
+    return *pGrafico;
 }
 
 void GerenciadorGrafico::desenharEnte(const Drawable& shape) {
@@ -57,11 +57,8 @@ void GerenciadorGrafico::atualizarCamera(const Vector2f posMago) {
     const float visaoE = camera.getSize().x;
     const float visaoD = camera.getSize().y;
 
-    float maxX = 1280;
-    float maxY = 1280;
-
-    if(!segundaTela)
-        maxY = 720;
+    float maxX = 1280.f;
+    float maxY = segundaTela ? 1280.f : 720.f;
 
     Vector2f centro = posMago;
 

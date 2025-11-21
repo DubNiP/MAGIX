@@ -1,12 +1,15 @@
 #include "JogandoState.hpp"
 
-JogandoState::JogandoState(Jogo* contexto, int numFase, int numJog):
+JogandoState::JogandoState(Jogo* contexto, int numFase, int numJog, bool reseta):
+
     State(contexto), 
     numeroFase(numFase), 
     numJogadores(numJog),
     pMago1(NULL), 
     pMago2(NULL),
-    faseAtual(NULL) {
+    faseAtual(NULL),
+    resetaFase(reseta)
+{
 
     pMago1 = contexto->getMago1();
     if (numJogadores == 2) {  
@@ -15,45 +18,56 @@ JogandoState::JogandoState(Jogo* contexto, int numFase, int numJog):
 }
 
 JogandoState::~JogandoState() {
+    pMago1 = NULL;                    /*TROQUEI*/
+    pMago2 = NULL;
     faseAtual = NULL;
 }
 
 void JogandoState::Entrar() {
     if (numeroFase == 1) {
         faseAtual = contexto->getFase1();
-        contexto->getGG().setSegundaTela(false);
+        Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(false);
     }
     else if (numeroFase == 2) {
         faseAtual = contexto->getFase2();
-        contexto->getGG().setSegundaTela(true);
+        Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(true);
     }
-
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago1(pMago1);
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(NULL);
 
     if (faseAtual) {
         if (numJogadores == 2) {
-            Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(pMago2);
             faseAtual->setdoisJog(true);
         }
         else {
             faseAtual->setdoisJog(false);
         }
     }
+
+    if (resetaFase) {
+        faseAtual->resetar();
+    }
+
+
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago1(pMago1);
+    if (numJogadores == 2 && pMago2) {
+        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(pMago2);
+    }
+    else {
+        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(NULL);
+    }
 }
 
 void JogandoState::handle() {
     if (faseAtual) {
-        faseAtual->executar();
+        faseAtual->executar();                                                                //Se saiu do looping desse método, aconteceu algo...
 
        
         if (pMago1 && pMago1->getVidas() <= 0) {
-            contexto->mudarEstado(new GameOverState(contexto, numeroFase));
+            contexto->mudarEstado(new GameOverState(contexto, numeroFase, numJogadores));
             return;
         }
 
         if (faseAtual->getPause()) {
-            contexto->mudarEstado(new PauseState(contexto, numeroFase));
+            contexto->mudarEstado(new PauseState(contexto, numeroFase, numJogadores));
             return;
         }
         
@@ -68,7 +82,7 @@ void JogandoState::handle() {
 
 void JogandoState::Sair() {
     if (numeroFase == 2) {
-        contexto->getGG().setSegundaTela(false);
+        Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(false);
     }
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago1(NULL);
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(NULL);

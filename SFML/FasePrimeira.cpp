@@ -25,7 +25,7 @@ void FasePrimeira::criarObstaculo() {
 
 void FasePrimeira::criarBlocos() {
     //Tamanho tela: 1280 e 720
-    //AQUI ESTÁ SENDO USADO O PADRÃO DE PROJETO PROTOTYPE
+    //Padrão de projeto prototype:
 
     entidades::obstaculos::Bloco molde(Vector2f(0.f,0.f),Vector2f(0.f,0.f));
 
@@ -80,7 +80,7 @@ void FasePrimeira::criarTeias() {
     }
 }
 
-void FasePrimeira::carregarFundo() {
+void FasePrimeira::carregarFundo() {    //OLHAR DPS
     textFundo = new Texture();
     if (!textFundo->loadFromFile("Textures/background 3.png")) {
         throw "textura não carregada";

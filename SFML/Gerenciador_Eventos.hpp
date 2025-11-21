@@ -5,6 +5,8 @@
 #include "Menu.hpp"
 #include "Subject.hpp"
 
+// Gerenciador de Eventos com apoio do padrão de projeto Observer.
+
 namespace Gerenciador {
 
     class GerenciadorEvento : public subject {

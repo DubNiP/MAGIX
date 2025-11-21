@@ -8,9 +8,10 @@ class GameOverState : public State {
 private:
     MenuGameOver menu;
     int faseAtual;
+    int numJog;
 
 public:
-    GameOverState(Jogo* contexto, int numFase);
+    GameOverState(Jogo* contexto, int numFase, int numJog);
     ~GameOverState();
 
     void Entrar();

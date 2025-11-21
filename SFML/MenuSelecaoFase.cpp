@@ -15,7 +15,7 @@ MenuSelecaoFase::~MenuSelecaoFase() {
 
 void MenuSelecaoFase::set_values() {
     const char* opcoes[] = { "Selecionar Fase", "1 Jogador - Fase 1", "1 Jogador - Fase 2","2 Jogadores - Fase 1","2 Jogadores - Fase 2","Voltar" };
-    const Vector2f posicoes[] = { {420.f, 110.f},{500.f, 250.f},{500.f, 320.f},{500.f, 390.f},{500.f, 460.f},{600.f, 550.f} };
+    const Vector2f posicoes[] = { {500.f, 110.f},{520.f, 250.f},{520.f, 320.f},{500.f, 390.f},{500.f, 460.f},{600.f, 550.f} };
     const unsigned int tamanhos[] = { 60u, 40u, 40u, 40u, 40u, 50u };
 
     texts.clear();

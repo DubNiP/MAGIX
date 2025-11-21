@@ -4,6 +4,10 @@
 
 class Jogo;
 
+
+//Essa classe é obrigatória para a comunicação entre Jogo e seu estado por meio do padrão de projeto Observer
+
+
 class State : public Observer {
 protected:
     Jogo* contexto;

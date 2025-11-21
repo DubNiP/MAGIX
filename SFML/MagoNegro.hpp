@@ -22,7 +22,7 @@ namespace entidades {
 
             void setFaseAtual(fases::Fase* f);
 
-            void danificar();
+            void danificar(Mago* pJog);
             void tomarDano(int dano, bool bondade);
 
             void mover();

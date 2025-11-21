@@ -31,9 +31,9 @@ namespace entidades {
 			faseAtual = f;
 		}
 
-		void MagoNegro::danificar() {
-			if (pJog) {
-				pJog->tomarDano(destruicao, false);
+		void MagoNegro::danificar(Mago* pJogador) {
+			if (pJogador) {
+				pJogador->tomarDano(destruicao, false);
 			}
 		}
 

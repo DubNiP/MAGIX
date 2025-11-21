@@ -22,9 +22,9 @@ namespace entidades {
 		{
 		}
 
-		void Golem::danificar() {
-			if (pJog) {
-				pJog->tomarDano(destruicao, false);
+		void Golem::danificar(Mago* pJogador) {
+			if (pJogador) {
+				pJogador->tomarDano(destruicao, false);
 			}
 		}
 

@@ -38,9 +38,9 @@ void FaseSegunda::criarInimigos() {
 
 void FaseSegunda::criarObstaculo() {
 
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(600.f, 1250.f), Vector2f(40.f, 10.f), 1.f));
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 980.f), Vector2f(40.f, 10.f), 1.f));
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 790.f), Vector2f(40.f, 10.f), 1.f));
+    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(600.f, 1250.f), Vector2f(40.f, 10.f), 1));
+    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 980.f), Vector2f(40.f, 10.f), 1));
+    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 790.f), Vector2f(40.f, 10.f), 1));
 
     auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 970.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
     auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 790.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
@@ -55,6 +55,8 @@ void FaseSegunda::criarObstaculo() {
 }
 
 void FaseSegunda::criarChefoes() {
+    //COLOCAR MAIS CHEFÕES!!!
+
     entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(Vector2f(900.f, 200.f), jog1, Vector2f(3.f, 50.f));
     criaEntidade(pM);
 	pM->setFaseAtual(this);
@@ -62,7 +64,7 @@ void FaseSegunda::criarChefoes() {
 
 
 void FaseSegunda::criarBlocos() {
-    //PADRÃO DE PROJETO PROTOTYPE:
+    //Padrão de projeto Prototype:
     entidades::obstaculos::Bloco molde(Vector2f(0.f, 0.f), Vector2f(0.f, 0.f));
 
     criaEntidade(molde.clone(Vector2f(0.f, 1260.f), Vector2f(1280.f, 20.f))); // chão

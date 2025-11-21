@@ -1,7 +1,12 @@
 #include "Fase.hpp"
 #include <random>
 
-using namespace fases;
+using namespace fases;  
+
+
+/*AQUI EM FASE TEMOS UM ERRO:
+O METODO CRIAR PLATAFORMA EXISTE EM FASE MAS DEVERIA EXISTIR SEPARADAMENTE PARA AS FASES,
+E O RAFA TÁ CRIANDO DIRETO EM CRIAR OBSTACULO NA FASE 2*/
 
 Fase::Fase(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJog2):
     Ente(),
@@ -17,7 +22,9 @@ Fase::Fase(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJ
     doisJog(false)
 {
     GC.setJog1(pJog1);
-    GC.setJog2(pJog2);
+    if (pJog2) { 
+        GC.setJog2(pJog2);
+    }
 }
 
 Fase::~Fase() {
@@ -25,7 +32,10 @@ Fase::~Fase() {
     GC.limparInimigos();
     GC.limparProjetis();
     GC.limparBlocos();
-    lista_ents.limparPreservando(jog1,jog2);                 //estranho..
+
+    lista_ents.limparPreservando(jog1, jog2);           //estranho..               //preserva os jogadores porque não estão agregados a fase.
+
+
     if (spriteFundo) {
         delete spriteFundo;
         spriteFundo = NULL;
@@ -72,7 +82,8 @@ void Fase::criarCenario() {
     GC.limparInimigos();
     GC.limparProjetis();
     GC.limparBlocos();
-    lista_ents.limparPreservando(jog1,jog2);                                    //estranho..
+
+   lista_ents.limparPreservando(jog1, jog2);        //estranho..
 
     carregarFundo();
 
@@ -83,18 +94,22 @@ void Fase::criarCenario() {
 
 		jog1->setFaseAtual(this);
         lista_ents.incluir(jog1);
-        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago1(jog1);
     }
 
-    if (doisJog) {
+    if (jog2 && doisJog) {
         jog2->reseta(posInicial, 15, 0);
 
         jog2->setFaseAtual(this);
         lista_ents.incluir(jog2);
-        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(jog2);
+        GC.setJog2(jog2);
+    }
+    else {
+        GC.setJog2(NULL);
     }
 
 
+    //padrão de projeto Template Method
+    carregarFundo();
     criarObstaculo();
     criarInimigos();
     criarBlocos();
@@ -137,7 +152,7 @@ void Fase::inicializar() {
 
 void Fase::executar() {
     inicializar();
-    lista_ents.retomarTodos();
+    lista_ents.retomarTodos();                                             //Despausa os clocks das entidades.
     pause = false;
     if (pGG) {
         GC.setWindow(pGG->getWindow());
@@ -145,13 +160,13 @@ void Fase::executar() {
         Event event;
         faseIniciada = true;
         bool teclaEscAnterior = false;
-        while (window && window->isOpen() && jog1 && jog1->getVidas() > 0 && !GC.getFaseConcluida()) {
+        while (window && window->isOpen() && jog1 && jog1->getVidas() > 0 && !GC.getFaseConcluida()) {        //Enquanto as vidas do jogador1 > 0 e a fase não ser concluída..
             pGG->atualizarCamera(jog1->getPos());
 		    View cam = pGG->getCamera();
 
             window->setView(cam);
             
-            while (window->pollEvent(event)) {
+            while (window->pollEvent(event)) {          //Talvez chamar função do GE aqui..
                 if (event.type == Event::Closed) {
                     window->close();
                     return;
@@ -166,8 +181,14 @@ void Fase::executar() {
 
             Gerenciador::GerenciadorEvento::getGerenciadorEvento()->executar();
             lista_ents.executarTodos();
-
             GC.executar();
+
+            if (jog2 && jog2->getVidas() <= 0) {
+                lista_ents.excluir(jog2);
+                Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(NULL);
+                GC.setJog2(NULL);
+                doisJog = false;
+            }
 
             pGG->desenhaTodos(&lista_ents,spriteFundo);   
         }
@@ -177,6 +198,7 @@ void Fase::executar() {
 
 void Fase::resetar() {
     cenarioCriado = false;
+    faseIniciada = false;
     inicializar();
 }
 

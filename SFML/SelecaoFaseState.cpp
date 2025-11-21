@@ -10,19 +10,19 @@ SelecaoFaseState::~SelecaoFaseState() {
 }
 
 void SelecaoFaseState::Entrar() {
-    contexto->getGG().resetarCamera();
+    Gerenciadores::GerenciadorGrafico::getGG().resetarCamera();
     menu.resetaFlags();
     menu.reseta();
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->soltaTeclas();
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);                                //Padrão de projeto Observer
 }
 
 void SelecaoFaseState::handle() {
-    auto& GG = contexto->getGG();
+    auto& GG = Gerenciadores::GerenciadorGrafico::getGG();
     auto* GE = Gerenciador::GerenciadorEvento::getGerenciadorEvento();
     RenderWindow* window = GG.getWindow();
 
-    while (window && window->isOpen() && menu.getFaseEscolhida() == -1 && !menu.getVoltar()) {
+    while (window && window->isOpen() && menu.getFaseEscolhida() == -1 && !menu.getVoltar()) {          //Enquanto não selecionar uma fase e não clicar para voltar...
         if (!GE->verificarEventosJanela(window)) {
             return;
         }
@@ -34,16 +34,16 @@ void SelecaoFaseState::handle() {
 
 void SelecaoFaseState::Sair() {
 
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);                              //Padrão de projeto Observer
     if (menu.getVoltar()) {
         contexto->mudarEstado(new MenuPrincipalState(contexto));
     }
+    
     else if (menu.getFaseEscolhida() == 1) {
-        contexto->getFase1()->setdoisJog(menu.getNumJogadores() == 1 ? false : true);
         contexto->mudarEstado(new JogandoState(contexto, 1, menu.getNumJogadores()));
     }
+
     else if (menu.getFaseEscolhida() == 2) {
-        contexto->getFase1()->setdoisJog(menu.getNumJogadores() == 1 ? false : true);
         contexto->mudarEstado(new JogandoState(contexto, 2, menu.getNumJogadores()));
     }
 }
