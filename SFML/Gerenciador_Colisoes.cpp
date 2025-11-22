@@ -126,7 +126,7 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 		for (auto it = LOs.begin(); it != LOs.end(); it++) {
 			if (*it) {
 				if (auto* saida = dynamic_cast<entidades::obstaculos::Saida*>(*it)) {
-					saida->atualizarPorProximidade(bJog);
+					saida->atualizarPorRaio(bJog);
 				}
 			}
 		}
@@ -153,7 +153,7 @@ void GerenciadorColisoes::tratarColisoesJogsObstacs() {
 		for (auto it = LOs.begin(); it != LOs.end(); it++) {
 			if (*it) {
 				if (auto* saida = dynamic_cast<entidades::obstaculos::Saida*>(*it)) {
-					saida->atualizarPorProximidade(bJog2);
+					saida->atualizarPorRaio(bJog2);
 				}
 			}
 		}

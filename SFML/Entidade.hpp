@@ -15,7 +15,7 @@ protected:
 	Vector2f vel;
 	Vector2f velocidadeInicial;
 	float aceleracao;
-	float emAceleracao;
+	bool emAceleracao;
 	float forcaGravidade;
 	float velocidadeTerminal;	
 	Clock tempoMovimento;
@@ -30,7 +30,7 @@ public:
 	virtual ~Entidade();
 
 	virtual void salvar() = 0;
-	void executar();
+	virtual void executar() = 0;
 
 	const bool getEmTerra() const;
 	void setEmTerra(const bool v);

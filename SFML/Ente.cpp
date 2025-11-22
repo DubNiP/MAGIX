@@ -39,7 +39,9 @@ void Ente::setGG(Gerenciadores::GerenciadorGrafico* pG) {
 }
 
 void Ente::setScale(const Vector2f& scale) {
-	if (pSprite) pSprite->setScale(scale);
+	if (pSprite) {
+		pSprite->setScale(scale);
+	}
 }
 
 FloatRect Ente::getBounds() const {
@@ -68,6 +70,6 @@ bool Ente::carregarTexturaSprite(const string& arquivo, bool repeated, bool smoo
 	return true;
 }
 
-Sprite* Ente::getSprite() {
+Sprite* Ente::getSprite() const {
 	return pSprite;
 }

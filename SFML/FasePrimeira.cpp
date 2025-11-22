@@ -37,7 +37,7 @@ void FasePrimeira::criarBlocos() {
     criaEntidade(molde.clone(Vector2f(1020.f, 290.f), Vector2f(80.f, 40.f)));
     criaEntidade(molde.clone(Vector2f(1180.f, 360.f), Vector2f(80.f, 40.f)));
     criaEntidade(molde.clone(Vector2f(1180.f, 220.f), Vector2f(80.f, 40.f)));
-    criaEntidade(molde.clone(Vector2f(0.f, 700.f), Vector2f(1300.f, 20.f)));
+    criaEntidade(molde.clone(Vector2f(0.f, 700.f), Vector2f(1300.f, 60.f)));
     criaEntidade(molde.clone(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f)));
     criaEntidade(molde.clone(Vector2f(0.f, 0.f), Vector2f(20.f, 720.f)));
     criaEntidade(molde.clone(Vector2f(1260.f, 0.f), Vector2f(20.f, 720.f)));

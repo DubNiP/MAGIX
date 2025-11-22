@@ -3,17 +3,17 @@
 namespace entidades {
 	namespace obstaculos {
 
-		Plataforma::Plataforma(Vector2f pos, Vector2f tam, bool dano, float ampl, float per) :
-			Obstaculo(pos, tam, dano),
+		Plataforma::Plataforma(Vector2f posi, Vector2f tam, bool dano, float ampl, float per) :
+			Obstaculo(posi, tam, dano),
 			amplitude(ampl),
 			periodo(per),
-			yIn(pos.y),
-			yAnt(pos.y),
+			yIn(posi.y),
+			yAnt(posi.y),
 			ativa(false),
 			tempo()
 		{
 			id = 7;
-			this->pos.y = yIn + amplitude;
+			pos.y = yIn + amplitude;
 			yAnt = pos.y;
 
 			carregarSprite();
@@ -93,11 +93,6 @@ namespace entidades {
 				}
 			}
 		}
-
-
-		//A COLISÃO ESTÁ HORROROSA, OS PERSONAGENS N ESTÃO SENDO ESMAGADOS.
-	
-		//possível solução: fazer com que se a entidade estiver abaixo de n pixels, ela é morta..
 
 		bool Plataforma::esmagou(entidades::personagens::Personagem* p) const {
 			if (p) {

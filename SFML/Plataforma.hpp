@@ -22,7 +22,7 @@ namespace entidades {
 			~Plataforma();
 		 
 			void executar();
-			virtual void salvar();
+			void salvar();
 			void salvarDataBuffer();
 			void obstaculizar(entidades::personagens::Mago* p);
 			bool esmagou(entidades::personagens::Personagem* p) const;
