@@ -6,9 +6,9 @@ namespace entidades
         Entidade(pos, Vector2f(80.f, -40.f), dir),
         ativo(true),
         bondade(bond),
-        posicao(0),
         dano(2)
     {
+        id = 10;
 		tempoMovimento.restart();
 		tempoAceleracao.restart();
 		clocksIni = true;
@@ -41,10 +41,14 @@ namespace entidades
 		Entidade::salvarDataBuffer();
 
         tempBuffer  << ativo << " "
-        << olhandoDir << " "
-        << ativo << " "
         << bondade << " "
         << dano << " " << endl;
+	}
+
+    void Projetil::carregar(bool ativo, bool bond, int d) {
+        this->ativo = ativo;
+        this->bondade = bond;
+        this->dano = d;
 	}
 
     void Projetil::setAtivo(bool valor) {

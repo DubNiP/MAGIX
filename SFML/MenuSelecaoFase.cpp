@@ -14,7 +14,7 @@ MenuSelecaoFase::~MenuSelecaoFase() {
 }
 
 void MenuSelecaoFase::set_values() {
-    const char* opcoes[] = { "Selecionar Fase", "1 Jogador - Fase 1", "1 Jogador - Fase 2","2 Jogadores - Fase 1","2 Jogadores - Fase 2","Voltar" };
+    const char* opcoes[] = { "Carregar Jogo", "1 Jogador - Fase 1", "1 Jogador - Fase 2","2 Jogadores - Fase 1","2 Jogadores - Fase 2","Voltar" }; //COLOCAR OPCAO DE CARREGAR
     const Vector2f posicoes[] = { {500.f, 110.f},{520.f, 250.f},{520.f, 320.f},{500.f, 390.f},{500.f, 460.f},{600.f, 550.f} };
     const unsigned int tamanhos[] = { 60u, 40u, 40u, 40u, 40u, 50u };
 
@@ -33,13 +33,16 @@ void MenuSelecaoFase::set_values() {
         texts.push_back(t);
     }
 
-    posMin = 1; 
+    posMin = 0; 
     posMax = 5;  
     pos = posMin;
 }
 
 void MenuSelecaoFase::confirmar() {
-    if (pos == 1) {
+    if (pos == 0) {
+        faseEscolhida = 3;
+    }
+    else if (pos == 1) {
         faseEscolhida = 1;
         numJogadores = 1;
     }

@@ -34,8 +34,6 @@ namespace entidades {
 			tempBuffer.str("");
 			tempBuffer.clear();
 
-			Inimigo::salvarDataBuffer();
-
 			salvarDataBuffer();
 
 			buffer.open("Save/save.txt", ios::out | ios::app);
@@ -52,12 +50,27 @@ namespace entidades {
 		}
 
 		void Sapo::salvarDataBuffer() {
-
+			Inimigo::salvarDataBuffer();
+			
 			tempBuffer << raio << " "
 			<< intervaloPulo << endl;
 
 		}
 
+		void Sapo::carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
+			int d, float tS, float tP, float r, float intPul){
+			Inimigo::carregar(num, m, jog, mA, pI, d, tS, tP);
+
+			raio = r;
+			intervaloPulo = intPul;
+
+		}
+		//RAFA TINHA TIRADO, COMENTAR..
+		void Sapo::danificar() {
+			if (pJog) {
+				pJog->tomarDano(destruicao, false);
+			}
+		}
 		void Sapo::danificar(Mago* pJogador) {
 			if (pJogador) {
 				pJogador->tomarDano(destruicao, false);
@@ -85,49 +98,35 @@ namespace entidades {
 
 			if (fabs(posJog.x - posInim.x) < raio && fabs(posJog.y - posInim.y) < raio) {
 				intervaloPulo = 1.0f;
+
 				if (posJog.x > posInim.x) moverDireita();
-
 				else moverEsquerda();
-
-				return;
-			}
-
-			const float alcanceEsquerda = posInicial.x - raio;
-			const float alcanceDireita = posInicial.x + raio;
-			intervaloPulo = 0.8f;
-
-			if (posInim.x < alcanceEsquerda * 0.5) {
-				moverDireita();
-			}
-			else if (posInim.x > alcanceDireita * 0.5) {
-				moverEsquerda();
 			}
 			else {
+				if (pos.x > 1240) { moverAleatorio = 1; }
+				if (pos.x < 40) { moverAleatorio = 0; }
 				movimentoAleatorio();
+			
 			}
 		}
 		
 		void Sapo::movimentoAleatorio() {
 
-			float dt = relogio.getElapsedTime().asSeconds();
+			float dt = relogio.getElapsedTime().asSeconds() + tempSalvo;
 			if (dt >= 1.0f) {
 				uniform_int_distribution<int> dist2(0, 3);
 				moverAleatorio = dist2(rng);
 				relogio.restart();
+				tempSalvo = 0;
 			}
 
-			if (moverAleatorio % 2 != 0) {
-				moverEsquerda();
-			}
-			else {
-				moverDireita();
-			}
+			if (moverAleatorio % 2 == 0) moverDireita();
+			else if (moverAleatorio % 2 != 0) moverEsquerda();
 		}
 
 		void Sapo::moverEsquerda() {
 
-			if (emTerra && relogioDePulo.getElapsedTime().asSeconds() >= intervaloPulo && pos.x > 30) {
-
+			if (emTerra && relogioDePulo.getElapsedTime().asSeconds() >= intervaloPulo) {
 				relogioDePulo.restart();
 				tempoAceleracao.restart();
 
@@ -147,7 +146,7 @@ namespace entidades {
 				emTerra = false;
 				emAceleracao = true;
 
-				relogioDePulo.restart();
+				relogioDePulo.restart();	
 				tempoAceleracao.restart();
 
 				vel.y = velocidadeInicial.y;

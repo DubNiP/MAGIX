@@ -28,6 +28,7 @@ namespace entidades {
 			void salvarDataBuffer();
 			virtual void salvar() = 0;
 			virtual void executar() = 0;
+			virtual void carregar(float l, float alt, bool dano);
 			virtual void obstaculizar(entidades::personagens::Mago* p) = 0;                 //está sem relação tanto no nosso diagrama quanto no do professor.
 
 			const bool getDanoso() const;

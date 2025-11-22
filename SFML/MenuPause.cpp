@@ -6,7 +6,7 @@ MenuPause::MenuPause() :
     Menu(),
     continuar(false),
     voltarMenu(false),
-    lista_ents(NULL)
+    salvar(false)
 {
     set_values();
     reseta();
@@ -49,13 +49,7 @@ void MenuPause::confirmar() {
         voltarMenu = true;
     }
     else if (pos == 3) {
-        std::cout << "MenuPause::confirmar() -> salvar selecionado. lista_ents ptr = " << lista_ents << std::endl;
-        if (lista_ents) {
-            lista_ents->salvarTodos();
-            std::cout << "MenuPause::confirmar() -> salvarTodos() chamado" << std::endl;
-        } else {
-            std::cout << "MenuPause::confirmar() -> lista_ents == nullptr (nenhuma lista conectada)" << std::endl;
-        }
+		salvar = true;
     }
 }
 
@@ -67,15 +61,13 @@ bool MenuPause::getVoltarMenu() const {
     return voltarMenu;
 }
 
+bool MenuPause::getSalvar() const {
+    return salvar;
+}
+
 void MenuPause::resetaFlags() {
     continuar = false;
     voltarMenu = false;
 }
 
-void MenuPause::setListaEntidades(listas::ListaEntidades* l) {
-    lista_ents = l;
-}
 
-listas::ListaEntidades* MenuPause::getListaEntidades() const {
-    return lista_ents;
-}

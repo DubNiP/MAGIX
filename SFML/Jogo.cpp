@@ -9,6 +9,7 @@ Jogo::Jogo() :
 {
     Ente::setGG(&Gerenciadores::GerenciadorGrafico::getGG());
     estadoAtual = new MenuPrincipalState(this);
+
 }
 
 Jogo::~Jogo() {

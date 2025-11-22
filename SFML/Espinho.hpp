@@ -13,6 +13,7 @@ namespace entidades {
 			~Espinho();
 			void salvarDataBuffer();
 			void salvar();
+			void carregar(float l, float a, bool dano, int quantDano);
 			void executar();
 			void obstaculizar(entidades::personagens::Mago* p);
 			const int getDanosidade() const;

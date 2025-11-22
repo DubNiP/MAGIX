@@ -7,7 +7,6 @@ namespace entidades
 	protected:
 		bool ativo;
 		bool bondade; 
-		int posicao;
 		int dano;                        //dano tbm..          
 	public:
 		Projetil(Vector2f pos, bool dir, bool bondade);
@@ -20,6 +19,7 @@ namespace entidades
 		const bool getBondade();
 		void salvar();
 		void salvarDataBuffer();
+		void carregar(bool ativo, bool bond, int d);
 		void carregarSprite();
 	};
 }

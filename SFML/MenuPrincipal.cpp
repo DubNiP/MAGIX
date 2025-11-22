@@ -44,7 +44,7 @@ void MenuPrincipal::confirmar() {
     else if (pos == 3) {
         sair = true;
     }
-    // pos == 2 (Ranking) não faz nada ainda
+    
 }
 
 bool MenuPrincipal::getIniciar() const {

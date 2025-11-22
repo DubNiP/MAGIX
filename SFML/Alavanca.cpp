@@ -8,7 +8,7 @@ namespace entidades {
 			p(pPlat),
 			acionada(false)
 		{
-			id = 10;
+			id = 9;
 			carregarSprite();
 		}
 
@@ -26,7 +26,7 @@ namespace entidades {
 
 			salvarDataBuffer();
 
-			buffer.open("Save/save", ios::out | ios::app);
+			buffer.open("Save/save.txt", ios::out | ios::app);
 
 			if (!buffer.is_open()) {
 				cout << "Arquivo não pode ser aberto" << endl;
@@ -41,7 +41,12 @@ namespace entidades {
 		void Alavanca::salvarDataBuffer() {
 			Obstaculo::salvarDataBuffer();
 
-			tempBuffer << acionada << "\n" << endl;
+			tempBuffer << acionada << endl;
+		}
+
+		void Alavanca::carregar(float l, float a, bool dano, bool acionad) {
+			Obstaculo::carregar(l, a, dano);
+			acionada = acionad;
 		}
 
 		void Alavanca::obstaculizar(entidades::personagens::Mago* pJ) {

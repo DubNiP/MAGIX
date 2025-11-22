@@ -45,7 +45,13 @@ namespace entidades {
 
 			tempBuffer << vida << " "
 			<< ativo << " "
-			<< "\n";
+			<< endl;
+		}
+
+		void Teia::carregar(float larg, float alt, bool dano, int v, bool atv) {
+			Obstaculo::carregar(larg, alt, dano);
+			vida = v;
+			ativo = atv;
 		}
 
 		void Teia::obstaculizar(entidades::personagens::Mago* p) {

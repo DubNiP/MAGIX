@@ -18,6 +18,7 @@ namespace entidades {
 			void executar();
 			void salvar();
 			void salvarDataBuffer();
+			void carregar(float l, float a, bool dano, bool acionad);
 
 			void obstaculizar(entidades::personagens::Mago* p);
 			void carregarSprite();

@@ -21,7 +21,11 @@ FaseSegunda::~FaseSegunda() {
 
 void FaseSegunda::criarInimigos() {
     criarChefoes();
+    criarSapos();
+   
+}
 
+void FaseSegunda::criarSapos() {
     vector<Vector2f> posicoesInimigos;
     posicoesInimigos.push_back(Vector2f(660.f, 1200.f));
     posicoesInimigos.push_back(Vector2f(660.f, 1030.f));
@@ -33,33 +37,99 @@ void FaseSegunda::criarInimigos() {
         int idx = dist2(rng);
         criaEntidade(new entidades::personagens::Sapo(posicoesInimigos[idx], jog1, Vector2f(20.f, 70.f)));
     }
-   
 }
 
 void FaseSegunda::criarObstaculo() {
+    criarPlataformas();
+    criarEspinho();
 
     criaEntidade(new entidades::obstaculos::Espinho(Vector2f(600.f, 1250.f), Vector2f(40.f, 10.f), 1));
     criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 980.f), Vector2f(40.f, 10.f), 1));
     criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 790.f), Vector2f(40.f, 10.f), 1));
 
-    auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 970.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
+    auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(20.f, 470.f), Vector2f(100.f, 20.f), false, 90.f, 10.f)));
     auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 790.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
-    auto* plat3 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(20.f, 470.f), Vector2f(100.f, 20.f), false, 90.f, 10.f)));
+    auto* plat3 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 970.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
     auto* plat4 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 1150.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
 
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1030.f), Vector2f(30.f, 40.f), plat1));
+
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1230.f), Vector2f(30.f, 40.f), plat1));
     criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 850.f), Vector2f(30.f, 40.f), plat2));
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1230.f), Vector2f(30.f, 40.f), plat3));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1030.f), Vector2f(30.f, 40.f), plat3));
     criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(350.f, 1230.f), Vector2f(30.f, 40.f), plat4));
 
 }
 
-void FaseSegunda::criarChefoes() {
-    //COLOCAR MAIS CHEFÕES!!!
+void FaseSegunda::criarPlataformas() {
 
-    entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(Vector2f(900.f, 200.f), jog1, Vector2f(3.f, 50.f));
+    auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(20.f, 470.f), Vector2f(100.f, 20.f), false, 90.f, 10.f)));
+    auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 790.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
+    auto* plat3 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 970.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
+    auto* plat4 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 1150.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
+
+
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1230.f), Vector2f(30.f, 40.f), plat1));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 850.f), Vector2f(30.f, 40.f), plat2));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1030.f), Vector2f(30.f, 40.f), plat3));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(350.f, 1230.f), Vector2f(30.f, 40.f), plat4));
+
+}
+
+void FaseSegunda::criarPlataforma(int i, bool ativ) {
+
+    if (i == 1) {
+        auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(20.f, 470.f), Vector2f(100.f, 20.f), false, 90.f, 10.f)));
+        criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1230.f), Vector2f(30.f, 40.f), plat1));
+        if (ativ)
+            plat1->setAtiva();
+	
+    }
+    else if (i == 2) {
+        auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 790.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
+        criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 850.f), Vector2f(30.f, 40.f), plat2));
+        if(ativ)
+			plat2->setAtiva();
+    }
+    else if (i == 3) {
+        auto* plat3 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 970.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
+        criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1030.f), Vector2f(30.f, 40.f), plat3));
+        if(ativ)
+			plat3->setAtiva();
+    }
+    else if (i == 4) {
+        auto* plat4 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 1150.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
+        criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(350.f, 1230.f), Vector2f(30.f, 40.f), plat4));
+        if(ativ)
+			plat4->setAtiva();
+    }
+}
+
+void FaseSegunda::criarEspinho() {
+    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(600.f, 1250.f), Vector2f(40.f, 10.f), 1.f));
+    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 980.f), Vector2f(40.f, 10.f), 1.f));
+    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 790.f), Vector2f(40.f, 10.f), 1.f));
+
+}
+
+void FaseSegunda::criarChefoes() {
+
+    vector<Vector2f> posicoesInimigos;
+    posicoesInimigos.push_back(Vector2f(900.f, 200.f));
+    posicoesInimigos.push_back(Vector2f(1180.f, 1200.f));
+    posicoesInimigos.push_back(Vector2f(1000.f, 200.f));
+
+    entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(posicoesInimigos[1], jog1, Vector2f(3.f, -60.f));
     criaEntidade(pM);
-	pM->setFaseAtual(this);
+    pM->setFaseAtual(this);
+
+    uniform_int_distribution<int> dist2(0, 2);
+
+    for (int i = 0; i < maxChefoes-1; i++) {
+		int idx = dist2(rng);
+        entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(posicoesInimigos[idx], jog1, Vector2f(3.f, -60.f));
+        criaEntidade(pM);
+        pM->setFaseAtual(this);
+    }
 }
 
 

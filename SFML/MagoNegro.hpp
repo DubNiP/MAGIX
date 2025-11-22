@@ -12,8 +12,6 @@ namespace entidades {
             int tamanho;
             Clock ataqueClock;
             bool apto;
-            int moverAleatorio;
-            float velocidadeInicialX;
 			fases::Fase* faseAtual;
 
         public:
@@ -29,11 +27,12 @@ namespace entidades {
             void moverEsquerda();
             void moverDireita();
             void movimentoAleatorio();
-            void pular();
 
             void executar();
             void salvar();
             void salvarDataBuffer();
+            void carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
+				int d, float tS, float tP, int t, bool apt);
             void carregarSprite();
 
         };

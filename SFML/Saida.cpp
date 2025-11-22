@@ -46,6 +46,13 @@ namespace entidades {
 				<< raio << "\n";
 		}
 
+		void Saida::carregar(float l, float a, bool dano, bool abert, float r) {
+			Obstaculo::carregar(l,a,  dano);
+			aberta = abert;
+			raio = r;
+			aplicarSpriteEstado();
+		}
+
 		void Saida::obstaculizar(entidades::personagens::Mago* p) {
 		}
 

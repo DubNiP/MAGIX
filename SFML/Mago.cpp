@@ -1,5 +1,6 @@
 #include "Mago.hpp"
 #include "fase.hpp"
+#include "FasePrimeira.hpp"
 
 namespace entidades {
 	namespace personagens {
@@ -12,13 +13,15 @@ namespace entidades {
 			ataqueClock(),
 			naTeia(false),
 			apto(true),
+			tempDanoSalv(0),
+			tempAtaqSalv(0),
 			concluiuFase(false),
 			faseAtual(NULL)
 		{
 			id = 1;
 			carregarSprite();
 		}
-
+		
 		Mago::~Mago() {
 			faseAtual = NULL;
 		}
@@ -62,7 +65,20 @@ namespace entidades {
 				<< naTeia << " " 
 				<< apto << " " 
 				<< concluiuFase << endl;
-			
+
+		}
+
+		void Mago::carregar(int numVidas, int pontosSalvos, float invSalvo, float tempDanoSalvo, float tempAtaqSalvo, bool naTeiaSalvo, bool apto, bool fConcl) {
+			this->num_vidas = numVidas;
+			this->pontos = pontosSalvos;
+			this->invencibilidade = invSalvo;
+
+			this->tempDanoSalv = tempDanoSalvo;
+			this->tempAtaqSalv = tempAtaqSalvo;
+
+			this->naTeia = naTeiaSalvo;
+			this->apto = apto;
+			barraVida.setSize(Vector2f(30.f * (num_vidas / 15.f), 2.f));
 		}
 
 		void Mago::mover() {
@@ -93,9 +109,10 @@ namespace entidades {
 			}
 
 			if (atirar) {
-				if (ataqueClock.getElapsedTime().asSeconds() > 1.f) {
+				if (ataqueClock.getElapsedTime().asSeconds() + tempAtaqSalv > 1.f) {
 					apto = true;
 					ataqueClock.restart();
+					tempAtaqSalv = 0;
 				}
 				if (apto) {
 					apto = false;
@@ -119,7 +136,6 @@ namespace entidades {
 			pontos = pts;
 			danoClock.restart();
 			ataqueClock.restart();
-			clocksIni = false;
 			vel.y = 0.f;
 			emTerra = true;
 			barraVida.setSize(Vector2f(30.f * (num_vidas / 15.f), 2.f));
@@ -127,13 +143,14 @@ namespace entidades {
 
 		void Mago::tomarDano(int dano, bool bond) {
 			if (dano > 0 && !bond) {
-				if (danoClock.getElapsedTime().asSeconds() < invencibilidade) {
+				if (danoClock.getElapsedTime().asSeconds() + tempDanoSalv < invencibilidade) {
 					return;
 				}
 				int vidas = getVidas() - dano;
 				if (vidas < 0) vidas = 0;
 				setVidas(vidas);
 				danoClock.restart();
+				tempDanoSalv = 0;
 				barraVida.setSize(Vector2f(30.f * (num_vidas / 15.f), 2.f));
 			}
 		}

@@ -7,20 +7,16 @@
 using namespace std;
 using namespace sf;
 
-
 class Menu: public Ente {
 protected:
 	int pos;
 	int posMin;  
 	int posMax;
 
-
 	Font font;
 	vector<Text> texts;
 
-
 	virtual void set_values() = 0;
-	
 
 public:
 	Menu();

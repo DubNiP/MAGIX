@@ -42,9 +42,11 @@ void SelecaoFaseState::Sair() {
     else if (menu.getFaseEscolhida() == 1) {
         contexto->mudarEstado(new JogandoState(contexto, 1, menu.getNumJogadores()));
     }
-
     else if (menu.getFaseEscolhida() == 2) {
         contexto->mudarEstado(new JogandoState(contexto, 2, menu.getNumJogadores()));
+    }
+    else if (menu.getFaseEscolhida() == 3) {
+        contexto->mudarEstado(new JogandoState(contexto, 3, menu.getNumJogadores()));
     }
 }
 

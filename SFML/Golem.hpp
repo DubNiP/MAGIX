@@ -8,8 +8,6 @@ namespace entidades {
         class Golem : public Inimigo {
         private:
             int tamanho;
-            int moverAleatorio;
-            float velocidadeInicialX;
 
         public:
             Golem(Vector2f pos, Mago* pJog, Vector2f vel);
@@ -22,11 +20,12 @@ namespace entidades {
             void moverEsquerda();
             void moverDireita();
             void movimentoAleatorio();
-            void pular();
 
             void executar();
             void salvar();
 			void salvarDataBuffer();
+            void carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
+				int d, float tS, float tP, int tam);
             void carregarSprite();
 
         };

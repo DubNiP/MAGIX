@@ -21,16 +21,6 @@ void PauseState::Entrar() {
     menu.resetaFlags();
     menu.reseta();
 
-    if (faseAtual == 1) {
-        menu.setListaEntidades(contexto->getFase1()->getListaEntidades());
-    } else if (faseAtual == 2) {
-        menu.setListaEntidades(contexto->getFase2()->getListaEntidades());
-    } else {
-        menu.setListaEntidades(NULL);
-    }
-
-    cout << "PauseState::Entrar() -> menu.lista_ents = " << menu.getListaEntidades() << endl;
-
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->soltaTeclas();
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);                                     //Padrão de projeto Observer.
 }
@@ -40,7 +30,11 @@ void PauseState::handle() {
     auto& GG = Gerenciadores::GerenciadorGrafico::getGG();
     RenderWindow* window = GG.getWindow();
 
-    while (window && window->isOpen() && !menu.getContinuar() && !menu.getVoltarMenu()) {                     //Enquanto não continua ou volta ao menu..
+    while (window && window->isOpen() && !menu.getContinuar() && !menu.getVoltarMenu()) {
+        if (menu.getSalvar()) {
+			contexto->getFase1()->getListaEntidades()->salvarTodos();
+        }
+        
         if (!GE->verificarEventosJanela(window)) {
             return;
         }

@@ -69,6 +69,16 @@ namespace entidades {
 				<< tempo.getElapsedTime().asSeconds() << endl;
 		}
 
+		void Plataforma::carregar(float l, float a, bool dano, float ampl, float per, float yin, float yant, bool ativ, float temp) {
+			Obstaculo::carregar(l, a, dano);
+			amplitude = ampl;
+			periodo = per;
+			yIn = yin;
+			yAnt = yant;
+			ativa = ativ;
+			tempo.restart();
+		}
+
 		void Plataforma::obstaculizar(entidades::personagens::Mago* p) {
 			if (p) {
 

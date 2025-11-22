@@ -128,18 +128,12 @@ namespace listas {
 
     void ListaEntidades::salvarTodos() {
         
-        try {
-            std::filesystem::create_directories("Save");
-        } catch (...) {
-        }
-
-        {
-            std::ofstream out("Save/save.txt", std::ios::out | std::ios::trunc);
-            if (!out.is_open()) {
-                std::cerr << "Erro: nao foi possivel abrir Save/save.txt para salvar." << std::endl;
-                return;
-            }
-        }
+        
+        ofstream out("Save/save.txt", ios::out | ios::trunc);
+        if (!out.is_open()) {
+            cerr << "Erro: nao foi possivel abrir Save/save.txt para salvar." << std::endl;
+            return;
+        }        
 
         Lista<Entidade>::Iterator it = LEs.begin();
         int count = 0;
@@ -151,7 +145,6 @@ namespace listas {
             }
             ++it;
         }
-        std::cout << "ListaEntidades::salvarTodos() -> entidades salvas = " << count << std::endl;
     }
 
     void ListaEntidades::retomarTodos() {

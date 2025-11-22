@@ -3,9 +3,9 @@
 namespace entidades {
 	namespace personagens {
 
-		Personagem::Personagem(Vector2f pos, Vector2f velocidade):
-			Entidade(pos, velocidade),
-			num_vidas(10)
+		Personagem::Personagem(Vector2f pos, Vector2f velocidade)
+			: Entidade(pos, velocidade, true),
+			  num_vidas(10)
 		{
 			barraVida = RectangleShape(Vector2f(30.f, 2.f));
 			barraFundo = RectangleShape(Vector2f(30.f, 2.f));

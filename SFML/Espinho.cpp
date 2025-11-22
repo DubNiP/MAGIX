@@ -40,6 +40,11 @@ namespace entidades {
 			tempBuffer << danosidade << "\n";
 		}
 
+		void Espinho::carregar(float l, float a, bool dano, int quantDano) {
+			Obstaculo::carregar(l, a, dano);
+			danosidade = quantDano;
+		}
+
 		void Espinho::executar() {
 			attPos();
 		}

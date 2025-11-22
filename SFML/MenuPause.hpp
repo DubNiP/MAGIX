@@ -1,12 +1,11 @@
 #pragma once
 #include "Menu.hpp"
-#include "ListaEntidades.hpp"
 
 class MenuPause : public Menu {
 private:
     bool continuar;
     bool voltarMenu;
-    listas::ListaEntidades* lista_ents;
+	bool salvar;
 protected:
     void set_values();
 
@@ -17,8 +16,6 @@ public:
     void confirmar();
     bool getContinuar() const;
     bool getVoltarMenu() const;
+	bool getSalvar() const;
     void resetaFlags();
-
-    void setListaEntidades(listas::ListaEntidades* l);
-    listas::ListaEntidades* getListaEntidades() const;
 };

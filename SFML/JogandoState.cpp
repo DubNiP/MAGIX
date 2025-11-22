@@ -32,6 +32,15 @@ void JogandoState::Entrar() {
         faseAtual = contexto->getFase2();
         Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(true);
     }
+    else if (numeroFase == 3) {
+
+        faseAtual = contexto->getFase1();
+        Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(false);
+
+        faseAtual->inicializar();
+
+        faseAtual->carregarSave("Save/save.txt");
+    }
 
     if (faseAtual) {
         if (numJogadores == 2) {

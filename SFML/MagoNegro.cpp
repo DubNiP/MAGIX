@@ -11,12 +11,11 @@ namespace entidades {
 			tamanho(300),
 			ataqueClock(),
 			apto(true),
-			moverAleatorio(0),
-			velocidadeInicialX(vel.x),
 			faseAtual(NULL)
 		{
 			id = 3;
 			carregarSprite();
+			velocidadeInicial.y = vel.y;
 			uniform_int_distribution<int> dist2(0, 3);
 			moverAleatorio = dist2(rng);
 			
@@ -57,7 +56,7 @@ namespace entidades {
 			Vector2f posInim = getPos();
 
 
-			if(fabs(posJog.x - posInim.x) < tamanho) {
+			if(fabs(posJog.x - posInim.x) < tamanho && fabs(posJog.y - posInim.y) < tamanho / 2) {
 				if (ataqueClock.getElapsedTime().asSeconds() > 1.f) {
 					apto = true;
 					ataqueClock.restart();
@@ -70,75 +69,48 @@ namespace entidades {
 			}
 
 			if (relogioDePulo.getElapsedTime().asSeconds() >= 3.0f && emTerra) {
-				pular();
+				emTerra = false;
+				vel.y = velocidadeInicial.y;
 				relogioDePulo.restart();
 				return;
 			}
 
-			if (fabs(posJog.x - posInim.x) + 150 < tamanho && fabs(posJog.y - posInim.y) + 150 < tamanho && apto) {
-				if (posJog.x > posInim.x) {
-					moverDireita();
-				}
-				else {
-					moverEsquerda();
-				}
+			if (fabs(posJog.x - posInim.x) + 150 < tamanho && fabs(posJog.y - posInim.y) < tamanho/2 && apto) {
+				if (posJog.x > posInim.x) moverDireita();
+				else moverEsquerda();
 			}
 			else {
-				if (getPos().x < posInicial.x - tamanho * 0.5 && getPos().x < 50.0f || getPos().x < 30.f) moverDireita();
-				else if (getPos().x > posInicial.x + tamanho * 3 && getPos().x > 50.0f || getPos().x > 1250.f) moverEsquerda();
-				else movimentoAleatorio();
-			}
-		}
-
-
-		void MagoNegro::pular() {
-			if (emTerra && pJog) {
-				Vector2f posJog = pJog->getPos();
-				Vector2f posInim = getPos();
-
-
-				if (posJog.x > posInim.x) {
-
-					vel.x = velocidadeInicialX * 2.0f;
-				}
-				else {
-					if (getPos().x > 30.0f) {
-						vel.x = -velocidadeInicialX * 2.0f;
-					}
-					else {
-						vel.x = velocidadeInicialX * 2.0f;
-					}
-				}
-
-				vel.y = -50.0f;
-				emTerra = false;
+				if (pos.x > 1240) { moverAleatorio = 1; }
+				if (pos.x < 40) { moverAleatorio = 0; }
+				movimentoAleatorio();
 			}
 		}
 
 		void MagoNegro::moverEsquerda() {
 			Vector2f novaPos = getPos();
-			novaPos.x -= velocidadeInicialX;
+			novaPos.x -= vel.x;
 			setPos(novaPos);
 			setOlhandoDir(false);
 		}
 
 		void MagoNegro::moverDireita() {
 			Vector2f novaPos = getPos();
-			novaPos.x += velocidadeInicialX;
+			novaPos.x += vel.x;
 			setPos(novaPos);
 			setOlhandoDir(true);
 		}
 
 		void MagoNegro::movimentoAleatorio() {
-			if (moverAleatorio % 2 == 0) moverDireita();
-			else if (moverAleatorio % 2 != 0 && getPos().x > 30) moverEsquerda();
-
 			float dt = relogio.getElapsedTime().asSeconds();
 			if (dt >= 1.0f) {
 				uniform_int_distribution<int> dist4(0, 3);
 				moverAleatorio = dist4(rng);
 				relogio.restart();
 			}
+
+			if (moverAleatorio % 2 == 0) moverDireita();
+			else if (moverAleatorio % 2 != 0) moverEsquerda();
+
 		}
 
 		void MagoNegro::executar() {
@@ -172,11 +144,15 @@ namespace entidades {
 			Inimigo::salvarDataBuffer();
 
 			tempBuffer << tamanho << " "
-				<< ataqueClock.getElapsedTime().asSeconds() << " "
-				<< apto << " "
-				<< moverAleatorio << " "
-				<< velocidadeInicialX << " "
-				<< faseAtual << "fim" << "\n";
+				<< apto << endl;
+		}
+		
+		void MagoNegro::carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
+			int d, float tS, float tP, int t, bool apt) {
+			Inimigo::carregar(num, m, jog, mA, pI, d, tS, tP);
+
+			this->tamanho = t;
+			this->apto = apt;
 		}
 
 		void MagoNegro::carregarSprite() {

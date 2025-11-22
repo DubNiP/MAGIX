@@ -5,14 +5,13 @@ namespace entidades {
 
 		Golem::Golem(Vector2f pos, Mago* pJog, Vector2f vel) :
 			Inimigo(pos, pJog, vel, 1),
-			tamanho(200),
-			moverAleatorio(0),
-			velocidadeInicialX(vel.x)  
+			tamanho(200)
 		{
 			id = 4;
 			relogio.restart();
 			relogioDePulo.restart();
 			carregarSprite();
+			velocidadeInicial.y = vel.y;
 			uniform_int_distribution<int> dist2(0, 3);
 			moverAleatorio = dist2(rng);
 			
@@ -48,63 +47,38 @@ namespace entidades {
 			Vector2f posInim = getPos();
 
 			if (relogioDePulo.getElapsedTime().asSeconds() >= 3.0f && emTerra) {
-				pular();
+				vel.y = -60.f;
+				emTerra = false;
 				relogioDePulo.restart();
 				return;
 			}
 
 			if (fabs(posJog.x - posInim.x) < tamanho && fabs(posJog.y - posInim.y) < tamanho) {
 				if (posJog.x > posInim.x) moverDireita();
-				else if (getPos().x > 30.0f) moverEsquerda();
+				else moverEsquerda();
 			}
 			else {
-				if (getPos().x < posInicial.x - tamanho * 0.5 && getPos().x < 30.0f) moverDireita();
-				else if (getPos().x > posInicial.x + tamanho * 3 && getPos().x > 30.0f) moverEsquerda();
-				else movimentoAleatorio();
-			}
-		}
-
-		void Golem::pular() {
-			if (emTerra && pJog) {
-				Vector2f posJog = pJog->getPos();
-				Vector2f posInim = getPos();
-
-				
-				if (posJog.x > posInim.x) {
-					
-					vel.x = velocidadeInicialX * 2.0f;  
-				}
-				else {
-					if (getPos().x > 30.0f) {
-						vel.x = -velocidadeInicialX * 2.0f;  
-					}
-					else {
-						vel.x = velocidadeInicialX * 2.0f;  
-					}
-				}
-
-				vel.y = -50.0f;
-				emTerra = false;
+				if (pos.x > 1240) { moverAleatorio = 1; }
+				if (pos.x < 40) { moverAleatorio = 0; }
+				movimentoAleatorio();
 			}
 		}
 
 		void Golem::moverEsquerda() {
 			Vector2f novaPos = getPos();
-			novaPos.x -= velocidadeInicialX;  
+			novaPos.x -= vel.x;  
 			setPos(novaPos);
 			setOlhandoDir(false);
 		}
 
 		void Golem::moverDireita() {
 			Vector2f novaPos = getPos();
-			novaPos.x += velocidadeInicialX;  
+			novaPos.x += vel.x;  
 			setPos(novaPos);
 			setOlhandoDir(true);
 		}
 
 		void Golem::movimentoAleatorio() {
-			if (moverAleatorio % 2 == 0) moverDireita();
-			else if (moverAleatorio % 2 != 0 && getPos().x > 30) moverEsquerda();
 
 			float dt = relogio.getElapsedTime().asSeconds();
 			if (dt >= 1.0f) {
@@ -112,6 +86,9 @@ namespace entidades {
 				moverAleatorio = dist2(rng);
 				relogio.restart();
 			}
+
+			if (moverAleatorio % 2 == 0) moverDireita();
+			else if (moverAleatorio % 2 != 0) moverEsquerda();
 		}
 
 		void Golem::executar() {
@@ -145,9 +122,13 @@ namespace entidades {
 
 			Inimigo::salvarDataBuffer();
 
-			tempBuffer << tamanho << " "
-			<< moverAleatorio << " "
-			<< velocidadeInicialX << endl;
+			tempBuffer << tamanho << endl;
+		}
+
+		void Golem::carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
+			int d, float tS, float tP, int tam) {
+			Inimigo::carregar(num, m, jog, mA, pI, d, tS, tP);
+			this->tamanho = tam;
 		}
 
 		void Golem::carregarSprite() {
