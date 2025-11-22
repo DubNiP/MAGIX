@@ -59,6 +59,24 @@ void FasePrimeira::criarGolems() {
         v.pop_back();
     }
 
+} 
+
+void FasePrimeira::criarSapos() {
+    vector<Vector2f>v;
+    v.push_back(Vector2f(300.f, 250.f));
+    v.push_back(Vector2f(400.f, 250.f));
+    v.push_back(Vector2f(200.f, 250.f));
+    v.push_back(Vector2f(1190.f, 180.f));
+
+    uniform_int_distribution<int> dist2(0, 1);
+    int i = dist2(rng) + 3;
+    while (i--) {
+        uniform_int_distribution<int> dist2(0, 50);
+        int j = dist2(rng) % v.size();
+        criaEntidade(new entidades::personagens::Sapo(v[j], jog, Vector2f(20.f, 70.f)));
+        v[j] = v.back();
+        v.pop_back();
+    }
 }
 
 void FasePrimeira::criarTeias() {
@@ -83,13 +101,28 @@ void FasePrimeira::criarTeias() {
 void FasePrimeira::criarPlataformas(){
 
     auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(400.f, 588.f), Vector2f(200.f, 20.f), false, 90.f, 5.f)));
-    lPlataformas.push_back(plat1);
     auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(760.f, 380.f), Vector2f(220.f, 20.f), false, 100.f, 5.f)));
-    lPlataformas.push_back(plat2);
 
     criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1100.f, 670.f), Vector2f(30.f, 50.f), plat1));
     criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1030.f, 120.f), Vector2f(30.f, 50.f), plat2));
 
+}
+
+void FasePrimeira::criarPlataforma(int i, bool ativ) {
+
+    if (i == 1) {
+        auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(400.f, 588.f), Vector2f(200.f, 20.f), false, 90.f, 5.f)));
+        criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1100.f, 670.f), Vector2f(30.f, 50.f), plat1));
+        if(ativ)
+			plat1->setAtiva();
+
+    }
+    else if (i == 2) {
+        auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(760.f, 380.f), Vector2f(220.f, 20.f), false, 100.f, 5.f)));
+        criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1030.f, 120.f), Vector2f(30.f, 50.f), plat2));
+		if(ativ)
+            plat2->setAtiva();
+    }
 }
 
 void FasePrimeira::carregarFundo() {
@@ -102,4 +135,8 @@ void FasePrimeira::carregarFundo() {
     float escalaX = 1280.f / tamTextura.x;
     float escalaY = 720.f / tamTextura.y;
     spriteFundo->setScale(escalaX, escalaY);
+}
+
+Vector2f FasePrimeira::getPosicaoInicialJogador() const {
+    return Vector2f(100.f, 660.f);
 }

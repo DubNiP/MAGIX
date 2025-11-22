@@ -23,22 +23,21 @@ namespace fases {
 		static listas::ListaEntidades lista_ents;
 		Gerenciadores::GerenciadorColisoes GC;
 		entidades::personagens::Mago* jog;
-		vector<entidades::obstaculos::Plataforma*> lPlataformas;
 		Texture* textFundo;
 		Sprite* spriteFundo;
 		bool faseIniciada;
 		bool pause;
 		bool cenarioCriado;
-
-		void criarSapos();
-		virtual void criarPlataformas() = 0;
 		virtual void criarInimigos() = 0;
 		virtual void criarObstaculo() = 0;
 		virtual void criarBlocos() = 0;
+		virtual void criarPlataformas() = 0;
 		void criarCenario();                            //fazer ser virtual no futuro??? (diagrama não deixa a princípio)
 		virtual void carregarFundo() = 0;
-		virtual Vector2f getPosicaoInicialJogador() const;
+		virtual Vector2f getPosicaoInicialJogador() const = 0;
+		virtual void criarPlataforma(int i, bool ativ) = 0;
 		Entidade* criaEntidade(Entidade* e);
+		void limparCenario();
 	public:
 		Fase(entidades::personagens::Mago* pJog);
 		~Fase();
@@ -53,7 +52,7 @@ namespace fases {
 
 		void carregarSave(const std::string& caminho);
 		void setarEntidade(Entidade* ent, Vector2f posL, bool emTerra,
-		bool emAcl, Vector2f vel, Vector2f velInit, bool olhandoDir);
+						   bool emAcl, Vector2f vel, Vector2f velInit, bool olhandoDir);
 	};
 
 }

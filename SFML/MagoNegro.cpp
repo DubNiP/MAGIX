@@ -56,7 +56,7 @@ namespace entidades {
 			Vector2f posInim = getPos();
 
 
-			if(fabs(posJog.x - posInim.x) < tamanho) {
+			if(fabs(posJog.x - posInim.x) < tamanho && fabs(posJog.y - posInim.y) < tamanho / 2) {
 				if (ataqueClock.getElapsedTime().asSeconds() > 1.f) {
 					apto = true;
 					ataqueClock.restart();
@@ -75,7 +75,7 @@ namespace entidades {
 				return;
 			}
 
-			if (fabs(posJog.x - posInim.x) + 150 < tamanho && fabs(posJog.y - posInim.y) + 150 < tamanho && apto) {
+			if (fabs(posJog.x - posInim.x) + 150 < tamanho && fabs(posJog.y - posInim.y) < tamanho/2 && apto) {
 				if (posJog.x > posInim.x) moverDireita();
 				else moverEsquerda();
 			}

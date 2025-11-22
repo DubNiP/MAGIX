@@ -9,10 +9,13 @@ namespace fases {
 
     protected:
         void criarInimigos();
-        void criarObstaculo();
-		void criarPlataformas();
         void criarChefoes();
+        void criarSapos();
+        void criarObstaculo();
+        void criarPlataformas();
+		void criarPlataforma(int i, bool ativ);
         void criarEspinho();
+       
         void criarBlocos();
         void carregarFundo();
         Vector2f getPosicaoInicialJogador() const;

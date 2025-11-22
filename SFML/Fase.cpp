@@ -24,11 +24,8 @@ Fase::Fase(entidades::personagens::Mago* pJog):
 }
 
 Fase::~Fase() {
-    GC.limparObstaculos();
-    GC.limparInimigos();
-    GC.limparProjetis();
-    GC.limparBlocos();
-    lista_ents.limparPreservando(jog);                 //estranho..
+    limparCenario();
+
     if (spriteFundo) {
         delete spriteFundo;
         spriteFundo = NULL;
@@ -41,49 +38,24 @@ Fase::~Fase() {
     jog = NULL;
 }
 
-void Fase::criarSapos() {
-    vector<Vector2f>v;
-    v.push_back(Vector2f(300.f, 250.f));
-    v.push_back(Vector2f(400.f, 250.f));
-    v.push_back(Vector2f(200.f, 250.f));
-    v.push_back(Vector2f(1190.f, 180.f));
-    
-    uniform_int_distribution<int> dist2(0, 1);
-    int i = dist2(rng) + 3;
-    while (i--) {
-        uniform_int_distribution<int> dist2(0, 50);
-        int j = dist2(rng) % v.size();
-        criaEntidade(new entidades::personagens::Sapo(v[j], jog, Vector2f(20.f, 70.f)));
-        v[j] = v.back();
-        v.pop_back();
-    }
-}
-
 void Fase::criarCenario() {
  
-    GC.limparObstaculos();
-    GC.limparInimigos();
-    GC.limparProjetis();
-    GC.limparBlocos();
-    lista_ents.limparPreservando(jog);                                    //estranho..
+    limparCenario(); 
 
     carregarFundo();
 
     if (jog) {
-        Vector2f posInicial = getPosicaoInicialJogador();
-        jog->reseta(Vector2f(160.f, 630.f), 15, 0);
+
+        jog->reseta(getPosicaoInicialJogador(), 15, 0);
 
 		jog->setFaseAtual(this);
         lista_ents.incluir(jog);
         Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(jog);
     }
+
     criarObstaculo();
     criarInimigos();
     criarBlocos();
-}
-
-Vector2f Fase::getPosicaoInicialJogador() const {
-    return Vector2f(160.f, 630.f);
 }
 
 Entidade* Fase::criaEntidade(Entidade* e) {
@@ -109,6 +81,13 @@ Entidade* Fase::criaEntidade(Entidade* e) {
     return NULL;
 }
 
+void Fase::limparCenario() {
+    GC.limparObstaculos();
+    GC.limparInimigos();
+    GC.limparProjetis();
+    GC.limparBlocos();
+    lista_ents.limparPreservando(jog);   //estranho..    
+}
 
 void Fase::inicializar() {
     if (!cenarioCriado) {
@@ -121,6 +100,7 @@ void Fase::executar() {
     inicializar();
     lista_ents.retomarTodos();
     pause = false;
+
     if (pGG) {
         GC.setWindow(pGG->getWindow());
         RenderWindow* window = pGG->getWindow();
@@ -189,11 +169,7 @@ void Fase::carregarSave(const string& caminho) {
     }
 
     // limpar fase
-    GC.limparObstaculos();
-    GC.limparInimigos();
-    GC.limparProjetis();
-    GC.limparBlocos();
-    lista_ents.limparPreservando(jog);
+    limparCenario();
 
     if (jog) {
         jog->setFaseAtual(this);
@@ -202,8 +178,8 @@ void Fase::carregarSave(const string& caminho) {
     }
 
     criarBlocos();
-	criarPlataformas();
 
+	int contPlat = 0;
     int idEnt = -1;
     float posx = 0.f, posy = 0.f;
     int emTerraInt = 0;
@@ -341,15 +317,13 @@ void Fase::carregarSave(const string& caminho) {
 
             case 7: { // Plataforma
                 bool dano = false; float larg = 0.f, alt = 0.f;
+                contPlat++;
                 float ampl = 0.f, per = 0.f, yin = 0.f, yant = 0.f; bool ativ = false; float temp = 0.f;
                 if (!(recuperarDados >> dano >> larg >> alt >> ampl >> per >> yin >> yant >> ativ >> temp)) {
                     recuperarDados.clear();
                     string lixo; getline(recuperarDados, lixo);
                 }
-                auto* p = new entidades::obstaculos::Plataforma(posL, Vector2f(larg, alt), dano, ampl, per);
-                setarEntidade(p, posL, emTerra, emAcl, vel, velInit, olhando);
-                p->carregar(larg, alt, dano, ampl, per, yin, yant, ativ, temp);
-                criaEntidade(p);
+                criarPlataforma(contPlat, ativ);
                 break;
             }
 
@@ -392,8 +366,6 @@ void Fase::carregarSave(const string& caminho) {
     } 
 
     recuperarDados.close();
-
-    if (pGG) GC.setWindow(pGG->getWindow());
 
 }
 
