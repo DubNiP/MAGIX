@@ -31,7 +31,7 @@ namespace entidades {
 			if (ativa && periodo != 0.f) {
 				yAnt = pos.y;
 
-				const float t = tempo.getElapsedTime().asSeconds() + tempoSalvo;                         //Verificar depois.
+				const float t = tempo.getElapsedTime().asSeconds() + tempoSalvo;                         
 				const float omega = 2.f * 3.1415f / periodo;     // w = 2pi/T
 				pos.y = yIn + amplitude * cos(omega * t);        // x = x0 + A * cos(wt)
 				vel.y = pos.y - yAnt;
@@ -112,8 +112,8 @@ namespace entidades {
 			if (p) {
 				const FloatRect pj = p->getBounds();
 				const FloatRect pf = getBounds();
-
 				const float overlapX = min(pj.left + pj.width, pf.left + pf.width) - max(pj.left, pf.left);
+
 				if (overlapX > pj.width * 0.2f && vel.y > 0.f && (yAnt <= pj.top) && (pos.y >= pj.top)) {
 					return true;
 				}
@@ -127,6 +127,7 @@ namespace entidades {
 
 		void Plataforma::setAtiva() {
 			ativa = true;
+			tempo.restart();
 		}
 
 		void Plataforma::carregarSprite() {

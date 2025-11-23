@@ -34,8 +34,6 @@ void FasePrimeira::criarBlocos() {
     criaEntidade(molde.clone(Vector2f(980.f, 0.f), Vector2f(40.f, 350.f)));
     criaEntidade(molde.clone(Vector2f(1020.f, 150.f), Vector2f(80.f, 40.f)));
     criaEntidade(molde.clone(Vector2f(1020.f, 290.f), Vector2f(80.f, 40.f)));
-    criaEntidade(molde.clone(Vector2f(1180.f, 360.f), Vector2f(80.f, 40.f)));
-    criaEntidade(molde.clone(Vector2f(1180.f, 220.f), Vector2f(80.f, 40.f)));
     criaEntidade(molde.clone(Vector2f(0.f, 700.f), Vector2f(1300.f, 60.f)));
     criaEntidade(molde.clone(Vector2f(0.f, 0.f), Vector2f(1280.f, 20.f)));
     criaEntidade(molde.clone(Vector2f(0.f, 0.f), Vector2f(20.f, 720.f)));
@@ -101,9 +99,18 @@ void FasePrimeira::criarPlataformas() {
 
     auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(400.f, 588.f), Vector2f(200.f, 20.f), false, 90.f, 5.f)));
     auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(760.f, 380.f), Vector2f(220.f, 20.f), false, 100.f, 5.f)));
+    auto* plat3 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1150.f, 300.f), Vector2f(110.f, 20.f), false, 180.f, 5.f)));
 
     criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1100.f, 670.f), Vector2f(30.f, 50.f), plat1));
     criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1030.f, 120.f), Vector2f(30.f, 50.f), plat2));
+    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(40.f, 470.f), Vector2f(30.f, 50.f), plat3));
+
+    uniform_int_distribution<int> dist(1, 5);
+    if (dist(rng) == 1) {
+        auto* plat4 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(550.f, 200.f), Vector2f(150.f, 20.f), false, 60.f, 5.f)));
+        criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1030.f, 260.f), Vector2f(30.f, 50.f), plat4));
+    }
+    
 
 }
 
@@ -123,6 +130,20 @@ void FasePrimeira::carregarPlataforma(int i, bool ativ, float temp) {
         if (ativ)
             plat2->setAtiva();
         plat2->setTempo(temp);
+    }
+    else if (i == 3) {
+        auto* plat3 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1150.f, 300.f), Vector2f(110.f, 20.f), false, 180.f, 5.f)));
+        criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(40.f, 470.f), Vector2f(30.f, 50.f), plat3));
+        if (ativ)
+            plat3->setAtiva();
+        plat3->setTempo(temp);
+    }
+    else if (i == 4) {
+        auto* plat4 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(550.f, 200.f), Vector2f(150.f, 20.f), false, 60.f, 5.f)));
+        criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1030.f, 260.f), Vector2f(30.f, 50.f), plat4));
+        if (ativ)
+            plat4->setAtiva();
+        plat4->setTempo(temp);
     }
 }
 

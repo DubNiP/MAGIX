@@ -1,5 +1,4 @@
 #include "Entidade.hpp"
-#include "Projetil.hpp" // ajuste o nome do arquivo se necessário
 #define velocidadeTerminal 40.f
 #define forcaGravidade 30.f
 #define aceleracao 0.1f
@@ -89,12 +88,12 @@ void Entidade::gravidade() {
 
 		float dt = tempoMovimento.getElapsedTime().asSeconds();
 
-		vel.y += forcaGravidade * dt;
+		vel.y += forcaGravidade * dt;    // v = a * t 
 
 		if (vel.y > velocidadeTerminal)
 			vel.y = velocidadeTerminal;
 
-		pos.y += vel.y * dt;
+		pos.y += vel.y * dt;    // x = v * t
 
 		attPos();
 	}
@@ -107,7 +106,6 @@ void Entidade::acelerar() {
 		float dtAc = tempoAceleracao.getElapsedTime().asSeconds();;
 
 		if (emAceleracao &&  dtAc < 0.4 ) {
-			dtAc = tempoAceleracao.getElapsedTime().asSeconds();
 			vel.x += aceleracao * dtAc;
 			pos.x += vel.x * dtAc;
 

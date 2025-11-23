@@ -11,7 +11,7 @@ namespace entidades {
             carregarSprite();
         }
 
-        Bloco::Bloco(const Bloco& copia,Vector2f pos, Vector2f tam):
+        Bloco::Bloco(const Bloco& copia,Vector2f pos, Vector2f tam):                      //padrão de projeto Prototype.
             Entidade(pos, copia.vel, true),
             larguraB(tam.x),
             alturaB(tam.y)
@@ -26,7 +26,7 @@ namespace entidades {
         Bloco::~Bloco() {
         }
 
-        Entidade* Bloco::clone(Vector2f pos, Vector2f tam) const {
+        Entidade* Bloco::clone(Vector2f pos, Vector2f tam) const {                        //padrão de projeto Prototype.
 
             return new Bloco(*this,pos,tam);
         }

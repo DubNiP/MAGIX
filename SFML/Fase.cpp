@@ -33,24 +33,6 @@ Fase::~Fase() {
     jog2 = NULL;
 }
 
-void Fase::criarSapos() {
-    vector<Vector2f>v;
-    v.push_back(Vector2f(300.f, 250.f));
-    v.push_back(Vector2f(400.f, 250.f));
-    v.push_back(Vector2f(200.f, 250.f));
-    v.push_back(Vector2f(1190.f, 180.f));
-    
-    uniform_int_distribution<int> dist2(0, 1);
-    int i = dist2(rng) + 3;
-    while (i--) {
-        uniform_int_distribution<int> dist2(0, 50);
-        int j = dist2(rng) % v.size();
-        criaEntidade(new entidades::personagens::Sapo(v[j], jog1, Vector2f(20.f, 70.f)));
-        v[j] = v.back();
-        v.pop_back();
-    }
-}
-
 void Fase::criarCenario() {
  
     limparCenario(); 
@@ -274,7 +256,7 @@ void Fase::carregarSave(const string& caminho) {
                 }
                 break;
             }
-
+             
             case 2: { // Sapo
                 float raio = 0.f, intervalo = 0.f;
                 if (!(recuperarDados >> raio >> intervalo)) {

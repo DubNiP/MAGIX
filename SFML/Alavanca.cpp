@@ -13,7 +13,7 @@ namespace entidades {
 		}
 
 		Alavanca::~Alavanca() {
-			p = NULL;                  //listaEntidades já faz o delete.
+			p = NULL;                
 		}
 
 		void Alavanca::executar() {

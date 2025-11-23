@@ -29,15 +29,13 @@ namespace fases {
 		bool cenarioCriado;
 		bool doisJog;
 
-		void criarSapos();
-
-		//padrão de projeto Template Method, criar cenário chama essas 3 funções dentro dele.
+		//padrão de projeto Template Method, criar cenário chama essas 5 funções dentro dele.
 		virtual void criarInimigos() = 0;
 		virtual void criarObstaculo() = 0;
 		virtual void criarBlocos() = 0;
 		virtual void criarPlataformas() = 0;
-		void criarCenario();                            //COLOCAR NA CONSTRUTORA.
 		virtual void carregarFundo() = 0;
+		void criarCenario();                            //COLOCAR NA CONSTRUTORA.
 		virtual Vector2f getPosicaoInicialJogador() const = 0;
 		virtual void carregarPlataforma(int i, bool ativ, float temp) = 0;
 		Entidade* criaEntidade(Entidade* e);
