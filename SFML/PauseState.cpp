@@ -31,7 +31,10 @@ void PauseState::handle() {
 
     while (window && window->isOpen() && !menu.getContinuar() && !menu.getVoltarMenu()) {
         if (menu.getSalvar()) {
+            contexto->getMago()->salvarLinha();
 			contexto->getFase1()->getListaEntidades()->salvarTodos();
+            cout << "Entrou" << endl;
+            menu.setSalvar(false);
         }
         
         if (!GE->verificarEventosJanela(window)) {

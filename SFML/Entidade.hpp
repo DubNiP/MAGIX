@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <string>
 
 using namespace std;
 using namespace sf;
@@ -19,6 +20,7 @@ protected:
 	Clock tempoAceleracao;
 	bool olhandoDir;
 	bool clocksIni;
+	static string caminho;
 	stringstream tempBuffer;
 	ofstream buffer;
 	void salvarDataBuffer();

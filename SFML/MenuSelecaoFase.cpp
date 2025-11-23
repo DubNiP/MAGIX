@@ -50,6 +50,7 @@ void MenuSelecaoFase::confirmar() {
     else if (pos == 4) {
         voltar = true;
     }
+
 }
 
 bool MenuSelecaoFase::getVoltar() const {

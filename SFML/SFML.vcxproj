@@ -151,6 +151,8 @@
     <ClCompile Include="MenuPause.cpp" />
     <ClCompile Include="MenuPrincipal.cpp" />
     <ClCompile Include="MenuPrincipalState.cpp" />
+    <ClCompile Include="MenuRanking.cpp" />
+    <ClCompile Include="MenuRankingState.cpp" />
     <ClCompile Include="MenuSelecaoFase.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PauseState.cpp" />
@@ -190,6 +192,8 @@
     <ClInclude Include="MenuPause.hpp" />
     <ClInclude Include="MenuPrincipal.hpp" />
     <ClInclude Include="MenuPrincipalState.hpp" />
+    <ClInclude Include="MenuRanking.hpp" />
+    <ClInclude Include="MenuRankingState.hpp" />
     <ClInclude Include="MenuSelecaoFase.hpp" />
     <ClInclude Include="PauseState.hpp" />
     <ClInclude Include="Saida.hpp" />

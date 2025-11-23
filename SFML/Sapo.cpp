@@ -13,7 +13,7 @@ namespace entidades {
 			velocidadeInicial.y = -vel.y;
 			velocidadeInicial.x = vel.x;
 			relogioDePulo.restart();
-			
+			nivel_maldade = 5;
 			carregarSprite();
 		}
 
@@ -36,7 +36,7 @@ namespace entidades {
 
 			salvarDataBuffer();
 
-			buffer.open("Save/save.txt", ios::out | ios::app);
+			buffer.open(caminho, ios::out | ios::app);
 
 			if (!buffer.is_open()) {
 				cerr << "Arquivo não pode ser aberto" << endl;
@@ -78,6 +78,10 @@ namespace entidades {
 					if (vidas < 0) vidas = 0;
 					setVidas(vidas);
 					barraVida.setSize(Vector2f(30.f * (num_vidas / 10.f), 3.f));
+					if (pJog) {
+						pJog->adicionarPontos(nivel_maldade);
+						cout << "Pontos: " << pJog->getPontos() << endl;
+					}
 				}
 			}
 		}

@@ -22,7 +22,7 @@ namespace entidades {
 
 			salvarDataBuffer();
 			
-			buffer.open("Save/save.txt", ios::out | ios::app);
+			buffer.open(caminho, ios::out | ios::app);
 			
 			if (!buffer.is_open()) {
 				cerr << "Arquivo não pode ser aberto" << endl;

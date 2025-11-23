@@ -23,13 +23,25 @@ void JogandoState::Entrar() {
         contexto->getGG().setSegundaTela(true);
     }
     else if (numeroFase == 3) {
-       
-        faseAtual = contexto->getFase1(); 
-        contexto->getGG().setSegundaTela(false);
+        ifstream arquivoFase(contexto->getMago()->getCaminho());
+
+        char n[50];
+        int p, f;
+
+        arquivoFase >> n >> p >> f;
+
+        if (f == 1) {
+            faseAtual = contexto->getFase1();
+            contexto->getGG().setSegundaTela(false);
+        }
+        else {
+            faseAtual = contexto->getFase2();
+            contexto->getGG().setSegundaTela(true);
+        }
 
         faseAtual->inicializar();
 
-        faseAtual->carregarSave("Save/save.txt");
+        faseAtual->carregarSave(contexto->getMago()->getCaminho());
     }
 
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(pMago);

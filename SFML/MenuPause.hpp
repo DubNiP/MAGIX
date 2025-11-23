@@ -17,5 +17,6 @@ public:
     bool getContinuar() const;
     bool getVoltarMenu() const;
 	bool getSalvar() const;
+	void setSalvar(bool s);
     void resetaFlags();
 };

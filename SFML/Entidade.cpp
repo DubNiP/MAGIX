@@ -4,6 +4,8 @@
 #define forcaGravidade 30.f
 #define aceleracao 0.1f
 
+string Entidade::caminho;
+
 Entidade::Entidade(Vector2f posicao, Vector2f velocidade, bool dir) :
 	Ente(),
 	pos(posicao),

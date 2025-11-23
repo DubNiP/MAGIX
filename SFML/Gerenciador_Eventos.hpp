@@ -4,6 +4,7 @@
 #include "Mago.hpp"
 #include "Menu.hpp"
 #include "Subject.hpp"
+#include <deque>
 
 namespace Gerenciador {
 
@@ -14,6 +15,9 @@ namespace Gerenciador {
         bool prevUp;
         bool prevDown;
         bool prevEnter;
+
+        // fila local de eventos coletados da janela
+        deque<sf::Event> eventQueue;
 
         GerenciadorEvento();
 
@@ -27,9 +31,14 @@ namespace Gerenciador {
         void executar();
         void executarMenu();
         void soltaTeclas();
+
+        // coleta eventos da janela e os armazena internamente
+        // retorna false se janela foi fechada
         bool verificarEventosJanela(RenderWindow* window);
 
-
+        // APIs para consumir a fila de eventos coletada
+        bool temEvento() const;
+        bool proximoEvento(sf::Event& out);
     };
 
 }

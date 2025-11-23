@@ -1,23 +1,20 @@
 #pragma once
 #include "State.hpp"
-#include "MenuPrincipal.hpp"
-#include "SelecaoFaseState.hpp"
+#include "MenuRanking.hpp"
 #include "Menu.hpp"
 #include "Jogo.hpp"
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Eventos.hpp"
+#include <vector>
 
 using namespace sf;
 
-class MenuPrincipalState : public State {
+class MenuRankingState : public State {
 private:
-    MenuPrincipal menu;
-    Font font;
-    Text inputText;
-    String buffer;
+    MenuRanking menu;
 public:
-    MenuPrincipalState(Jogo* contexto);
-    ~MenuPrincipalState();
+    MenuRankingState(Jogo* contexto);
+    ~MenuRankingState();
 
     void Entrar();
     void handle();

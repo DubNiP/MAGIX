@@ -1,6 +1,10 @@
 #include "Mago.hpp"
 #include "fase.hpp"
 #include "FasePrimeira.hpp"
+#include <fstream> 
+#include <filesystem>
+#include <iostream>
+#include <string>
 
 namespace entidades {
 	namespace personagens {
@@ -16,9 +20,13 @@ namespace entidades {
 			tempDanoSalv(0),
 			tempAtaqSalv(0),
 			concluiuFase(false),
+			numFase(0), // inicializa
 			faseAtual(NULL)
 		{
 			id = 1;
+			strcpy_s(nome, sizeof(nome), "Jogador");
+			// usa std::string do Entidade para evitar estouro de buffer
+			Entidade::caminho = "Save/" + std::string(nome) + ".txt";
 			carregarSprite();
 		}
 		
@@ -41,7 +49,7 @@ namespace entidades {
 
 			salvarDataBuffer();
 
-			buffer.open("Save/save.txt", ios::out | ios::app);
+			buffer.open(Entidade::caminho, ios::out | ios::app);
 
 			if (!buffer.is_open()) {
 				cerr << "Arquivo não pode ser aberto" << endl;
@@ -172,11 +180,46 @@ namespace entidades {
 
 		void Mago::setFaseAtual(fases::Fase* f) {
 			faseAtual = f;
+
+			dynamic_cast<fases::FasePrimeira*>(faseAtual) ? numFase = 1 : numFase = 2;
+			
 		}
 
 		bool Mago::getConcluiuFase() const {
 			return concluiuFase;
-		}	
+		}
+		void Mago::setNome(const char* n)
+		{
+			strcpy_s(nome, sizeof(nome), n);
+			Entidade::caminho = "Save/" + std::string(nome) + ".txt";
+		}
+
+		int Mago::getNumFase() const
+		{
+			return numFase;
+		}
+		const char* Mago::getNome() const
+		{
+			return nome;
+		}
+
+		const char* Mago::getCaminho() const
+		{
+			return Entidade::caminho.c_str();
+		}
+		
+		void Mago::salvarLinha() {
+			ofstream salvarDados(Entidade::caminho, std::ios::out | std::ios::app);
+			if (!salvarDados.is_open()) {
+				fflush(stdin);
+				return;
+			}
+			salvarDados << nome << " " << pontos << " " << numFase << endl;
+
+			salvarDados.close();
+
+		
+		}
 
 	} 
 }

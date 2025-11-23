@@ -102,7 +102,7 @@ void FaseSegunda::criarChefoes() {
     posicoesInimigos.push_back(Vector2f(1180.f, 1200.f));
     posicoesInimigos.push_back(Vector2f(1000.f, 200.f));
 
-    entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(posicoesInimigos[1], jog, Vector2f(3.f, -60.f));
+    entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(Vector2f(900.f, 200.f), jog, Vector2f(3.f, -60.f));
     criaEntidade(pM);
     pM->setFaseAtual(this);
 

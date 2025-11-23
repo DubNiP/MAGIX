@@ -25,7 +25,7 @@ namespace entidades
 
 		salvarDataBuffer();
 
-        buffer.open("Save/save.txt", ios::out | ios::app);
+        buffer.open(caminho, ios::out | ios::app);
 
         if (!buffer.is_open()) {
             throw "Erro ao abrir arquivo de salvamento do projetil";

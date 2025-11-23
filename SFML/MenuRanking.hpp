@@ -5,25 +5,25 @@
 
 namespace Gerenciadores { class GerenciadorGrafico; }
 
-class MenuPrincipal :public Menu {
+class MenuRanking : public Menu {
 private:
     bool sair;
-    bool iniciar;
-	bool ranking;
-    char nomeMago[50];
+    int rankPos;
+    vector<pair<string, int>> ranking;
 
 protected:
     void set_values();
 
 public:
-    MenuPrincipal();
-    ~MenuPrincipal();
+    MenuRanking();
+    ~MenuRanking();
 
     void confirmar();
-    bool getIniciar() const;
     bool getSair() const;
-	bool getRanking() const;
-    void setNomeMago(const char* n);
     void resetaFlags();
 
+    void mostrarRanking();
+
+    std::vector<int> calcularFaixa();
+    void preencherTexts(const std::vector<int>& faixa);
 };

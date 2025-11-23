@@ -1,6 +1,9 @@
 #include "ListaEntidades.hpp"
+#include "Mago.hpp"                // para dynamic_cast e getters do jogador
 #include <filesystem> // Para manipulação de sistemas de arquivos
 #include <fstream> // Para operações de arquivo
+#include <sstream>
+#include <system_error>
 
 using namespace std;
 
@@ -126,26 +129,108 @@ namespace listas {
     }
 
     void ListaEntidades::salvarTodos() {
-        
-        
-        ofstream out("Save/save.txt", ios::out | ios::trunc);
-        if (!out.is_open()) {
-            cerr << "Erro: nao foi possivel abrir Save/save.txt para salvar." << std::endl;
+
+        try {
+            filesystem::create_directories("Save");
+        }
+        catch (const filesystem::filesystem_error& e) {
+            cerr << "Aviso: nao foi possivel criar o diretorio Save/: "
+                << e.what() << endl;
             return;
-        }        
+        }
+
+        string nomeStr = "";
+        int pontos = 0;
+        int numFase = 0;
+
+        entidades::personagens::Mago* m = NULL;
+
+        Lista<Entidade>::Iterator itFind = LEs.begin();
+        while (itFind != LEs.end()) {
+            Entidade* e = *itFind;
+            if (e) {
+                if (auto* mago = dynamic_cast<entidades::personagens::Mago*>(e)) {
+                    m = mago;
+                    nomeStr = m->getNome() ? m->getNome() : "";
+                    pontos = m->getPontos();
+                    numFase = m->getNumFase();
+                    break;
+                }
+            }
+            ++itFind;
+        }
+        if (!m) {
+            cerr << "Erro: Mago não encontrado na lista de entidades." << endl;
+            return;
+        }
+
+
+        const string rankingPath = "Save/ranking.txt";
+
+        vector<tuple<string,int,int>> ranking;
+        {
+            ifstream in(rankingPath);
+            if (in.is_open()) {
+                string n;
+                int p;
+                int f;
+                while (in >> n >> p >> f) {
+                    ranking.emplace_back(n, p, f);
+                }
+                in.close();
+            }
+        }
+
+        bool atualizado = false;
+        for (auto& t : ranking) {
+            if (get<0>(t) == nomeStr) {
+                get<1>(t) = pontos;
+                get<2>(t) = numFase;
+                atualizado = true;
+                break;
+            }
+        }
+        if (!atualizado) {
+            ranking.emplace_back(nomeStr, pontos, numFase);
+        }
+
+        sort(ranking.begin(), ranking.end(),
+            [](const auto& a, const auto& b) {
+                return get<0>(a) < get<0>(b);
+            });
+
+        ofstream outRanking;
+        outRanking.open(rankingPath, ios::out | ios::trunc);
+        if (!outRanking.is_open()) {
+            cerr << "Erro: nao foi possivel abrir " << rankingPath << " para salvar ranking." << std::endl;
+           
+        } else {
+            for (const auto& t : ranking) {
+                outRanking << get<0>(t) << " " << get<1>(t) << " " << get<2>(t) << endl;
+            }
+            outRanking.close();
+        }
+
+        ofstream outPlayer;
+        outPlayer.open(m->getCaminho(), ios::out | ios::trunc);
+        if (!outPlayer.is_open()) {
+            cerr << "Erro: nao foi possivel abrir " << m->getCaminho() << " para salvar." << std::endl;
+			fflush(stdin);
+        } else {
+            outPlayer << nomeStr << " " << pontos << " " << numFase << endl;
+            outPlayer.close();
+        }
 
         Lista<Entidade>::Iterator it = LEs.begin();
-        int count = 0;
         while (it != LEs.end()) {
             Entidade* e = *it;
             if (e) {
-                ++count;
                 e->salvar();
             }
             ++it;
         }
     }
-
+    
     void ListaEntidades::retomarTodos() {
         Lista<Entidade>::Iterator it = LEs.begin();
         while(it != LEs.end()) {

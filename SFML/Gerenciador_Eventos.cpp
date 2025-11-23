@@ -9,7 +9,8 @@ namespace Gerenciador {
         pMago(NULL),
         prevUp(false),
         prevDown(false),
-        prevEnter(false)
+        prevEnter(false),
+        eventQueue()
     {
     }
 
@@ -43,23 +44,23 @@ namespace Gerenciador {
 
     void GerenciadorEvento::executarMenu() {
 
-    bool down = Keyboard::isKeyPressed(Keyboard::Down);
-    bool up = Keyboard::isKeyPressed(Keyboard::Up);
-    bool enter = Keyboard::isKeyPressed(Keyboard::Enter);
+        bool down = Keyboard::isKeyPressed(Keyboard::Down);
+        bool up = Keyboard::isKeyPressed(Keyboard::Up);
+        bool enter = Keyboard::isKeyPressed(Keyboard::Enter);
 
-    if (down && !prevDown) {
-        notify(1);
-    }
-    if (up && !prevUp) {
-        notify(2);
-    }
-    if (enter && !prevEnter) {
-        notify(3);
-    }
+        if (down && !prevDown) {
+            notify(1);
+        }
+        if (up && !prevUp) {
+            notify(2);
+        }
+        if (enter && !prevEnter) {
+            notify(3);
+        }
 
-    prevDown  = down;
-    prevUp    = up;
-    prevEnter = enter;
+        prevDown  = down;
+        prevUp    = up;
+        prevEnter = enter;
     }
 
     void GerenciadorEvento::soltaTeclas() {
@@ -81,17 +82,32 @@ namespace Gerenciador {
     }
 
 
-    bool GerenciadorEvento::verificarEventosJanela(sf::RenderWindow* window) {
+    bool GerenciadorEvento::verificarEventosJanela(RenderWindow* window) {
         if (window) {
             Event event;
+            eventQueue.clear();
             while (window->pollEvent(event)) {
                 if (event.type == Event::Closed) {
                     window->close();
-                    return false; 
+                    return false;
                 }
+                // armazenar todos os eventos para consumo por estados
+                eventQueue.push_back(event);
             }
             return true;
         }
+        return false;
+    }
+
+    bool GerenciadorEvento::temEvento() const {
+        return !eventQueue.empty();
+    }
+
+    bool GerenciadorEvento::proximoEvento(Event& out) {
+        if (eventQueue.empty()) return false;
+        out = eventQueue.front();
+        eventQueue.pop_front();
+        return true;
     }
 }
 

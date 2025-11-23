@@ -162,6 +162,11 @@ listas::ListaEntidades* Fase::getListaEntidades() {
 void Fase::carregarSave(const string& caminho) {
     ifstream recuperarDados(caminho, ios::in);
 
+    char n[50];
+    int p, f;
+
+	recuperarDados >> n >> p >> f;
+
     if (!recuperarDados.is_open()) {
         cerr << "Fase::carregarSave: nao foi possivel abrir " << caminho << endl;
 		fflush(stdin);
@@ -236,6 +241,7 @@ void Fase::carregarSave(const string& caminho) {
                     jog->carregar(numVidas, pontosInt, inv, tDano, tAtaq,
                         naTeiaInt != 0, apto!= 0 , concluiuInt != 0);
                     jog->iniciarClocks();
+                    jog->setNome(n);
                 }
                 break;
             }

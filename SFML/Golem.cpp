@@ -14,7 +14,7 @@ namespace entidades {
 			velocidadeInicial.y = vel.y;
 			uniform_int_distribution<int> dist2(0, 3);
 			moverAleatorio = dist2(rng);
-			
+			nivel_maldade = 7;
 		}
 
 		Golem::~Golem()
@@ -34,6 +34,11 @@ namespace entidades {
 					if (vidas < 0) vidas = 0;
 					setVidas(vidas);
 					barraVida.setSize(Vector2f(30.f * (num_vidas / 10.f), 3.f));
+					if(pJog){
+						pJog->adicionarPontos(15);
+						cout << "Pontos: " << pJog->getPontos() << endl;
+					}
+
 				}
 			}
 		}
@@ -105,7 +110,7 @@ namespace entidades {
 			
 			salvarDataBuffer();
 			
-			buffer.open("Save/save.txt", ios::out | ios::app);
+			buffer.open(caminho, ios::out | ios::app);
 
 			if (!buffer.is_open()) {
 				cerr << "Arquivo não pode ser aberto" << endl;

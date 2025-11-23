@@ -15,6 +15,7 @@ namespace entidades {
 		class Mago: public Personagem {
 		protected:      //Seguindo diagrama UML base.
 			int pontos;
+			char nome[50];
 		private:
 			float invencibilidade;
 			Clock danoClock;
@@ -24,6 +25,7 @@ namespace entidades {
 			bool naTeia;
 			bool apto;
 			bool concluiuFase;
+			int numFase;
 			fases::Fase* faseAtual;
 		public:
 			Mago(Vector2f pos, Vector2f vel);
@@ -49,6 +51,13 @@ namespace entidades {
 			void setConcluiuFase(bool c);
 			void setFaseAtual(fases::Fase* f);
 			bool getConcluiuFase() const;
+
+			int getNumFase() const;
+			void setNome(const char* n);
+			const char* getNome() const;
+			const char* getCaminho() const;
+
+			void salvarLinha();
 		};
 	} 
 }

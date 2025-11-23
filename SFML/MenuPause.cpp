@@ -61,6 +61,10 @@ bool MenuPause::getVoltarMenu() const {
     return voltarMenu;
 }
 
+void MenuPause::setSalvar(bool s) {
+    salvar = s;
+}
+
 bool MenuPause::getSalvar() const {
     return salvar;
 }
@@ -68,6 +72,7 @@ bool MenuPause::getSalvar() const {
 void MenuPause::resetaFlags() {
     continuar = false;
     voltarMenu = false;
+	salvar = false;
 }
 
 
