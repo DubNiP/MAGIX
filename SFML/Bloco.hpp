@@ -15,7 +15,7 @@ namespace entidades {
 
             Entidade* clone(Vector2f pos, Vector2f tam) const;
             void executar();
-            void salvar() { return; }
+            void salvar() {}
 
             void carregarSprite();
             const float getLargura() const;

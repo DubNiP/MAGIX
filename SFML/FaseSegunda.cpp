@@ -40,7 +40,6 @@ void FaseSegunda::criarSapos() {
 }
 
 void FaseSegunda::criarObstaculo() {
-    criarPlataformas();
     criarEspinho();
 
     criaEntidade(new entidades::obstaculos::Espinho(Vector2f(600.f, 1250.f), Vector2f(40.f, 10.f), 1));
@@ -75,13 +74,14 @@ void FaseSegunda::criarPlataformas() {
 
 }
 
-void FaseSegunda::criarPlataforma(int i, bool ativ) {
+void FaseSegunda::carregarPlataforma(int i, bool ativ, float temp) {
 
     if (i == 1) {
         auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(20.f, 470.f), Vector2f(100.f, 20.f), false, 90.f, 10.f)));
         criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1230.f), Vector2f(30.f, 40.f), plat1));
         if (ativ)
             plat1->setAtiva();
+        plat1->setTempo(temp);
 	
     }
     else if (i == 2) {
@@ -89,26 +89,30 @@ void FaseSegunda::criarPlataforma(int i, bool ativ) {
         criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 850.f), Vector2f(30.f, 40.f), plat2));
         if(ativ)
 			plat2->setAtiva();
+        plat2->setTempo(temp);
     }
     else if (i == 3) {
         auto* plat3 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 970.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
         criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1030.f), Vector2f(30.f, 40.f), plat3));
         if(ativ)
 			plat3->setAtiva();
+        plat3->setTempo(temp);
     }
     else if (i == 4) {
         auto* plat4 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 1150.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
         criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(350.f, 1230.f), Vector2f(30.f, 40.f), plat4));
         if(ativ)
 			plat4->setAtiva();
+        plat4->setTempo(temp);
     }
 }
 
 void FaseSegunda::criarEspinho() {
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(600.f, 1250.f), Vector2f(40.f, 10.f), 1.f));
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 980.f), Vector2f(40.f, 10.f), 1.f));
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 790.f), Vector2f(40.f, 10.f), 1.f));
+    uniform_int_distribution<int> distDano(1, 3);
 
+    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(600.f, 1250.f), Vector2f(40.f, 10.f), distDano(rng)));
+    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 980.f), Vector2f(40.f, 10.f), distDano(rng)));
+    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 790.f), Vector2f(40.f, 10.f), distDano(rng)));
 }
 
 void FaseSegunda::criarChefoes() {
@@ -163,19 +167,18 @@ void FaseSegunda::criarBlocos() {
 
 
 void FaseSegunda::carregarFundo() {
-    textFundo = new Texture();
-
-    if (!textFundo->loadFromFile("Textures/background 2.png")) {
+    textura = new Texture();
+    if (!textura->loadFromFile("Textures/background 2.png")) {
         throw "textura não carregada";
     }
 
-    spriteFundo = new Sprite(*textFundo);
+    pSprite = new Sprite(*textura);
 
-    Vector2u tam = textFundo->getSize();
+    Vector2u tam = textura->getSize();
     float escX = 1280.f / tam.x;
     float escY = 1280.f / tam.y;
 
-    spriteFundo->setScale(escX, escY);
+    pSprite->setScale(escX, escY);
 }
 
 Vector2f FaseSegunda::getPosicaoInicialJogador() const {

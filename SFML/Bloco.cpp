@@ -18,7 +18,7 @@ namespace entidades {
         {
             textura = new Texture();
             *textura = *copia.textura;
-            //try catch?
+
             pSprite->setTexture(*textura, true);
             pSprite->setTextureRect(IntRect(0, 0, (int)larguraB, (int)alturaB));
         }
@@ -32,6 +32,8 @@ namespace entidades {
         }
 
         void Bloco::executar() {
+            gravidade();
+            vel.y = 0.f;
             attPos();
         }
 

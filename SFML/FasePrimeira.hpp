@@ -20,7 +20,7 @@ namespace fases {
 		void criarTeias();
 
 		void criarPlataformas();
-		void criarPlataforma(int i, bool ativ);
+		void carregarPlataforma(int i, bool ativ, float temp);
 
 		void carregarFundo();
 

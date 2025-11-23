@@ -24,8 +24,6 @@ namespace fases {
 		Gerenciadores::GerenciadorColisoes GC;
 		entidades::personagens::Mago* jog1;
 		entidades::personagens::Mago* jog2;
-		Texture* textFundo;   //será que n posso usar de ente?
-		Sprite* spriteFundo;
 		bool faseIniciada;
 		bool pause;
 		bool cenarioCriado;
@@ -39,10 +37,9 @@ namespace fases {
 		virtual void criarBlocos() = 0;
 		virtual void criarPlataformas() = 0;
 		void criarCenario();                            //COLOCAR NA CONSTRUTORA.
-
 		virtual void carregarFundo() = 0;
 		virtual Vector2f getPosicaoInicialJogador() const = 0;
-		virtual void criarPlataforma(int i, bool ativ) = 0;
+		virtual void carregarPlataforma(int i, bool ativ, float temp) = 0;
 		Entidade* criaEntidade(Entidade* e);
 		void limparCenario();
 	public:

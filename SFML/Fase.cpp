@@ -8,20 +8,13 @@
 
 using namespace fases;  
 
-
-/*AQUI EM FASE TEMOS UM ERRO:
-O METODO CRIAR PLATAFORMA EXISTE EM FASE MAS DEVERIA EXISTIR SEPARADAMENTE PARA AS FASES,
-E O RAFA TÁ CRIANDO DIRETO EM CRIAR OBSTACULO NA FASE 2*/
-
-listas::ListaEntidades fases::Fase::lista_ents;
+listas::ListaEntidades Fase::lista_ents;
 
 Fase::Fase(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJog2):
     Ente(),
     GC(),
     jog1(pJog1),
     jog2(pJog2),
-    textFundo(NULL),
-    spriteFundo(NULL),
     faseIniciada(false),
     pause(false),
     cenarioCriado(false),
@@ -35,15 +28,6 @@ Fase::Fase(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJ
 
 Fase::~Fase() {
     limparCenario();
-
-    if (spriteFundo) {
-        delete spriteFundo;
-        spriteFundo = NULL;
-    }
-    if (textFundo) {
-        delete textFundo;
-        textFundo = NULL;
-    }
     
     jog1 = NULL;
     jog2 = NULL;
@@ -71,8 +55,6 @@ void Fase::criarCenario() {
  
     limparCenario(); 
 
-    carregarFundo();
-
     Vector2f posInicial = getPosicaoInicialJogador();
 
     if (jog1) {
@@ -99,6 +81,7 @@ void Fase::criarCenario() {
     criarObstaculo();
     criarInimigos();
     criarBlocos();
+    criarPlataformas();
 }
 
 Entidade* Fase::criaEntidade(Entidade* e) {
@@ -129,7 +112,7 @@ void Fase::limparCenario() {
     GC.limparInimigos();
     GC.limparProjetis();
     GC.limparBlocos();
-    lista_ents.limparPreservando(jog1, jog2);        //estranho..
+    lista_ents.limparPreservando(jog1, jog2);
 }
 
 void Fase::inicializar() {
@@ -145,7 +128,6 @@ void Fase::executar() {
     pause = false;
 
     if (pGG) {
-        GC.setWindow(pGG->getWindow());
         RenderWindow* window = pGG->getWindow();
         Event event;
         faseIniciada = true;
@@ -180,7 +162,7 @@ void Fase::executar() {
                 doisJog = false;
             }
 
-            pGG->desenhaTodos(&lista_ents,spriteFundo);   
+            pGG->desenhaTodos(&lista_ents,pSprite);   
         }
         jog1->setConcluiuFase(GC.getFaseConcluida());
     }
@@ -245,7 +227,6 @@ void Fase::carregarSave(const string& caminho) {
     while (recuperarDados >> idEnt >> posx >> posy >> emTerraInt
         >> velx >> vely >> vIniX >> vIniY
         >> emAcelInt >> olhandoDirInt) {
-
         Vector2f posL(posx, posy);
         Vector2f vel(velx, vely);
         Vector2f velInit(vIniX, vIniY);
@@ -304,7 +285,7 @@ void Fase::carregarSave(const string& caminho) {
                 auto* s = new entidades::personagens::Sapo(posL, jog1, Vector2f(20.f, 70.f));
                 setarEntidade(s, posL, emTerra, emAcl, vel, velInit, olhando);
                 s->setVidas(numVidas);
-                s->carregar(numVidas, m, jog1, mA, pI, d, tS, tP, raio, intervalo);
+                s->carregar(numVidas, m, jog1, mA, pI, d, raio, intervalo);
                 criaEntidade(s);
                 break;
             }
@@ -319,7 +300,7 @@ void Fase::carregarSave(const string& caminho) {
                 auto* mn = new entidades::personagens::MagoNegro(posL, jog1, Vector2f(20.f, -70.f));
                 setarEntidade(mn, posL, emTerra, emAcl, vel, velInit, olhando);
                 mn->setVidas(numVidas);
-                mn->carregar(numVidas, m, jog1, mA, pI, d, tS, tP, tamanho, apto);
+                mn->carregar(numVidas, m, jog1, mA, pI, d, tamanho, apto);
                 mn->setFaseAtual(this);
                 criaEntidade(mn);
                 break;
@@ -335,7 +316,7 @@ void Fase::carregarSave(const string& caminho) {
                 auto* g = new entidades::personagens::Golem(posL, jog1, Vector2f(20.f, -70.f));
                 setarEntidade(g, posL, emTerra, emAcl, vel, velInit, olhando);
                 g->setVidas(numVidas);
-                g->carregar(numVidas, m, jog1, mA, pI, d, tS, tP, tamanho);
+                g->carregar(numVidas, m, jog1, mA, pI, d, tamanho);
                 criaEntidade(g);
                 break;
             }
@@ -377,7 +358,7 @@ void Fase::carregarSave(const string& caminho) {
                     recuperarDados.clear();
                     string lixo; getline(recuperarDados, lixo);
                 }
-                criarPlataforma(contPlat, ativ);
+                carregarPlataforma(contPlat, ativ, temp);
                 break;
             }
 
@@ -428,9 +409,7 @@ void Fase::setarEntidade(Entidade* ent, Vector2f posL, bool emTerra,
     ent->setPos(posL);
     ent->setEmTerra(emTerra);
     ent->setEmAceleracao(emAcl);
-    ent->setVelocidadeX(vel.x);
-    ent->setVelocidadeY(vel.y);
-    ent->setVelocidadeInicialX(velInit.x);
-    ent->setVelocidadeInicialY(velInit.y);
+    ent->setVelocidade(vel.x, vel.y);
+    ent->setVelocidadeInicial(velInit.x, velInit.y);
     ent->setOlhandoDir(olhandoDir);
 }

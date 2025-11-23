@@ -22,10 +22,10 @@ public:
         ~Elemento() = default;
 
 
-        void setInfo(TE* p) { pInfo = p; }
         void setProx(Elemento<TE>* pE) { pProx = pE; }
-        TE* getInfo() const { return pInfo; }
+        void setInfo(TE* p) { pInfo = p; }
         Elemento<TE>* getProx() const { return pProx; }
+        TE* getInfo() const { return pInfo; }
     };
 
     class Iterator {                                                      //Classe Iterator, padrão de projeto Iterator.

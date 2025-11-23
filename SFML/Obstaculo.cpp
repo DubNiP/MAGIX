@@ -24,6 +24,7 @@ namespace entidades {
 				<< altura << " ";
 		}
 
+
 		void Obstaculo::carregar(float larg, float alt, bool dano)
 		{
 			this->largura = larg;

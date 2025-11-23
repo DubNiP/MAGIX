@@ -19,9 +19,9 @@ namespace Gerenciador {
         bool prevEnter;
 
         GerenciadorEvento();
+        ~GerenciadorEvento();
 
     public:
-        ~GerenciadorEvento();
 
         static GerenciadorEvento* getGerenciadorEvento();
 

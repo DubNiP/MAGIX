@@ -1,5 +1,7 @@
 #include "SelecaoFaseState.hpp"
 
+using namespace estados;
+
 SelecaoFaseState::SelecaoFaseState(Jogo* contexto) :
     State(contexto),
     menu()
@@ -46,7 +48,7 @@ void SelecaoFaseState::Sair() {
         contexto->mudarEstado(new JogandoState(contexto, 2, menu.getNumJogadores()));
     }
     else if (menu.getFaseEscolhida() == 3) {
-        contexto->mudarEstado(new JogandoState(contexto, 3, menu.getNumJogadores()));
+        contexto->mudarEstado(new JogandoState(contexto, 3, menu.getNumJogadores(), false));
     }
 }
 

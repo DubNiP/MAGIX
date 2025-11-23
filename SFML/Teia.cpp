@@ -18,6 +18,8 @@ namespace entidades {
 
 
 		void Teia::executar() {
+			gravidade();
+			vel.y = 0.f;
 			attPos();
 		}
 

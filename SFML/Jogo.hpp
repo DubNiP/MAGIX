@@ -16,14 +16,14 @@ class Jogo {
 private:
 	entidades::personagens::Mago pJog1;   
 	entidades::personagens::Mago pJog2;
-	State* estadoAtual;
+	estados::State* estadoAtual;
 	fases::FasePrimeira fase1;
 	fases::FaseSegunda fase2;
 public:
 	Jogo();
 	~Jogo();
 	void executar();
-	void mudarEstado(State* novoEstado);
+	void mudarEstado(estados::State* novoEstado);
 
 	//GETTERS
 	entidades::personagens::Mago* getMago1();

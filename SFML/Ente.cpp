@@ -50,6 +50,24 @@ FloatRect Ente::getBounds() const {
 	}
 	return FloatRect();
 }
+bool Ente::carregarTexturaSprite(const string& arquivo) {
+	if (textura) {
+		delete textura;
+		textura = NULL;
+	}
+	textura = new Texture();
+	if (!textura->loadFromFile(arquivo)) {
+		delete textura;
+		textura = NULL;
+		return false;
+	}
+	textura->setRepeated(false);
+	textura->setSmooth(false);
+	if (pSprite) {
+		pSprite->setTexture(*textura, true);
+	}
+	return true;
+}
 
 bool Ente::carregarTexturaSprite(const string& arquivo, bool repeated, bool smooth) {
 	if (textura) {

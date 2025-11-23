@@ -14,10 +14,7 @@ protected:
 	bool emTerra;
 	Vector2f vel;
 	Vector2f velocidadeInicial;
-	float aceleracao;
 	bool emAceleracao;
-	float forcaGravidade;
-	float velocidadeTerminal;	
 	Clock tempoMovimento;
 	Clock tempoAceleracao;
 	bool olhandoDir;
@@ -43,17 +40,10 @@ public:
 	void setPos(const Vector2f& p);
 
 
-	const float getVelocidadeX() const;
-	const float getVelocidadeY() const;
-	void setVelocidadeX(const float v);
-	void setVelocidadeY(const float v);
+	const Vector2f getVelocidade() const;
+	void setVelocidade(const float vx, const float vy);
+	void setVelocidadeInicial(float vx, float vy);
 
-	const float getVelocidadeInicialX() const;
-	const float getVelocidadeInicialY() const;
-	void setVelocidadeInicialX(float v);
-	void setVelocidadeInicialY(float v);
-
-	
 	void attPos();
 	void gravidade();
 	void acelerar();

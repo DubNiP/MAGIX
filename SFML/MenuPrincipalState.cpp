@@ -1,5 +1,7 @@
 #include "MenuPrincipalState.hpp"
 
+using namespace estados;
+
 MenuPrincipalState::MenuPrincipalState(Jogo* contexto): 
     State(contexto),
     menu() 

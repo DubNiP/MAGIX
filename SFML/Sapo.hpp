@@ -18,10 +18,7 @@ namespace entidades {
             void executar();
             void salvar();
             void salvarDataBuffer();
-            void carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
-                int d, float tS, float tP, float r, float intPul);
-            void danificar();
-            //RAFA TINHA TIRADO:
+            void carregar(int num, int m, Mago* jog, short mA, Vector2f pI,int d, float r, float intPul);
             void danificar(Mago* pJog);
             void tomarDano(int dano, bool bondade);
 

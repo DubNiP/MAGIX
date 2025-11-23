@@ -9,16 +9,18 @@
 
 using namespace sf;
 
-class SelecaoFaseState : public State {
-private:
-    MenuSelecaoFase menu;
+namespace estados {
+    class SelecaoFaseState : public State {
+    private:
+        MenuSelecaoFase menu;
 
-public:
-    SelecaoFaseState(Jogo* contexto);
-    ~SelecaoFaseState();
+    public:
+        SelecaoFaseState(Jogo* contexto);
+        ~SelecaoFaseState();
 
-    void Entrar();
-    void handle();
-    void Sair();
-    void update(int i);
-};
+        void Entrar();
+        void handle();
+        void Sair();
+        void update(int i);
+    };
+}

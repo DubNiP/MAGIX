@@ -8,7 +8,7 @@ Jogo::Jogo() :
     fase2(&pJog1, &pJog2)
 {
     Ente::setGG(&Gerenciadores::GerenciadorGrafico::getGG());
-    estadoAtual = new MenuPrincipalState(this);
+    estadoAtual = new estados::MenuPrincipalState(this);
 
 }
 
@@ -31,7 +31,7 @@ void Jogo::executar() {
     }
 }
 
-void Jogo::mudarEstado(State * novoEstado) {
+void Jogo::mudarEstado(estados::State * novoEstado) {
     if (estadoAtual) {
         delete estadoAtual;
     }
@@ -46,6 +46,7 @@ void Jogo::mudarEstado(State * novoEstado) {
 entidades::personagens::Mago* Jogo::getMago1() {
     return &pJog1;
 }
+
 entidades::personagens::Mago* Jogo::getMago2() {
     return &pJog2;
 }

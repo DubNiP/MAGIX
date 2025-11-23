@@ -62,36 +62,21 @@ void Entidade::setPos(const Vector2f& p) {
 	attPos();
 }
 
-const float Entidade::getVelocidadeX() const {
-	return vel.x;
+const Vector2f Entidade::getVelocidade() const {
+	return vel;
 }
 
-const float Entidade::getVelocidadeY() const {
-	return vel.y;
-}
-
-void Entidade::setVelocidadeX(const float v) {
-	vel.x = v;
+void Entidade::setVelocidade(const float vx, const float vy) {
+	vel.x = vx;
+	vel.y = vy;
 }
 
 
-void Entidade::setVelocidadeY(const float v) {
-	vel.y = v;
+void Entidade::setVelocidadeInicial(float vx, float vy) { 
+	velocidadeInicial.x = vx;
+	velocidadeInicial.y = vy;
 }
 
-const float Entidade::getVelocidadeInicialX() const { 
-	return velocidadeInicial.x; 
-}
-
-const float Entidade::getVelocidadeInicialY() const { 
-	return velocidadeInicial.y; 
-}
-void Entidade::setVelocidadeInicialX(float v) { 
-	velocidadeInicial.x = v;
-}
-void Entidade::setVelocidadeInicialY(float v) { 
-	velocidadeInicial.y = v;
-}
 
 void Entidade::attPos() {
 	if (pSprite) {

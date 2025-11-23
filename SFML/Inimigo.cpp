@@ -33,7 +33,7 @@ namespace entidades {
 		}
 
 		void Inimigo::carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
-			int d, float tS, float tP) {
+			int d) {
 			
 			this->num_vidas = num;
 			this->nivel_maldade = m;
@@ -41,8 +41,6 @@ namespace entidades {
 			this->moverAleatorio = mA;
 			this->posInicial = pI;
 			this->destruicao = d;
-			this->tempSalvo = tS;
-			this->tempPuloSalvo = tP;
 			relogio.restart();
 			relogioDePulo.restart();
 			barraVida.setSize(Vector2f(30.f * (num_vidas / 10.f), 2.f));

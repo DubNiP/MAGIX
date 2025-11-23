@@ -1,6 +1,6 @@
 #include "ListaEntidades.hpp"
-#include <filesystem> // Para manipulação de sistemas de arquivos
-#include <fstream> // Para operações de arquivo
+#include <filesystem> 
+#include <fstream> 
 
 using namespace std;
 
@@ -45,6 +45,7 @@ namespace listas {
         }
         LEs.limpar();
     }
+
 
     void ListaEntidades::limparPreservando(Entidade* J1,Entidade* J2) {                  //isso é zoado, é bom dar um jeito de remover isso...
         Lista<Entidade>::Iterator it = LEs.begin();                           //POSSIVEL SOLUCAO: COLOCAR DYNAMIC CAST PRA JOGADOR E N EXCLUIR SE FOR,

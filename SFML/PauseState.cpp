@@ -5,6 +5,9 @@
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Eventos.hpp"
 
+
+using namespace estados;
+
 PauseState::PauseState(Jogo* contexto, int numFase, int numJ): 
     State(contexto), 
     menu(),  

@@ -1,5 +1,7 @@
 #include "JogandoState.hpp"
 
+using namespace estados;
+
 JogandoState::JogandoState(Jogo* contexto, int numFase, int numJog, bool reseta):
 
     State(contexto), 
@@ -40,6 +42,7 @@ void JogandoState::Entrar() {
         faseAtual->inicializar();
 
         faseAtual->carregarSave("Save/save.txt");
+        numeroFase = 1;
     }
 
     if (faseAtual) {

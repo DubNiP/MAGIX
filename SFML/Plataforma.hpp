@@ -14,7 +14,8 @@ namespace entidades {
 			float amplitude;     
 			float periodo;        
 			float yIn;       
-			float yAnt;      
+			float yAnt;
+			float tempoSalvo;
 			bool ativa;
 			Clock tempo;
 		public:
@@ -24,9 +25,10 @@ namespace entidades {
 			void executar();
 			void salvar();
 			void salvarDataBuffer();
-			void carregar(float l, float a, bool dano, float ampl, float per, float yin, float yant, bool ativ, float temp);
+			void carregar(float l, float a, bool dano, float ampl, float per, float yin, float yant, bool ativ, float t);
 			void obstaculizar(entidades::personagens::Mago* p);
 			bool esmagou(entidades::personagens::Personagem* p) const;
+			void setTempo(float t);
 			void setAtiva();
 			void carregarSprite();
 		};

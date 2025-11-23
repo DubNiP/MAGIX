@@ -19,7 +19,6 @@ void FasePrimeira::criarInimigos() {
 
 void FasePrimeira::criarObstaculo() {
     criarTeias();
-    criarPlataformas();
     criaEntidade(new entidades::obstaculos::Saida(sf::Vector2f(60.f, 197.f), sf::Vector2f(47.f, 55.f)));
 }
 
@@ -108,13 +107,14 @@ void FasePrimeira::criarPlataformas() {
 
 }
 
-void FasePrimeira::criarPlataforma(int i, bool ativ) {
+void FasePrimeira::carregarPlataforma(int i, bool ativ, float temp) {
 
     if (i == 1) {
         auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(400.f, 588.f), Vector2f(200.f, 20.f), false, 90.f, 5.f)));
         criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1100.f, 670.f), Vector2f(30.f, 50.f), plat1));
         if (ativ)
             plat1->setAtiva();
+        plat1->setTempo(temp);
 
     }
     else if (i == 2) {
@@ -122,19 +122,20 @@ void FasePrimeira::criarPlataforma(int i, bool ativ) {
         criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(1030.f, 120.f), Vector2f(30.f, 50.f), plat2));
         if (ativ)
             plat2->setAtiva();
+        plat2->setTempo(temp);
     }
 }
 
 void FasePrimeira::carregarFundo() {    //OLHAR DPS
-    textFundo = new Texture();
-    if (!textFundo->loadFromFile("Textures/background 3.png")) {
+    textura = new Texture();
+    if (!textura->loadFromFile("Textures/background 3.png")) {
         throw "textura não carregada";
     }
-    spriteFundo = new Sprite(*textFundo);
-    Vector2u tamTextura = textFundo->getSize();
+    pSprite = new Sprite(*textura);
+    Vector2u tamTextura = textura->getSize();
     float escalaX = 1280.f / tamTextura.x;
     float escalaY = 720.f / tamTextura.y;
-    spriteFundo->setScale(escalaX, escalaY);
+    pSprite->setScale(escalaX, escalaY);
 }
 
 Vector2f FasePrimeira::getPosicaoInicialJogador() const {

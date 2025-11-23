@@ -46,6 +46,8 @@ namespace entidades {
 		}
 
 		void Espinho::executar() {
+			gravidade();
+			vel.y = 0.f;
 			attPos();
 		}
 

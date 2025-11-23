@@ -8,7 +8,6 @@ GerenciadorColisoes::GerenciadorColisoes(entidades::personagens::Mago* pJog, ent
 	LPs(),
 	pJog1(pJog),
 	pJog2(pJog2),
-	window(win),
 	faseConcluida(false)
 {
 
@@ -70,8 +69,8 @@ void GerenciadorColisoes::colidiu(Entidade* a, Entidade* b) {
 			}
 			if (aPerson && bPerson) {
 
-				float va = max(0.f, a->getVelocidadeX());
-				float vb = max(0.f, b->getVelocidadeX());
+				float va = max(0.f, a->getVelocidade().x);
+				float vb = max(0.f, b->getVelocidade().x);
 
 				float soma = va + vb;
 				float fracA = 0.5f;
@@ -456,11 +455,8 @@ void GerenciadorColisoes::setJog2(entidades::personagens::Mago* pJog) {
 	pJog2 = pJog;
 }
 
-void GerenciadorColisoes::setWindow(RenderWindow* win) {
-	window = win;
-}
-
 void GerenciadorColisoes::limiteDeTela() {
+	RenderWindow* window = (Gerenciadores::GerenciadorGrafico::getGG()).getWindow();
 	if (window) {
 		Vector2u windowSize = window->getSize();
 		const float Y = 1280;

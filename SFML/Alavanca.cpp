@@ -17,6 +17,8 @@ namespace entidades {
 		}
 
 		void Alavanca::executar() {
+			gravidade();
+			vel.y = 0.f;
 			attPos();
 		}
 
@@ -44,9 +46,9 @@ namespace entidades {
 			tempBuffer << acionada << endl;
 		}
 
-		void Alavanca::carregar(float l, float a, bool dano, bool acionad) {
+		void Alavanca::carregar(float l, float a, bool dano, bool acionado) {
 			Obstaculo::carregar(l, a, dano);
-			acionada = acionad;
+			acionada = acionado;
 		}
 
 		void Alavanca::obstaculizar(entidades::personagens::Mago* pJ) {
@@ -56,7 +58,7 @@ namespace entidades {
 		}
 
 		void Alavanca::carregarSprite() {
-			if (!carregarTexturaSprite("Textures/Alavanca.png", false, false)) {
+			if (!carregarTexturaSprite("Textures/Alavanca.png")) {
 				throw "Textura não carregada";
 			}
 			setScale(Vector2f(1.f, 1.f));

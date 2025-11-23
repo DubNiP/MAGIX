@@ -25,7 +25,6 @@ namespace Gerenciadores {
         set<entidades::Projetil*>LPs;  
         entidades::personagens::Mago* pJog1;
         entidades::personagens::Mago* pJog2;
-        RenderWindow* window;
         bool faseConcluida;
     public:
         GerenciadorColisoes(entidades::personagens::Mago* pJog = NULL, entidades::personagens::Mago* pJog2 = NULL, RenderWindow* window = NULL);
@@ -65,7 +64,7 @@ namespace Gerenciadores {
 
         void setJog1(entidades::personagens::Mago* pJog);
         void setJog2(entidades::personagens::Mago* pJog);
-        void setWindow(RenderWindow* win);
+    
 
         void limiteDeTela();
         void limiteDeTelaMago(bool J1,float X, float Y);

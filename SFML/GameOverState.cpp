@@ -5,6 +5,8 @@
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Eventos.hpp"
 
+using namespace estados;
+
 GameOverState::GameOverState(Jogo* contexto, int numFase, int numJog) : 
     State(contexto),
     menu(),

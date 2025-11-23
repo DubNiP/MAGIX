@@ -19,6 +19,8 @@ namespace entidades {
 		}
 
 		void Saida::executar() {
+			gravidade();
+			vel.y = 0.f;
 			attPos();
 		}
 

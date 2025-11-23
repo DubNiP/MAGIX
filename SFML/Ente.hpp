@@ -26,6 +26,8 @@ public:
 
 	FloatRect getBounds() const;        
 
-	bool carregarTexturaSprite(const string& arquivo, bool repeated = false, bool smooth = true);
+	bool carregarTexturaSprite(const string& arquivo);
+	bool carregarTexturaSprite(const string& arquivo, bool repeated, bool smooth);
+	
 	Sprite* getSprite() const;
 };

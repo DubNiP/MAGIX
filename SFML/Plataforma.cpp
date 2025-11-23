@@ -9,6 +9,7 @@ namespace entidades {
 			periodo(per),
 			yIn(posi.y),
 			yAnt(posi.y),
+			tempoSalvo(),
 			ativa(false),
 			tempo()
 		{
@@ -25,14 +26,16 @@ namespace entidades {
 		}
 
 		void Plataforma::executar() {
-
+			gravidade();
+			vel.y = 0.f;
 			if (ativa && periodo != 0.f) {
 				yAnt = pos.y;
 
-				const float t = tempo.getElapsedTime().asSeconds();
+				const float t = tempo.getElapsedTime().asSeconds() + tempoSalvo;                         //Verificar depois.
 				const float omega = 2.f * 3.1415f / periodo;     // w = 2pi/T
 				pos.y = yIn + amplitude * cos(omega * t);        // x = x0 + A * cos(wt)
 				vel.y = pos.y - yAnt;
+
 			}
 			else {
 				vel.y = 0.f;
@@ -69,13 +72,14 @@ namespace entidades {
 				<< tempo.getElapsedTime().asSeconds() << endl;
 		}
 
-		void Plataforma::carregar(float l, float a, bool dano, float ampl, float per, float yin, float yant, bool ativ, float temp) {
+		void Plataforma::carregar(float l, float a, bool dano, float ampl, float per, float yin, float yant, bool ativ, float t) {
 			Obstaculo::carregar(l, a, dano);
 			amplitude = ampl;
 			periodo = per;
 			yIn = yin;
 			yAnt = yant;
 			ativa = ativ;
+			tempoSalvo = t;
 			tempo.restart();
 		}
 
@@ -110,11 +114,15 @@ namespace entidades {
 				const FloatRect pf = getBounds();
 
 				const float overlapX = min(pj.left + pj.width, pf.left + pf.width) - max(pj.left, pf.left);
-				if (overlapX > pj.width * 0.2f && getVelocidadeY() > 0.f && (yAnt <= pj.top) && (pos.y >= pj.top)) {
+				if (overlapX > pj.width * 0.2f && vel.y > 0.f && (yAnt <= pj.top) && (pos.y >= pj.top)) {
 					return true;
 				}
 			}
 			return false;
+		}
+
+		void Plataforma::setTempo(float t) {
+			tempoSalvo = t;
 		}
 
 		void Plataforma::setAtiva() {
