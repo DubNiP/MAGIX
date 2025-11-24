@@ -1,6 +1,8 @@
 Dub! 75 1
 Joao 50 2
 Jogador 0 2
+Mat_Pasqualotto 15 1
 Menghello 25 1
+Moretto 75 1
 Rafael 30 2
 Sérginho 0 1

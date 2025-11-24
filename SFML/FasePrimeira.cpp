@@ -19,7 +19,7 @@ void FasePrimeira::criarInimigos() {
 
 void FasePrimeira::criarObstaculo() {
     criarTeias();
-    criaEntidade(new entidades::obstaculos::Saida(sf::Vector2f(60.f, 197.f), sf::Vector2f(47.f, 55.f)));
+    criaEntidade(new entidades::obstaculos::Saida(Vector2f(60.f, 197.f), Vector2f(47.f, 55.f)));
 }
 
 void FasePrimeira::criarBlocos() {
@@ -63,12 +63,12 @@ void FasePrimeira::criarSapos() {
     v.push_back(Vector2f(300.f, 250.f));
     v.push_back(Vector2f(400.f, 250.f));
     v.push_back(Vector2f(200.f, 250.f));
-    v.push_back(Vector2f(1190.f, 180.f));
+    v.push_back(Vector2f(1090.f, 240.f));
 
     uniform_int_distribution<int> dist2(0, 1);
     int i = dist2(rng) + 3;
     while (i--) {
-        uniform_int_distribution<int> dist2(0, 50);
+        uniform_int_distribution<int> dist2(0, 100);
         int j = dist2(rng) % v.size();
         criaEntidade(new entidades::personagens::Sapo(v[j], jog1, Vector2f(20.f, 70.f)));
         v[j] = v.back();

@@ -35,7 +35,7 @@ namespace fases {
 		virtual void criarBlocos() = 0;
 		virtual void criarPlataformas() = 0;
 		virtual void carregarFundo() = 0;
-		void criarCenario();                            //COLOCAR NA CONSTRUTORA.
+		void criarCenario();                           
 		virtual Vector2f getPosicaoInicialJogador() const = 0;
 		virtual void carregarPlataforma(int i, bool ativ, float temp) = 0;
 		Entidade* criaEntidade(Entidade* e);

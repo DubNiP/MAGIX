@@ -12,7 +12,7 @@ listas::ListaEntidades Fase::lista_ents;
 
 Fase::Fase(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJog2):
     Ente(),
-    GC(),
+    GC(pJog1),
     jog1(pJog1),
     jog2(pJog2),
     faseIniciada(false),
@@ -20,7 +20,6 @@ Fase::Fase(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJ
     cenarioCriado(false),
     doisJog(false)
 {
-    GC.setJog1(pJog1);
     if (pJog2) { 
         GC.setJog2(pJog2);
     }
@@ -120,12 +119,10 @@ void Fase::executar() {
 
             window->setView(cam);
             
-            while (window->pollEvent(event)) {          //Talvez chamar função do GE aqui..
-                if (event.type == Event::Closed) {
-                    window->close();
-                    return;
-                }
+            if (!Gerenciador::GerenciadorEvento::getGerenciadorEvento()->verificarEventosJanela(window)) {
+                return;
             }
+
             bool teclaEsc = Keyboard::isKeyPressed(Keyboard::Escape);
             if (teclaEsc && !teclaEscAnterior) {
                 pause = true;

@@ -27,36 +27,31 @@ void FaseSegunda::criarInimigos() {
 
 void FaseSegunda::criarSapos() {
     vector<Vector2f> posicoesInimigos;
+    posicoesInimigos.push_back(Vector2f(460.f, 1200.f));
+    posicoesInimigos.push_back(Vector2f(460.f, 1030.f));
+    posicoesInimigos.push_back(Vector2f(460.f, 800.f));
     posicoesInimigos.push_back(Vector2f(660.f, 1200.f));
     posicoesInimigos.push_back(Vector2f(660.f, 1030.f));
     posicoesInimigos.push_back(Vector2f(660.f, 800.f));
+    posicoesInimigos.push_back(Vector2f(860.f, 1200.f));
+    posicoesInimigos.push_back(Vector2f(860.f, 1030.f));
+    posicoesInimigos.push_back(Vector2f(860.f, 800.f));
 
-    uniform_int_distribution<int> dist2(0, 2);
-
-    for (int i = 0; i < 3; i++) {
-        int idx = dist2(rng);
-        criaEntidade(new entidades::personagens::Sapo(posicoesInimigos[idx], jog1, Vector2f(20.f, 70.f)));
+    uniform_int_distribution<int> dist1(0, 5);
+    int i = dist1(rng) + 3;
+    while (i--) {
+        uniform_int_distribution<int> dist2(0, 100);
+        int j = dist2(rng) % posicoesInimigos.size();
+        criaEntidade(new entidades::personagens::Sapo(posicoesInimigos[j], jog1, Vector2f(20.f, 70.f)));
+        posicoesInimigos[j] = posicoesInimigos.back();
+        posicoesInimigos.pop_back();
     }
+
 }
 
 void FaseSegunda::criarObstaculo() {
     criarEspinho();
-
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(600.f, 1250.f), Vector2f(40.f, 10.f), 1));
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 980.f), Vector2f(40.f, 10.f), 1));
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 790.f), Vector2f(40.f, 10.f), 1));
-
-    auto* plat1 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(20.f, 470.f), Vector2f(100.f, 20.f), false, 90.f, 10.f)));
-    auto* plat2 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 790.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
-    auto* plat3 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 970.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
-    auto* plat4 = dynamic_cast<entidades::obstaculos::Plataforma*>(criaEntidade(new entidades::obstaculos::Plataforma(Vector2f(1120.f, 1150.f), Vector2f(140.f, 20.f), false, 90.f, 10.f)));
-
-
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1230.f), Vector2f(30.f, 40.f), plat1));
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 850.f), Vector2f(30.f, 40.f), plat2));
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(300.f, 1030.f), Vector2f(30.f, 40.f), plat3));
-    criaEntidade(new entidades::obstaculos::Alavanca(Vector2f(350.f, 1230.f), Vector2f(30.f, 40.f), plat4));
-
+    criaEntidade(new entidades::obstaculos::Saida(Vector2f(1160.f, 357.f), Vector2f(47.f, 55.f)));
 }
 
 void FaseSegunda::criarPlataformas() {
@@ -108,32 +103,58 @@ void FaseSegunda::carregarPlataforma(int i, bool ativ, float temp) {
 }
 
 void FaseSegunda::criarEspinho() {
+    vector<Vector2f> posicoesEspinhos;
+    posicoesEspinhos.push_back(Vector2f(600.f, 1250.f));
+    posicoesEspinhos.push_back(Vector2f(40.f, 980.f));
+    posicoesEspinhos.push_back(Vector2f(40.f, 790.f));
+    posicoesEspinhos.push_back(Vector2f(900.f, 872.f));
+    posicoesEspinhos.push_back(Vector2f(700.f, 872.f));
+    posicoesEspinhos.push_back(Vector2f(500.f, 872.f));
+    posicoesEspinhos.push_back(Vector2f(900.f, 1052.f));
+    posicoesEspinhos.push_back(Vector2f(700.f, 1052.f));
+    posicoesEspinhos.push_back(Vector2f(500.f, 1052.f));
+
+    uniform_int_distribution<int> distQtd(0, 5);
+    int qtd = distQtd(rng) + 3;
+
+
     uniform_int_distribution<int> distDano(1, 3);
 
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(600.f, 1250.f), Vector2f(40.f, 10.f), distDano(rng)));
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 980.f), Vector2f(40.f, 10.f), distDano(rng)));
-    criaEntidade(new entidades::obstaculos::Espinho(Vector2f(40.f, 790.f), Vector2f(40.f, 10.f), distDano(rng)));
+    while (qtd--) {
+        uniform_int_distribution<int> distPos(0, 100);
+        int idx = distPos(rng) % posicoesEspinhos.size();
+        criaEntidade(new entidades::obstaculos::Espinho(posicoesEspinhos[idx], Vector2f(40.f, 10.f), distDano(rng)));
+        posicoesEspinhos[idx] = posicoesEspinhos.back();
+        posicoesEspinhos.pop_back();
+    }
 }
 
 void FaseSegunda::criarChefoes() {
+    auto* p1 = new entidades::personagens::MagoNegro(Vector2f(900.f, 200.f), jog1, Vector2f(3.f, -60.f));
+    auto* p2 = new entidades::personagens::MagoNegro(Vector2f(1100.f, 200.f), jog1, Vector2f(3.f, -60.f));
+    criaEntidade(p1);
+    criaEntidade(p2);
+    p1->setFaseAtual(this);
+    p2->setFaseAtual(this);
 
     vector<Vector2f> posicoesInimigos;
-    posicoesInimigos.push_back(Vector2f(900.f, 200.f));
-    posicoesInimigos.push_back(Vector2f(1180.f, 1200.f));
-    posicoesInimigos.push_back(Vector2f(1000.f, 200.f));
+    posicoesInimigos.push_back(Vector2f(1180.f, 1200.f)); 
+    posicoesInimigos.push_back(Vector2f(1040.f, 1200.f)); 
+    posicoesInimigos.push_back(Vector2f(1100.f, 200.f));
 
-    entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(posicoesInimigos[0], jog1, Vector2f(3.f, -60.f));
-    criaEntidade(pM);
-    pM->setFaseAtual(this);
+    uniform_int_distribution<int> distQtd(0, 2);
+    int qtd = distQtd(rng) + 1; // mínimo 3 chefões
 
-    uniform_int_distribution<int> dist2(0, 2);
-
-    for (int i = 0; i < maxChefoes-1; i++) {
-		int idx = dist2(rng);
-        entidades::personagens::MagoNegro* pM = new entidades::personagens::MagoNegro(posicoesInimigos[idx], jog1, Vector2f(3.f, -60.f));
+    while (qtd--) {
+        uniform_int_distribution<int> distPos(0, 100);
+        int idx = distPos(rng) % posicoesInimigos.size();
+        auto* pM = new entidades::personagens::MagoNegro(posicoesInimigos[idx], jog1, Vector2f(3.f, -60.f));
         criaEntidade(pM);
         pM->setFaseAtual(this);
+        posicoesInimigos[idx] = posicoesInimigos.back();
+        posicoesInimigos.pop_back();
     }
+    
 }
 
 

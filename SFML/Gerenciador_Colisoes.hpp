@@ -62,7 +62,6 @@ namespace Gerenciadores {
 
         void executar();
 
-        void setJog1(entidades::personagens::Mago* pJog);
         void setJog2(entidades::personagens::Mago* pJog);
     
 

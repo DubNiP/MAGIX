@@ -447,10 +447,6 @@ void GerenciadorColisoes::executar() {
 	removerMortos();
 }
 
-void GerenciadorColisoes::setJog1(entidades::personagens::Mago* pJog) {
-	pJog1 = pJog;
-}
-
 void GerenciadorColisoes::setJog2(entidades::personagens::Mago* pJog) {
 	pJog2 = pJog;
 }
@@ -507,7 +503,7 @@ void GerenciadorColisoes::limiteDeTelaProjeteis(float X, float Y) {
 			Vector2f posProjetil = projetil->getPos();
 
 			if (posProjetil.x  < 0 || posProjetil.y  < 0 || posProjetil.x > X || posProjetil.y > Y) {
-				projetil->setAtivo(false); //fazer a devida alteracao?	
+				projetil->setAtivo(false); 	
 
 				it = LPs.erase(it);
 				continue;
