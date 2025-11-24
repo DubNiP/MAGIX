@@ -21,7 +21,7 @@ namespace entidades {
 			void obstaculizar(entidades::personagens::Mago* p);
 			void setSprite();
 			void aplicarSpriteEstado();
-			void atualizarPorProximidade(const FloatRect& boundsMago);
+			void atualizarPorRaio(const FloatRect& bMago);
 		};
 	}
 }

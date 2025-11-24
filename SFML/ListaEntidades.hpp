@@ -5,6 +5,9 @@
 #include "Projetil.hpp"
 #include "Teia.hpp"
 
+
+//É na lista de entidades que todas as entidades são salvas, excluídas , desenhadas e executadas.
+
 namespace listas {
 
     class ListaEntidades
@@ -19,7 +22,7 @@ namespace listas {
         void incluir(Entidade* pE);
         void excluir(Entidade* pE);
         void limpar();
-        void limparPreservando(Entidade* keep);
+        void limparPreservando(Entidade* J1, Entidade* J2);
 
         void executarTodos();
         void desenharTodos();

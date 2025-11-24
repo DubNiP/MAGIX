@@ -1,6 +1,8 @@
 #include "MenuPrincipalState.hpp"
 #include "MenuRankingState.hpp"
 
+using namespace estados;
+
 MenuPrincipalState::MenuPrincipalState(Jogo* contexto): 
     State(contexto),
     font(),
@@ -17,18 +19,18 @@ MenuPrincipalState::MenuPrincipalState(Jogo* contexto):
 }
 
 MenuPrincipalState::~MenuPrincipalState() {
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);               //Padrão de projeto Observer
 }
 
 void MenuPrincipalState::Entrar() {
-    contexto->getGG().resetarCamera();
-    menu.setNomeMago((contexto->getMago()->getNome()));
+    Gerenciadores::GerenciadorGrafico::getGG().resetarCamera();
+    menu.setNomeMago((contexto->getMago1()->getNome()));
     menu.resetaFlags();
     menu.reseta();
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);                //Padrão de projeto Observer
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->soltaTeclas();
 
-    const char* atual = contexto->getMago()->getNome();
+    const char* atual = contexto->getMago1()->getNome();
     buffer = atual ? atual : "";
     inputText.setString(buffer);
     inputText.setPosition(200.f, 300.f);
@@ -38,7 +40,7 @@ void MenuPrincipalState::Entrar() {
 }
 
 void MenuPrincipalState::handle() {
-    auto& GG = contexto->getGG();
+    auto& GG = Gerenciadores::GerenciadorGrafico::getGG();
     auto* GE = Gerenciador::GerenciadorEvento::getGerenciadorEvento();
     RenderWindow* window = GG.getWindow();
 
@@ -85,13 +87,13 @@ void MenuPrincipalState::handle() {
         menu.draw_menu();
 
         string novo = buffer.toAnsiString();
-        contexto->getMago()->setNome(novo.c_str());
+        contexto->getMago1()->setNome(novo.c_str());
     }
 }
 
 void MenuPrincipalState::Sair() {
 
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);              //Padrão de projeto Observer
     if (menu.getRanking()) {
 		contexto->mudarEstado(new MenuRankingState(contexto));
     }
@@ -99,13 +101,15 @@ void MenuPrincipalState::Sair() {
         contexto->mudarEstado(new SelecaoFaseState(contexto));
     }
     else if (menu.getSair()) {
-        auto& GG = contexto->getGG();
+        auto& GG = Gerenciadores::GerenciadorGrafico::getGG();
         RenderWindow* window = GG.getWindow();
-        if (window) window->close();
+        if (window) {
+            window->close();
+        }
     }
 }
 
-void MenuPrincipalState::update(int i) {
+void MenuPrincipalState::update(int i) {                                                //Padrão de projeto Observer
     if (i == 1) {
         menu.moverBaixo();
     }

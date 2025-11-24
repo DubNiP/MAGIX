@@ -13,9 +13,9 @@ class Entidade : public Ente {
 protected:
 	Vector2f pos;
 	bool emTerra;
-	bool emAceleracao;
 	Vector2f vel;
 	Vector2f velocidadeInicial;
+	bool emAceleracao;
 	Clock tempoMovimento;
 	Clock tempoAceleracao;
 	bool olhandoDir;
@@ -29,7 +29,7 @@ public:
 	virtual ~Entidade();
 
 	virtual void salvar() = 0;
-	void executar();
+	virtual void executar() = 0;
 
 	const bool getEmTerra() const;
 	void setEmTerra(const bool v);
@@ -42,17 +42,10 @@ public:
 	void setPos(const Vector2f& p);
 
 
-	const float getVelocidadeX() const;
-	const float getVelocidadeY() const;
-	void setVelocidadeX(const float v);
-	void setVelocidadeY(const float v);
+	const Vector2f getVelocidade() const;
+	void setVelocidade(const float vx, const float vy);
+	void setVelocidadeInicial(float vx, float vy);
 
-	const float getVelocidadeInicialX() const;
-	const float getVelocidadeInicialY() const;
-	void setVelocidadeInicialX(float v);
-	void setVelocidadeInicialY(float v);
-
-	
 	void attPos();
 	void gravidade();
 	void acelerar();

@@ -6,7 +6,8 @@ namespace Gerenciador {
 
     GerenciadorEvento::GerenciadorEvento() :
         subject(),
-        pMago(NULL),
+        pMago1(NULL),
+        pMago2(NULL),
         prevUp(false),
         prevDown(false),
         prevEnter(false),
@@ -15,30 +16,42 @@ namespace Gerenciador {
     }
 
     GerenciadorEvento::~GerenciadorEvento() {
-        pMago = NULL;
+        pMago1 = NULL;
+        pMago2 = NULL;
     }
 
-    GerenciadorEvento* GerenciadorEvento::getGerenciadorEvento() {
+    GerenciadorEvento* GerenciadorEvento::getGerenciadorEvento() {     //Singleton.
         if (!pEvento) {
             pEvento = new GerenciadorEvento();
         }
         return pEvento;
     }
 
-    void GerenciadorEvento::setMago(entidades::personagens::Mago* pj) {
-        pMago = pj;
+    void GerenciadorEvento::setMago1(entidades::personagens::Mago* pj) {
+        pMago1 = pj;
+    }
+    void GerenciadorEvento::setMago2(entidades::personagens::Mago* pj) {
+        pMago2 = pj;
     }
 
 
     void GerenciadorEvento::executar() {
-        if (pMago) {
+        if (pMago1) {
 
-           bool moverEsq = Keyboard::isKeyPressed(Keyboard::A) || Keyboard::isKeyPressed(Keyboard::Left);
-           bool moverDir = Keyboard::isKeyPressed(Keyboard::D) || Keyboard::isKeyPressed(Keyboard::Right);
-           bool pular = Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::Up);
-           bool atirar = Keyboard::isKeyPressed(Keyboard::Space);
+           bool moverEsq = Keyboard::isKeyPressed(Keyboard::A);
+           bool moverDir = Keyboard::isKeyPressed(Keyboard::D);
+           bool pular = Keyboard::isKeyPressed(Keyboard::W);
+           bool atirar = Keyboard::isKeyPressed(Keyboard::F);
 
-            pMago->processarInput(moverEsq, moverDir, pular, atirar);
+            pMago1->processarInput(moverEsq, moverDir, pular, atirar);
+        }
+        if (pMago2) {
+            bool moverEsq2 = Keyboard::isKeyPressed(Keyboard::Left);
+            bool moverDir2 = Keyboard::isKeyPressed(Keyboard::Right);
+            bool pular2 = Keyboard::isKeyPressed(Keyboard::Up);
+            bool atirar2 = Keyboard::isKeyPressed(Keyboard::Space);
+
+            pMago2->processarInput(moverEsq2, moverDir2, pular2, atirar2);
         }
     }
 
@@ -48,15 +61,15 @@ namespace Gerenciador {
         bool up = Keyboard::isKeyPressed(Keyboard::Up);
         bool enter = Keyboard::isKeyPressed(Keyboard::Enter);
 
-        if (down && !prevDown) {
-            notify(1);
-        }
-        if (up && !prevUp) {
-            notify(2);
-        }
-        if (enter && !prevEnter) {
-            notify(3);
-        }
+    if (down && !prevDown) {                                 //Quando uma tecla é pressionada, o gerenciador de eventos notifica os Observadores.
+        notify(1); 
+    }
+    if (up && !prevUp) {
+        notify(2);
+    }
+    if (enter && !prevEnter) {
+        notify(3);
+    }
 
         prevDown  = down;
         prevUp    = up;
@@ -72,6 +85,7 @@ namespace Gerenciador {
                 Keyboard::isKeyPressed(Keyboard::S) ||
                 Keyboard::isKeyPressed(Keyboard::Enter) ||
                 Keyboard::isKeyPressed(Keyboard::Space) ||
+                Keyboard::isKeyPressed(Keyboard::F) ||
                 Keyboard::isKeyPressed(Keyboard::Escape);
 
             if (!algumaTeclaApertada) {

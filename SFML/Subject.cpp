@@ -1,6 +1,8 @@
 #include "Subject.hpp"
 #include "Observer.cpp"
 
+// Padrão de Projeto Observer.
+
 subject::subject() : 
 	LObs()
 {

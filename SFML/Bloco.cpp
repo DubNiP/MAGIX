@@ -11,14 +11,14 @@ namespace entidades {
             carregarSprite();
         }
 
-        Bloco::Bloco(const Bloco& copia,Vector2f pos, Vector2f tam):
+        Bloco::Bloco(const Bloco& copia,Vector2f pos, Vector2f tam):                      //padrão de projeto Prototype.
             Entidade(pos, copia.vel, true),
             larguraB(tam.x),
             alturaB(tam.y)
         {
             textura = new Texture();
             *textura = *copia.textura;
-            //try catch?
+
             pSprite->setTexture(*textura, true);
             pSprite->setTextureRect(IntRect(0, 0, (int)larguraB, (int)alturaB));
         }
@@ -26,12 +26,14 @@ namespace entidades {
         Bloco::~Bloco() {
         }
 
-        Entidade* Bloco::clone(Vector2f pos, Vector2f tam) const {
+        Entidade* Bloco::clone(Vector2f pos, Vector2f tam) const {                        //padrão de projeto Prototype.
 
             return new Bloco(*this,pos,tam);
         }
 
         void Bloco::executar() {
+            gravidade();
+            vel.y = 0.f;
             attPos();
         }
 

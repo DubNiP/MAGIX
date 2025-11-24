@@ -17,7 +17,7 @@ MenuPause::~MenuPause() {
 
 void MenuPause::set_values() {
     const char* opcoes[] = { "PAUSADO", "Continuar", "Menu Principal", "Salvar"};
-    const Vector2f posicoes[] = { {550.f, 200.f}, {560.f, 350.f}, {510.f, 450.f}, {580.f, 550.f}};
+    const Vector2f posicoes[] = { {530.f, 120.f}, {560.f, 350.f}, {510.f, 450.f}, {580.f, 550.f}};
 
     const unsigned int tamanhos[] = { 70u, 50u, 50u, 50u };
 

@@ -1,29 +1,41 @@
 #include "JogandoState.hpp"
 
-JogandoState::JogandoState(Jogo* contexto, int numFase):
+using namespace estados;
+
+JogandoState::JogandoState(Jogo* contexto, int numFase, int numJog, bool reseta):
+
     State(contexto), 
     numeroFase(numFase), 
-    pMago(NULL), 
-    faseAtual(NULL) {
+    numJogadores(numJog),
+    pMago1(NULL), 
+    pMago2(NULL),
+    faseAtual(NULL),
+    resetaFase(reseta)
+{
 
-    pMago = contexto->getMago();
+    pMago1 = contexto->getMago1();
+    if (numJogadores == 2) {  
+        pMago2 = contexto->getMago2();
+    }
 }
 
 JogandoState::~JogandoState() {
+    pMago1 = NULL;                    
+    pMago2 = NULL;
     faseAtual = NULL;
 }
 
 void JogandoState::Entrar() {
     if (numeroFase == 1) {
         faseAtual = contexto->getFase1();
-        contexto->getGG().setSegundaTela(false);
+        Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(false);
     }
     else if (numeroFase == 2) {
         faseAtual = contexto->getFase2();
-        contexto->getGG().setSegundaTela(true);
+        Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(true);
     }
     else if (numeroFase == 3) {
-        ifstream arquivoFase(contexto->getMago()->getCaminho());
+        ifstream arquivoFase(contexto->getMago1()->getCaminho());
 
         char n[50];
         int p, f;
@@ -32,37 +44,57 @@ void JogandoState::Entrar() {
 
         if (f == 1) {
             faseAtual = contexto->getFase1();
-            contexto->getGG().setSegundaTela(false);
+            Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(false);
         }
         else {
             faseAtual = contexto->getFase2();
-            contexto->getGG().setSegundaTela(true);
+            Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(true);
         }
 
         faseAtual->inicializar();
 
-        faseAtual->carregarSave(contexto->getMago()->getCaminho());
+        faseAtual->carregarSave(contexto->getMago1()->getCaminho());
     }
 
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(pMago);
+    if (faseAtual) {
+        if (numJogadores == 2) {
+            faseAtual->setdoisJog(true);
+        }
+        else {
+            faseAtual->setdoisJog(false);
+        }
+    }
+
+    if (resetaFase) {
+        faseAtual->resetar();
+    }
+
+
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago1(pMago1);
+    if (numJogadores == 2 && pMago2) {
+        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(pMago2);
+    }
+    else {
+        Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(NULL);
+    }
 }
 
 void JogandoState::handle() {
     if (faseAtual) {
-        faseAtual->executar();
+        faseAtual->executar();                                                                //Se saiu do looping desse método, aconteceu algo...
 
        
-        if (pMago && pMago->getVidas() <= 0) {
-            contexto->mudarEstado(new GameOverState(contexto, numeroFase));
+        if (pMago1 && pMago1->getVidas() <= 0) {
+            contexto->mudarEstado(new GameOverState(contexto, numeroFase, numJogadores));
             return;
         }
 
         if (faseAtual->getPause()) {
-            contexto->mudarEstado(new PauseState(contexto, numeroFase));
+            contexto->mudarEstado(new PauseState(contexto, numeroFase, numJogadores));
             return;
         }
         
-        if (pMago && pMago->getConcluiuFase()) {
+        if (pMago1 && pMago1->getConcluiuFase()) {
             faseAtual->resetar();
             contexto->mudarEstado(new MenuPrincipalState(contexto));
             return;
@@ -73,7 +105,8 @@ void JogandoState::handle() {
 
 void JogandoState::Sair() {
     if (numeroFase == 2) {
-        contexto->getGG().setSegundaTela(false);
+        Gerenciadores::GerenciadorGrafico::getGG().setSegundaTela(false);
     }
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago(NULL);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago1(NULL);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(NULL);
 }

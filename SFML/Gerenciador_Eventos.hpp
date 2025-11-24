@@ -6,27 +6,31 @@
 #include "Subject.hpp"
 #include <deque>
 
+// Gerenciador de Eventos com apoio do padrão de projeto Observer.
+
 namespace Gerenciador {
 
     class GerenciadorEvento : public subject {
     private:
         static GerenciadorEvento* pEvento;
-        entidades::personagens::Mago* pMago;
+        entidades::personagens::Mago* pMago1;
+        entidades::personagens::Mago* pMago2;
         bool prevUp;
         bool prevDown;
         bool prevEnter;
 
         // fila local de eventos coletados da janela
-        deque<sf::Event> eventQueue;
+        deque<Event> eventQueue;
 
         GerenciadorEvento();
+        ~GerenciadorEvento();
 
     public:
-        ~GerenciadorEvento();
 
         static GerenciadorEvento* getGerenciadorEvento();
 
-        void setMago(entidades::personagens::Mago* pj);
+        void setMago1(entidades::personagens::Mago* pj);
+        void setMago2(entidades::personagens::Mago* pj);
 
         void executar();
         void executarMenu();
@@ -38,7 +42,7 @@ namespace Gerenciador {
 
         // APIs para consumir a fila de eventos coletada
         bool temEvento() const;
-        bool proximoEvento(sf::Event& out);
+        bool proximoEvento(Event& out);
     };
 
 }

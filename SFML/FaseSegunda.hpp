@@ -13,7 +13,7 @@ namespace fases {
         void criarSapos();
         void criarObstaculo();
         void criarPlataformas();
-		void criarPlataforma(int i, bool ativ);
+		void carregarPlataforma(int i, bool ativ, float temp);
         void criarEspinho();
        
         void criarBlocos();
@@ -22,7 +22,7 @@ namespace fases {
 
 
     public:
-        FaseSegunda(entidades::personagens::Mago* pJog);
+        FaseSegunda(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJog2);
         ~FaseSegunda();
     };
 

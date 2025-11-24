@@ -4,17 +4,20 @@
 
 using namespace sf;
 
-class GameOverState : public State {
-private:
-    MenuGameOver menu;
-    int faseAtual;
+namespace estados {
+    class GameOverState : public State {
+    private:
+        MenuGameOver menu;
+        int faseAtual;
+        int numJog;
 
-public:
-    GameOverState(Jogo* contexto, int numFase);
-    ~GameOverState();
+    public:
+        GameOverState(Jogo* contexto, int numFase, int numJog);
+        ~GameOverState();
 
-    void Entrar();
-    void handle();
-    void Sair();
-    void update(int i);
-};
+        void Entrar();
+        void handle();
+        void Sair();
+        void update(int i);
+    };
+}

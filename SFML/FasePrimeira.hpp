@@ -20,14 +20,14 @@ namespace fases {
 		void criarTeias();
 
 		void criarPlataformas();
-		void criarPlataforma(int i, bool ativ);
+		void carregarPlataforma(int i, bool ativ, float temp);
 
 		void carregarFundo();
 
 		Vector2f getPosicaoInicialJogador() const;
 
 	public:
-		FasePrimeira(entidades::personagens::Mago* pJog);        
+		FasePrimeira(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJog2 = NULL);
 		~FasePrimeira();
 	};
 

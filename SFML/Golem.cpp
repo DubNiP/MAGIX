@@ -21,9 +21,9 @@ namespace entidades {
 		{
 		}
 
-		void Golem::danificar() {
-			if (pJog) {
-				pJog->tomarDano(destruicao, false);
+		void Golem::danificar(Mago* pJogador) {
+			if (pJogador) {
+				pJogador->tomarDano(destruicao, false);
 			}
 		}
 
@@ -44,28 +44,30 @@ namespace entidades {
 		}
 
 		void Golem::mover() {
-			if (!pJog) {
-				return;
-			}
+			if (pJog) {
+				Vector2f posJog = pJog->getPos();
+				Vector2f posInim = getPos();
 
-			Vector2f posJog = pJog->getPos();
-			Vector2f posInim = getPos();
+				if (relogioDePulo.getElapsedTime().asSeconds() >= 3.0f && emTerra) {
+					vel.y = -60.f;
+					emTerra = false;
+					relogioDePulo.restart();
+					return;
+				}
 
-			if (relogioDePulo.getElapsedTime().asSeconds() >= 3.0f && emTerra) {
-				vel.y = -60.f;
-				emTerra = false;
-				relogioDePulo.restart();
-				return;
-			}
-
-			if (fabs(posJog.x - posInim.x) < tamanho && fabs(posJog.y - posInim.y) < tamanho) {
-				if (posJog.x > posInim.x) moverDireita();
-				else moverEsquerda();
-			}
-			else {
-				if (pos.x > 1240) { moverAleatorio = 1; }
-				if (pos.x < 40) { moverAleatorio = 0; }
-				movimentoAleatorio();
+				if (fabs(posJog.x - posInim.x) < tamanho && fabs(posJog.y - posInim.y) < tamanho) {
+					if (posJog.x > posInim.x) moverDireita();
+					else moverEsquerda();
+				}
+				else {
+					if (pos.x > 1240) {
+						moverAleatorio = 1;
+					}
+					if (pos.x < 40) {
+						moverAleatorio = 0; 
+					}
+					movimentoAleatorio();
+				}
 			}
 		}
 
@@ -131,13 +133,13 @@ namespace entidades {
 		}
 
 		void Golem::carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
-			int d, float tS, float tP, int tam) {
-			Inimigo::carregar(num, m, jog, mA, pI, d, tS, tP);
+			int d, int tam) {
+			Inimigo::carregar(num, m, jog, mA, pI, d);
 			this->tamanho = tam;
 		}
 
 		void Golem::carregarSprite() {
-			if (!carregarTexturaSprite("Textures/Golem_idle1.png", false, false)) {
+			if (!carregarTexturaSprite("Textures/Golem_idle1.png")) {
 				throw "Textura não carregada";
 			}
 			setScale(Vector2f(2.f, 2.f));

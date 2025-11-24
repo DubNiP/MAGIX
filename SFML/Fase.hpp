@@ -22,29 +22,34 @@ namespace fases {
 	protected:
 		static listas::ListaEntidades lista_ents;
 		Gerenciadores::GerenciadorColisoes GC;
-		entidades::personagens::Mago* jog;
-		Texture* textFundo;
-		Sprite* spriteFundo;
+		entidades::personagens::Mago* jog1;
+		entidades::personagens::Mago* jog2;
 		bool faseIniciada;
 		bool pause;
 		bool cenarioCriado;
+		bool doisJog;
+
+		//padrão de projeto Template Method, criar cenário chama essas 5 funções dentro dele.
 		virtual void criarInimigos() = 0;
 		virtual void criarObstaculo() = 0;
 		virtual void criarBlocos() = 0;
 		virtual void criarPlataformas() = 0;
-		void criarCenario();                            //fazer ser virtual no futuro??? (diagrama não deixa a princípio)
 		virtual void carregarFundo() = 0;
+		void criarCenario();                            //COLOCAR NA CONSTRUTORA.
 		virtual Vector2f getPosicaoInicialJogador() const = 0;
-		virtual void criarPlataforma(int i, bool ativ) = 0;
+		virtual void carregarPlataforma(int i, bool ativ, float temp) = 0;
 		Entidade* criaEntidade(Entidade* e);
 		void limparCenario();
 	public:
-		Fase(entidades::personagens::Mago* pJog);
+		Fase(entidades::personagens::Mago* pJog1, entidades::personagens::Mago* pJog2);
 		~Fase();
 		void criarProjetil(Vector2f pos, bool dir, bool bond);
 		void inicializar();
-		void executar();         //nao foi implementado executar nas derivadas de fase. Aqui existe uma dúvida em relação a esse executar
+		void executar();
 		void resetar();
+
+		void setdoisJog(bool doisJ);
+
 		const bool getFaseIniciada() const;
 		const bool getPause() const;
 

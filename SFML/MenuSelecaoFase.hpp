@@ -5,6 +5,7 @@ class MenuSelecaoFase : public Menu {
 private:
     bool voltar;
     int faseEscolhida;
+    int numJogadores;
 
 protected:
     void set_values();
@@ -16,5 +17,6 @@ public:
     void confirmar();
     bool getVoltar() const;
     int getFaseEscolhida() const;
+    int getNumJogadores() const;
     void resetaFlags();
 };

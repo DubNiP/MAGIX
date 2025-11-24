@@ -57,15 +57,15 @@ namespace entidades {
 
 		}
 
-		void Sapo::carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
-			int d, float tS, float tP, float r, float intPul){
-			Inimigo::carregar(num, m, jog, mA, pI, d, tS, tP);
+		void Sapo::carregar(int num, int m, Mago* jog, short mA, Vector2f pI,int d, float r, float intPul) {
+			Inimigo::carregar(num, m, jog, mA, pI, d);
 
 			raio = r;
 			intervaloPulo = intPul;
 
 		}
-		void Sapo::danificar() {
+
+		void Sapo::danificar(Mago* pJog) {
 			if (pJog) {
 				pJog->tomarDano(destruicao, false);
 			}
@@ -110,12 +110,11 @@ namespace entidades {
 		
 		void Sapo::movimentoAleatorio() {
 
-			float dt = relogio.getElapsedTime().asSeconds() + tempSalvo;
+			float dt = relogio.getElapsedTime().asSeconds();
 			if (dt >= 1.0f) {
 				uniform_int_distribution<int> dist2(0, 3);
 				moverAleatorio = dist2(rng);
 				relogio.restart();
-				tempSalvo = 0;
 			}
 
 			if (moverAleatorio % 2 == 0) moverDireita();
@@ -154,7 +153,7 @@ namespace entidades {
 		}
 
 		void Sapo::carregarSprite() {                         
-			if (!carregarTexturaSprite("Textures/Sapo.png", false, false)) {
+			if (!carregarTexturaSprite("Textures/Sapo.png")) {
 				throw "Textura não carregada";
 			}
 			setScale(Vector2f(1.5f, 1.5f));

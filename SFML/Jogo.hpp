@@ -14,19 +14,20 @@ using namespace sf;
 
 class Jogo {
 private:
-	entidades::personagens::Mago pJog1;            
-	Gerenciadores::GerenciadorGrafico& GG;
-	State* estadoAtual;
+	entidades::personagens::Mago pJog1;   
+	entidades::personagens::Mago pJog2;
+	estados::State* estadoAtual;
 	fases::FasePrimeira fase1;
 	fases::FaseSegunda fase2;
 public:
 	Jogo();
 	~Jogo();
 	void executar();
-	void mudarEstado(State* novoEstado);
+	void mudarEstado(estados::State* novoEstado);
 
-	entidades::personagens::Mago* getMago();
+	//GETTERS
+	entidades::personagens::Mago* getMago1();
+	entidades::personagens::Mago* getMago2();
 	fases::FasePrimeira* getFase1();
 	fases::FaseSegunda* getFase2();
-	Gerenciadores::GerenciadorGrafico& getGG();   //ACHO QUE N FAZ SENTIDO PQ O GG É SINGLETON!!!
 };

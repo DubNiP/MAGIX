@@ -24,6 +24,6 @@ public:
 
     void mostrarRanking();
 
-    std::vector<int> calcularFaixa();
-    void preencherTexts(const std::vector<int>& faixa);
+    vector<int> calcularFaixa();
+    void preencherTexts(const vector<int>& faixa);
 };

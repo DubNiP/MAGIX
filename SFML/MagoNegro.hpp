@@ -20,7 +20,7 @@ namespace entidades {
 
             void setFaseAtual(fases::Fase* f);
 
-            void danificar();
+            void danificar(Mago* pJog);
             void tomarDano(int dano, bool bondade);
 
             void mover();
@@ -31,8 +31,7 @@ namespace entidades {
             void executar();
             void salvar();
             void salvarDataBuffer();
-            void carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
-				int d, float tS, float tP, int t, bool apt);
+            void carregar(int num, int m, Mago* jog, short mA, Vector2f pI,int d, int t, bool apt);
             void carregarSprite();
 
         };

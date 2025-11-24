@@ -19,6 +19,8 @@ namespace entidades {
 		}
 
 		void Saida::executar() {
+			gravidade();
+			vel.y = 0.f;
 			attPos();
 		}
 
@@ -80,7 +82,7 @@ namespace entidades {
 			}
 		}
 
-		void Saida::atualizarPorProximidade(const FloatRect& boundsMago) {
+		void Saida::atualizarPorRaio(const FloatRect& boundsMago) {
 			const float cxJ = boundsMago.left + boundsMago.width * 0.5f;
 			const float cyJ = boundsMago.top + boundsMago.height * 0.5f;
 

@@ -1,5 +1,7 @@
 #include "MenuRankingState.hpp"
 
+using namespace estados;
+
 MenuRankingState::MenuRankingState(Jogo* contexto):
     State(contexto)
 {
@@ -10,7 +12,7 @@ MenuRankingState::~MenuRankingState() {
 }
 
 void MenuRankingState::Entrar() {
-    contexto->getGG().resetarCamera();
+    Gerenciadores::GerenciadorGrafico::getGG().resetarCamera();
     menu.resetaFlags();
     menu.reseta();
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);
@@ -19,7 +21,7 @@ void MenuRankingState::Entrar() {
 }
 
 void MenuRankingState::handle() {
-    auto& GG = contexto->getGG();
+    auto& GG = Gerenciadores::GerenciadorGrafico::getGG();
     auto* GE = Gerenciador::GerenciadorEvento::getGerenciadorEvento();
     RenderWindow* window = GG.getWindow();
 

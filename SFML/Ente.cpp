@@ -39,7 +39,9 @@ void Ente::setGG(Gerenciadores::GerenciadorGrafico* pG) {
 }
 
 void Ente::setScale(const Vector2f& scale) {
-	if (pSprite) pSprite->setScale(scale);
+	if (pSprite) {
+		pSprite->setScale(scale);
+	}
 }
 
 FloatRect Ente::getBounds() const {
@@ -47,6 +49,24 @@ FloatRect Ente::getBounds() const {
 		return pSprite->getGlobalBounds();
 	}
 	return FloatRect();
+}
+bool Ente::carregarTexturaSprite(const string& arquivo) {
+	if (textura) {
+		delete textura;
+		textura = NULL;
+	}
+	textura = new Texture();
+	if (!textura->loadFromFile(arquivo)) {
+		delete textura;
+		textura = NULL;
+		return false;
+	}
+	textura->setRepeated(false);
+	textura->setSmooth(false);
+	if (pSprite) {
+		pSprite->setTexture(*textura, true);
+	}
+	return true;
 }
 
 bool Ente::carregarTexturaSprite(const string& arquivo, bool repeated, bool smooth) {
@@ -68,6 +88,6 @@ bool Ente::carregarTexturaSprite(const string& arquivo, bool repeated, bool smoo
 	return true;
 }
 
-Sprite* Ente::getSprite() {
+Sprite* Ente::getSprite() const {
 	return pSprite;
 }

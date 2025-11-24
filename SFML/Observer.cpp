@@ -1,5 +1,7 @@
 #pragma once
 
+//Padrão de projeto Observer.
+
 class Observer {
 public:
 	Observer() {};

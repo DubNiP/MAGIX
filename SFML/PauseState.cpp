@@ -5,10 +5,14 @@
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Eventos.hpp"
 
-PauseState::PauseState(Jogo* contexto, int numFase)
-    : State(contexto), 
+
+using namespace estados;
+
+PauseState::PauseState(Jogo* contexto, int numFase, int numJ): 
+    State(contexto), 
     menu(),  
-    faseAtual(numFase) 
+    faseAtual(numFase),
+    numJog(numJ)
 {
 }
 
@@ -21,7 +25,7 @@ void PauseState::Entrar() {
     menu.reseta();
 
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->soltaTeclas();
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);                                     //Padrão de projeto Observer.
 }
 
 void PauseState::handle() {
@@ -31,7 +35,7 @@ void PauseState::handle() {
 
     while (window && window->isOpen() && !menu.getContinuar() && !menu.getVoltarMenu()) {
         if (menu.getSalvar()) {
-            contexto->getMago()->salvarLinha();
+            contexto->getMago1()->salvarLinha();
 			contexto->getFase1()->getListaEntidades()->salvarTodos();
             cout << "Entrou" << endl;
             menu.setSalvar(false);
@@ -47,13 +51,17 @@ void PauseState::handle() {
 }
 
 void PauseState::Sair() {
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);                                    //Padrão de projeto Observer.
 
     if (menu.getContinuar()) {
-        contexto->mudarEstado(new JogandoState(contexto, faseAtual));
+        contexto->mudarEstado(new JogandoState(contexto, faseAtual, numJog, false));
     }
+
     else if (menu.getVoltarMenu()) {
-        contexto->getMago()->reseta(Vector2f(100.f, 630.f), 15, 0);
+        contexto->getMago1()->reseta(Vector2f(100.f, 630.f), 15, 0);
+        if (numJog == 2) {
+            contexto->getMago2()->reseta(Vector2f(100.f, 630.f), 15, 0);
+        }
         contexto->mudarEstado(new MenuPrincipalState(contexto));
     }
 }

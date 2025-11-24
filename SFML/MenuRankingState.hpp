@@ -9,15 +9,17 @@
 
 using namespace sf;
 
-class MenuRankingState : public State {
-private:
-    MenuRanking menu;
-public:
-    MenuRankingState(Jogo* contexto);
-    ~MenuRankingState();
+namespace estados {
+    class MenuRankingState : public State {
+    private:
+        MenuRanking menu;
+    public:
+        MenuRankingState(Jogo* contexto);
+        ~MenuRankingState();
 
-    void Entrar();
-    void handle();
-    void Sair();
-    void update(int i);
-};
+        void Entrar();
+        void handle();
+        void Sair();
+        void update(int i);
+    };
+}

@@ -5,10 +5,13 @@
 #include "Gerenciador_Grafico.hpp"
 #include "Gerenciador_Eventos.hpp"
 
-GameOverState::GameOverState(Jogo* contexto, int numFase) : 
+using namespace estados;
+
+GameOverState::GameOverState(Jogo* contexto, int numFase, int numJog) : 
     State(contexto),
     menu(),
-    faseAtual(numFase) 
+    faseAtual(numFase),
+    numJog(numJog)
 {
 }
 
@@ -16,19 +19,19 @@ GameOverState::~GameOverState() {
 }
 
 void GameOverState::Entrar() {
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);
-    contexto->getGG().resetarCamera();
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->attach(this);                              //Padrão de projeto Observer
+    Gerenciadores::GerenciadorGrafico::getGG().resetarCamera();
     menu.resetaFlags();
     menu.reseta();
     Gerenciador::GerenciadorEvento::getGerenciadorEvento()->soltaTeclas();
 }
 
 void GameOverState::handle() {
-    auto& GG = contexto->getGG();
+    auto& GG = Gerenciadores::GerenciadorGrafico::getGG();
     auto* GE = Gerenciador::GerenciadorEvento::getGerenciadorEvento();
     RenderWindow* window = GG.getWindow();
 
-    while (window && window->isOpen() && !menu.getReiniciar() && !menu.getVoltarMenu()) {
+    while (window && window->isOpen() && !menu.getReiniciar() && !menu.getVoltarMenu()) {             //Enquanto não reiniciou e não voltou pro menu..
         if (!GE->verificarEventosJanela(window)) {
             return;
         }
@@ -39,10 +42,15 @@ void GameOverState::handle() {
 }
 
 void GameOverState::Sair() {
-    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);
-    contexto->getMago()->reseta(Vector2f(100.f, 630.f), 15, 0);
+    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->dettach(this);                            //Padrão de projeto Observer
+
+    contexto->getMago1()->reseta(Vector2f(100.f, 630.f), 15, 0);
+    if (numJog == 2) {
+        contexto->getMago2()->reseta(Vector2f(100.f, 630.f), 15, 0);
+    }
+
     if (menu.getReiniciar()) {
-        contexto->mudarEstado(new JogandoState(contexto, faseAtual));
+        contexto->mudarEstado(new JogandoState(contexto, faseAtual, numJog));
     }
     else if (menu.getVoltarMenu()) {
         contexto->mudarEstado(new MenuPrincipalState(contexto));

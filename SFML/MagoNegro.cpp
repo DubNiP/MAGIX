@@ -30,9 +30,9 @@ namespace entidades {
 			faseAtual = f;
 		}
 
-		void MagoNegro::danificar() {
-			if (pJog) {
-				pJog->tomarDano(destruicao, false);
+		void MagoNegro::danificar(Mago* pJogador) {
+			if (pJogador) {
+				pJogador->tomarDano(destruicao, false);
 			}
 		}
 
@@ -151,16 +151,15 @@ namespace entidades {
 				<< apto << endl;
 		}
 		
-		void MagoNegro::carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
-			int d, float tS, float tP, int t, bool apt) {
-			Inimigo::carregar(num, m, jog, mA, pI, d, tS, tP);
+		void MagoNegro::carregar(int num, int m, Mago* jog, short mA, Vector2f pI,int d, int t, bool apt) {
+			Inimigo::carregar(num, m, jog, mA, pI, d);
 
 			this->tamanho = t;
 			this->apto = apt;
 		}
 
 		void MagoNegro::carregarSprite() {
-			if (!carregarTexturaSprite("Textures/magoNegro.png", false, false)) {
+			if (!carregarTexturaSprite("Textures/magoNegro.png")) {
 				throw "Textura não carregada";
 			}
 			setPos(pos);

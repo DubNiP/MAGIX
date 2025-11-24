@@ -13,7 +13,7 @@ namespace entidades {
             Golem(Vector2f pos, Mago* pJog, Vector2f vel);
             ~Golem();
 
-            void danificar();
+            void danificar(Mago* pJog);
             void tomarDano(int dano, bool bondade);
 
             void mover();
@@ -25,7 +25,7 @@ namespace entidades {
             void salvar();
 			void salvarDataBuffer();
             void carregar(int num, int m, Mago* jog, short mA, Vector2f pI,
-				int d, float tS, float tP, int tam);
+				int d, int tam);
             void carregarSprite();
 
         };
