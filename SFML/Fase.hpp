@@ -55,7 +55,7 @@ namespace fases {
 
 		listas::ListaEntidades* getListaEntidades();
 
-		void carregarSave(const std::string& caminho);
+		void carregarSave(const string& caminho);
 		void setarEntidade(Entidade* ent, Vector2f posL, bool emTerra,
 						   bool emAcl, Vector2f vel, Vector2f velInit, bool olhandoDir);
 	};

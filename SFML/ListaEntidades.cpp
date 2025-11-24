@@ -121,13 +121,20 @@ namespace listas {
     }
 
 
-    void ListaEntidades::desenharTodos() {
+    void ListaEntidades::desenharTodos(Sprite* fundo) {
         Lista<Entidade>::Iterator it = LEs.begin();
+        Entidade* e = *it;
+
+        if (e) { 
+            e->clearWindow(); 
+            e->desenhaFundo(fundo);
+        }
         while (it != LEs.end()) {
             Entidade* e = *it;
             if (e) e->desenhar();
             ++it;
         }
+		if (e) e->displayWindow();
     }
 
     void ListaEntidades::salvarTodos() {
@@ -204,7 +211,7 @@ namespace listas {
         ofstream outRanking;
         outRanking.open(rankingPath, ios::out | ios::trunc);
         if (!outRanking.is_open()) {
-            cerr << "Erro: nao foi possivel abrir " << rankingPath << " para salvar ranking." << std::endl;
+            cerr << "Erro: nao foi possivel abrir " << rankingPath << " para salvar ranking." << endl;
            
         } else {
             for (const auto& t : ranking) {
@@ -216,7 +223,7 @@ namespace listas {
         ofstream outPlayer;
         outPlayer.open(m->getCaminho(), ios::out | ios::trunc);
         if (!outPlayer.is_open()) {
-            cerr << "Erro: nao foi possivel abrir " << m->getCaminho() << " para salvar." << std::endl;
+            cerr << "Erro: nao foi possivel abrir " << m->getCaminho() << " para salvar." << endl;
 			fflush(stdin);
         } else {
             outPlayer << nomeStr << " " << pontos << " " << numFase << endl;

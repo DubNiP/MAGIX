@@ -25,7 +25,7 @@ namespace listas {
         void limparPreservando(Entidade* J1, Entidade* J2);
 
         void executarTodos();
-        void desenharTodos();
+        void desenharTodos(Sprite* fundo);
 		void salvarTodos();
         void retomarTodos();
         void removerProjetis();

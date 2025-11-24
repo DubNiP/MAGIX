@@ -1,10 +1,6 @@
 #include "Gerenciador_Grafico.hpp"
-#include "ListaEntidades.hpp"
-#include "Fase.hpp"
 
 using namespace Gerenciadores;
-using namespace listas;
-using namespace fases;
 using namespace std;
 
 GerenciadorGrafico* GerenciadorGrafico::pGrafico = NULL;
@@ -35,21 +31,27 @@ GerenciadorGrafico& GerenciadorGrafico::getGG() {
 }
 
 void GerenciadorGrafico::desenharEnte(const Drawable& shape) {
-    if (window) {
+    if (window) 
         window->draw(shape);
-    }
+    
+}
+
+void GerenciadorGrafico::desenhaFundo(Sprite* fundo) {
+    if (window && fundo) 
+        window->draw(*fundo);
+    
 }
 
 void GerenciadorGrafico::clearWindow(Color cor) {
-    if (window) {
+    if (window) 
         window->clear(cor);
-    }
+    
 }
 
 void GerenciadorGrafico::displayWindow() {
-    if (window) {
+    if (window) 
         window->display();
-    }
+    
 }
 
 void GerenciadorGrafico::atualizarCamera(const Vector2f posMago) {
@@ -86,19 +88,6 @@ void GerenciadorGrafico::resetarCamera() {
 
 void GerenciadorGrafico::setSegundaTela(bool val) {
     segundaTela = val;
-}
-
-void GerenciadorGrafico::desenhaTodos(listas::ListaEntidades* pLE, Sprite* fundo) {
-    if (window) {
-        clearWindow();
-        if (fundo) {
-            window->draw(*fundo);
-        }
-        if (pLE) {
-            pLE->desenharTodos();
-        }
-        displayWindow();
-    }
 }
 
 RenderWindow* GerenciadorGrafico::getWindow() const {

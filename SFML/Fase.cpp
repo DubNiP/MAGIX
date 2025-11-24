@@ -143,8 +143,7 @@ void Fase::executar() {
                 GC.setJog2(NULL);
                 doisJog = false;
             }
-
-            pGG->desenhaTodos(&lista_ents,pSprite);   
+			lista_ents.desenharTodos(pSprite);  
         }
         jog1->setConcluiuFase(GC.getFaseConcluida());
     }

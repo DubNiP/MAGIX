@@ -26,12 +26,30 @@ Ente::~Ente() {
 	textura = NULL;
 }
 
+void Ente::clearWindow() {
+	if (pGG) 
+		pGG->clearWindow();
+	
+}
+
+void Ente::desenhaFundo(Sprite* fundo) {
+	if (pGG) 
+		pGG->desenhaFundo(fundo);
+	
+}
+
 void Ente::desenhar() {
 	if (pGG && pSprite) {
 		pGG->desenharEnte(*pSprite);
 		pGG->desenharEnte(barraFundo);
 		pGG->desenharEnte(barraVida);
 	}
+}
+
+void Ente::displayWindow() {
+	if (pGG) 
+		pGG->displayWindow();
+	
 }
 
 void Ente::setGG(Gerenciadores::GerenciadorGrafico* pG) {

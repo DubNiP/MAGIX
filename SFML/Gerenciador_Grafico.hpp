@@ -2,8 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 
-namespace listas { class ListaEntidades; }
-
 using namespace sf;
 
 namespace Gerenciadores {
@@ -19,9 +17,9 @@ namespace Gerenciadores {
     public:
         static GerenciadorGrafico& getGG();
         void desenharEnte(const Drawable& shape);
+		void desenhaFundo(Sprite* fundo);
         void clearWindow(Color cor = Color::Black);
         void displayWindow();
-        void desenhaTodos(listas::ListaEntidades* LE, Sprite* sp = NULL);
         void atualizarCamera(const Vector2f posMago);
         void resetarCamera();
 		void setSegundaTela(bool val);

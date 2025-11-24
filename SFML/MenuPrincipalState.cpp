@@ -44,7 +44,7 @@ void MenuPrincipalState::handle() {
     auto* GE = Gerenciador::GerenciadorEvento::getGerenciadorEvento();
     RenderWindow* window = GG.getWindow();
 
-    const std::size_t MAX_NAME_LEN = 49;
+    const size_t MAX_NAME_LEN = 49;
 
     while (window && window->isOpen() && !menu.getIniciar() && !menu.getSair() && !menu.getRanking()) {
         if (!GE->verificarEventosJanela(window)) {

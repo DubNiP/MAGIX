@@ -25,8 +25,8 @@ namespace entidades {
 		{
 			id = 1;
 			strcpy_s(nome, sizeof(nome), "Jogador");
-			// usa std::string do Entidade para evitar estouro de buffer
-			Entidade::caminho = "Save/" + std::string(nome) + ".txt";
+
+			Entidade::caminho = "Save/" + string(nome) + ".txt";
 			carregarSprite();
 		}
 		
@@ -191,7 +191,7 @@ namespace entidades {
 		void Mago::setNome(const char* n)
 		{
 			strcpy_s(nome, sizeof(nome), n);
-			Entidade::caminho = "Save/" + std::string(nome) + ".txt";
+			Entidade::caminho = "Save/" + string(nome) + ".txt";
 		}
 
 		int Mago::getNumFase() const
@@ -209,7 +209,7 @@ namespace entidades {
 		}
 		
 		void Mago::salvarLinha() {
-			ofstream salvarDados(Entidade::caminho, std::ios::out | std::ios::app);
+			ofstream salvarDados(Entidade::caminho, ios::out | ios::app);
 			if (!salvarDados.is_open()) {
 				fflush(stdin);
 				return;

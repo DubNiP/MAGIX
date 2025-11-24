@@ -35,12 +35,9 @@ public:
 	void setEmTerra(const bool v);
 
 	void setEmAceleracao(const bool v);
-	void setTempMovSalvo(float temp);
-	void setTempAclSalvo(float temp);
 
 	const Vector2f getPos() const;
 	void setPos(const Vector2f& p);
-
 
 	const Vector2f getVelocidade() const;
 	void setVelocidade(const float vx, const float vy);
