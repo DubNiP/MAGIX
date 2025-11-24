@@ -28,10 +28,14 @@ namespace Gerenciador {
     }
 
     void GerenciadorEvento::setMago1(entidades::personagens::Mago* pj) {
+        if(pj)
         pMago1 = pj;
     }
     void GerenciadorEvento::setMago2(entidades::personagens::Mago* pj) {
-        pMago2 = pj;
+        if (pj)
+            pMago2 = pj;
+        else
+            cout << "Segundo jogador Nulo" << endl;
     }
 
 
@@ -52,6 +56,9 @@ namespace Gerenciador {
             bool atirar2 = Keyboard::isKeyPressed(Keyboard::Space);
 
             pMago2->processarInput(moverEsq2, moverDir2, pular2, atirar2);
+        }
+        else {
+			//cout << "GerenciadorEvento: Nenhum personagem 2 atribuído." << endl;
         }
     }
 

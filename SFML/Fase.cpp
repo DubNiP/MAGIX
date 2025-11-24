@@ -177,7 +177,7 @@ void Fase::carregarSave(const string& caminho) {
     ifstream recuperarDados(caminho, ios::in);
 
     char n[50];
-    int p, f;
+    int p, f, k = 0;
 
 	recuperarDados >> n >> p >> f;
 
@@ -249,13 +249,32 @@ void Fase::carregarSave(const string& caminho) {
                     getline(recuperarDados, lixo);
                     break;
                 }
-                if (jog1) {
+                if (jog1 && k == 0) {
+                    k++;
                     setarEntidade(jog1, posL, emTerra, emAcl, vel, velInit, olhando);
                     jog1->carregar(numVidas, pontosInt, inv, tDano, tAtaq,
                         naTeiaInt != 0, apto!= 0 , concluiuInt != 0);
                     jog1->iniciarClocks();
                     jog1->setNome(n);
+                    break;
                 }
+                if (jog2 && k == 1) {
+                    k++;
+
+                    jog2 = new entidades::personagens::Mago(posL, Vector2f(3.f, 100.f));
+                    jog2->setFaseAtual(this);
+                    lista_ents.incluir(jog2);
+                    Gerenciador::GerenciadorEvento::getGerenciadorEvento()->setMago2(jog2);
+                    GC.setJog2(jog2);
+                    doisJog = true;
+                    setarEntidade(jog2, posL, emTerra, emAcl, vel, velInit, olhando);
+                    jog2->carregar(numVidas, pontosInt, inv, tDano, tAtaq,
+                        naTeiaInt != 0, apto != 0, concluiuInt != 0);
+                    jog2->iniciarClocks();
+                    jog2->setNome(n);
+
+                }
+
                 break;
             }
              
